@@ -1,9 +1,7 @@
-// server.js
-
 import express from 'express';
 import bodyParser from 'body-parser';
-import cors from 'cors'; // Import pakietu cors
-import { sequelize, Car } from './models.js'; // Import tylko modelu Car
+import cors from 'cors'; 
+import { sequelize, Car } from './models.js'; 
 import { Op } from 'sequelize';
 
 // Inicjalizacja aplikacji Express

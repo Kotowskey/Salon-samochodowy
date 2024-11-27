@@ -1,5 +1,3 @@
-// src/app/app.component.ts
-
 import { Component } from '@angular/core';
 import { CarListComponent } from './components/car-list/car-list.component';
 import { AddCarComponent } from "./components/add-car/add-car.component";
