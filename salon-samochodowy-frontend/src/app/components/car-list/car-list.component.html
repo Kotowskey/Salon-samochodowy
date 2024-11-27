@@ -1,0 +1,36 @@
+<!-- src/app/components/car-list/car-list.component.html -->
+
+<div class="container">
+    <h2>Lista Samochodów</h2>
+    <button (click)="sortByPrice()">
+        Sortuj według ceny ({{ sortDirection === 'asc' ? 'Rosnąco' : 'Malejąco' }})
+    </button>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Marka</th>
+                <th>Model</th>
+                <th>Rok</th>
+                <th>VIN</th>
+                <th>Wynajem</th>
+                <th>Sprzedany</th>
+                <th>Cena</th>
+                <th>Owner ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let car of sortedCars">
+                <td>{{ car.id }}</td>
+                <td>{{ car.brand }}</td>
+                <td>{{ car.model }}</td>
+                <td>{{ car.year }}</td>
+                <td>{{ car.vin }}</td>
+                <td>{{ car.rent }}</td>
+                <td>{{ car.sold ? 'Tak' : 'Nie' }}</td>
+                <td>{{ car.price | currency }}</td>
+                <td>{{ car.ownerId }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
