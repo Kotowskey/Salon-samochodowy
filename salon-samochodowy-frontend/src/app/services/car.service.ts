@@ -30,5 +30,18 @@ export class CarService {
         return from(fetchPromise);
     }
 
+    addCar(newCar: Car): Observable<Car> {
+        const fetchPromise = fetch(this.apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newCar)
+        })
+            .then(response => response.json())
+            .then(data => data as Car);
+        return from(fetchPromise);
+    }
+
     // Dodatkowe metody (getCarById, addCar, etc.) mogą być dodane analogicznie
 }

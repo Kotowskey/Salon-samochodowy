@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize';
 
 // Inicjalizacja Sequelize
-const sequelize = new Sequelize('salon_samochodowy', 'klient', 'klient', {
+const sequelize = new Sequelize('salon_samochodowy', 'root', 'root', {
     host: 'localhost',
     dialect: 'mysql', // lub 'sqlite', 'postgres', 'mssql'
 });
