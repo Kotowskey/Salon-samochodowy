@@ -6,7 +6,6 @@ const sequelize = new Sequelize('salon_samochodowy', 'klient', 'klient', {
     dialect: 'mysql', // lub 'sqlite', 'postgres', 'mssql'
 });
 
-// Definicja modeli
 const Car = sequelize.define('Car', {
     brand: {
         type: Sequelize.STRING,
@@ -33,7 +32,10 @@ const Car = sequelize.define('Car', {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
     },
+}, {
+    timestamps: false, // Wyłącza createdAt i updatedAt
 });
+
 
 const User = sequelize.define('User', {
     username: {
@@ -57,7 +59,10 @@ const User = sequelize.define('User', {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
     },
+}, {
+    timestamps: false, // Wyłącza kolumny createdAt i updatedAt
 });
+
 
 // Relacje
 User.belongsToMany(Car, { through: 'UserCarsBought', as: 'carsBought' });
