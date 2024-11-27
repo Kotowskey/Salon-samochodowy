@@ -13,10 +13,8 @@
                 <th>Model</th>
                 <th>Rok</th>
                 <th>VIN</th>
-                <th>Wynajem</th>
-                <th>Sprzedany</th>
+                <th>Dostępny do wynajmu</th>
                 <th>Cena</th>
-                <th>Owner ID</th>
             </tr>
         </thead>
         <tbody>
@@ -26,10 +24,8 @@
                 <td>{{ car.model }}</td>
                 <td>{{ car.year }}</td>
                 <td>{{ car.vin }}</td>
-                <td>{{ car.rent }}</td>
-                <td>{{ car.sold ? 'Tak' : 'Nie' }}</td>
+                <td>{{ car.isAvailableForRent ? 'Tak' : 'Nie' }}</td>
                 <td>{{ car.price | currency }}</td>
-                <td>{{ car.ownerId }}</td>
             </tr>
         </tbody>
     </table>
