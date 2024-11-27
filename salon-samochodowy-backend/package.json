@@ -10,5 +10,8 @@
     "mysql2": "^3.11.4",
     "sequelize": "^6.37.5"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "sequelize-cli": "^6.6.2"
+  }
 }

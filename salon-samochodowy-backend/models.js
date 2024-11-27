@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize';
 
 // Inicjalizacja Sequelize
-const sequelize = new Sequelize('salon_samochodowy', 'root', 'Admin', {
+const sequelize = new Sequelize('salon_samochodowy', 'klient', 'klient', {
     host: 'localhost',
     dialect: 'mysql', // lub 'sqlite', 'postgres', 'mssql'
 });
@@ -35,17 +35,6 @@ const Car = sequelize.define('Car', {
     },
 });
 
-const Salon = sequelize.define('Salon', {
-    name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-    location: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-});
-
 const User = sequelize.define('User', {
     username: {
         type: Sequelize.STRING,
@@ -71,14 +60,18 @@ const User = sequelize.define('User', {
 });
 
 // Relacje
-Salon.hasMany(Car, { as: 'cars' });
-Car.belongsTo(Salon);
-
 User.belongsToMany(Car, { through: 'UserCarsBought', as: 'carsBought' });
 Car.belongsToMany(User, { through: 'UserCarsBought', as: 'buyers' });
 
 User.belongsToMany(Car, { through: 'UserCarsRented', as: 'carsRented' });
 Car.belongsToMany(User, { through: 'UserCarsRented', as: 'renters' });
 
+// Synchronizacja bazy danych
+(async () => {
+    await sequelize.sync({ alter: true })
+        .then(() => console.log('Database synchronized'))
+        .catch(err => console.error('Database synchronization error:', err));
+})();
+
 // Eksport modeli i instancji Sequelize
-export { sequelize, Car, Salon, User };
+export { sequelize, Car, User };
