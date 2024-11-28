@@ -20,7 +20,7 @@ export class CarService {
     private apiUrl = 'http://localhost:3000/cars';
 
 
-    constructor(private http_client: HttpClient) { }
+    constructor() { }
 
     getCars(): Observable<Car[]> {
         const fetchPromise = fetch(this.apiUrl)
