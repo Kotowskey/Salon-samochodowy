@@ -1,156 +1,105 @@
-import fs from 'fs';
 import express from 'express';
 import bodyParser from 'body-parser';
-import cors from 'cors';
+import cors from 'cors'; 
+import { sequelize, Car } from './models.js'; 
+import { Op } from 'sequelize';
 
+// Inicjalizacja aplikacji Express
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-app.use(cors());
-app.use(express.json());
+// Middleware
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true
+
+// Konfiguracja CORS
+app.use(cors({
+  origin: 'http://localhost:4200',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
+// Test połączenia z bazą danych
+sequelize.authenticate()
+    .then(() => {
+        console.log('Połączono z bazą danych.');
+    })
+    .catch(err => {
+        console.error('Nie udało się połączyć z bazą danych:', err);
+    });
+
+// ROUTE: Strona główna API
 app.get('/', (req, res) => {
-    res.send('Server with orders');
+    res.send('Witamy w API Zarządzanie Samochodami!');
 });
 
-app.get('/orders', (req, res) => {
-    fs.readFile('./orders.json', 'utf8', (err, ordersJson) => {
-        if (err) {
-            console.log("File read failed in GET /orders: "+ err);
-            res.status(500).send('File read failed');
-            return;
-        }
-        console.log("GET: /orders");
-        res.send(ordersJson);
-    });
+// ====== CARS ======
+
+// GET all Cars
+app.get('/cars', async (req, res) => {
+    try {
+        const cars = await Car.findAll();
+        res.json(cars);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
-app.get('/orders/:id', (req, res) => {
-    fs.readFile('./orders.json', 'utf8', (err, ordersJson) => {
-        if (err) {
-            console.log("File read failed in GET /orders/" + req.params.id + ": "+ err);
-            res.status(500).send('File read failed');
-            return;
-        }
-        var orders = JSON.parse(ordersJson);
-        var order = orders.find(ordertmp => ordertmp.orderId == req.params.id);
-        if (!order) {
-            console.log("Can't find order with id: " + req.params.id);
-            res.status(500).send('Cant find order with id: ' + req.params.id);
-            return;
-        }
-        var orderJSON = JSON.stringify(order);
-        console.log("GET /orders/" + req.params.id);
-        res.send(orderJSON);
-    });
-});
-
-app.post('/orders', (req, res) => {
-    fs.readFile('./orders.json', 'utf8', (err, ordersJson) => {
-        if (err) {
-            console.log("File read failed in POST /orders: "+ err);
-            res.status(500).send('File read failed');
-            return;
-        }
-        var orders = JSON.parse(ordersJson);
-        var order = orders.find(ordertmp => ordertmp.orderId == req.body.orderId);
-        if (!order) {
-            orders.push(req.body);
-            var newList = JSON.stringify(orders);
-            fs.writeFile('./orders.json', newList, err => {
-                if (err) {
-                    console.log("Error writing file in POST /orders: "+ err);
-                    res.status(500).send('Error writing file orders.json');
-                } else {
-                    res.status(201).send(req.body);
-                    console.log("Successfully wrote file orders.json and added new order with id = " + req.body.orderId);
-                }
-            });
+// GET Car by ID
+app.get('/cars/:id', async (req, res) => {
+    try {
+        const car = await Car.findByPk(req.params.id);
+        if (car) {
+            res.json(car);
         } else {
-            console.log("Order by id = " + req.body.orderId + " already exists");
-            res.status(500).send('Order by id = ' + req.body.orderId + ' already exists');
-            return;
+            res.status(404).json({ error: 'Samochód nie znaleziony' });
         }
-    });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
-app.put('/orders/:id', (req, res) => {
-    fs.readFile('./orders.json', 'utf8', (err, ordersJson) => {
-        if (err) {
-            console.log("File read failed in PUT /orders/" + req.params.id+": "+ err);
-            res.status(500).send('File read failed');
-            return;
-        }
-        var orders = JSON.parse(ordersJson);
-        var orderBody = orders.find(ordertmp => ordertmp.orderId == req.body.orderId);
-        if (orderBody && orderBody.orderId != req.params.id) {
-            console.log("Order by id = " + orderBody.orderId + " already exists");
-            res.status(500).send('Order by id = ' + orderBody.orderId + ' already exists');
-            return;
-        }
-        var order = orders.find(ordertmp => ordertmp.orderId == req.params.id);
-        if (!order) {
-            orders.push(req.body);
-            var newList = JSON.stringify(orders);
-            fs.writeFile('./orders.json', newList, err => {
-                if (err) {
-                    console.log("Error writing file in PUT /orders/" + req.params.id+": "+err);
-                    res.status(500).send('Error writing file orders.json');
-                } else {
-                    res.status(201).send(req.body);
-                    console.log("Successfully wrote file orders.json and added new order with id = " + req.body.orderId);
-                }
-            });
+// CREATE Car
+app.post('/cars', async (req, res) => {
+    try {
+        const { brand, model, year, vin, price, isAvailableForRent } = req.body;
+        const newCar = await Car.create({ brand, model, year, vin, price, isAvailableForRent });
+        res.status(201).json(newCar);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// UPDATE Car
+app.put('/cars/:id', async (req, res) => {
+    try {
+        const { brand, model, year, vin, price, isAvailableForRent } = req.body;
+        const car = await Car.findByPk(req.params.id);
+        if (car) {
+            await car.update({ brand, model, year, vin, price, isAvailableForRent });
+            res.json(car);
         } else {
-            for (var i = 0; i < orders.length; i++) {
-                if (orders[i].orderId == order.orderId) {
-                    orders[i] = req.body;
-                }
-            }
-            var newList = JSON.stringify(orders);
-            fs.writeFile('./orders.json', newList, err => {
-                if (err) {
-                    console.log("Error writing file in PUT /orders/" + req.params.id+": "+ err);
-                    res.status(500).send('Error writing file orders.json');
-                } else {
-                    res.status(200).send(req.body);
-                    console.log("Successfully wrote file orders.json and edit order with old id = " + req.params.id);
-                }
-            });
+            res.status(404).json({ error: 'Samochód nie znaleziony' });
         }
-    });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
-app.delete('/orders/:id', (req, res) => {
-    fs.readFile('./orders.json', 'utf8', (err, ordersJson) => {
-        if (err) {
-            console.log("File read failed in DELETE /orders: "+ err);
-            res.status(500).send('File read failed');
-            return;
-        }
-        var orders = JSON.parse(ordersJson);
-        var orderIndex = orders.findIndex(ordertmp => ordertmp.orderId == req.params.id);
-        if (orderIndex != -1) {
-            orders.splice(orderIndex, 1);
-            var newList = JSON.stringify(orders);
-            fs.writeFile('./orders.json', newList, err => {
-                if (err) {
-                    console.log("Error writing file in DELETE /orders/" + req.params.id+": "+ err);
-                    res.status(500).send('Error writing file orders.json');
-                } else {
-                    res.status(204).send();
-                    console.log("Successfully deleted order with id = " + req.params.id);
-                }
-            });
+// DELETE Car
+app.delete('/cars/:id', async (req, res) => {
+    try {
+        const car = await Car.findByPk(req.params.id);
+        if (car) {
+            await car.destroy();
+            res.json({ message: 'Samochód usunięty' });
         } else {
-            console.log("Order by id = " + req.params.id + " does not exists");
-            res.status(500).send('Order by id = ' + req.params.id + ' does not exists');
-            return;
+            res.status(404).json({ error: 'Samochód nie znaleziony' });
         }
-    });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
-app.listen(7777, () => console.log("Server address http://localhost:7777"));
+// ====== START SERWERA ======
+app.listen(PORT, () => {
+    console.log(`Serwer działa na porcie ${PORT}`);
+});

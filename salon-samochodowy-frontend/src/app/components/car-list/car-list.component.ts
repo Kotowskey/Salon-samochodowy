@@ -1,5 +1,3 @@
-// src/app/components/car-list/car-list.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { CarService, Car } from '../../services/car.service';
 import { CommonModule } from '@angular/common';

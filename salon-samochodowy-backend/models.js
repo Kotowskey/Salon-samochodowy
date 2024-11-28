@@ -1,147 +1,82 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from './db.js';
+import { Sequelize } from 'sequelize';
 
-// Definicja modelu Car
-export const Car = sequelize.define('Car', {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
+
+const sequelize = new Sequelize('salon_samochodowy', 'root', 'root', {
+    host: 'localhost',
+    dialect: 'mysql', 
+});
+
+const Car = sequelize.define('Car', {
     brand: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
     },
     model: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
     },
     year: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
     },
     vin: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
         unique: true,
     },
     price: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: Sequelize.FLOAT,
         allowNull: false,
     },
     isAvailableForRent: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
+        type: Sequelize.BOOLEAN,
         defaultValue: true,
     },
 }, {
-    tableName: 'Cars',
-    timestamps: false,
+    timestamps: false, 
 });
 
-// Definicja modelu Salon
-export const Salon = sequelize.define('Salon', {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    location: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-}, {
-    tableName: 'Salons',
-    timestamps: false,
-});
 
-// Definicja modelu User
-export const User = sequelize.define('User', {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
+const User = sequelize.define('User', {
     username: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
         unique: true,
     },
     password: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
     },
     firstName: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
     },
     lastName: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
     },
     isDealer: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
+        type: Sequelize.BOOLEAN,
         defaultValue: false,
     },
 }, {
-    tableName: 'Users',
-    timestamps: false,
+    timestamps: false, 
 });
 
 
 
-//salon
-Salon.hasMany(Car, {
-    foreignKey: 'salonId',
-    as: 'cars',
-    onDelete: 'CASCADE',
-});
-Car.belongsTo(Salon, {
-    foreignKey: 'salonId',
-    as: 'salon',
-});
+User.belongsToMany(Car, { through: 'UserCarsBought', as: 'carsBought' });
+Car.belongsToMany(User, { through: 'UserCarsBought', as: 'buyers' });
 
-//kupowanie
-User.belongsToMany(Car, {
-    through: 'CarsBought',
-    foreignKey: 'userId',
-    otherKey: 'carId',
-    as: 'carsBought',
-});
-Car.belongsToMany(User, {
-    through: 'CarsBought',
-    foreignKey: 'carId',
-    otherKey: 'userId',
-    as: 'buyers',
-});
-
-//wypozyczenie
-User.belongsToMany(Car, {
-    through: 'CarsRented',
-    foreignKey: 'userId',
-    otherKey: 'carId',
-    as: 'carsRented',
-});
-Car.belongsToMany(User, {
-    through: 'CarsRented',
-    foreignKey: 'carId',
-    otherKey: 'userId',
-    as: 'renters',
-});
+User.belongsToMany(Car, { through: 'UserCarsRented', as: 'carsRented' });
+Car.belongsToMany(User, { through: 'UserCarsRented', as: 'renters' });
 
 
-const syncModels = async () => {
-    try {
-        await sequelize.sync({ alter: true });
-        console.log('Modele zostały zsynchronizowane z bazą danych.');
-    } catch (error) {
-        console.error('Błąd synchronizacji modeli:', error);
-    }
-};
+(async () => {
+    await sequelize.sync({ alter: true })
+        .then(() => console.log('Database synchronized'))
+        .catch(err => console.error('Database synchronization error:', err));
+})();
 
-syncModels();
+
+export { sequelize, Car, User };

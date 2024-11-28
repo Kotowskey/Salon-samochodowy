@@ -1,30 +1,46 @@
 import { Injectable } from '@angular/core';
+import { Observable, from } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 export interface Car {
     id: number;
     brand: string;
     model: string;
-    year: string;
+    year: number;
     vin: string;
-    rent: number;
-    sold: boolean;
     price: number;
-    ownerId: number;
+    isAvailableForRent: boolean;
 }
+
 
 @Injectable({
     providedIn: 'root'
 })
 export class CarService {
-    private apiUrl = 'http://localhost:3000/api/cars';
+    private apiUrl = 'http://localhost:3000/cars';
 
-    constructor(private http: HttpClient) { }
+
+    constructor(private http_client: HttpClient) { }
 
     getCars(): Observable<Car[]> {
-        return this.http.get<Car[]>(this.apiUrl);
+        const fetchPromise = fetch(this.apiUrl)
+            .then(response => response.json())
+            .then(data => data as Car[]);
+        return from(fetchPromise);
     }
 
-    // Możesz dodać więcej metod (getCarById, addCar, etc.)
+    addCar(newCar: Car): Observable<Car> {
+        const fetchPromise = fetch(this.apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newCar)
+        })
+            .then(response => response.json())
+            .then(data => data as Car);
+        return from(fetchPromise);
+    }
+
+    
 }
