@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { CarService, Car } from '../../services/car.service';
-import { FormsModule } from '@angular/forms';  // Importowanie FormsModule
+import { FormsModule } from '@angular/forms';  
 
 @Component({
   selector: 'app-add-car',
-  standalone: true,  // Ustawienie komponentu jako standalone
-  imports: [FormsModule],  // Dodanie FormsModule do komponentu
+  standalone: true,  
+  imports: [FormsModule],  
   templateUrl: './add-car.component.html',
   styleUrls: ['./add-car.component.css']
 })
