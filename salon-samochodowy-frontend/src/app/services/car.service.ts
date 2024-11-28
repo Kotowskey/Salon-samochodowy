@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 export interface Car {
     id: number;
@@ -19,7 +20,7 @@ export class CarService {
     private apiUrl = 'http://localhost:3000/cars';
 
 
-    constructor() { }
+    constructor(private http_client: HttpClient) { }
 
     getCars(): Observable<Car[]> {
         const fetchPromise = fetch(this.apiUrl)
