@@ -1,9 +1,9 @@
 import { Sequelize } from 'sequelize';
 
-// Inicjalizacja Sequelize
+
 const sequelize = new Sequelize('salon_samochodowy', 'root', 'root', {
     host: 'localhost',
-    dialect: 'mysql', // lub 'sqlite', 'postgres', 'mssql'
+    dialect: 'mysql', 
 });
 
 const Car = sequelize.define('Car', {
@@ -33,7 +33,7 @@ const Car = sequelize.define('Car', {
         defaultValue: true,
     },
 }, {
-    timestamps: false, // Wyłącza createdAt i updatedAt
+    timestamps: false, 
 });
 
 
@@ -60,23 +60,23 @@ const User = sequelize.define('User', {
         defaultValue: false,
     },
 }, {
-    timestamps: false, // Wyłącza kolumny createdAt i updatedAt
+    timestamps: false, 
 });
 
 
-// Relacje
+
 User.belongsToMany(Car, { through: 'UserCarsBought', as: 'carsBought' });
 Car.belongsToMany(User, { through: 'UserCarsBought', as: 'buyers' });
 
 User.belongsToMany(Car, { through: 'UserCarsRented', as: 'carsRented' });
 Car.belongsToMany(User, { through: 'UserCarsRented', as: 'renters' });
 
-// Synchronizacja bazy danych
+
 (async () => {
     await sequelize.sync({ alter: true })
         .then(() => console.log('Database synchronized'))
         .catch(err => console.error('Database synchronization error:', err));
 })();
 
-// Eksport modeli i instancji Sequelize
+
 export { sequelize, Car, User };
