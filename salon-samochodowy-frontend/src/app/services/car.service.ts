@@ -41,5 +41,5 @@ export class CarService {
         return from(fetchPromise);
     }
 
-    // Dodatkowe metody (getCarById, addCar, etc.) mogą być dodane analogicznie
+    
 }
