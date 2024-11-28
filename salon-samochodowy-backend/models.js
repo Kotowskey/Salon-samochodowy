@@ -65,11 +65,11 @@ const User = sequelize.define('User', {
 
 
 
-User.belongsToMany(Car, { through: 'UserCarsBought', as: 'carsBought' });
-Car.belongsToMany(User, { through: 'UserCarsBought', as: 'buyers' });
+User.hasMany(Car, { as: 'carsOwned', foreignKey: 'ownerId' });
+Car.belongsTo(User, { as: 'owner', foreignKey: 'ownerId' });
 
-User.belongsToMany(Car, { through: 'UserCarsRented', as: 'carsRented' });
-Car.belongsToMany(User, { through: 'UserCarsRented', as: 'renters' });
+User.hasMany(Car, { as: 'carsRented', foreignKey: 'renterId' });
+Car.belongsTo(User, { as: 'renter', foreignKey: 'renterId' });
 
 
 (async () => {
