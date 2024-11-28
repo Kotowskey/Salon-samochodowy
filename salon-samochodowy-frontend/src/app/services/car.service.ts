@@ -1,46 +1,32 @@
+// src/app/services/car.service.ts
 import { Injectable } from '@angular/core';
-import { Observable, from } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export interface Car {
-    id: number;
-    brand: string;
-    model: string;
-    year: number;
-    vin: string;
-    price: number;
-    isAvailableForRent: boolean;
+  id: number;
+  brand: string;
+  model: string;
+  year: number;
+  vin: string;
+  price: number;
+  isAvailableForRent: boolean;
 }
 
-
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class CarService {
-    private apiUrl = 'http://localhost:3000/cars';
+  private apiUrl = 'http://localhost:3000/cars';
 
+  constructor(private http: HttpClient) { } 
 
-    constructor() { }
+  getCars(): Observable<Car[]> {
+    return this.http.get<Car[]>(this.apiUrl);
+  }
 
-    getCars(): Observable<Car[]> {
-        const fetchPromise = fetch(this.apiUrl)
-            .then(response => response.json())
-            .then(data => data as Car[]);
-        return from(fetchPromise);
-    }
-
-    addCar(newCar: Car): Observable<Car> {
-        const fetchPromise = fetch(this.apiUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newCar)
-        })
-            .then(response => response.json())
-            .then(data => data as Car);
-        return from(fetchPromise);
-    }
-
-    
+  addCar(newCar: Car): Observable<Car> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<Car>(this.apiUrl, newCar, { headers });
+  }
 }
