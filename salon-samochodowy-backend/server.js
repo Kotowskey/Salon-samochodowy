@@ -245,6 +245,42 @@ app.post('/cars/:id/return', async (req, res) => {
     }
 });
 
+// BUY Car
+app.post('/cars/:id/buy', async (req, res) => {
+    try {
+        const carId = req.params.id;
+        const { userId } = req.body; // Zakładamy, że użytkownik przesyła swoje ID w treści żądania.
+
+        // Znajdź samochód po ID
+        const car = await Car.findByPk(carId);
+
+        if (!car) {
+            return res.status(404).json({ error: 'Samochód nie znaleziony' });
+        }
+
+        if (!car.isAvailableForRent) {
+            return res.status(400).json({ error: 'Samochód jest już sprzedany lub wynajęty' });
+        }
+
+        // Znajdź użytkownika po ID
+        const user = await User.findByPk(userId);
+
+        if (!user) {
+            return res.status(404).json({ error: 'Użytkownik nie znaleziony' });
+        }
+
+        // Kupno samochodu
+        car.isAvailableForRent = false; // Samochód jest teraz niedostępny do wynajmu
+        car.ownerId = user.id; // Przypisujemy właściciela
+
+        await car.save();
+
+        res.status(200).json({ message: 'Samochód został kupiony', car });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 
 
 // ====== START SERWERA ======
