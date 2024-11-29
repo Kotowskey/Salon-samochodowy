@@ -1,0 +1,48 @@
+/* Nawigacja */
+.navbar {
+  display: flex; /* Użycie Flexbox do rozmieszczenia elementów */
+  justify-content: space-between; /* Rozmieszczenie elementów: lewa, środkowa i prawa część */
+  align-items: center; /* Wyrównanie elementów w pionie */
+  background-color: #28a745; /* Kolor tła navbaru */
+  color: white;
+  padding: 15px;
+  position: fixed; /* Ustawienie navbaru na stałe */
+  top: 0; /* Ustawienie navbaru na samej górze */
+  left: 0; /* Ustawienie navbaru na całej szerokości */
+  width: 100%; /* Na całą szerokość */
+  z-index: 1000; /* Zapewnienie, że navbar będzie na wierzchu */
+}
+
+/* Zapewnienie, że zawartość nie będzie zakrywać navbaru */
+.content {
+  margin-top: 70px; /* Ustawienie marginesu górnego na wysokość navbaru */
+}
+
+/* Tytuł na środku */
+.navbar-center {
+  flex-grow: 1; /* Pozwolenie, aby ten element rozszerzał się i zajął dostępną przestrzeń */
+  text-align: center; /* Wyrównanie tekstu do środka */
+}
+
+.navbar-center h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  text-align: center;
+}
+
+/* Stylizacja przycisku logowania */
+.login-button {
+  background-color: white;
+  color: #4CAF50;
+  border: none;
+  padding: 8px 16px;
+  margin-right: 50px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-button:hover {
+  background-color: #f1f1f1;
+}

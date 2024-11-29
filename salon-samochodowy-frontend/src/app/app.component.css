@@ -40,7 +40,10 @@
   
   /* Kontener na zawartość */
   .content {
+    margin-top: 70px;
     width: 90%;
     max-width: 1200px;
   }
+
+  
   
