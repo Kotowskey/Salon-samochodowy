@@ -212,7 +212,38 @@ app.post('/cars/:id/rent', async (req, res) => {
     }
 });
 
+// RETURN Car
+app.post('/cars/:id/return', async (req, res) => {
+    try {
+        const carId = req.params.id;
+        const { userId } = req.body; // Zakładamy, że użytkownik przesyła swoje ID w treści żądania.
 
+        // Znajdź samochód po ID
+        const car = await Car.findByPk(carId);
+
+        if (!car) {
+            return res.status(404).json({ error: 'Samochód nie znaleziony' });
+        }
+
+        if (car.isAvailableForRent) {
+            return res.status(400).json({ error: 'Samochód już jest dostępny' });
+        }
+
+        if (car.renterId !== userId) {
+            return res.status(403).json({ error: 'Nie możesz zwrócić tego samochodu, ponieważ nie jesteś jego wynajmującym' });
+        }
+
+        // Zwrócenie samochodu
+        car.isAvailableForRent = true;
+        car.renterId = null; // Usuwamy powiązanie z wynajmującym
+
+        await car.save();
+
+        res.status(200).json({ message: 'Samochód został zwrócony', car });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 
 
