@@ -1,49 +1,63 @@
 /* Tło pełnoekranowe */
 .background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #f5f5f5; /* Lekko szary kolor */
-    z-index: -1; /* Ustawia tło za całą zawartością */
-  }
-  
-  /* Nakładka półprzezroczysta */
-  .overlay {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Półprzezroczysta nakładka dla kontrastu tekstu */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Nagłówek */
-  .header {
-    text-align: center;
-    color: #fff;
-    margin-bottom: 20px;
-  }
-  
-  .header h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    margin: 0;
-  }
-  
-  .header p {
-    font-size: 1.5rem;
-  }
-  
-  /* Kontener na zawartość */
-  .content {
-    margin-top: 70px;
-    width: 90%;
-    max-width: 1200px;
-  }
+  position: absolute; /* Zamiast fixed, pozwala na przewijanie strony */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5; /* Lekko szary kolor */
+  z-index: -1; /* Ustawia tło za całą zawartością */
+  background-attachment: fixed; /* Tło pozostaje nieruchome podczas przewijania */
+}
 
-  
-  
+/* Nakładka półprzezroczysta */
+.overlay {
+  position: relative;
+  min-height: 100vh; /* Aby pokryła całą wysokość ekranu */
+  background-color: rgba(0, 0, 0, 0.6); /* Półprzezroczysta nakładka dla kontrastu tekstu */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Aby zawartość miała odstęp od krawędzi */
+  box-sizing: border-box;
+}
+
+/* Nagłówek */
+.header {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.header p {
+  font-size: 1.5rem;
+}
+
+/* Kontener na zawartość */
+.content {
+  margin-top: 20px; /* Mniejszy odstęp od góry */
+  width: 100%; /* Szerokość na całą stronę */
+  max-width: 1200px; /* Maksymalna szerokość kontenera */
+  overflow-y: auto; /* Włącz przewijanie w pionie */
+  padding: 20px; /* Odstępy wewnętrzne */
+  box-sizing: border-box; /* Wlicza padding i border w szerokość */
+  background: #fff; /* Opcjonalne białe tło dla treści */
+  border-radius: 8px; /* Opcjonalne zaokrąglenie krawędzi */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Opcjonalny cień */
+}
+
+/* Ogólne */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden; /* Ukrywa poziome przewijanie */
+}

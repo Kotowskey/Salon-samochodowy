@@ -1,7 +1,10 @@
-<div class="container">
-    <h2>Lista Samochodów</h2>
-    <button (click)="sortByPrice()">
-        Sortuj według ceny ({{ sortDirection === 'asc' ? 'Rosnąco' : 'Malejąco' }})
+<div class="container my-4">
+  <h2 class="mb-4">Lista Samochodów</h2>
+  
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <button class="btn btn-primary" (click)="sortByPrice()">
+      Sortuj według ceny 
+      <i [ngClass]="sortDirection === 'asc' ? 'bi bi-sort-up' : 'bi bi-sort-down'"></i>
     </button>
     <table>
         <thead>
