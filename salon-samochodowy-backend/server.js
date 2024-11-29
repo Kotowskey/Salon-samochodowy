@@ -1,7 +1,8 @@
+// server.js
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors'; 
-import { sequelize, Car } from './models.js'; 
+import { sequelize, Car, User } from './models.js'; 
 import { Op } from 'sequelize';
 
 // Inicjalizacja aplikacji Express
@@ -93,6 +94,82 @@ app.delete('/cars/:id', async (req, res) => {
             res.json({ message: 'Samochód usunięty' });
         } else {
             res.status(404).json({ error: 'Samochód nie znaleziony' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// ====== USERS ======
+
+// GET all Users (klientów)
+app.get('/users', async (req, res) => {
+    try {
+        const users = await User.findAll({
+            where: { isDealer: false } // Klienci mają isDealer: false
+        });
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// GET User by ID
+app.get('/users/:id', async (req, res) => {
+    try {
+        const user = await User.findByPk(req.params.id);
+        if (user && !user.isDealer) {
+            res.json(user);
+        } else {
+            res.status(404).json({ error: 'Klient nie znaleziony' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// CREATE User (klient)
+app.post('/users', async (req, res) => {
+    try {
+        const { username, password, firstName, lastName } = req.body;
+        const newUser = await User.create({ 
+            username, 
+            password, 
+            firstName, 
+            lastName,
+            isDealer: false // Upewniamy się, że tworzymy klienta, a nie dealera
+        });
+        res.status(201).json(newUser);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// UPDATE User (klient)
+app.put('/users/:id', async (req, res) => {
+    try {
+        const { username, password, firstName, lastName } = req.body;
+        const user = await User.findByPk(req.params.id);
+        if (user && !user.isDealer) {
+            await user.update({ username, password, firstName, lastName });
+            res.json(user);
+        } else {
+            res.status(404).json({ error: 'Klient nie znaleziony' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// DELETE User (klient)
+app.delete('/users/:id', async (req, res) => {
+    try {
+        const user = await User.findByPk(req.params.id);
+        if (user && !user.isDealer) {
+            await user.destroy();
+            res.json({ message: 'Klient usunięty' });
+        } else {
+            res.status(404).json({ error: 'Klient nie znaleziony' });
         }
     } catch (error) {
         res.status(500).json({ error: error.message });

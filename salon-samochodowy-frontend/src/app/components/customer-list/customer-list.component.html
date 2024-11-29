@@ -1,0 +1,29 @@
+<!-- src/app/components/customer-list/customer-list.component.html -->
+<div class="customer-list">
+    <h2>Lista Klientów</h2>
+    <div *ngIf="error" class="error">
+      {{ error }}
+    </div>
+    <table *ngIf="customers.length > 0; else noCustomers">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Imię</th>
+          <th>Nazwisko</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customer of customers">
+          <td>{{ customer.id }}</td>
+          <td>{{ customer.username }}</td>
+          <td>{{ customer.firstName }}</td>
+          <td>{{ customer.lastName }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noCustomers>
+      <p>Brak klientów do wyświetlenia.</p>
+    </ng-template>
+  </div>
+  

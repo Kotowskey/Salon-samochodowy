@@ -1,0 +1,29 @@
+<div class="add-customer">
+    <h2>Dodaj Nowego Klienta</h2>
+    <form (ngSubmit)="addCustomer()" #customerForm="ngForm">
+      <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" [(ngModel)]="newCustomer.username" name="username" required>
+      </div>
+      <div>
+        <label for="password">Hasło:</label>
+        <input type="password" id="password" [(ngModel)]="newCustomer.password" name="password" required>
+      </div>
+      <div>
+        <label for="firstName">Imię:</label>
+        <input type="text" id="firstName" [(ngModel)]="newCustomer.firstName" name="firstName" required>
+      </div>
+      <div>
+        <label for="lastName">Nazwisko:</label>
+        <input type="text" id="lastName" [(ngModel)]="newCustomer.lastName" name="lastName" required>
+      </div>
+      <button type="submit">Dodaj Klienta</button>
+    </form>
+    <div *ngIf="successMessage" class="success">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="error">
+      {{ errorMessage }}
+    </div>
+  </div>
+  
