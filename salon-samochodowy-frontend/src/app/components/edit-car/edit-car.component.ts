@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, Input} from '@angular/core';
 import {Car,CarService } from '../../services/car.service';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
@@ -8,31 +8,28 @@ import {MatInputModule} from '@angular/material/input';
 import { ShowCarForm } from '../show-car-form/show-car-form.component';
 
 @Component({
-  selector: 'app-add-car',
-  standalone: true,  
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,  
-  templateUrl: './add-car.component.html',
-  styleUrls: ['./add-car.component.css']
+  selector: 'edit-car',
+  imports: [],
+  templateUrl: './edit-car.component.html',
+  styleUrl: './edit-car.component.css'
 })
-export class AddCarComponent {
-  car: Car = {
+export class EditCarComponent {
+  @Input() car: Car = {
     id: 0,
     brand: '',
     model: '',
     year: 0,
     vin: '',
     price: 0,
-    isAvailableForRent: true
+    isAvailableForRent: true,
   };
-  private dialog = inject(MatDialog);
   private carService = inject(CarService);
-
-  addCar() {
-    this.carService.addCar(this.car).subscribe(
-      (newCar) => {
-        console.log('Nowy samochód dodany:', newCar);
-        alert('Samochód został dodany!');
+  private dialog = inject(MatDialog);
+  editCar(){
+    this.carService.updateCar(this.car.id,this.car).subscribe(
+      (updatedCar) =>{
+        console.log('Samochód zmodyfikowany:', updatedCar);
+        alert('Samochód zmodyfikowany!');
       },
       (error) => {
         console.error('Błąd przy dodawaniu samochodu:', error);
@@ -40,16 +37,16 @@ export class AddCarComponent {
       }
     );
   }
-  openAddCarDialog(): void {
+  openEditCarDialog(): void {
     const dialogRef = this.dialog.open(ShowCarForm, {
       width: '600px',
-      data: { ...this.car },
+      data: this.car,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.car = result;
-        this.addCar();
+        this.editCar();
       }
     });
   }

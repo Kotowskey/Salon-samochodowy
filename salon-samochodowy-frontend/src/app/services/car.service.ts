@@ -29,4 +29,8 @@ export class CarService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<Car>(this.apiUrl, newCar, { headers });
   }
+  updateCar(id: number, updatedCar: Car): Observable<Car> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put<Car>(`${this.apiUrl}/${id}`, updatedCar, { headers });
+  }
 }

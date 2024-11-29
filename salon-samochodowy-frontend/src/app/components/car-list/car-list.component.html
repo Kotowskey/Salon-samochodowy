@@ -24,6 +24,7 @@
                 <td>{{ car.vin }}</td>
                 <td>{{ car.isAvailableForRent ? 'Tak' : 'Nie' }}</td>
                 <td>{{ car.price | currency }}</td>
+                <td><edit-car [car]="car"></edit-car></td>
             </tr>
         </tbody>
     </table>
