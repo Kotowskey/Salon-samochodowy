@@ -176,6 +176,46 @@ app.delete('/users/:id', async (req, res) => {
     }
 });
 
+// RENT Car
+app.post('/cars/:id/rent', async (req, res) => {
+    try {
+        const carId = req.params.id;
+        const { userId } = req.body; // Zakładamy, że użytkownik przesyła swoje ID w treści żądania.
+
+        // Znajdź samochód po ID
+        const car = await Car.findByPk(carId);
+
+        if (!car) {
+            return res.status(404).json({ error: 'Samochód nie znaleziony' });
+        }
+
+        if (!car.isAvailableForRent) {
+            return res.status(400).json({ error: 'Samochód jest już wynajęty' });
+        }
+
+        // Znajdź użytkownika po ID
+        const user = await User.findByPk(userId);
+
+        if (!user) {
+            return res.status(404).json({ error: 'Użytkownik nie znaleziony' });
+        }
+
+        // Wynajem samochodu
+        car.isAvailableForRent = false;
+        car.renterId = user.id; // Przypisujemy ID użytkownika jako wynajmującego
+
+        await car.save();
+
+        res.status(200).json({ message: 'Samochód został wynajęty', car });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
+
+
+
 // ====== START SERWERA ======
 app.listen(PORT, () => {
     console.log(`Serwer działa na porcie ${PORT}`);
