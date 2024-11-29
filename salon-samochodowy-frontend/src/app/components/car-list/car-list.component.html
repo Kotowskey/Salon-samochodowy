@@ -6,29 +6,33 @@
       Sortuj według ceny 
       <i [ngClass]="sortDirection === 'asc' ? 'bi bi-sort-up' : 'bi bi-sort-down'"></i>
     </button>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Marka</th>
-                <th>Model</th>
-                <th>Rok</th>
-                <th>VIN</th>
-                <th>Dostępny do wynajmu</th>
-                <th>Cena</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let car of sortedCars">
-                <td>{{ car.id }}</td>
-                <td>{{ car.brand }}</td>
-                <td>{{ car.model }}</td>
-                <td>{{ car.year }}</td>
-                <td>{{ car.vin }}</td>
-                <td>{{ car.isAvailableForRent ? 'Tak' : 'Nie' }}</td>
-                <td>{{ car.price | currency }}</td>
-                <td><edit-car [car]="car"></edit-car></td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- Możesz dodać dodatkowe filtry tutaj -->
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let car of sortedCars">
+      <div class="card h-100">
+        <!-- Jeśli masz obrazek samochodu, dodaj go tutaj -->
+        <!-- <img src="{{ car.imageUrl }}" class="card-img-top" alt="{{ car.brand }} {{ car.model }}"> -->
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+          <p class="card-text">
+            <strong>Rok:</strong> {{ car.year }}<br>
+            <strong>VIN:</strong> {{ car.vin }}<br>
+            <strong>Dostępny do wynajmu:</strong>
+            <span class="badge" [ngClass]="car.isAvailableForRent ? 'bg-success' : 'bg-danger'">
+              {{ car.isAvailableForRent ? 'Tak' : 'Nie' }}
+            </span>
+          </p>
+          <div class="mt-auto">
+            <h6 class="card-subtitle mb-2 text-muted">{{ car.price | currency:'PLN' }}</h6>
+            <button class="btn btn-outline-primary btn-sm me-2">Szczegóły</button>
+            <button class="btn btn-primary btn-sm me-2">Wynajmij</button>
+            <!-- Dodanie komponentu edycji -->
+            <edit-car [car]="car"></edit-car>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
