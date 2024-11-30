@@ -28,9 +28,7 @@
             <h6 class="card-subtitle mb-2 text-muted">{{ car.price | currency:'PLN' }}</h6>
             <div class="button-box">
               <button class="btn btn-primary btn-sm me-2">Kup</button>
-              <button class="btn btn-success btn-sm me-2" [disabled]="!car.isAvailableForRent"[ngClass]="{ 'btn-disabled': !car.isAvailableForRent }">
-                Wynajmij
-              </button>
+              <app-rent-car [car]="car"></app-rent-car>
               @if(isDealer) {
                 <button mat-raised-button color="primary" class="btn btn-danger btn-sm me-2" (click)="deleteCar(car.id)">
                   Usun

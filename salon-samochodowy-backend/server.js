@@ -354,7 +354,22 @@ app.post('/cars/:id/return', authenticateSession, async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+//szukanie samochodu po użytkowniku
+app.get('/cars/:id/renter', async (req, res) => {
+    const carId = req.params.id; // ID samochodu z parametru URL
+    try {
+        // Znajdź samochód na podstawie ID
+        const car = await Car.findByPk(carId);
 
+        if (car) {
+            res.json({ carId: car.id, renterId: car.renterId });
+        } else {
+            res.status(404).json({ error: 'Samochód nie znaleziony' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 // BUY Car (chronione)
 app.post('/cars/:id/buy', authenticateSession, async (req, res) => {
     try {

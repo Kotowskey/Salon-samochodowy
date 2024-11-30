@@ -12,6 +12,10 @@ export interface Car {
   price: number;
   isAvailableForRent: boolean;
 }
+export interface CarRenter {
+  carId: number;
+  renterId: number;
+}
 
 export interface LeasingRequest {
   downPayment: number;
@@ -53,6 +57,20 @@ export class CarService {
   deleteCar(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`, { withCredentials: true });
   }
+  rentCar(carId: number): Observable<any> {
+    const url = `${this.apiUrl}/${carId}/rent`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(url, {}, { headers, withCredentials: true });
+  }
+  returnCar(carId: number): Observable<any> {
+    const url = `${this.apiUrl}/${carId}/return`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(url, {}, { headers, withCredentials: true });
+  }
+  getRenterId(carId: number): Observable<CarRenter> {
+    const url = `${this.apiUrl}/${carId}/renter`;
+    return this.http.get<CarRenter>(url);
+  }  
   leaseCar(carId: number, leasingData: LeasingRequest): Observable<LeasingResponse> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<LeasingResponse>(`${this.apiUrl}/${carId}/leasing`,leasingData,{ headers });

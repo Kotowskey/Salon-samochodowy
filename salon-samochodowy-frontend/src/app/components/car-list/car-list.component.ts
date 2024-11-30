@@ -4,12 +4,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EditCarComponent } from '../edit-car/edit-car.component';
 import { AuthenticationService } from '../../services/authentication.service';
+import { RentCarComponent } from '../rent-car/rent-car.component';
 import { CalculateLeasingComponent } from '../calculate-leasing/calculate-leasing.component';
-
 @Component({
     selector: 'app-car-list',
     standalone: true,
-    imports: [CommonModule, FormsModule, EditCarComponent,CalculateLeasingComponent],
+    imports: [CommonModule, FormsModule, EditCarComponent,RentCarComponent,CalculateLeasingComponent],
     templateUrl: './car-list.component.html',
     styleUrls: ['./car-list.component.css']
 })
@@ -31,7 +31,6 @@ export class CarListComponent implements OnInit {
             this.sortedCars = [...this.cars];
         });
     }
-
     sortByPrice(): void {
         if (this.sortDirection === 'asc') {
             this.sortedCars.sort((a, b) => a.price - b.price);
@@ -62,5 +61,7 @@ export class CarListComponent implements OnInit {
           );
         }
     }
+
+    
 
 }
