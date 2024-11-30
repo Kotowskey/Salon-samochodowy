@@ -23,16 +23,16 @@ export interface NewCustomer {
   providedIn: 'root'
 })
 export class CustomerService {
-  private apiUrl = 'http://localhost:3000/users';
+  private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { } 
 
   getCustomers(): Observable<Customer[]> {
-    return this.http.get<Customer[]>(this.apiUrl, { withCredentials: true });
+    return this.http.get<Customer[]>(`${this.apiUrl}/users`, { withCredentials: true });
   }
 
   addCustomer(newCustomer: NewCustomer): Observable<Customer> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<Customer>(this.apiUrl, newCustomer, { headers, withCredentials: true });
+    return this.http.post<Customer>(`${this.apiUrl}/register`, newCustomer, { headers, withCredentials: true });
   }
 }
