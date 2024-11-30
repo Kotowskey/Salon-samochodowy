@@ -1,5 +1,5 @@
 <div class="container my-4">
-  <h2 class="mb-4">Lista Samochodów</h2>
+  <h2 class="mb-4 text-center">Lista dostępnych samochodów</h2>
   
   <div class="d-flex justify-content-between align-items-center mb-3">
     <button class="btn btn-primary" (click)="sortByPrice()">
@@ -26,8 +26,14 @@
           </p>
           <div class="mt-auto">
             <h6 class="card-subtitle mb-2 text-muted">{{ car.price | currency:'PLN' }}</h6>
-            <button class="btn btn-outline-primary btn-sm me-2">Szczegóły</button>
-            <button class="btn btn-primary btn-sm me-2">Wynajmij</button>
+            <button class="btn btn-primary btn-sm me-2">Kup</button>
+            <button 
+            class="btn btn-primary btn-sm me-2" 
+            [disabled]="!car.isAvailableForRent"
+           [ngClass]="{ 'btn-disabled': !car.isAvailableForRent }"
+          >
+          Wynajmij
+          </button>
             <!-- Dodanie komponentu edycji -->
             <edit-car [car]="car"></edit-car>
           </div>

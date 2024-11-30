@@ -9,4 +9,12 @@
   .card-subtitle {
     font-size: 1rem;
   }
+
+  .btn-disabled {
+    background-color: #d6d6d6;
+    color: #999999;
+    border-color: #d6d6d6;
+    cursor: not-allowed;
+}
+
   

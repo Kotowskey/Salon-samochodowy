@@ -1,14 +1,22 @@
-<nav class="navbar">
-  <!-- Lewa strona (możesz dodać tu inne elementy, jeśli chcesz) -->
-  <div class="navbar-left"></div>
+<nav class="navbar navbar-expand-lg navbar-light bg-secondary shadow-sm">
+  <div class="container-fluid">
+    <!-- Lewa strona: Logo lub nazwa firmy -->
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <!-- Ikona -->
+      <i class="bi bi-car-front-fill me-2" style="font-size: 1.5rem; color: #ffffff;"></i>
+      <span class="fw-bold" style="color: white;">Salon Samochodowy Angular Białystok</span>
+    </a>
 
-  <!-- Tytuł na środku -->
-  <div class="navbar-center">
-    <h1>Salon Samochodowy</h1>
-  </div>
+    <!-- Przycisk hamburger na małych ekranach -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" 
+            aria-controls="navbarContent" aria-expanded="false" aria-label="Przełącz nawigację">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <!-- Prawa strona (przycisk logowania) -->
-  <div class="navbar-right">
-    <button class="login-button">Zaloguj się</button>
+    <!-- Prawa strona: Przycisk logowania -->
+    <div class="d-flex">
+      <button class="btn btn-light" type="button">Zaloguj się</button>
+    </div>
   </div>
 </nav>
+

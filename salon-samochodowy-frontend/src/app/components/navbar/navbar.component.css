@@ -3,8 +3,8 @@
   display: flex; /* Użycie Flexbox do rozmieszczenia elementów */
   justify-content: space-between; /* Rozmieszczenie elementów: lewa, środkowa i prawa część */
   align-items: center; /* Wyrównanie elementów w pionie */
-  background-color: #28a745; /* Kolor tła navbaru */
-  color: white;
+  background-color: #6c757d; /* Kolor tła navbaru (szary) */
+  color: #f5f5f5;
   padding: 15px;
   position: fixed; /* Ustawienie navbaru na stałe */
   top: 0; /* Ustawienie navbaru na samej górze */
@@ -18,22 +18,10 @@
   margin-top: 70px; /* Ustawienie marginesu górnego na wysokość navbaru */
 }
 
-/* Tytuł na środku */
-.navbar-center {
-  flex-grow: 1; /* Pozwolenie, aby ten element rozszerzał się i zajął dostępną przestrzeń */
-  text-align: center; /* Wyrównanie tekstu do środka */
-}
-
-.navbar-center h1 {
-  font-size: 1.5rem;
-  margin: 0;
-  text-align: center;
-}
-
 /* Stylizacja przycisku logowania */
-.login-button {
-  background-color: white;
-  color: #4CAF50;
+.btn-light {
+  background-color: #f8f9fa;
+  color: #6c757d;
   border: none;
   padding: 8px 16px;
   margin-right: 50px;
@@ -43,6 +31,6 @@
   transition: background-color 0.3s;
 }
 
-.login-button:hover {
-  background-color: #f1f1f1;
+.btn-light:hover {
+  background-color: #e2e6ea;
 }
