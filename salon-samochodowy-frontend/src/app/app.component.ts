@@ -4,13 +4,23 @@ import { AddCarComponent } from "./components/add-car/add-car.component";
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { AddCustomerComponent } from './components/add-customer/add-customer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { AuthInterceptor } from './auth.interceptor'; // Ścieżka do interceptora
+import { HTTP_INTERCEPTORS} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [CarListComponent, AddCarComponent, CustomerListComponent, AddCustomerComponent, NavbarComponent],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+    // Inne providery
+  ]
 })
 export class AppComponent {
   title = 'salon-samochodowy-frontend';

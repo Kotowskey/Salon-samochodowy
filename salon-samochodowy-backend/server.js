@@ -387,6 +387,22 @@ app.post('/cars/:id/buy', authenticateSession, async (req, res) => {
     }
 });
 
+// ====== CURRENT USER ======
+app.get('/current-user', authenticateSession, async (req, res) => {
+    try {
+        const user = await User.findByPk(req.session.userId, {
+            attributes: ['id', 'username', 'firstName', 'lastName']
+        });
+        if (user) {
+            res.json({ user });
+        } else {
+            res.status(404).json({ error: 'Użytkownik nie znaleziony' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 // ====== START SERWERA ======
 app.listen(PORT, () => {
     console.log(`Serwer działa na porcie ${PORT}`);

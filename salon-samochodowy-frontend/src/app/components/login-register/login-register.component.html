@@ -1,0 +1,55 @@
+<!-- src/app/login-register/login-register.component.html -->
+<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="authModalLabel">
+            {{ isLoginMode ? 'Logowanie' : 'Rejestracja' }}
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zamknij"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="username" class="form-label">Nazwa użytkownika</label>
+              <input type="text" class="form-control" id="username" [(ngModel)]="username" name="username" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Hasło</label>
+              <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password" required>
+            </div>
+  
+            <!-- Tylko w trybie rejestracji -->
+            <div *ngIf="!isLoginMode">
+              <div class="mb-3">
+                <label for="firstName" class="form-label">Imię</label>
+                <input type="text" class="form-control" id="firstName" [(ngModel)]="firstName" name="firstName" required>
+              </div>
+              <div class="mb-3">
+                <label for="lastName" class="form-label">Nazwisko</label>
+                <input type="text" class="form-control" id="lastName" [(ngModel)]="lastName" name="lastName" required>
+              </div>
+            </div>
+  
+            <!-- Komunikaty o błędach/sukcesie -->
+            <div *ngIf="errorMessage" class="alert alert-danger">
+              {{ errorMessage }}
+            </div>
+            <div *ngIf="successMessage" class="alert alert-success">
+              {{ successMessage }}
+            </div>
+  
+            <button type="submit" class="btn btn-primary w-100">
+              {{ isLoginMode ? 'Zaloguj się' : 'Zarejestruj się' }}
+            </button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-link" (click)="toggleMode()">
+            {{ isLoginMode ? 'Nie masz konta? Zarejestruj się' : 'Masz już konto? Zaloguj się' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

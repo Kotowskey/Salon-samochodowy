@@ -1,3 +1,4 @@
+// customer.service.ts
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -26,11 +27,11 @@ export class CustomerService {
   constructor(private http: HttpClient) { } 
 
   getCustomers(): Observable<Customer[]> {
-    return this.http.get<Customer[]>(this.apiUrl);
+    return this.http.get<Customer[]>(this.apiUrl, { withCredentials: true });
   }
 
   addCustomer(newCustomer: NewCustomer): Observable<Customer> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<Customer>(this.apiUrl, newCustomer, { headers });
+    return this.http.post<Customer>(this.apiUrl, newCustomer, { headers, withCredentials: true });
   }
 }
