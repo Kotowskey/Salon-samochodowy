@@ -39,8 +39,8 @@ export class EditCarComponent {
         alert('Samochód zmodyfikowany!');
       },
       (error) => {
-        console.error('Błąd przy dodawaniu samochodu:', error);
-        alert('Wystąpił błąd przy dodawaniu samochodu.');
+        console.error('Błąd przy edytowaniu samochodu:', error);
+        alert('Wystąpił błąd przy edytowaniu samochodu.');
       }
     );
   }
