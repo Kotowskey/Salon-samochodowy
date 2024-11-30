@@ -17,4 +17,9 @@
     cursor: not-allowed;
 }
 
-  
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+    border-color: #dc3545;
+}
+

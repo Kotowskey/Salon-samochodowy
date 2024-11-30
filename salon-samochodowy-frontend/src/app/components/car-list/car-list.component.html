@@ -34,9 +34,15 @@
           >
           Wynajmij
           </button>
+          @if(isDealer) {
+            <button mat-raised-button color="primary" class="delete-button" (click)="deleteCar(car.id)">
+              Usun
+            </button>
+          }
             <!-- Dodanie komponentu edycji -->
             <edit-car [car]="car"></edit-car>
           </div>
+         
         </div>
       </div>
     </div>

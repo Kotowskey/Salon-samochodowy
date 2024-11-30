@@ -33,4 +33,9 @@ export class CarService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.put<Car>(`${this.apiUrl}/${id}`, updatedCar, { headers });
   }
+
+  deleteCar(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { withCredentials: true });
+  }
+
 }

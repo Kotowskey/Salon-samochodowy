@@ -212,23 +212,19 @@ app.put('/cars/:id', authenticateSession, async (req, res) => {
 
 // DELETE Car (chronione)
 app.delete('/cars/:id', authenticateSession, async (req, res) => {
-    try {
-        const car = await Car.findByPk(req.params.id);
-        if (car) {
-            // Sprawdzenie, czy aktualny użytkownik jest właścicielem samochodu
-            if (car.ownerId !== req.session.userId) {
-                return res.status(403).json({ error: 'Nie masz uprawnień do usunięcia tego samochodu' });
-            }
-
-            await car.destroy();
-            res.json({ message: 'Samochód usunięty' });
-        } else {
-            res.status(404).json({ error: 'Samochód nie znaleziony' });
-        }
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+    const userId = req.session.userId;
+    const carId = req.params.id;
+  
+    // Sprawdź, czy użytkownik jest dealerem
+    const user = await User.findByPk(userId);
+    if (!user || !user.isDealer) {
+      return res.status(403).json({ error: 'Brak uprawnień do usuwania samochodów' });
     }
-});
+  
+    // Usuń samochód
+    await Car.destroy({ where: { id: carId } });
+    res.status(200).json({ message: 'Samochód usunięty.' });
+  });
 
 // ====== USERS ======
 
