@@ -2,10 +2,10 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors'; 
+import session from 'express-session'; // Import express-session
 import { sequelize, Car, User } from './models.js'; 
 import { Op } from 'sequelize';
 
-// Inicjalizacja aplikacji Express
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -14,9 +14,31 @@ app.use(bodyParser.json());
 
 // Konfiguracja CORS
 app.use(cors({
-  origin: 'http://localhost:4200',
+  origin: 'http://localhost:4200', // Zmień na adres Twojej aplikacji frontendowej
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true, // Pozwól na przesyłanie ciasteczek
 }));
+
+// Konfiguracja sesji
+app.use(session({
+    secret: 'TwojSuperTajnyKlucz', // Powinno być przechowywane w zmiennych środowiskowych
+    resave: false,
+    saveUninitialized: false,
+    cookie: { 
+        secure: false, // Ustaw na true, jeśli używasz HTTPS
+        httpOnly: true, // Zapobiega dostępowi do ciasteczka z poziomu JavaScript
+        maxAge: 1000 * 60 * 60 // Sesja ważna przez 1 godzinę
+    }
+}));
+
+// Middleware do ochrony tras
+const authenticateSession = (req, res, next) => {
+    if (req.session && req.session.userId) {
+        next();
+    } else {
+        res.status(401).json({ error: 'Nieautoryzowany' });
+    }
+};
 
 // Test połączenia z bazą danych
 sequelize.authenticate()
@@ -30,6 +52,96 @@ sequelize.authenticate()
 // ROUTE: Strona główna API
 app.get('/', (req, res) => {
     res.send('Witamy w API Zarządzanie Samochodami!');
+});
+
+// ====== AUTHENTICATION ======
+
+// REGISTER User
+app.post('/register', async (req, res) => {
+    try {
+        const { username, password, firstName, lastName } = req.body;
+
+        // Sprawdzenie, czy użytkownik już istnieje
+        const existingUser = await User.findOne({ where: { username } });
+        if (existingUser) {
+            return res.status(400).json({ error: 'Nazwa użytkownika jest już zajęta' });
+        }
+
+        // Tworzenie nowego użytkownika (bez haszowania hasła)
+        const newUser = await User.create({ 
+            username, 
+            password, 
+            firstName, 
+            lastName,
+            isDealer: false // Upewniamy się, że tworzymy klienta, a nie dealera
+        });
+
+        // Inicjalizacja sesji
+        req.session.userId = newUser.id;
+        req.session.username = newUser.username;
+
+        res.status(201).json({ 
+            message: 'Rejestracja udana', 
+            user: { 
+                id: newUser.id, 
+                username: newUser.username, 
+                firstName: newUser.firstName, 
+                lastName: newUser.lastName 
+            } 
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// LOGIN User
+app.post('/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+
+        // Znajdź użytkownika po nazwie użytkownika
+        const user = await User.findOne({ where: { username } });
+
+        if (!user) {
+            return res.status(400).json({ error: 'Nieprawidłowa nazwa użytkownika lub hasło' });
+        }
+
+        // Sprawdź hasło (bez haszowania)
+        if (user.password !== password) {
+            return res.status(400).json({ error: 'Nieprawidłowa nazwa użytkownika lub hasło' });
+        }
+
+        // Inicjalizacja sesji
+        req.session.userId = user.id;
+        req.session.username = user.username;
+
+        res.status(200).json({ 
+            message: 'Logowanie udane', 
+            user: { 
+                id: user.id, 
+                username: user.username, 
+                firstName: user.firstName, 
+                lastName: user.lastName 
+            } 
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// LOGOUT User
+app.post('/logout', (req, res) => {
+    if (req.session) {
+        req.session.destroy(err => {
+            if (err) {
+                return res.status(500).json({ error: 'Nie udało się wylogować' });
+            } else {
+                res.status(200).json({ message: 'Wylogowano pomyślnie' });
+            }
+        });
+    } else {
+        res.status(400).json({ error: 'Brak aktywnej sesji' });
+    }
 });
 
 // ====== CARS ======
@@ -58,23 +170,36 @@ app.get('/cars/:id', async (req, res) => {
     }
 });
 
-// CREATE Car
-app.post('/cars', async (req, res) => {
+// CREATE Car (chronione)
+app.post('/cars', authenticateSession, async (req, res) => {
     try {
         const { brand, model, year, vin, price, isAvailableForRent } = req.body;
-        const newCar = await Car.create({ brand, model, year, vin, price, isAvailableForRent });
+        const newCar = await Car.create({ 
+            brand, 
+            model, 
+            year, 
+            vin, 
+            price, 
+            isAvailableForRent,
+            ownerId: req.session.userId // Przypisanie właściciela
+        });
         res.status(201).json(newCar);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-// UPDATE Car
-app.put('/cars/:id', async (req, res) => {
+// UPDATE Car (chronione)
+app.put('/cars/:id', authenticateSession, async (req, res) => {
     try {
         const { brand, model, year, vin, price, isAvailableForRent } = req.body;
         const car = await Car.findByPk(req.params.id);
         if (car) {
+            // Sprawdzenie, czy aktualny użytkownik jest właścicielem samochodu
+            if (car.ownerId !== req.session.userId) {
+                return res.status(403).json({ error: 'Nie masz uprawnień do edycji tego samochodu' });
+            }
+
             await car.update({ brand, model, year, vin, price, isAvailableForRent });
             res.json(car);
         } else {
@@ -85,11 +210,16 @@ app.put('/cars/:id', async (req, res) => {
     }
 });
 
-// DELETE Car
-app.delete('/cars/:id', async (req, res) => {
+// DELETE Car (chronione)
+app.delete('/cars/:id', authenticateSession, async (req, res) => {
     try {
         const car = await Car.findByPk(req.params.id);
         if (car) {
+            // Sprawdzenie, czy aktualny użytkownik jest właścicielem samochodu
+            if (car.ownerId !== req.session.userId) {
+                return res.status(403).json({ error: 'Nie masz uprawnień do usunięcia tego samochodu' });
+            }
+
             await car.destroy();
             res.json({ message: 'Samochód usunięty' });
         } else {
@@ -102,8 +232,8 @@ app.delete('/cars/:id', async (req, res) => {
 
 // ====== USERS ======
 
-// GET all Users (klientów)
-app.get('/users', async (req, res) => {
+// GET all Users (klientów) (chronione)
+app.get('/users', authenticateSession, async (req, res) => {
     try {
         const users = await User.findAll({
             where: { isDealer: false } // Klienci mają isDealer: false
@@ -114,8 +244,8 @@ app.get('/users', async (req, res) => {
     }
 });
 
-// GET User by ID
-app.get('/users/:id', async (req, res) => {
+// GET User by ID (chronione)
+app.get('/users/:id', authenticateSession, async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
         if (user && !user.isDealer) {
@@ -128,29 +258,17 @@ app.get('/users/:id', async (req, res) => {
     }
 });
 
-// CREATE User (klient)
-app.post('/users', async (req, res) => {
-    try {
-        const { username, password, firstName, lastName } = req.body;
-        const newUser = await User.create({ 
-            username, 
-            password, 
-            firstName, 
-            lastName,
-            isDealer: false // Upewniamy się, że tworzymy klienta, a nie dealera
-        });
-        res.status(201).json(newUser);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
-// UPDATE User (klient)
-app.put('/users/:id', async (req, res) => {
+// UPDATE User (klient) (chronione)
+app.put('/users/:id', authenticateSession, async (req, res) => {
     try {
         const { username, password, firstName, lastName } = req.body;
         const user = await User.findByPk(req.params.id);
         if (user && !user.isDealer) {
+            // Opcjonalnie: Możesz dodać logikę, aby użytkownik mógł edytować tylko swoje własne dane
+            if (user.id !== req.session.userId) {
+                return res.status(403).json({ error: 'Nie masz uprawnień do edycji tego użytkownika' });
+            }
+
             await user.update({ username, password, firstName, lastName });
             res.json(user);
         } else {
@@ -161,11 +279,16 @@ app.put('/users/:id', async (req, res) => {
     }
 });
 
-// DELETE User (klient)
-app.delete('/users/:id', async (req, res) => {
+// DELETE User (klient) (chronione)
+app.delete('/users/:id', authenticateSession, async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
         if (user && !user.isDealer) {
+            // Opcjonalnie: Użytkownik może usunąć tylko swoje konto
+            if (user.id !== req.session.userId) {
+                return res.status(403).json({ error: 'Nie masz uprawnień do usunięcia tego użytkownika' });
+            }
+
             await user.destroy();
             res.json({ message: 'Klient usunięty' });
         } else {
@@ -176,11 +299,10 @@ app.delete('/users/:id', async (req, res) => {
     }
 });
 
-// RENT Car
-app.post('/cars/:id/rent', async (req, res) => {
+// RENT Car (chronione)
+app.post('/cars/:id/rent', authenticateSession, async (req, res) => {
     try {
         const carId = req.params.id;
-        const { userId } = req.body; // Zakładamy, że użytkownik przesyła swoje ID w treści żądania.
 
         // Znajdź samochód po ID
         const car = await Car.findByPk(carId);
@@ -193,16 +315,9 @@ app.post('/cars/:id/rent', async (req, res) => {
             return res.status(400).json({ error: 'Samochód jest już wynajęty' });
         }
 
-        // Znajdź użytkownika po ID
-        const user = await User.findByPk(userId);
-
-        if (!user) {
-            return res.status(404).json({ error: 'Użytkownik nie znaleziony' });
-        }
-
         // Wynajem samochodu
         car.isAvailableForRent = false;
-        car.renterId = user.id; // Przypisujemy ID użytkownika jako wynajmującego
+        car.renterId = req.session.userId; // Przypisujemy ID użytkownika jako wynajmującego
 
         await car.save();
 
@@ -212,11 +327,10 @@ app.post('/cars/:id/rent', async (req, res) => {
     }
 });
 
-// RETURN Car
-app.post('/cars/:id/return', async (req, res) => {
+// RETURN Car (chronione)
+app.post('/cars/:id/return', authenticateSession, async (req, res) => {
     try {
         const carId = req.params.id;
-        const { userId } = req.body; // Zakładamy, że użytkownik przesyła swoje ID w treści żądania.
 
         // Znajdź samochód po ID
         const car = await Car.findByPk(carId);
@@ -229,7 +343,7 @@ app.post('/cars/:id/return', async (req, res) => {
             return res.status(400).json({ error: 'Samochód już jest dostępny' });
         }
 
-        if (car.renterId !== userId) {
+        if (car.renterId !== req.session.userId) {
             return res.status(403).json({ error: 'Nie możesz zwrócić tego samochodu, ponieważ nie jesteś jego wynajmującym' });
         }
 
@@ -245,11 +359,10 @@ app.post('/cars/:id/return', async (req, res) => {
     }
 });
 
-// BUY Car
-app.post('/cars/:id/buy', async (req, res) => {
+// BUY Car (chronione)
+app.post('/cars/:id/buy', authenticateSession, async (req, res) => {
     try {
         const carId = req.params.id;
-        const { userId } = req.body; // Zakładamy, że użytkownik przesyła swoje ID w treści żądania.
 
         // Znajdź samochód po ID
         const car = await Car.findByPk(carId);
@@ -262,16 +375,9 @@ app.post('/cars/:id/buy', async (req, res) => {
             return res.status(400).json({ error: 'Samochód jest już sprzedany lub wynajęty' });
         }
 
-        // Znajdź użytkownika po ID
-        const user = await User.findByPk(userId);
-
-        if (!user) {
-            return res.status(404).json({ error: 'Użytkownik nie znaleziony' });
-        }
-
         // Kupno samochodu
         car.isAvailableForRent = false; // Samochód jest teraz niedostępny do wynajmu
-        car.ownerId = user.id; // Przypisujemy właściciela
+        car.ownerId = req.session.userId; // Przypisujemy właściciela
 
         await car.save();
 
@@ -280,8 +386,6 @@ app.post('/cars/:id/buy', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
-
 
 // ====== START SERWERA ======
 app.listen(PORT, () => {
