@@ -27,11 +27,11 @@ export class CarService {
 
   addCar(newCar: Car): Observable<Car> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<Car>(this.apiUrl, newCar, { headers });
+    return this.http.post<Car>(this.apiUrl, newCar, { headers, withCredentials: true });
   }
   updateCar(id: number, updatedCar: Car): Observable<Car> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put<Car>(`${this.apiUrl}/${id}`, updatedCar, { headers });
+    return this.http.put<Car>(`${this.apiUrl}/${id}`, updatedCar, { headers, withCredentials: true });
   }
 
   deleteCar(id: number): Observable<void> {
