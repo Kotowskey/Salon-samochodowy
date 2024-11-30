@@ -8,6 +8,7 @@ export interface Customer {
   username: string;
   firstName: string;
   lastName: string;
+  isDealer: boolean;
   // Nie wysyłamy hasła do frontendu ze względów bezpieczeństwa
 }
 

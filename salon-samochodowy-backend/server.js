@@ -391,7 +391,7 @@ app.post('/cars/:id/buy', authenticateSession, async (req, res) => {
 app.get('/current-user', authenticateSession, async (req, res) => {
     try {
         const user = await User.findByPk(req.session.userId, {
-            attributes: ['id', 'username', 'firstName', 'lastName']
+            attributes: ['id', 'username', 'firstName', 'lastName', 'isDealer']
         });
         if (user) {
             res.json({ user });

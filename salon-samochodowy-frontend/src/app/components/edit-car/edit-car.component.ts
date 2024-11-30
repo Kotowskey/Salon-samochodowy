@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { ShowCarForm } from '../show-car-form/show-car-form.component';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'edit-car',
@@ -23,8 +24,18 @@ export class EditCarComponent {
     price: 0,
     isAvailableForRent: true,
   };
+
+  isDealer = false;
   private carService = inject(CarService);
   private dialog = inject(MatDialog);
+  private authService = inject(AuthenticationService);
+
+  constructor() {
+    // Subskrybuj strumień currentUser$
+    this.authService.currentUser$.subscribe((user) => {
+      this.isDealer = user?.isDealer ?? false; // Ustaw flagę na podstawie danych użytkownika
+    });
+  }
   editCar(){
     this.carService.updateCar(this.car.id,this.car).subscribe(
       (updatedCar) =>{

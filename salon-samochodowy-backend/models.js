@@ -57,7 +57,7 @@ const User = sequelize.define('User', {
     },
     isDealer: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false,
+        defaultValue: true,
     },
 }, {
     timestamps: false, 
