@@ -9,7 +9,7 @@ import { NgIf, NgClass } from '@angular/common';
 @Component({
   selector: 'app-login-register',
   standalone: true,
-  imports: [CommonModule, FormsModule, NgIf, NgClass],
+  imports: [CommonModule, FormsModule, NgIf],
   templateUrl: './login-register.component.html',
   styleUrls: ['./login-register.component.css']
 })
