@@ -403,6 +403,46 @@ app.get('/current-user', authenticateSession, async (req, res) => {
     }
 });
 
+// LEASING Car
+app.post('/cars/:id/leasing', async (req, res) => {
+    try {
+        const carId = req.params.id;
+        const { downPayment, months } = req.body;
+
+        if (!downPayment || !months || months <= 0 || downPayment < 0) {
+            return res.status(400).json({ error: 'Nieprawidłowe dane wejściowe' });
+        }
+
+        const car = await Car.findByPk(carId);
+
+        if (!car) {
+            return res.status(404).json({ error: 'Samochód nie znaleziony' });
+        }
+
+        const remainingAmount = car.price - downPayment;
+
+        if (remainingAmount < 0) {
+            return res.status(400).json({ error: 'Wpłata wstępna nie może być większa niż cena samochodu' });
+        }
+
+        const monthlyRate = remainingAmount / months;
+
+        res.status(200).json({
+            carId: car.id,
+            carBrand: car.brand,
+            carModel: car.model,
+            totalPrice: car.price,
+            downPayment: downPayment,
+            remainingAmount: remainingAmount.toFixed(2),
+            months: months,
+            monthlyRate: monthlyRate.toFixed(2),
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
 // ====== START SERWERA ======
 app.listen(PORT, () => {
     console.log(`Serwer działa na porcie ${PORT}`);
