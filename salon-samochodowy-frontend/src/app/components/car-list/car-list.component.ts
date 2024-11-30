@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EditCarComponent } from '../edit-car/edit-car.component';
 import { AuthenticationService } from '../../services/authentication.service';
+import { CalculateLeasingComponent } from '../calculate-leasing/calculate-leasing.component';
 
 @Component({
     selector: 'app-car-list',
     standalone: true,
-    imports: [CommonModule, FormsModule, EditCarComponent],
+    imports: [CommonModule, FormsModule, EditCarComponent,CalculateLeasingComponent],
     templateUrl: './car-list.component.html',
     styleUrls: ['./car-list.component.css']
 })

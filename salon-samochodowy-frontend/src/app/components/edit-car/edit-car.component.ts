@@ -1,10 +1,6 @@
-import {ChangeDetectionStrategy, Component, inject, Input} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {Car,CarService } from '../../services/car.service';
-import {MatButtonModule} from '@angular/material/button';
-import {FormsModule} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
 import { ShowCarForm } from '../show-car-form/show-car-form.component';
 import { AuthenticationService } from '../../services/authentication.service';
 

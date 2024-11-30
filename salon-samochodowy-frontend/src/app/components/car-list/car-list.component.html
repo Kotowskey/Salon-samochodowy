@@ -19,28 +19,28 @@
           <p class="card-text">
             <strong>Rok:</strong> {{ car.year }}<br>
             <strong>VIN:</strong> {{ car.vin }}<br>
-            <strong>Dostępny do wynajmu:</strong>
+            <strong>Dostępny do wynajmu: </strong>
             <span class="badge" [ngClass]="car.isAvailableForRent ? 'bg-success' : 'bg-danger'">
               {{ car.isAvailableForRent ? 'Tak' : 'Nie' }}
             </span>
           </p>
           <div class="mt-auto">
             <h6 class="card-subtitle mb-2 text-muted">{{ car.price | currency:'PLN' }}</h6>
-            <button class="btn btn-primary btn-sm me-2">Kup</button>
-            <button 
-            class="btn btn-primary btn-sm me-2" 
-            [disabled]="!car.isAvailableForRent"
-           [ngClass]="{ 'btn-disabled': !car.isAvailableForRent }"
-          >
-          Wynajmij
-          </button>
-          @if(isDealer) {
-            <button mat-raised-button color="primary" class="delete-button" (click)="deleteCar(car.id)">
-              Usun
-            </button>
-          }
-            <!-- Dodanie komponentu edycji -->
-            <edit-car [car]="car"></edit-car>
+            <div class="button-box">
+              <button class="btn btn-primary btn-sm me-2">Kup</button>
+              <button class="btn btn-success btn-sm me-2" [disabled]="!car.isAvailableForRent"[ngClass]="{ 'btn-disabled': !car.isAvailableForRent }">
+                Wynajmij
+              </button>
+              @if(isDealer) {
+                <button mat-raised-button color="primary" class="btn btn-danger btn-sm me-2" (click)="deleteCar(car.id)">
+                  Usun
+                </button>
+                <!-- Dodanie komponentu edycji -->
+                <edit-car [car]="car"></edit-car>
+              }
+
+              <calculate-leasing [car]="car" ></calculate-leasing>
+            </div>
           </div>
          
         </div>

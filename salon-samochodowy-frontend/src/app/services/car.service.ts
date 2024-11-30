@@ -13,6 +13,22 @@ export interface Car {
   isAvailableForRent: boolean;
 }
 
+export interface LeasingRequest {
+  downPayment: number;
+  months: number;
+}
+
+export interface LeasingResponse {
+  carId: number;
+  carBrand: string;
+  carModel: string;
+  totalPrice: number;
+  downPayment: number;
+  remainingAmount: string;
+  months: number;
+  monthlyRate: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,6 +52,10 @@ export class CarService {
 
   deleteCar(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`, { withCredentials: true });
+  }
+  leaseCar(carId: number, leasingData: LeasingRequest): Observable<LeasingResponse> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<LeasingResponse>(`${this.apiUrl}/${carId}/leasing`,leasingData,{ headers });
   }
 
 }

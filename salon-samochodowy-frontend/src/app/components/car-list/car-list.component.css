@@ -22,4 +22,11 @@
     color: white;
     border-color: #dc3545;
 }
+.button-box {
+  display: grid;
+  grid-auto-flow: column; /* Ustaw elementy w jednej kolumnie */
+  gap: 10px; /* Odstępy między elementami */
+  align-items: center; /* Wyrównanie w pionie */
+}
+
 
