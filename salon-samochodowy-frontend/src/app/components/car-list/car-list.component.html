@@ -23,13 +23,13 @@
             <strong>Dostępny do wynajmu: </strong>
             <span class="badge" [ngClass]="car.isAvailableForRent ? 'bg-success' : 'bg-danger'">
               {{ car.isAvailableForRent ? 'Tak' : 'Nie' }}
-            </span>
+            </span> 
           </p>
           <div class="mt-auto">
             <h6 class="card-subtitle mb-2 text-muted">{{ car.price | currency:'PLN' }}</h6>
             <div class="button-box">
               @if(!isDealer){
-              <button class="btn btn-primary btn-sm me-2">Kup</button>
+              <app-buy-car [car]="car"></app-buy-car>
               <app-rent-car [car]="car"></app-rent-car>
               }
               @if(isDealer) {

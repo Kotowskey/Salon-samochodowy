@@ -76,4 +76,10 @@ export class CarService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<LeasingResponse>(`${this.apiUrl}/${carId}/leasing`,leasingData,{ headers });
   }
+  buyCar(carId: number): Observable<any> {
+    const url = `${this.apiUrl}/${carId}/buy`; // Endpoint dla zakupu
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(url, {}, { headers, withCredentials: true });
+  }
+  
 }

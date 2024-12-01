@@ -6,10 +6,11 @@ import { EditCarComponent } from '../edit-car/edit-car.component';
 import { AuthenticationService } from '../../services/authentication.service';
 import { RentCarComponent } from '../rent-car/rent-car.component';
 import { CalculateLeasingComponent } from '../calculate-leasing/calculate-leasing.component';
+import { BuyCarComponent } from '../buy-car/buy-car.component';
 @Component({
     selector: 'app-car-list',
     standalone: true,
-    imports: [CommonModule, FormsModule, EditCarComponent,RentCarComponent,CalculateLeasingComponent],
+    imports: [CommonModule, FormsModule, EditCarComponent,RentCarComponent,CalculateLeasingComponent, BuyCarComponent],
     templateUrl: './car-list.component.html',
     styleUrls: ['./car-list.component.css']
 })
