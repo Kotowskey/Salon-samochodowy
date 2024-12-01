@@ -16,6 +16,8 @@ import { BuyCarComponent } from '../buy-car/buy-car.component';
 })
 export class CarListComponent implements OnInit {
     isDealer = false;
+    logged = false;
+    brandserch = "";
     cars: Car[] = [];
     sortedCars: Car[] = [];
     sortDirection: 'asc' | 'desc' = 'asc';
@@ -25,6 +27,7 @@ export class CarListComponent implements OnInit {
     ngOnInit(): void {
         this.authService.currentUser$.subscribe((user) => {
             this.isDealer = user?.isDealer ?? false;
+            if(user != null) this.logged = true;
           });
         
         this.carService.getCars().subscribe(data => {
