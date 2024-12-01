@@ -10,7 +10,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let car of sortedCars" [style.display] = "car.brand.includes(brandserch) || brandserch == null ? 'block' : 'none'">
+    <div class="col-md-4 mb-4" *ngFor="let car of sortedCars" [style.display] = "(car.brand.startsWith(brandserch) || brandserch == null) ? 'block' : 'none'">
       <div class="card h-100">
         <!-- Jeśli masz obrazek samochodu, dodaj go tutaj -->
         <!-- <img src="{{ car.imageUrl }}" class="card-img-top" alt="{{ car.brand }} {{ car.model }}"> -->
@@ -30,7 +30,7 @@
               @if(logged)
               {
                 <div class="button-box">
-                @if(!isDealer){
+                @if(!isDealer && (car.renterId == userId || car.renterId == null)){
                 <app-buy-car [car]="car"></app-buy-car>
                 <app-rent-car [car]="car"></app-rent-car>
                 <calculate-leasing [car]="car" ></calculate-leasing>
@@ -51,3 +51,30 @@
     </div>
   </div>
 </div>
+@if(ownedCars.length > 0 && logged)
+{
+  <div class="container my-4">
+    <h2 class="mb-4 text-center">Lista twoich samochodów</h2>
+    <div class="row">
+  
+      <div class="col-md-4 mb-4" *ngFor="let car of ownedCars">
+        <div class="card h-100">
+          <!-- Jeśli masz obrazek samochodu, dodaj go tutaj -->
+          <!-- <img src="{{ car.imageUrl }}" class="card-img-top" alt="{{ car.brand }} {{ car.model }}"> -->
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+              <p class="card-text">
+                <strong>Rok:</strong> {{ car.year }}<br>
+                <strong>Moc:</strong> {{ car.horsePower }} KM<br>
+                <strong>VIN:</strong> {{ car.vin }}<br>
+              </p>
+              <div class="mt-auto">
+                <h6 class="card-subtitle mb-2 text-muted">{{ car.price | currency:'PLN' }}</h6>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+

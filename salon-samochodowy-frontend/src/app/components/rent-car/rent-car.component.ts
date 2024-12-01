@@ -19,7 +19,8 @@ import { map, switchMap } from 'rxjs/operators'; // Operatory map i switchMap
 export class RentCarComponent {
   @Input() car: Car = {
     id: 0,
-    owner: 0,
+    ownerId: 0,
+    renterId: 0,
     brand: '',
     model: '',
     year: 0,

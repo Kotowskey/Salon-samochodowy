@@ -17,8 +17,10 @@ import { BuyCarComponent } from '../buy-car/buy-car.component';
 export class CarListComponent implements OnInit {
     isDealer = false;
     logged = false;
+    userId = -1;
     brandserch = "";
     cars: Car[] = [];
+    ownedCars: Car[] = [];
     sortedCars: Car[] = [];
     sortDirection: 'asc' | 'desc' = 'asc';
 
@@ -27,12 +29,17 @@ export class CarListComponent implements OnInit {
     ngOnInit(): void {
         this.authService.currentUser$.subscribe((user) => {
             this.isDealer = user?.isDealer ?? false;
-            if(user != null) this.logged = true;
+            if(user != null)
+              {
+                this.logged = true;
+                this.userId = user.id;
+                this.ownedCars = this.cars.filter(car => car.ownerId == this.userId).map(car => ({ ...car }));
+              } 
           });
         
         this.carService.getCars().subscribe(data => {
             this.cars = data;
-            this.sortedCars = [...this.cars];
+            this.sortedCars = this.cars.filter(car => car.ownerId == null).map(car => ({ ...car }));
         });
     }
     sortByPrice(): void {
