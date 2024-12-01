@@ -10,6 +10,7 @@ export interface Car {
   year: number;
   vin: string;
   price: number;
+  horsePower: number;
   isAvailableForRent: boolean;
 }
 export interface CarRenter {
@@ -75,5 +76,4 @@ export class CarService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<LeasingResponse>(`${this.apiUrl}/${carId}/leasing`,leasingData,{ headers });
   }
-
 }

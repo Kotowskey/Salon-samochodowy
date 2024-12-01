@@ -28,6 +28,10 @@ const Car = sequelize.define('Car', {
         type: Sequelize.FLOAT,
         allowNull: false,
     },
+    horsePower:{
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    },
     isAvailableForRent: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,

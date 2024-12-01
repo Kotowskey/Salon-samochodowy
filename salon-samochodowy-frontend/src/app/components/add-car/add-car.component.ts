@@ -23,6 +23,7 @@ export class AddCarComponent {
     year: 0,
     vin: '',
     price: 0,
+    horsePower: 0,
     isAvailableForRent: true
   };
   private dialog = inject(MatDialog);

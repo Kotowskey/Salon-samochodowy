@@ -18,6 +18,7 @@
           <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
           <p class="card-text">
             <strong>Rok:</strong> {{ car.year }}<br>
+            <strong>Moc:</strong> {{ car.horsePower }} KM<br>
             <strong>VIN:</strong> {{ car.vin }}<br>
             <strong>Dostępny do wynajmu: </strong>
             <span class="badge" [ngClass]="car.isAvailableForRent ? 'bg-success' : 'bg-danger'">
@@ -27,8 +28,10 @@
           <div class="mt-auto">
             <h6 class="card-subtitle mb-2 text-muted">{{ car.price | currency:'PLN' }}</h6>
             <div class="button-box">
+              @if(!isDealer){
               <button class="btn btn-primary btn-sm me-2">Kup</button>
               <app-rent-car [car]="car"></app-rent-car>
+              }
               @if(isDealer) {
                 <button mat-raised-button color="primary" class="btn btn-danger btn-sm me-2" (click)="deleteCar(car.id)">
                   Usun

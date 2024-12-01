@@ -173,13 +173,14 @@ app.get('/cars/:id', async (req, res) => {
 // CREATE Car (chronione)
 app.post('/cars', authenticateSession, async (req, res) => {
     try {
-        const { brand, model, year, vin, price, isAvailableForRent } = req.body;
+        const { brand, model, year, vin, price, horsePower, isAvailableForRent } = req.body;
         const newCar = await Car.create({ 
             brand, 
             model, 
             year, 
             vin, 
-            price, 
+            price,
+            horsePower, 
             isAvailableForRent,
             ownerId: req.session.userId // Przypisanie właściciela
         });
@@ -192,7 +193,7 @@ app.post('/cars', authenticateSession, async (req, res) => {
 // UPDATE Car (chronione)
 app.put('/cars/:id', authenticateSession, async (req, res) => {
     try {
-        const { brand, model, year, vin, price, isAvailableForRent } = req.body;
+        const { brand, model, year, vin, price, horsePower, isAvailableForRent } = req.body;
         const car = await Car.findByPk(req.params.id);
         if (car) {
             // Sprawdzenie, czy aktualny użytkownik jest właścicielem samochodu
@@ -200,7 +201,7 @@ app.put('/cars/:id', authenticateSession, async (req, res) => {
                 return res.status(403).json({ error: 'Nie masz uprawnień do edycji tego samochodu' });
             }
 
-            await car.update({ brand, model, year, vin, price, isAvailableForRent });
+            await car.update({ brand, model, year, vin, price, horsePower, isAvailableForRent });
             res.json(car);
         } else {
             res.status(404).json({ error: 'Samochód nie znaleziony' });
