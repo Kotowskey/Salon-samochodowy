@@ -12,6 +12,7 @@ import {MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 export class ShowCarForm {
   @Input() car: Car = {
     id: 0,
+    owner: 0,
     brand: '',
     model: '',
     year: 0,

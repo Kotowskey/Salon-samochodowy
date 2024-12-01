@@ -181,8 +181,7 @@ app.post('/cars', authenticateSession, async (req, res) => {
             vin, 
             price,
             horsePower, 
-            isAvailableForRent,
-            ownerId: req.session.userId // Przypisanie właściciela
+            isAvailableForRent
         });
         res.status(201).json(newCar);
     } catch (error) {

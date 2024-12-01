@@ -18,6 +18,7 @@ import { ShowCarForm } from '../show-car-form/show-car-form.component';
 export class AddCarComponent {
   car: Car = {
     id: 0,
+    owner: 0,
     brand: '',
     model: '',
     year: 0,

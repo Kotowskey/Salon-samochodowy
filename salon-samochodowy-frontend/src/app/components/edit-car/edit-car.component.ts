@@ -13,6 +13,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class EditCarComponent {
   @Input() car: Car = {
     id: 0,
+    owner: 0,
     brand: '',
     model: '',
     year: 0,

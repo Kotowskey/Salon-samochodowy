@@ -11,6 +11,7 @@ export interface Car {
   vin: string;
   price: number;
   horsePower: number;
+  owner: number;
   isAvailableForRent: boolean;
 }
 export interface CarRenter {
