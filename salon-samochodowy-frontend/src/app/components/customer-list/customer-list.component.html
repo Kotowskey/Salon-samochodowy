@@ -1,10 +1,14 @@
-<!-- src/app/components/customer-list/customer-list.component.html -->
 <div class="customer-list">
-    <h2>Lista Klientów</h2>
-    <div *ngIf="error" class="error">
+  <h2>Lista Klientów</h2>
+
+  <ng-template [ngIf]="error">
+    <div class="error">
       {{ error }}
     </div>
-    <table *ngIf="customers.length > 0; else noCustomers">
+  </ng-template>
+
+  <ng-template [ngIf]="customers.length > 0">
+    <table>
       <thead>
         <tr>
           <th>ID</th>
@@ -15,17 +19,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let customer of customers">
-          <td>{{ customer.id }}</td>
-          <td>{{ customer.username }}</td>
-          <td>{{ customer.firstName }}</td>
-          <td>{{ customer.lastName }}</td>
-          <td>{{customer.isDealer}}</td>
-        </tr>
+        <ng-template ngFor let-customer [ngForOf]="customers">
+          <tr>
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.username }}</td>
+            <td>{{ customer.firstName }}</td>
+            <td>{{ customer.lastName }}</td>
+            <td>{{ customer.isDealer }}</td>
+          </tr>
+        </ng-template>
       </tbody>
     </table>
-    <ng-template #noCustomers>
-      <p>Brak klientów do wyświetlenia.</p>
-    </ng-template>
-  </div>
-  
+  </ng-template>
+
+  <ng-template #noCustomers>
+    <p>Brak klientów do wyświetlenia.</p>
+  </ng-template>
+</div>
