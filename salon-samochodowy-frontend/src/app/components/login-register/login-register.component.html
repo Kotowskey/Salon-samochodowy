@@ -18,7 +18,7 @@
             <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password" required>
           </div>
 
-          <ng-template [ngIf]="!isLoginMode">
+          <div *ngIf="!isLoginMode">
             <div class="mb-3">
               <label for="firstName" class="form-label">Imię</label>
               <input type="text" class="form-control" id="firstName" [(ngModel)]="firstName" name="firstName" required>
@@ -27,18 +27,14 @@
               <label for="lastName" class="form-label">Nazwisko</label>
               <input type="text" class="form-control" id="lastName" [(ngModel)]="lastName" name="lastName" required>
             </div>
-          </ng-template>
+          </div>
 
-          <ng-template [ngIf]="errorMessage">
-            <div class="alert alert-danger">
-              {{ errorMessage }}
-            </div>
-          </ng-template>
-          <ng-template [ngIf]="successMessage">
-            <div class="alert alert-success">
-              {{ successMessage }}
-            </div>
-          </ng-template>
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+          </div>
+          <div *ngIf="successMessage" class="alert alert-success">
+            {{ successMessage }}
+          </div>
 
           <button type="submit" class="btn btn-primary w-100">
             {{ isLoginMode ? 'Zaloguj się' : 'Zarejestruj się' }}
@@ -46,16 +42,9 @@
         </form>
       </div>
       <div class="modal-footer">
-        <ng-template [ngIf]="isLoginMode">
-          <button type="button" class="btn btn-link" (click)="toggleMode()">
-            Nie masz konta? Zarejestruj się
-          </button>
-        </ng-template>
-        <ng-template [ngIf]="!isLoginMode">
-          <button type="button" class="btn btn-link" (click)="toggleMode()">
-            Masz już konto? Zaloguj się
-          </button>
-        </ng-template>
+        <button type="button" class="btn btn-link" (click)="toggleMode()">
+          {{ isLoginMode ? 'Nie masz konta? Zarejestruj się' : 'Masz już konto? Zaloguj się' }}
+        </button>
       </div>
     </div>
   </div>

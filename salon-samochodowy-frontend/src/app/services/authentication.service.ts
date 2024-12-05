@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, of } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 interface User {
   id: number;
@@ -15,11 +16,11 @@ interface User {
   providedIn: 'root',
 })
 export class AuthenticationService {
-  private apiUrl = 'http://localhost:3000'; // Update with your backend URL
+  private apiUrl = 'http://localhost:3000'; // Zaktualizuj URL backendu
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.checkCurrentUser();
   }
 
@@ -28,14 +29,13 @@ export class AuthenticationService {
       .pipe(
         tap(response => {
           this.currentUserSubject.next(response.user);
+        }),
+        catchError(() => {
+          this.currentUserSubject.next(null);
+          return of(null);
         })
       )
-      .subscribe({
-        next: () => {},
-        error: () => {
-          this.currentUserSubject.next(null);
-        }
-      });
+      .subscribe();
   }
 
   register(username: string, password: string, firstName: string, lastName: string): Observable<any> {

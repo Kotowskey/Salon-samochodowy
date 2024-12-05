@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { AuthenticationService } from '../../services/authentication.service';
+import { CommonModule } from '@angular/common'; // Import CommonModule
+import { FormsModule } from '@angular/forms'; // Import FormsModule
 import { Router } from '@angular/router';
-
-import { NgIf, NgClass } from '@angular/common';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-login-register',
-  standalone: true,
-  imports: [CommonModule, FormsModule, NgIf],
+  standalone: true, // Dodaj standalone: true
+  imports: [CommonModule, FormsModule], // Dodaj imports
   templateUrl: './login-register.component.html',
   styleUrls: ['./login-register.component.css']
 })
@@ -36,7 +34,8 @@ export class LoginRegisterComponent {
         next: (response) => {
           this.successMessage = response.message;
           this.closeModal();
-          window.location.reload(); // Odświeżanie strony po logowaniu
+          // Przekierowanie po zalogowaniu
+          this.router.navigate(['/']);
         },
         error: (error) => {
           this.errorMessage = error.error.error || 'Błąd logowania';
@@ -47,7 +46,10 @@ export class LoginRegisterComponent {
         next: (response) => {
           this.successMessage = response.message;
           this.closeModal();
-          window.location.reload(); // Odświeżanie strony po rejestracji
+          // Opcjonalne automatyczne logowanie po rejestracji
+          this.authService.login(this.username, this.password).subscribe(() => {
+            this.router.navigate(['/']);
+          });
         },
         error: (error) => {
           this.errorMessage = error.error.error || 'Błąd rejestracji';
@@ -59,7 +61,8 @@ export class LoginRegisterComponent {
   logout() {
     this.authService.logout().subscribe({
       next: () => {
-        window.location.reload(); // Odświeżanie strony po wylogowaniu
+        // Aktualizacja stanu aplikacji po wylogowaniu
+        this.router.navigate(['/']);
       },
       error: () => {
         this.errorMessage = 'Nie udało się wylogować.';
