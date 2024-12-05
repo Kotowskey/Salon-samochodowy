@@ -6,11 +6,11 @@
       Sortuj według ceny 
       <i [ngClass]="sortDirection === 'asc' ? 'bi bi-sort-up' : 'bi bi-sort-down'"></i>
     </button>
-    <input type="text" [(ngModel)]="brandserch" placeholder="Wyszuakj markę">
+    <input type="text" [(ngModel)]="brandserch" (ngModelChange)="onBrandSearchChange()" placeholder="Wyszukaj markę">
   </div>
 
   <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let car of sortedCars" [style.display] = "(car.brand.startsWith(brandserch) || brandserch == null) ? 'block' : 'none'">
+    <div class="col-md-4 mb-4" *ngFor="let car of filteredCars">
       <div class="card h-100">
         <!-- Jeśli masz obrazek samochodu, dodaj go tutaj -->
         <!-- <img src="{{ car.imageUrl }}" class="card-img-top" alt="{{ car.brand }} {{ car.model }}"> -->
@@ -42,7 +42,6 @@
                   <!-- Dodanie komponentu edycji -->
                   <edit-car [car]="car"></edit-car>
                 }
-                
               </div>
               }
             </div>
@@ -51,12 +50,12 @@
     </div>
   </div>
 </div>
+
 @if(ownedCars.length > 0 && logged)
 {
   <div class="container my-4">
     <h2 class="mb-4 text-center">Lista twoich samochodów</h2>
     <div class="row">
-  
       <div class="col-md-4 mb-4" *ngFor="let car of ownedCars">
         <div class="card h-100">
           <!-- Jeśli masz obrazek samochodu, dodaj go tutaj -->
@@ -77,4 +76,3 @@
     </div>
   </div>
 }
-
