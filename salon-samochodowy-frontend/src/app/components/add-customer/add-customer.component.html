@@ -1,32 +1,29 @@
+<!-- src/app/components/add-customer/add-customer.component.html -->
 <div class="add-customer">
   <h2>Dodaj Nowego Klienta</h2>
   <form (ngSubmit)="addCustomer()" #customerForm="ngForm">
-    <div>
-      <label for="username">Username:</label>
-      <input type="text" id="username" [(ngModel)]="newCustomer.username" name="username" required>
+    <div class="mb-3">
+      <label for="username" class="form-label">Username:</label>
+      <input type="text" id="username" [(ngModel)]="newCustomer.username" name="username" class="form-control" required>
     </div>
-    <div>
-      <label for="password">Hasło:</label>
-      <input type="password" id="password" [(ngModel)]="newCustomer.password" name="password" required>
+    <div class="mb-3">
+      <label for="password" class="form-label">Hasło:</label>
+      <input type="password" id="password" [(ngModel)]="newCustomer.password" name="password" class="form-control" required>
     </div>
-    <div>
-      <label for="firstName">Imię:</label>
-      <input type="text" id="firstName" [(ngModel)]="newCustomer.firstName" name="firstName" required>
+    <div class="mb-3">
+      <label for="firstName" class="form-label">Imię:</label>
+      <input type="text" id="firstName" [(ngModel)]="newCustomer.firstName" name="firstName" class="form-control" required>
     </div>
-    <div>
-      <label for="lastName">Nazwisko:</label>
-      <input type="text" id="lastName" [(ngModel)]="newCustomer.lastName" name="lastName" required>
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Nazwisko:</label>
+      <input type="text" id="lastName" [(ngModel)]="newCustomer.lastName" name="lastName" class="form-control" required>
     </div>
-    <button type="submit">Dodaj Klienta</button>
+    <button type="submit" class="btn btn-primary">Dodaj Klienta</button>
   </form>
-  <ng-template [ngIf]="successMessage">
-    <div class="success">
-      {{ successMessage }}
-    </div>
-  </ng-template>
-  <ng-template [ngIf]="errorMessage">
-    <div class="error">
-      {{ errorMessage }}
-    </div>
-  </ng-template>
+  <div *ngIf="successMessage" class="alert alert-success mt-3">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    {{ errorMessage }}
+  </div>
 </div>

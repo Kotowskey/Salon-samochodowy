@@ -1,3 +1,4 @@
+// src/app/components/add-customer/add-customer.component.ts
 import { Component } from '@angular/core';
 import { CustomerService, NewCustomer } from '../../services/customer.service';
 import { CommonModule } from '@angular/common';
@@ -31,10 +32,12 @@ export class AddCustomerComponent {
     }
 
     this.customerService.addCustomer(this.newCustomer).subscribe({
-      next: (customer) => {
-        this.successMessage = `Klient ${customer.firstName} ${customer.lastName} został dodany.`;
+      next: (response) => {
+        this.successMessage = `Klient ${response.user.firstName} ${response.user.lastName} został dodany.`;
         this.errorMessage = '';
         this.newCustomer = { username: '', password: '', firstName: '', lastName: '' };
+        
+        // Nie odświeżaj bieżącego użytkownika, aby zachować sesję dealera
       },
       error: (err) => {
         this.errorMessage = err.error.error || 'Wystąpił błąd podczas dodawania klienta.';

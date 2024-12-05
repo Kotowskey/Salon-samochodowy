@@ -1,4 +1,4 @@
-// customer.service.ts
+// src/app/services/customer.service.ts
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -9,7 +9,6 @@ export interface Customer {
   firstName: string;
   lastName: string;
   isDealer: boolean;
-  // Nie wysyłamy hasła do frontendu ze względów bezpieczeństwa
 }
 
 export interface NewCustomer {
@@ -31,8 +30,9 @@ export class CustomerService {
     return this.http.get<Customer[]>(`${this.apiUrl}/users`, { withCredentials: true });
   }
 
-  addCustomer(newCustomer: NewCustomer): Observable<Customer> {
+  // Aktualizacja endpointa na /admin/create-customer
+  addCustomer(newCustomer: NewCustomer): Observable<{ message: string, user: Customer }> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<Customer>(`${this.apiUrl}/register`, newCustomer, { headers, withCredentials: true });
+    return this.http.post<{ message: string, user: Customer }>(`${this.apiUrl}/admin/create-customer`, newCustomer, { headers, withCredentials: true });
   }
 }

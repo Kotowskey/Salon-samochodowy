@@ -453,6 +453,48 @@ app.post('/cars/:id/leasing', async (req, res) => {
     }
 });
 
+// ===== DEALER =====
+// Endpoint do tworzenia nowych klientów przez dealerów
+app.post('/admin/create-customer', authenticateSession, async (req, res) => {
+    try {
+        const { username, password, firstName, lastName } = req.body;
+
+        // Sprawdzenie, czy aktualny użytkownik jest dealerem
+        const dealer = await User.findByPk(req.session.userId);
+        if (!dealer || !dealer.isDealer) {
+            return res.status(403).json({ error: 'Brak uprawnień do tworzenia klientów' });
+        }
+
+        // Sprawdzenie, czy użytkownik już istnieje
+        const existingUser = await User.findOne({ where: { username } });
+        if (existingUser) {
+            return res.status(400).json({ error: 'Nazwa użytkownika jest już zajęta' });
+        }
+
+        // Tworzenie nowego klienta bez haszowania hasła
+        const newUser = await User.create({ 
+            username, 
+            password, 
+            firstName, 
+            lastName,
+            isDealer: false // Upewniamy się, że tworzymy klienta, a nie dealera
+        });
+
+        res.status(201).json({ 
+            message: 'Klient został pomyślnie dodany', 
+            user: { 
+                id: newUser.id, 
+                username: newUser.username, 
+                firstName: newUser.firstName, 
+                lastName: newUser.lastName,
+                isDealer: newUser.isDealer
+            } 
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 
 // ====== START SERWERA ======
 app.listen(PORT, () => {
