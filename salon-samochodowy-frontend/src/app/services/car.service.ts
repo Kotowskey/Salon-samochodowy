@@ -1,4 +1,5 @@
 // src/app/services/car.service.ts
+
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -44,7 +45,7 @@ export interface LeasingResponse {
 export class CarService {
   private apiUrl = 'http://localhost:3000/cars';
   
-  // BehaviorSubject do przechowywania aktualnej listy samochodów
+  // BehaviorSubject to store the current list of cars
   private carsSubject: BehaviorSubject<Car[]> = new BehaviorSubject<Car[]>([]);
   public cars$ = this.carsSubject.asObservable();
 
@@ -52,12 +53,12 @@ export class CarService {
     this.loadInitialData();
   }
 
-  // Ładowanie początkowych danych
+  // Load initial data
   private loadInitialData(): void {
-    this.http.get<Car[]>(this.apiUrl)
+    this.http.get<Car[]>(this.apiUrl, { withCredentials: true })
       .subscribe(
         (cars) => this.carsSubject.next(cars),
-        (error) => console.error('Błąd podczas ładowania samochodów:', error)
+        (error) => console.error('Error loading cars:', error)
       );
   }
 
@@ -126,12 +127,12 @@ export class CarService {
 
   getRenterId(carId: number): Observable<CarRenter> {
     const url = `${this.apiUrl}/${carId}/renter`;
-    return this.http.get<CarRenter>(url);
+    return this.http.get<CarRenter>(url, { withCredentials: true });
   }  
 
   leaseCar(carId: number, leasingData: LeasingRequest): Observable<LeasingResponse> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<LeasingResponse>(`${this.apiUrl}/${carId}/leasing`, leasingData, { headers })
+    return this.http.post<LeasingResponse>(`${this.apiUrl}/${carId}/leasing`, leasingData, { headers, withCredentials: true })
       .pipe(
         tap(() => {
           this.refreshCar(carId);
@@ -140,7 +141,7 @@ export class CarService {
   }
 
   buyCar(carId: number): Observable<any> {
-    const url = `${this.apiUrl}/${carId}/buy`; // Endpoint dla zakupu
+    const url = `${this.apiUrl}/${carId}/buy`; // Endpoint for buying
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(url, {}, { headers, withCredentials: true })
       .pipe(
@@ -150,9 +151,9 @@ export class CarService {
       );
   }
 
-  // Pomocnicza metoda do odświeżania pojedynczego samochodu
+  // Helper method to refresh a single car
   private refreshCar(carId: number): void {
-    this.http.get<Car>(`${this.apiUrl}/${carId}`)
+    this.http.get<Car>(`${this.apiUrl}/${carId}`, { withCredentials: true })
       .subscribe(
         (updatedCar) => {
           const currentCars = this.carsSubject.getValue();
@@ -162,7 +163,7 @@ export class CarService {
             this.carsSubject.next([...currentCars]);
           }
         },
-        (error) => console.error(`Błąd podczas odświeżania samochodu o ID ${carId}:`, error)
+        (error) => console.error(`Error refreshing car with ID ${carId}:`, error)
       );
   }
 }

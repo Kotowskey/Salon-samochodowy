@@ -1,6 +1,7 @@
 // src/app/services/authentication.service.ts
+
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'; // Import HttpClient
+import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -16,7 +17,7 @@ interface User {
   providedIn: 'root',
 })
 export class AuthenticationService {
-  private apiUrl = 'http://localhost:3000'; // Zmień na odpowiedni URL backendu
+  private apiUrl = 'http://localhost:3000'; // Update with your backend URL
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
@@ -24,7 +25,7 @@ export class AuthenticationService {
     this.checkCurrentUser();
   }
 
-  // Sprawdzenie, czy użytkownik jest już zalogowany
+  // Check if the user is already logged in
   private checkCurrentUser() {
     this.http.get<{ user: User }>(`${this.apiUrl}/current-user`, { withCredentials: true })
       .pipe(
