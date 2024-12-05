@@ -1,19 +1,22 @@
 // src/app/navbar/navbar.component.ts
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginRegisterComponent } from '../login-register/login-register.component';
 import { AuthenticationService } from '../../services/authentication.service';
-
 import { Subscription } from 'rxjs';
+
+// Importuj nowe komponenty
+import { CustomerListComponent } from '../customer-list/customer-list.component';
+import { AddCustomerComponent } from '../add-customer/add-customer.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, LoginRegisterComponent],
+  imports: [CommonModule, LoginRegisterComponent, CustomerListComponent, AddCustomerComponent],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnDestroy {
   currentUser: any = null;
   private userSubscription: Subscription;
 
