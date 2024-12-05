@@ -1,13 +1,15 @@
-import {Component, Inject, Input} from '@angular/core';
-import {Car} from '../../services/car.service';
-import {FormsModule} from '@angular/forms';
-import {MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
+// src/app/show-car-form/show-car-form.component.ts
+import { Component, Inject, Input } from '@angular/core';
+import { Car } from '../../services/car.service';
+import { FormsModule } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 @Component({
   selector: 'show-car-form',
-  standalone: true,  
-  imports: [FormsModule],  
+  standalone: true,
+  imports: [FormsModule],
   templateUrl: './show-car-form.component.html',
-  styleUrls: ['./show-car-form.component.css']
+  styleUrls: ['./show-car-form.component.css'],
 })
 export class ShowCarForm {
   @Input() car: Car = {
@@ -20,20 +22,20 @@ export class ShowCarForm {
     vin: '',
     price: 0,
     horsePower: 0,
-    isAvailableForRent: true
+    isAvailableForRent: true,
   };
 
   constructor(
     private dialogRef: MatDialogRef<ShowCarForm>,
-    @Inject(MAT_DIALOG_DATA) data: Car // Odbiór przekazanych danych
+    @Inject(MAT_DIALOG_DATA) data: Car
   ) {
-    // Przypisanie przekazanych danych do istniejącej zmiennej `car`
     Object.assign(this.car, data);
   }
 
   addCar() {
     this.dialogRef.close(this.car);
   }
+
   closeDialog(): void {
     this.dialogRef.close();
   }
