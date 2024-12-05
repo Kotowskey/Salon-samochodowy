@@ -10,7 +10,7 @@ import { HTTP_INTERCEPTORS} from '@angular/common/http';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CarListComponent, AddCarComponent, CustomerListComponent, AddCustomerComponent, NavbarComponent],
+  imports: [CarListComponent, AddCarComponent, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   providers: [

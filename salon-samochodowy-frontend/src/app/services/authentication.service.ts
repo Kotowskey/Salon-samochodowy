@@ -1,5 +1,3 @@
-// src/app/services/authentication.service.ts
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -25,7 +23,6 @@ export class AuthenticationService {
     this.checkCurrentUser();
   }
 
-  // Check if the user is already logged in
   private checkCurrentUser() {
     this.http.get<{ user: User }>(`${this.apiUrl}/current-user`, { withCredentials: true })
       .pipe(

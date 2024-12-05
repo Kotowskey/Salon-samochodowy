@@ -1,4 +1,3 @@
-// src/app/navbar/navbar.component.ts
 import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginRegisterComponent } from '../login-register/login-register.component';
@@ -47,11 +46,13 @@ export class NavbarComponent implements OnDestroy {
     private dialog: MatDialog,
     private carService: CarService
   ) {
+    // Subskrybujemy bieżącego użytkownika
     this.userSubscription = this.authService.currentUser$.subscribe((user) => {
       this.currentUser = user;
     });
   }
 
+  // Metoda otwierająca modal logowania/rejestracji
   openAuthModal() {
     const modalElement = document.getElementById('authModal');
     if (modalElement) {
@@ -60,17 +61,20 @@ export class NavbarComponent implements OnDestroy {
     }
   }
 
+  // Metoda wylogowania użytkownika z odświeżeniem strony
   logout() {
     this.authService.logout().subscribe({
       next: () => {
-        // Dodatkowe akcje po wylogowaniu (opcjonalnie)
+        window.location.reload(); // Odświeżenie strony po wylogowaniu
       },
       error: (error) => {
         console.error('Błąd podczas wylogowywania:', error);
+        alert('Nie udało się wylogować. Spróbuj ponownie.');
       },
     });
   }
 
+  // Zwalniamy zasoby przy zniszczeniu komponentu
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
   }

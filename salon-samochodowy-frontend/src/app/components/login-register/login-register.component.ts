@@ -1,8 +1,8 @@
-// src/app/login-register/login-register.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
+import { Router } from '@angular/router';
 
 import { NgIf, NgClass } from '@angular/common';
 
@@ -22,7 +22,7 @@ export class LoginRegisterComponent {
   errorMessage: string = '';
   successMessage: string = '';
 
-  constructor(private authService: AuthenticationService) {}
+  constructor(private authService: AuthenticationService, private router: Router) {}
 
   toggleMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -36,6 +36,7 @@ export class LoginRegisterComponent {
         next: (response) => {
           this.successMessage = response.message;
           this.closeModal();
+          window.location.reload(); // Odświeżanie strony po logowaniu
         },
         error: (error) => {
           this.errorMessage = error.error.error || 'Błąd logowania';
@@ -46,12 +47,24 @@ export class LoginRegisterComponent {
         next: (response) => {
           this.successMessage = response.message;
           this.closeModal();
+          window.location.reload(); // Odświeżanie strony po rejestracji
         },
         error: (error) => {
           this.errorMessage = error.error.error || 'Błąd rejestracji';
         }
       });
     }
+  }
+
+  logout() {
+    this.authService.logout().subscribe({
+      next: () => {
+        window.location.reload(); // Odświeżanie strony po wylogowaniu
+      },
+      error: () => {
+        this.errorMessage = 'Nie udało się wylogować.';
+      }
+    });
   }
 
   closeModal() {
