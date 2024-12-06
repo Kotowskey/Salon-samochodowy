@@ -1,3 +1,5 @@
+// src/app/components/car-list/car-list.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { CarService, Car } from '../../services/car.service';
 import { CommonModule } from '@angular/common';
@@ -8,11 +10,20 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { RentCarComponent } from '../rent-car/rent-car.component';
 import { CalculateLeasingComponent } from '../calculate-leasing/calculate-leasing.component';
 import { BuyCarComponent } from '../buy-car/buy-car.component';
+import { combineLatest } from 'rxjs';
 
 @Component({
     selector: 'app-car-list',
     standalone: true,
-    imports: [CommonModule, FormsModule, EditCarComponent, RentCarComponent, CalculateLeasingComponent, BuyCarComponent, RouterModule],
+    imports: [
+      CommonModule,
+      FormsModule,
+      EditCarComponent,
+      RentCarComponent,
+      CalculateLeasingComponent,
+      BuyCarComponent,
+      RouterModule
+    ],
     templateUrl: './car-list.component.html',
     styleUrls: ['./car-list.component.css']
 })
@@ -28,22 +39,32 @@ export class CarListComponent implements OnInit {
     priceSortDirection: 'asc' | 'desc' = 'asc';
     horsePowerSortDirection: 'asc' | 'desc' = 'asc';
 
-    constructor(private carService: CarService, private authService: AuthenticationService) { }
+    constructor(
+      private carService: CarService,
+      private authService: AuthenticationService
+    ) { }
 
     ngOnInit(): void {
-        this.authService.currentUser$.subscribe((user) => {
+        // Połączenie strumieni użytkownika i samochodów
+        combineLatest([
+            this.authService.currentUser$,
+            this.carService.getCars()
+        ]).subscribe(([user, cars]) => {
             this.isDealer = user?.isDealer ?? false;
-            if (user != null) {
-                this.logged = true;
-                this.userId = user.id;
-                this.ownedCars = this.cars.filter(car => car.ownerId == this.userId).map(car => ({ ...car }));
-            }
-        });
+            this.logged = !!user;
+            this.userId = user?.id ?? -1;
+            this.cars = cars;
 
-        this.carService.getCars().subscribe(data => {
-            this.cars = data;
-            this.sortedCars = this.cars.filter(car => car.ownerId == null).map(car => ({ ...car }));
-            this.filterCars(); // Filtracja po pierwszym pobraniu danych
+            // Aktualizacja ownedCars
+            if (this.logged) {
+                this.ownedCars = this.cars.filter(car => car.ownerId === this.userId);
+            } else {
+                this.ownedCars = [];
+            }
+
+            // Filtracja i sortowanie samochodów dostępnych do wynajmu
+            this.sortedCars = this.cars.filter(car => car.ownerId == null);
+            this.filterCars();
         });
     }
 
