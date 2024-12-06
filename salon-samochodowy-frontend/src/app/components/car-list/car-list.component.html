@@ -1,45 +1,78 @@
 <div class="container my-4">
   <h2 class="mb-4 text-center">Lista dostępnych samochodów</h2>
-
+  
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <div class="btn-group me-2">
-      <button class="btn btn-primary" (click)="sortByPrice()">
-        Sortuj według ceny
-        <i [ngClass]="sortDirection === 'asc' ? 'bi bi-sort-up' : 'bi bi-sort-down'"></i>
-      </button>
-      <button class="btn btn-secondary" (click)="sortByHorsePower()">
-        Sortuj według mocy
-        <i [ngClass]="sortHorsePowerDirection === 'asc' ? 'bi bi-sort-up' : 'bi bi-sort-down'"></i>
-      </button>
-    </div>
-    <input
-      type="text"
-      class="form-control w-25"
-      [(ngModel)]="brandserch"
-      (ngModelChange)="onBrandSearchChange()"
-      placeholder="Wyszukaj markę"
-    />
+    <button class="btn btn-primary" (click)="sortByPrice()">
+      Sortuj według ceny 
+      <i [ngClass]="sortDirection === 'asc' ? 'bi bi-sort-up' : 'bi bi-sort-down'"></i>
+    </button>
+    <input type="text" [(ngModel)]="brandserch" (ngModelChange)="onBrandSearchChange()" placeholder="Wyszukaj markę">
   </div>
 
   <div class="row">
     <div class="col-md-4 mb-4" *ngFor="let car of filteredCars">
       <div class="card h-100">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
-          <p class="card-text">
-            <strong>Rok:</strong> {{ car.year }}<br />
-            <strong>Moc:</strong> {{ car.horsePower }} KM<br />
-            <strong>VIN:</strong> {{ car.vin }}<br />
-            <strong>Dostępny do wynajmu:</strong>
-            <span class="badge" [ngClass]="car.isAvailableForRent ? 'bg-success' : 'bg-danger'">
-              {{ car.isAvailableForRent ? 'Tak' : 'Nie' }}
-            </span>
-          </p>
-          <div class="mt-auto">
-            <h6 class="card-subtitle mb-2 text-muted">{{ car.price | currency: 'PLN' }}</h6>
+        <!-- Jeśli masz obrazek samochodu, dodaj go tutaj -->
+        <!-- <img src="{{ car.imageUrl }}" class="card-img-top" alt="{{ car.brand }} {{ car.model }}"> -->
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+            <p class="card-text">
+              <strong>Rok:</strong> {{ car.year }}<br>
+              <strong>Moc:</strong> {{ car.horsePower }} KM<br>
+              <strong>VIN:</strong> {{ car.vin }}<br>
+              <strong>Dostępny do wynajmu: </strong>
+              <span class="badge" [ngClass]="car.isAvailableForRent ? 'bg-success' : 'bg-danger'">
+                {{ car.isAvailableForRent ? 'Tak' : 'Nie' }}
+              </span> 
+            </p>
+            <div class="mt-auto">
+              <h6 class="card-subtitle mb-2 text-muted">{{ car.price | currency:'PLN' }}</h6>
+              @if(logged)
+              {
+                <div class="button-box">
+                @if(!isDealer && (car.renterId == userId || car.renterId == null)){
+                <app-buy-car [car]="car"></app-buy-car>
+                <app-rent-car [car]="car"></app-rent-car>
+                <calculate-leasing [car]="car" ></calculate-leasing>
+                }
+                @if(isDealer) {
+                  <button mat-raised-button color="primary" class="btn btn-danger btn-sm me-2" (click)="deleteCar(car.id)">
+                    Usun
+                  </button>
+                  <!-- Dodanie komponentu edycji -->
+                  <edit-car [car]="car"></edit-car>
+                }
+              </div>
+              }
+            </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
 </div>
+
+@if(ownedCars.length > 0 && logged)
+{
+  <div class="container my-4">
+    <h2 class="mb-4 text-center">Lista twoich samochodów</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let car of ownedCars">
+        <div class="card h-100">
+          <!-- Jeśli masz obrazek samochodu, dodaj go tutaj -->
+          <!-- <img src="{{ car.imageUrl }}" class="card-img-top" alt="{{ car.brand }} {{ car.model }}"> -->
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+              <p class="card-text">
+                <strong>Rok:</strong> {{ car.year }}<br>
+                <strong>Moc:</strong> {{ car.horsePower }} KM<br>
+                <strong>VIN:</strong> {{ car.vin }}<br>
+              </p>
+              <div class="mt-auto">
+                <h6 class="card-subtitle mb-2 text-muted">{{ car.price | currency:'PLN' }}</h6>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
