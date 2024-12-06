@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 
 export const routes: Routes = [
   {
@@ -15,5 +16,9 @@ export const routes: Routes = [
     path: 'cars/:id',
     loadComponent: () =>
       import('./components/car-detail/car-detail.component').then((m) => m.CarDetailComponent),
+  },
+  {
+    path: 'privacy-policy',
+    component: PrivacyPolicyComponent
   },
 ];

@@ -29,4 +29,22 @@
   align-items: center; /* Wyrównanie w pionie */
 }
 
+/* footer.component.css */
+
+footer {
+  text-align: center; /* Wycentrowanie zawartości poziomo */
+  padding: 20px 0; /* Dodanie odstępów góra-dół */
+  background-color: #f8f9fa; /* Opcjonalny kolor tła */
+}
+
+footer a {
+  text-decoration: none; /* Usunięcie podkreślenia linku */
+  color: #007bff; /* Kolor linku */
+  font-size: 16px; /* Rozmiar czcionki */
+}
+
+footer a:hover {
+  text-decoration: underline; /* Podkreślenie na hover */
+}
+
 
