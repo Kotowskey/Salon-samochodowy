@@ -196,11 +196,6 @@ app.put('/cars/:id', authenticateSession, async (req, res) => {
         const { brand, model, year, vin, price, horsePower, isAvailableForRent } = req.body;
         const car = await Car.findByPk(req.params.id);
         if (car) {
-            // Sprawdzenie, czy aktualny użytkownik jest właścicielem samochodu
-            if (car.ownerId !== req.session.userId) {
-                return res.status(403).json({ error: 'Nie masz uprawnień do edycji tego samochodu' });
-            }
-
             await car.update({ brand, model, year, vin, price, horsePower, isAvailableForRent });
             res.json(car);
         } else {
