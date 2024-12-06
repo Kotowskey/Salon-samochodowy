@@ -121,7 +121,8 @@ app.post('/login', async (req, res) => {
                 id: user.id, 
                 username: user.username, 
                 firstName: user.firstName, 
-                lastName: user.lastName 
+                lastName: user.lastName,
+                isDealer: user.isDealer
             } 
         });
     } catch (error) {
