@@ -33,6 +33,7 @@
             </p>
             <div class="mt-auto">
               <h6 class="card-subtitle mb-2 text-muted">{{ car.price | currency:'PLN' }}</h6>
+              <a [routerLink]="['/cars', car.id]" class="btn btn-info btn-sm">Szczegóły</a>
               @if(logged)
               {
                 <div class="button-box">

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CarService, Car } from '../../services/car.service';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { EditCarComponent } from '../edit-car/edit-car.component';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -11,7 +12,7 @@ import { BuyCarComponent } from '../buy-car/buy-car.component';
 @Component({
     selector: 'app-car-list',
     standalone: true,
-    imports: [CommonModule, FormsModule, EditCarComponent, RentCarComponent, CalculateLeasingComponent, BuyCarComponent],
+    imports: [CommonModule, FormsModule, EditCarComponent, RentCarComponent, CalculateLeasingComponent, BuyCarComponent, RouterModule],
     templateUrl: './car-list.component.html',
     styleUrls: ['./car-list.component.css']
 })

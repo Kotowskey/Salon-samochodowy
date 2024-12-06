@@ -66,6 +66,10 @@ export class CarService {
     return this.cars$;
   }
 
+  getCar(carId: number): Observable<Car> {
+    return this.http.get<Car>(`${this.apiUrl}/${carId}`, { withCredentials: true });
+  }
+
   addCar(newCar: Car): Observable<Car> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<Car>(this.apiUrl, newCar, { headers, withCredentials: true })
