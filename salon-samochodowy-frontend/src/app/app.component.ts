@@ -11,7 +11,7 @@ import { HTTP_INTERCEPTORS} from '@angular/common/http';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CarListComponent, AddCarComponent, NavbarComponent, RouterModule],
+  imports: [AddCarComponent, NavbarComponent, RouterModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   providers: [
