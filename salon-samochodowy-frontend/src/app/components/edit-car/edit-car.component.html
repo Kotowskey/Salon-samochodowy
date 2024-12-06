@@ -1,8 +1,7 @@
-@if (isDealer) {
-<div>
-    <button mat-raised-button color="primary" class="btn btn btn-warning btn-sm me-2"  (click)="openEditCarDialog()">
-      Edytuj
+<div class="d-flex gap-2 flex-wrap">
+  @if (isDealer) {
+    <button class="btn btn-warning btn-sm d-flex align-items-center" (click)="openEditCarDialog()">
+        <i class="bi bi-pencil me-1"></i>Edytuj
     </button>
-  </div>
-}
-  
+  }
+</div>
