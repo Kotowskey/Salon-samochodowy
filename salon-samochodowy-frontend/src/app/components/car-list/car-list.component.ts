@@ -24,8 +24,7 @@ export class CarListComponent implements OnInit {
     ownedCars: Car[] = [];
     sortedCars: Car[] = [];
     filteredCars: Car[] = [];
-    priceSortDirection: 'asc' | 'desc' = 'asc';
-    horsePowerSortDirection: 'asc' | 'desc' = 'asc';
+    sortDirection: 'asc' | 'desc' = 'asc';
 
     constructor(private carService: CarService, private authService: AuthenticationService) { }
 
@@ -47,28 +46,13 @@ export class CarListComponent implements OnInit {
     }
 
     sortByPrice(): void {
-        if (this.priceSortDirection === 'asc') {
+        if (this.sortDirection === 'asc') {
             this.sortedCars.sort((a, b) => a.price - b.price);
-            this.priceSortDirection = 'desc';
+            this.sortDirection = 'desc';
         } else {
             this.sortedCars.sort((a, b) => b.price - a.price);
-            this.priceSortDirection = 'asc';
+            this.sortDirection = 'asc';
         }
-        // Resetowanie sortowania mocy, jeśli jest aktywne
-        this.horsePowerSortDirection = 'asc';
-        this.filterCars(); // Aktualizacja listy po sortowaniu
-    }
-
-    sortByHorsePower(): void {
-        if (this.horsePowerSortDirection === 'asc') {
-            this.sortedCars.sort((a, b) => a.horsePower - b.horsePower);
-            this.horsePowerSortDirection = 'desc';
-        } else {
-            this.sortedCars.sort((a, b) => b.horsePower - a.horsePower);
-            this.horsePowerSortDirection = 'asc';
-        }
-        // Resetowanie sortowania ceny, jeśli jest aktywne
-        this.priceSortDirection = 'asc';
         this.filterCars(); // Aktualizacja listy po sortowaniu
     }
 
@@ -83,7 +67,6 @@ export class CarListComponent implements OnInit {
                 () => {
                     this.cars = this.cars.filter((car) => car.id !== id);
                     this.sortedCars = this.sortedCars.filter((car) => car.id !== id);
-                    this.ownedCars = this.ownedCars.filter((car) => car.id !== id);
                     this.filterCars(); // Aktualizacja po usunięciu samochodu
                     alert('Samochód został usunięty.');
                 },
