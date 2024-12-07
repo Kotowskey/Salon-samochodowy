@@ -19,3 +19,9 @@
    ```bash
    node server.js
    ```
+
+## Dokumentacja
+2. Uruchom serwer dokumentacyjny:
+   ```bash
+compodoc -s -p tsconfig.json --language pl-PL
+```
