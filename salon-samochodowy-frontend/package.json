@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:salon-samochodowy-frontend": "node dist/salon-samochodowy-frontend/server/server.mjs",
-      "compodoc": "compodoc -p tsconfig.json"
+  " compodoc": "compodoc -p tsconfig.json --language pl-PL"
   },
   "private": true,
   "dependencies": {

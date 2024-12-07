@@ -70,7 +70,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Wprowadź tekst wyszukiwania"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -86,7 +86,7 @@
 
 
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item">Komponenty</li>
   <li class="breadcrumb-item"
   >
   AddCarComponent</li>
@@ -117,19 +117,29 @@
 
 <div class="tab-content">
     <div class="tab-pane fade active in" id="info"><p class="comment">
-    <h3>File</h3>
+    <h3>Plik</h3>
 </p>
 <p class="comment">
     <code>src/app/components/add-car/add-car.component.ts</code>
 </p>
 
 
+    <p class="comment">
+        <h3>Opis</h3>
+    </p>
+    <p class="comment">
+        <p>Komponent odpowiedzialny za dodawanie nowego samochodu do systemu.</p>
+<p>Ten komponent umożliwia użytkownikowi wprowadzenie danych nowego samochodu
+oraz zapisanie go za pomocą serwisu <code>CarService</code>.</p>
+<b>Przykład :</b><div><pre class="line-numbers"><code class="language-html">```html
+&lt;app-add-car&gt;&lt;/app-add-car&gt;</code></pre></div><b>Przykład :</b><div><pre class="line-numbers"><code class="language-none"></code></pre></div>
+    </p>
 
 
 
 
 <section data-compodoc="block-metadata">
-    <h3>Metadata</h3>
+    <h3>Metadane</h3>
     <table class="table table-sm table-hover metadata">
         <tbody>
 
@@ -192,12 +202,12 @@
 </section>
 
     <section data-compodoc="block-index">
-    <h3 id="index">Index</h3>
+    <h3 id="index">Indeks</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
+                        <h6><b>Włąściwości</b></h6>
                     </td>
                 </tr>
                 <tr>
@@ -220,7 +230,7 @@
 
                 <tr>
                     <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
+                        <h6><b>Metody</b></h6>
                     </td>
                 </tr>
                 <tr>
@@ -252,7 +262,7 @@
     <section data-compodoc="block-methods">
     
     <h3 id="methods">
-        Methods
+        Metody
     </h3>
     <table class="table table-sm table-bordered">
         <tbody>
@@ -274,17 +284,21 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="34"
-                                    class="link-to-prism">src/app/components/add-car/add-car.component.ts:34</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="65"
+                                    class="link-to-prism">src/app/components/add-car/add-car.component.ts:65</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Metoda odpowiedzialna za dodanie nowego samochodu poprzez <code>CarService</code>.</p>
+<p>Metoda subskrybuje się do Observable zwróconego przez <code>addCar</code> i
+obsługuje zarówno sukces, jak i błąd operacji.</p>
+</div>
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
                 </td>
@@ -311,17 +325,21 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="46"
-                                    class="link-to-prism">src/app/components/add-car/add-car.component.ts:46</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="85"
+                                    class="link-to-prism">src/app/components/add-car/add-car.component.ts:85</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Metoda otwierająca dialog formularza do dodawania samochodu.</p>
+<p>Po zamknięciu dialogu, jeśli użytkownik zatwierdził dane,
+samochód zostanie dodany poprzez metodę <code>addCar</code>.</p>
+</div>
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
                 </td>
@@ -332,7 +350,7 @@
     <section data-compodoc="block-properties">
     
     <h3 id="inputs">
-        Properties
+        Włąściwości
     </h3>
     <table class="table table-sm table-bordered">
         <tbody>
@@ -347,13 +365,13 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/Car.html" target="_self" >Car</a></code>
+                        <i>Typ : </i>        <code><a href="../interfaces/Car.html" target="_self" >Car</a></code>
 
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>{
+                        <i>Domyślna wartość : </i><code>{
     id: 0,
     ownerId: 0,
     renterId: 0,
@@ -369,10 +387,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/add-car/add-car.component.ts:19</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="35" class="link-to-prism">src/app/components/add-car/add-car.component.ts:35</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Obiekt reprezentujący samochód, który ma zostać dodany.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -390,15 +414,21 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>inject(CarService)</code>
+                        <i>Domyślna wartość : </i><code>inject(CarService)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/add-car/add-car.component.ts:32</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="56" class="link-to-prism">src/app/components/add-car/add-car.component.ts:56</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serwis do zarządzania operacjami na samochodach.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -416,15 +446,21 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>inject(MatDialog)</code>
+                        <i>Domyślna wartość : </i><code>inject(MatDialog)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/add-car/add-car.component.ts:31</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="51" class="link-to-prism">src/app/components/add-car/add-car.component.ts:51</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serwis dialogów Angular Material.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -434,15 +470,27 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {ChangeDetectionStrategy, Component, inject} from &#x27;@angular/core&#x27;;
-import {Car,CarService } from &#x27;../../services/car.service&#x27;;
-import {MatButtonModule} from &#x27;@angular/material/button&#x27;;
-import {FormsModule} from &#x27;@angular/forms&#x27;;
-import {MatDialog} from &#x27;@angular/material/dialog&#x27;;
-import {MatFormFieldModule} from &#x27;@angular/material/form-field&#x27;;
-import {MatInputModule} from &#x27;@angular/material/input&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ChangeDetectionStrategy, Component, inject } from &#x27;@angular/core&#x27;;
+import { Car, CarService } from &#x27;../../services/car.service&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
 import { ShowCarForm } from &#x27;../show-car-form/show-car-form.component&#x27;;
 
+/**
+ * Komponent odpowiedzialny za dodawanie nowego samochodu do systemu.
+ * 
+ * @remarks
+ * Ten komponent umożliwia użytkownikowi wprowadzenie danych nowego samochodu
+ * oraz zapisanie go za pomocą serwisu &#x60;CarService&#x60;. 
+ * 
+ * @example
+ * &#x60;&#x60;&#x60;html
+ * &lt;app-add-car&gt;&lt;/app-add-car&gt;
+ * &#x60;&#x60;&#x60;
+ */
 @Component({
   selector: &#x27;app-add-car&#x27;,
   standalone: true,  
@@ -452,6 +500,10 @@ import { ShowCarForm } from &#x27;../show-car-form/show-car-form.component&#x27;
   styleUrls: [&#x27;./add-car.component.css&#x27;]
 })
 export class AddCarComponent {
+  
+  /**
+   * Obiekt reprezentujący samochód, który ma zostać dodany.
+   */
   car: Car &#x3D; {
     id: 0,
     ownerId: 0,
@@ -464,10 +516,25 @@ export class AddCarComponent {
     horsePower: 0,
     isAvailableForRent: true
   };
+  
+  /**
+   * Serwis dialogów Angular Material.
+   */
   private dialog &#x3D; inject(MatDialog);
+  
+  /**
+   * Serwis do zarządzania operacjami na samochodach.
+   */
   private carService &#x3D; inject(CarService);
 
-  addCar() {
+  /**
+   * Metoda odpowiedzialna za dodanie nowego samochodu poprzez &#x60;CarService&#x60;.
+   * 
+   * @remarks
+   * Metoda subskrybuje się do Observable zwróconego przez &#x60;addCar&#x60; i 
+   * obsługuje zarówno sukces, jak i błąd operacji.
+   */
+  addCar(): void {
     this.carService.addCar(this.car).subscribe(
       (newCar) &#x3D;&gt; {
         console.log(&#x27;Nowy samochód dodany:&#x27;, newCar);
@@ -479,6 +546,14 @@ export class AddCarComponent {
       }
     );
   }
+
+  /**
+   * Metoda otwierająca dialog formularza do dodawania samochodu.
+   * 
+   * @remarks
+   * Po zamknięciu dialogu, jeśli użytkownik zatwierdził dane, 
+   * samochód zostanie dodany poprzez metodę &#x60;addCar&#x60;.
+   */
   openAddCarDialog(): void {
     const dialogRef &#x3D; this.dialog.open(ShowCarForm, {
       width: &#x27;600px&#x27;,
@@ -574,16 +649,16 @@ export class AddCarComponent {
         <div id="tree-container"></div>
         <div class="tree-legend">
             <div class="title">
-                <b>Legend</b>
+                <b>Legenda</b>
             </div>
             <div>
                 <div class="color htmlelement"></div><span>Html element</span>
             </div>
             <div>
-                <div class="color component"></div><span>Component</span>
+                <div class="color component"></div><span>Komponent</span>
             </div>
             <div>
-                <div class="color directive"></div><span>Html element with directive</span>
+                <div class="color directive"></div><span>Html element z dyrektywą</span>
             </div>
         </div>
     </div>
@@ -620,11 +695,11 @@ export class AddCarComponent {
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> pasujących wyników "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
-        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title">Brak pasujących wyników "<span class='search-query'></span>"</h1>
     </div>
 </div>
 </div>
