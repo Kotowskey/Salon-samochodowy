@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:salon-samochodowy-frontend": "node dist/salon-samochodowy-frontend/server/server.mjs"
+    "serve:ssr:salon-samochodowy-frontend": "node dist/salon-samochodowy-frontend/server/server.mjs",
+      "compodoc": "compodoc -p tsconfig.json"
   },
   "private": true,
   "dependencies": {
@@ -34,6 +35,7 @@
     "@angular-devkit/build-angular": "^19.0.2",
     "@angular/cli": "^19.0.2",
     "@angular/compiler-cli": "^19.0.0",
+    "@compodoc/compodoc": "^1.1.26",
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
