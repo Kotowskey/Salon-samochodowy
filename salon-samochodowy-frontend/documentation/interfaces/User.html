@@ -126,6 +126,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Opis</h3>
+            </p>
+            <p class="comment">
+                <p>Interface reprezentująca użytkownika.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -357,7 +364,10 @@ import { Observable, BehaviorSubject, of } from &#x27;rxjs&#x27;;
 import { tap, catchError } from &#x27;rxjs/operators&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 
-interface User {
+/**
+ * Interface reprezentująca użytkownika.
+ */
+export interface User {
   id: number;
   username: string;
   firstName: string;
@@ -365,25 +375,58 @@ interface User {
   isDealer: boolean;
 }
 
+/**
+ * AuthenticationService zarządza uwierzytelnianiem użytkowników, w tym rejestracją, logowaniem i wylogowywaniem.
+ *
+ * @injectable
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;,
 })
 export class AuthenticationService {
-  private apiUrl &#x3D; &#x27;http://localhost:3000&#x27;; // Zaktualizuj URL backendu
-  private currentUserSubject &#x3D; new BehaviorSubject&lt;User | null&gt;(null);
-  public currentUser$ &#x3D; this.currentUserSubject.asObservable();
+  /**
+   * URL do backendu API.
+   * Można rozważyć przeniesienie tego do pliku konfiguracyjnego.
+   * @type {string}
+   */
+  private apiUrl: string &#x3D; &#x27;http://localhost:3000&#x27;; // Zaktualizuj URL backendu
 
+  /**
+   * BehaviorSubject przechowujący bieżącego użytkownika.
+   * Inicjalizowany jest jako &#x60;null&#x60;, gdy użytkownik nie jest zalogowany.
+   * @type {BehaviorSubject&lt;User | null&gt;}
+   */
+  private currentUserSubject: BehaviorSubject&lt;User | null&gt; &#x3D; new BehaviorSubject&lt;User | null&gt;(null);
+
+  /**
+   * Observable emitujący zmiany bieżącego użytkownika.
+   * @type {Observable&lt;User | null&gt;}
+   */
+  public currentUser$: Observable&lt;User | null&gt; &#x3D; this.currentUserSubject.asObservable();
+
+  /**
+   * Konstruktor serwisu.
+   *
+   * @param {HttpClient} http - Serwis HttpClient do wykonywania żądań HTTP.
+   * @param {Router} router - Serwis Router do nawigacji między trasami.
+   */
   constructor(private http: HttpClient, private router: Router) {
     this.checkCurrentUser();
   }
 
-  private checkCurrentUser() {
+  /**
+   * Sprawdza, czy użytkownik jest aktualnie zalogowany, wykonując żądanie do backendu.
+   * Aktualizuje &#x60;currentUserSubject&#x60; na podstawie odpowiedzi.
+   * Jeśli żądanie zakończy się błędem, ustawia &#x60;currentUserSubject&#x60; na &#x60;null&#x60;.
+   */
+  private checkCurrentUser(): void {
     this.http.get&lt;{ user: User }&gt;(&#x60;${this.apiUrl}/current-user&#x60;, { withCredentials: true })
       .pipe(
         tap(response &#x3D;&gt; {
           this.currentUserSubject.next(response.user);
         }),
-        catchError(() &#x3D;&gt; {
+        catchError((error) &#x3D;&gt; {
+          console.warn(&#x27;Brak zalogowanego użytkownika lub wystąpił błąd:&#x27;, error);
           this.currentUserSubject.next(null);
           return of(null);
         })
@@ -391,8 +434,17 @@ export class AuthenticationService {
       .subscribe();
   }
 
+  /**
+   * Rejestruje nowego użytkownika.
+   *
+   * @param {string} username - Nazwa użytkownika.
+   * @param {string} password - Hasło użytkownika.
+   * @param {string} firstName - Imię użytkownika.
+   * @param {string} lastName - Nazwisko użytkownika.
+   * @returns {Observable&lt;any&gt;} Observable emitujący odpowiedź z backendu.
+   */
   register(username: string, password: string, firstName: string, lastName: string): Observable&lt;any&gt; {
-    return this.http.post&lt;any&gt;(
+    return this.http.post&lt;{ user: User }&gt;(
       &#x60;${this.apiUrl}/register&#x60;,
       { username, password, firstName, lastName },
       { withCredentials: true }
@@ -401,12 +453,23 @@ export class AuthenticationService {
         if (response.user) {
           this.currentUserSubject.next(response.user);
         }
+      }),
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Błąd podczas rejestracji:&#x27;, error);
+        return of(error);
       })
     );
   }
 
+  /**
+   * Loguje użytkownika.
+   *
+   * @param {string} username - Nazwa użytkownika.
+   * @param {string} password - Hasło użytkownika.
+   * @returns {Observable&lt;any&gt;} Observable emitujący odpowiedź z backendu.
+   */
   login(username: string, password: string): Observable&lt;any&gt; {
-    return this.http.post&lt;any&gt;(
+    return this.http.post&lt;{ user: User }&gt;(
       &#x60;${this.apiUrl}/login&#x60;,
       { username, password },
       { withCredentials: true }
@@ -415,20 +478,52 @@ export class AuthenticationService {
         if (response.user) {
           this.currentUserSubject.next(response.user);
         }
+      }),
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Błąd podczas logowania:&#x27;, error);
+        return of(error);
       })
     );
   }
 
+  /**
+   * Wylogowuje aktualnie zalogowanego użytkownika.
+   *
+   * @returns {Observable&lt;any&gt;} Observable emitujący odpowiedź z backendu.
+   */
   logout(): Observable&lt;any&gt; {
-    return this.http.post&lt;any&gt;(
+    return this.http.post&lt;{ message: string }&gt;(
       &#x60;${this.apiUrl}/logout&#x60;,
       {},
       { withCredentials: true }
     ).pipe(
       tap(() &#x3D;&gt; {
         this.currentUserSubject.next(null);
+        this.router.navigate([&#x27;/&#x27;]); // Przekierowanie na stronę główną po wylogowaniu
+      }),
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Błąd podczas wylogowywania:&#x27;, error);
+        return of(error);
       })
     );
+  }
+
+  /**
+   * Metoda pomocnicza do sprawdzania, czy użytkownik jest zalogowany.
+   *
+   * @returns {boolean} &#x60;true&#x60; jeśli użytkownik jest zalogowany, w przeciwnym razie &#x60;false&#x60;.
+   */
+  isLoggedIn(): boolean {
+    return this.currentUserSubject.value !&#x3D;&#x3D; null;
+  }
+
+  /**
+   * Pobiera bieżącego użytkownika jako &#x60;User&#x60; lub &#x60;null&#x60;.
+   *
+   * @returns {User | null} Aktualny użytkownik lub &#x60;null&#x60; jeśli nie jest zalogowany.
+   */
+  getCurrentUser(): User | null {
+    return this.currentUserSubject.value;
   }
 }
 </code></pre>

@@ -1,16 +1,27 @@
-import {Component, inject, Input} from '@angular/core';
-import {Car,CarService } from '../../services/car.service';
-import {MatDialog} from '@angular/material/dialog';
-import { ShowCarForm } from '../show-car-form/show-car-form.component';
-import { AuthenticationService } from '../../services/authentication.service';
+// src/app/components/edit-car/edit-car.component.ts
 
+import { Component, OnDestroy, Input, inject } from '@angular/core';
+import { Car, CarService } from '../../services/car.service';
+import { AuthenticationService } from '../../services/authentication.service';
+import { Subscription } from 'rxjs';
+
+/**
+ * EditCarComponent umożliwia edycję informacji o wybranym samochodzie bez użycia dialogów.
+ *
+ * @component
+ */
 @Component({
   selector: 'edit-car',
-  imports: [],
+  standalone: true,
   templateUrl: './edit-car.component.html',
-  styleUrl: './edit-car.component.css'
+  styleUrls: ['./edit-car.component.css']
 })
-export class EditCarComponent {
+export class EditCarComponent implements OnDestroy {
+  
+  /**
+   * Obiekt reprezentujący samochód do edycji.
+   * @type {Car}
+   */
   @Input() car: Car = {
     id: 0,
     ownerId: 0,
@@ -24,40 +35,93 @@ export class EditCarComponent {
     isAvailableForRent: true,
   };
 
+  /**
+   * Flaga określająca, czy aktualnie zalogowany użytkownik jest dealerem.
+   * @type {boolean}
+   */
   isDealer = false;
+
+  /**
+   * Flaga określająca, czy komponent znajduje się w trybie edycji.
+   * @type {boolean}
+   */
+  isEditing = false;
+
+  /**
+   * Subskrypcja na strumień użytkownika, umożliwiająca odsubskrybowanie w metodzie ngOnDestroy.
+   * @type {Subscription}
+   */
+  private userSubscription: Subscription;
+
+  /**
+   * Serwis do zarządzania danymi samochodów.
+   */
   private carService = inject(CarService);
-  private dialog = inject(MatDialog);
+
+  /**
+   * Serwis uwierzytelniania.
+   */
   private authService = inject(AuthenticationService);
 
+  /**
+   * Konstruktor komponentu.
+   * Inicjalizuje subskrypcję na strumień aktualnego użytkownika.
+   */
   constructor() {
     // Subskrybuj strumień currentUser$
-    this.authService.currentUser$.subscribe((user) => {
+    this.userSubscription = this.authService.currentUser$.subscribe((user) => {
       this.isDealer = user?.isDealer ?? false; // Ustaw flagę na podstawie danych użytkownika
     });
   }
-  editCar(){
-    this.carService.updateCar(this.car.id,this.car).subscribe(
-      (updatedCar) =>{
+
+  /**
+   * Metoda inicjalizująca edycję samochodu.
+   * Ustawia flagę isEditing na true, aby wyświetlić formularz edycji.
+   */
+  startEdit(): void {
+    if (!this.isDealer) {
+      alert('Nie masz uprawnień do edytowania samochodów.');
+      return;
+    }
+    this.isEditing = true;
+  }
+
+  /**
+   * Metoda anulująca edycję samochodu.
+   * Resetuje flagę isEditing na false i przywraca oryginalne dane samochodu.
+   */
+  cancelEdit(): void {
+    this.isEditing = false;
+    // Można tutaj przywrócić oryginalne dane, jeśli były przechowywane
+  }
+
+  /**
+   * Metoda edytująca informacje o samochodzie.
+   * Wysyła zaktualizowane dane do serwisu CarService.
+   */
+  editCar(): void {
+    if (!this.isDealer) {
+      alert('Nie masz uprawnień do edytowania samochodów.');
+      return;
+    }
+
+    this.carService.updateCar(this.car.id, this.car).subscribe(
+      (updatedCar: Car) => {
         console.log('Samochód zmodyfikowany:', updatedCar);
         alert('Samochód zmodyfikowany!');
+        this.isEditing = false; // Wyjście z trybu edycji po sukcesie
       },
-      (error) => {
+      (error: any) => {
         console.error('Błąd przy edytowaniu samochodu:', error);
         alert('Wystąpił błąd przy edytowaniu samochodu.');
       }
     );
   }
-  openEditCarDialog(): void {
-    const dialogRef = this.dialog.open(ShowCarForm, {
-      width: '600px',
-      data: this.car,
-    });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.car = result;
-        this.editCar();
-      }
-    });
+  /**
+   * Metoda czyszcząca subskrypcje przy niszczeniu komponentu, aby zapobiec wyciekom pamięci.
+   */
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
   }
 }

@@ -89,7 +89,7 @@
   <li class="breadcrumb-item">Komponenty</li>
   <li class="breadcrumb-item"
   >
-  AddCarComponent</li>
+  ShowCarFormComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -120,7 +120,7 @@
     <h3>Plik</h3>
 </p>
 <p class="comment">
-    <code>src/app/components/add-car/add-car.component.ts</code>
+    <code>src/app/components/show-car-form/show-car-form.component.ts</code>
 </p>
 
 
@@ -128,11 +128,9 @@
         <h3>Opis</h3>
     </p>
     <p class="comment">
-        <p>Komponent odpowiedzialny za dodawanie nowego samochodu do systemu.</p>
-<p>Ten komponent umożliwia użytkownikowi wprowadzenie danych nowego samochodu
-oraz zapisanie go za pomocą serwisu <code>CarService</code>.</p>
-<b>Przykład :</b><div><pre class="line-numbers"><code class="language-html">```html
-&lt;app-add-car&gt;&lt;/app-add-car&gt;</code></pre></div><b>Przykład :</b><div><pre class="line-numbers"><code class="language-none"></code></pre></div>
+        <p>ShowCarFormComponent umożliwia wyświetlanie i edycję informacji o samochodzie.
+Jest używany jako standardowy komponent bez wykorzystania dialogów.</p>
+
     </p>
 
 
@@ -160,7 +158,7 @@ oraz zapisanie go za pomocą serwisu <code>CarService</code>.</p>
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>app-add-car</code></td>
+                <td class="col-md-9"><code>show-car-form</code></td>
             </tr>
 
             <tr>
@@ -171,23 +169,20 @@ oraz zapisanie go za pomocą serwisu <code>CarService</code>.</p>
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
-                            <code>MatFormFieldModule</code>
-                            <code>MatInputModule</code>
                             <code>FormsModule</code>
-                            <code>MatButtonModule</code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./add-car.component.css</code></td>
+                <td class="col-md-9"><code>./show-car-form.component.css</code></td>
             </tr>
 
 
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./add-car.component.html</code></td>
+                <td class="col-md-9"><code>./show-car-form.component.html</code></td>
             </tr>
 
 
@@ -205,28 +200,6 @@ oraz zapisanie go za pomocą serwisu <code>CarService</code>.</p>
     <h3 id="index">Indeks</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Włąściwości</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#car" >car</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#carService" >carService</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#dialog" >dialog</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -240,7 +213,40 @@ oraz zapisanie go za pomocą serwisu <code>CarService</code>.</p>
                                 <a href="#addCar" >addCar</a>
                             </li>
                             <li>
-                                <a href="#openAddCarDialog" >openAddCarDialog</a>
+                                <a href="#closeDialog" >closeDialog</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputy</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#car" >car</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputy</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addCarEvent" >addCarEvent</a>
+                            </li>
+                            <li>
+                                <a href="#closeEvent" >closeEvent</a>
                             </li>
                         </ul>
                     </td>
@@ -248,15 +254,138 @@ oraz zapisanie go za pomocą serwisu <code>CarService</code>.</p>
 
 
 
-
-
         </tbody>
     </table>
 </section>
 
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Konstruktor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="50" class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:50</a></div>
+                            </td>
+                        </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Konstruktor komponentu.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputy</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="car"></a>
+                        <b>car</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Typ : </i>        <code><a href="../interfaces/Car.html" target="_self" >Car</a></code>
 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Domyślna wartość : </i><code>{
+    id: 0,
+    ownerId: 0,
+    renterId: 0,
+    brand: &#x27;&#x27;,
+    model: &#x27;&#x27;,
+    year: 0,
+    vin: &#x27;&#x27;,
+    price: 0,
+    horsePower: 0,
+    isAvailableForRent: true,
+  }</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Zdefiniowane w <a href="" data-line="27" class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:27</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Obiekt reprezentujący samochód do wyświetlenia i edycji.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputy</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="addCarEvent"></a>
+                        <b>addCarEvent</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Typ : </i>        <code><a href="../interfaces/Car.html" target="_self" >EventEmitter&lt;Car&gt;</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Zdefiniowane w <a href="" data-line="44" class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:44</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emituje zdarzenie dodania samochodu po zapisaniu zmian.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="closeEvent"></a>
+                        <b>closeEvent</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Typ : </i>    <code>EventEmitter&lt;void&gt;</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Zdefiniowane w <a href="" data-line="50" class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:50</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emituje zdarzenie zamknięcia formularza bez zapisania zmian.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
 
     <section data-compodoc="block-methods">
@@ -284,17 +413,15 @@ oraz zapisanie go za pomocą serwisu <code>CarService</code>.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="65"
-                                    class="link-to-prism">src/app/components/add-car/add-car.component.ts:65</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="60"
+                                    class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:60</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Metoda odpowiedzialna za dodanie nowego samochodu poprzez <code>CarService</code>.</p>
-<p>Metoda subskrybuje się do Observable zwróconego przez <code>addCar</code> i
-obsługuje zarówno sukces, jak i błąd operacji.</p>
+                        <div class="io-description"><p>Metoda emitująca zdarzenie dodania samochodu z aktualizowanymi danymi.</p>
 </div>
 
                         <div class="io-description">
@@ -309,33 +436,31 @@ obsługuje zarówno sukces, jak i błąd operacji.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="openAddCarDialog"></a>
+                    <a name="closeDialog"></a>
                     <span class="name">
-                        <span ><b>openAddCarDialog</b></span>
-                        <a href="#openAddCarDialog"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>closeDialog</b></span>
+                        <a href="#closeDialog"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>openAddCarDialog()</code>
+<code>closeDialog()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="85"
-                                    class="link-to-prism">src/app/components/add-car/add-car.component.ts:85</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="67"
+                                    class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:67</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Metoda otwierająca dialog formularza do dodawania samochodu.</p>
-<p>Po zamknięciu dialogu, jeśli użytkownik zatwierdził dane,
-samochód zostanie dodany poprzez metodę <code>addCar</code>.</p>
+                        <div class="io-description"><p>Metoda emitująca zdarzenie zamknięcia formularza.</p>
 </div>
 
                         <div class="io-description">
@@ -344,124 +469,6 @@ samochód zostanie dodany poprzez metodę <code>addCar</code>.</p>
                         </div>
                 </td>
             </tr>
-        </tbody>
-    </table>
-</section>
-    <section data-compodoc="block-properties">
-    
-    <h3 id="inputs">
-        Włąściwości
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="car"></a>
-                    <span class="name">
-                        <span ><b>car</b></span>
-                        <a href="#car"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Typ : </i>        <code><a href="../interfaces/Car.html" target="_self" >Car</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Domyślna wartość : </i><code>{
-    id: 0,
-    ownerId: 0,
-    renterId: 0,
-    brand: &#x27;&#x27;,
-    model: &#x27;&#x27;,
-    year: 0,
-    vin: &#x27;&#x27;,
-    price: 0,
-    horsePower: 0,
-    isAvailableForRent: true
-  }</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="35" class="link-to-prism">src/app/components/add-car/add-car.component.ts:35</a></div>
-                        </td>
-                    </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Obiekt reprezentujący samochód, który ma zostać dodany.</p>
-</div>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="carService"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>carService</b></span>
-                        <a href="#carService"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Domyślna wartość : </i><code>inject(CarService)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="56" class="link-to-prism">src/app/components/add-car/add-car.component.ts:56</a></div>
-                        </td>
-                    </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Serwis do zarządzania operacjami na samochodach.</p>
-</div>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="dialog"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>dialog</b></span>
-                        <a href="#dialog"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Domyślna wartość : </i><code>inject(MatDialog)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="51" class="link-to-prism">src/app/components/add-car/add-car.component.ts:51</a></div>
-                        </td>
-                    </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Serwis dialogów Angular Material.</p>
-</div>
-                </td>
-            </tr>
-
         </tbody>
     </table>
 </section>
@@ -470,41 +477,31 @@ samochód zostanie dodany poprzez metodę <code>addCar</code>.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ChangeDetectionStrategy, Component, inject } from &#x27;@angular/core&#x27;;
-import { Car, CarService } from &#x27;../../services/car.service&#x27;;
-import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from &#x27;@angular/core&#x27;;
+import { Car } from &#x27;../../services/car.service&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
-import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
-import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
-import { MatInputModule } from &#x27;@angular/material/input&#x27;;
-import { ShowCarForm } from &#x27;../show-car-form/show-car-form.component&#x27;;
 
 /**
- * Komponent odpowiedzialny za dodawanie nowego samochodu do systemu.
- * 
- * @remarks
- * Ten komponent umożliwia użytkownikowi wprowadzenie danych nowego samochodu
- * oraz zapisanie go za pomocą serwisu &#x60;CarService&#x60;. 
- * 
- * @example
- * &#x60;&#x60;&#x60;html
- * &lt;app-add-car&gt;&lt;/app-add-car&gt;
- * &#x60;&#x60;&#x60;
+ * ShowCarFormComponent umożliwia wyświetlanie i edycję informacji o samochodzie.
+ * Jest używany jako standardowy komponent bez wykorzystania dialogów.
+ *
+ * @component
  */
 @Component({
-  selector: &#x27;app-add-car&#x27;,
-  standalone: true,  
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,  
-  templateUrl: &#x27;./add-car.component.html&#x27;,
-  styleUrls: [&#x27;./add-car.component.css&#x27;]
+  selector: &#x27;show-car-form&#x27;,
+  standalone: true,
+  imports: [FormsModule],
+  templateUrl: &#x27;./show-car-form.component.html&#x27;,
+  styleUrls: [&#x27;./show-car-form.component.css&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush, // Opcjonalnie dla lepszej wydajności
 })
-export class AddCarComponent {
+export class ShowCarFormComponent {
   
   /**
-   * Obiekt reprezentujący samochód, który ma zostać dodany.
+   * Obiekt reprezentujący samochód do wyświetlenia i edycji.
+   * @type {Car}
    */
-  car: Car &#x3D; {
+  @Input() car: Car &#x3D; {
     id: 0,
     ownerId: 0,
     renterId: 0,
@@ -514,70 +511,123 @@ export class AddCarComponent {
     vin: &#x27;&#x27;,
     price: 0,
     horsePower: 0,
-    isAvailableForRent: true
+    isAvailableForRent: true,
   };
-  
-  /**
-   * Serwis dialogów Angular Material.
-   */
-  private dialog &#x3D; inject(MatDialog);
-  
-  /**
-   * Serwis do zarządzania operacjami na samochodach.
-   */
-  private carService &#x3D; inject(CarService);
 
   /**
-   * Metoda odpowiedzialna za dodanie nowego samochodu poprzez &#x60;CarService&#x60;.
-   * 
-   * @remarks
-   * Metoda subskrybuje się do Observable zwróconego przez &#x60;addCar&#x60; i 
-   * obsługuje zarówno sukces, jak i błąd operacji.
+   * Emituje zdarzenie dodania samochodu po zapisaniu zmian.
+   * @type {EventEmitter&lt;Car&gt;}
+   */
+  @Output() addCarEvent: EventEmitter&lt;Car&gt; &#x3D; new EventEmitter&lt;Car&gt;();
+
+  /**
+   * Emituje zdarzenie zamknięcia formularza bez zapisania zmian.
+   * @type {EventEmitter&lt;void&gt;}
+   */
+  @Output() closeEvent: EventEmitter&lt;void&gt; &#x3D; new EventEmitter&lt;void&gt;();
+
+  /**
+   * Konstruktor komponentu.
+   */
+  constructor() { }
+
+  /**
+   * Metoda emitująca zdarzenie dodania samochodu z aktualizowanymi danymi.
    */
   addCar(): void {
-    this.carService.addCar(this.car).subscribe(
-      (newCar) &#x3D;&gt; {
-        console.log(&#x27;Nowy samochód dodany:&#x27;, newCar);
-        alert(&#x27;Samochód został dodany!&#x27;);
-      },
-      (error) &#x3D;&gt; {
-        console.error(&#x27;Błąd przy dodawaniu samochodu:&#x27;, error);
-        alert(&#x27;Wystąpił błąd przy dodawaniu samochodu.&#x27;);
-      }
-    );
+    this.addCarEvent.emit(this.car);
   }
 
   /**
-   * Metoda otwierająca dialog formularza do dodawania samochodu.
-   * 
-   * @remarks
-   * Po zamknięciu dialogu, jeśli użytkownik zatwierdził dane, 
-   * samochód zostanie dodany poprzez metodę &#x60;addCar&#x60;.
+   * Metoda emitująca zdarzenie zamknięcia formularza.
    */
-  openAddCarDialog(): void {
-    const dialogRef &#x3D; this.dialog.open(ShowCarForm, {
-      width: &#x27;600px&#x27;,
-      data: { ...this.car },
-    });
-
-    dialogRef.afterClosed().subscribe(result &#x3D;&gt; {
-      if (result) {
-        this.car &#x3D; result;
-        this.addCar();
-      }
-    });
+  closeDialog(): void {
+    this.closeEvent.emit();
   }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html"></code></pre>
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;add-car-form&quot;&gt;
+  &lt;h2&gt;Dodaj Samochód&lt;/h2&gt;
+  &lt;form (ngSubmit)&#x3D;&quot;addCar()&quot;&gt;
+    &lt;label for&#x3D;&quot;brand&quot;&gt;Marka&lt;/label&gt;
+    &lt;input
+      type&#x3D;&quot;text&quot;
+      id&#x3D;&quot;brand&quot;
+      [(ngModel)]&#x3D;&quot;car.brand&quot;
+      name&#x3D;&quot;brand&quot;
+      required
+    /&gt;
+
+    &lt;label for&#x3D;&quot;model&quot;&gt;Model&lt;/label&gt;
+    &lt;input
+      type&#x3D;&quot;text&quot;
+      id&#x3D;&quot;model&quot;
+      [(ngModel)]&#x3D;&quot;car.model&quot;
+      name&#x3D;&quot;model&quot;
+      required
+    /&gt;
+
+    &lt;label for&#x3D;&quot;year&quot;&gt;Rok&lt;/label&gt;
+    &lt;input
+      type&#x3D;&quot;number&quot;
+      id&#x3D;&quot;year&quot;
+      [(ngModel)]&#x3D;&quot;car.year&quot;
+      name&#x3D;&quot;year&quot;
+      required
+    /&gt;
+
+    &lt;label for&#x3D;&quot;vin&quot;&gt;VIN&lt;/label&gt;
+    &lt;input
+      type&#x3D;&quot;text&quot;
+      id&#x3D;&quot;vin&quot;
+      [(ngModel)]&#x3D;&quot;car.vin&quot;
+      name&#x3D;&quot;vin&quot;
+      required
+    /&gt;
+
+    &lt;label for&#x3D;&quot;price&quot;&gt;Cena&lt;/label&gt;
+    &lt;input
+      type&#x3D;&quot;number&quot;
+      id&#x3D;&quot;price&quot;
+      [(ngModel)]&#x3D;&quot;car.price&quot;
+      name&#x3D;&quot;price&quot;
+      required
+    /&gt;
+
+    &lt;label for&#x3D;&quot;horsePower&quot;&gt;Moc&lt;/label&gt;
+    &lt;input
+      type&#x3D;&quot;number&quot;
+      id&#x3D;&quot;horsePower&quot;
+      [(ngModel)]&#x3D;&quot;car.horsePower&quot;
+      name&#x3D;&quot;horsePower&quot;
+      required
+    /&gt;
+
+    &lt;label for&#x3D;&quot;isAvailableForRent&quot;&gt;
+      Dostępny do wynajmu
+      &lt;input
+        type&#x3D;&quot;checkbox&quot;
+        id&#x3D;&quot;isAvailableForRent&quot;
+        [(ngModel)]&#x3D;&quot;car.isAvailableForRent&quot;
+        name&#x3D;&quot;isAvailableForRent&quot;
+      /&gt;
+    &lt;/label&gt;
+
+    &lt;div class&#x3D;&quot;add-car-form-buttons&quot;&gt;
+      &lt;button type&#x3D;&quot;submit&quot;&gt;Zapisz&lt;/button&gt;
+      &lt;button type&#x3D;&quot;button&quot; mat-button (click)&#x3D;&quot;closeDialog()&quot;&gt;Zamknij&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="styleData">
                 <p class="comment">
-                    <code>./add-car.component.css</code>
+                    <code>./show-car-form.component.css</code>
                 </p>
                 <pre class="line-numbers"><code class="language-scss">.add-car-form {
     width: 500px;
@@ -670,10 +720,10 @@ export class AddCarComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="add-car-form">  <h2>Dodaj Samochód</h2>  <form (ngSubmit)="addCar()">    <label for="brand">Marka</label>    <input      type="text"      id="brand"      [(ngModel)]="car.brand"      name="brand"      required    />    <label for="model">Model</label>    <input      type="text"      id="model"      [(ngModel)]="car.model"      name="model"      required    />    <label for="year">Rok</label>    <input      type="number"      id="year"      [(ngModel)]="car.year"      name="year"      required    />    <label for="vin">VIN</label>    <input      type="text"      id="vin"      [(ngModel)]="car.vin"      name="vin"      required    />    <label for="price">Cena</label>    <input      type="number"      id="price"      [(ngModel)]="car.price"      name="price"      required    />    <label for="horsePower">Moc</label>    <input      type="number"      id="horsePower"      [(ngModel)]="car.horsePower"      name="horsePower"      required    />    <label for="isAvailableForRent">      Dostępny do wynajmu      <input        type="checkbox"        id="isAvailableForRent"        [(ngModel)]="car.isAvailableForRent"        name="isAvailableForRent"      />    </label>    <div class="add-car-form-buttons">      <button type="submit">Zapisz</button>      <button type="button" mat-button (click)="closeDialog()">Zamknij</button>    </div>  </form></div></div>'
     var COMPONENTS = [{'name': 'AddCarComponent', 'selector': 'app-add-car'},{'name': 'AddCustomerComponent', 'selector': 'app-add-customer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuyCarComponent', 'selector': 'app-buy-car'},{'name': 'CalculateLeasingComponent', 'selector': 'calculate-leasing'},{'name': 'CarDetailComponent', 'selector': 'app-car-detail'},{'name': 'CarListComponent', 'selector': 'app-car-list'},{'name': 'CustomerListComponent', 'selector': 'app-customer-list'},{'name': 'EditCarComponent', 'selector': 'edit-car'},{'name': 'LoginRegisterComponent', 'selector': 'app-login-register'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'RentCarComponent', 'selector': 'app-rent-car'},{'name': 'ShowCarFormComponent', 'selector': 'show-car-form'}];
     var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'AddCarComponent'};
+    var ACTUAL_COMPONENT = {'name': 'ShowCarFormComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -719,7 +769,7 @@ export class AddCarComponent {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'AddCarComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ShowCarFormComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

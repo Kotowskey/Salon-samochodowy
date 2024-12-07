@@ -120,6 +120,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Opis</h3>
+            </p>
+            <p class="comment">
+                <p>AuthInterceptor jest używany do klonowania każdego żądania HTTP i dodawania
+opcji <code>withCredentials: true</code>, co umożliwia wysyłanie ciasteczek wraz z żądaniami.</p>
+
+            </p>
 
 
             <section data-compodoc="block-index">
@@ -176,14 +184,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="14"
-                                    class="link-to-prism">src/app/auth.interceptor.ts:14</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="30"
+                                    class="link-to-prism">src/app/auth.interceptor.ts:30</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Metoda interceptuje każde żądanie HTTP wychodzące z aplikacji,
+klonuje je i dodaje opcję <code>withCredentials: true</code>.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parametry :</b>
@@ -194,6 +205,7 @@
                                             <td>Nazwa</td>
                                                 <td>Typ</td>
                                             <td>Opcjonalne</td>
+                                                <td>Opis</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -208,6 +220,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Oryginalne żądanie HTTP.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>next</td>
@@ -220,6 +238,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Następny handler w łańcuchu interceptora.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -229,7 +253,10 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <ul>
+<li>Observable emitujący zdarzenia HTTP.</li>
+</ul>
+
                             </div>
                 </td>
             </tr>
@@ -250,11 +277,26 @@ import {
 } from &#x27;@angular/common/http&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 
+/**
+ * AuthInterceptor jest używany do klonowania każdego żądania HTTP i dodawania
+ * opcji &#x60;withCredentials: true&#x60;, co umożliwia wysyłanie ciasteczek wraz z żądaniami.
+ *
+ * @implements {HttpInterceptor}
+ * @injectable
+ */
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   
+  /**
+   * Metoda interceptuje każde żądanie HTTP wychodzące z aplikacji,
+   * klonuje je i dodaje opcję &#x60;withCredentials: true&#x60;.
+   *
+   * @param {HttpRequest&lt;any&gt;} req - Oryginalne żądanie HTTP.
+   * @param {HttpHandler} next - Następny handler w łańcuchu interceptora.
+   * @returns {Observable&lt;HttpEvent&lt;any&gt;&gt;} - Observable emitujący zdarzenia HTTP.
+   */
   intercept(req: HttpRequest&lt;any&gt;, next: HttpHandler): Observable&lt;HttpEvent&lt;any&gt;&gt; {
-    // Klonowanie żądania i dodanie withCredentials: true
+    // Klonowanie żądania i dodanie &#x60;withCredentials: true&#x60;
     const clonedRequest &#x3D; req.clone({
       withCredentials: true
     });

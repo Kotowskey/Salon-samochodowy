@@ -124,8 +124,21 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Opis</h3>
+    </p>
+    <p class="comment">
+        <p>RentCarComponent umożliwia użytkownikom wypożyczanie oraz zwracanie samochodów.</p>
+
+    </p>
 
 
+    <p class="comment">
+        <h3>Implementuje</h3>
+    </p>
+    <p class="comment">
+                <code>OnDestroy</code>
+    </p>
 
 
 <section data-compodoc="block-metadata">
@@ -212,7 +225,11 @@
                                 <a href="#carService" >carService</a>
                             </li>
                             <li>
-                                <a href="#isRenter" >isRenter</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#destroy$" >destroy$</a>
+                            </li>
+                            <li>
+                                <a href="#isRenter$" >isRenter$</a>
                             </li>
                             <li>
                                 <a href="#renter" >renter</a>
@@ -230,7 +247,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#isYouRented" >isYouRented</a>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
                             </li>
                             <li>
                                 <a href="#rentCar" >rentCar</a>
@@ -264,6 +281,31 @@
     </table>
 </section>
 
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Konstruktor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="74" class="link-to-prism">src/app/components/rent-car/rent-car.component.ts:74</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Konstruktor komponentu.
+Inicjalizuje obserwację, czy aktualny użytkownik jest wypożyczającym samochód.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
     <section data-compodoc="block-inputs">
     <h3 id="inputs">Inputy</h3>
@@ -299,9 +341,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Zdefiniowane w <a href="" data-line="20" class="link-to-prism">src/app/components/rent-car/rent-car.component.ts:20</a></div>
+                                    <div class="io-line">Zdefiniowane w <a href="" data-line="32" class="link-to-prism">src/app/components/rent-car/rent-car.component.ts:32</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Obiekt reprezentujący samochód do wypożyczenia.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -317,33 +365,35 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="isYouRented"></a>
+                    <a name="ngOnDestroy"></a>
                     <span class="name">
-                        <span ><b>isYouRented</b></span>
-                        <a href="#isYouRented"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>isYouRented()</code>
+<code>ngOnDestroy()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="65"
-                                    class="link-to-prism">src/app/components/rent-car/rent-car.component.ts:65</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="130"
+                                    class="link-to-prism">src/app/components/rent-car/rent-car.component.ts:130</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Metoda czyszcząca subskrypcje przy niszczeniu komponentu, aby zapobiec wyciekom pamięci.</p>
+</div>
 
                         <div class="io-description">
-                            <b>Zwraca : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                            <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
                 </td>
@@ -370,14 +420,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="40"
-                                    class="link-to-prism">src/app/components/rent-car/rent-car.component.ts:40</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="93"
+                                    class="link-to-prism">src/app/components/rent-car/rent-car.component.ts:93</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Metoda wypożyczająca samochód.
+Wysyła żądanie wypożyczenia samochodu do serwisu CarService i obsługuje odpowiedzi oraz błędy.</p>
+</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -407,14 +460,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="52"
-                                    class="link-to-prism">src/app/components/rent-car/rent-car.component.ts:52</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="112"
+                                    class="link-to-prism">src/app/components/rent-car/rent-car.component.ts:112</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Metoda zwracająca samochód.
+Wysyła żądanie zwrotu samochodu do serwisu CarService i obsługuje odpowiedzi oraz błędy.</p>
+</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -449,10 +505,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="38" class="link-to-prism">src/app/components/rent-car/rent-car.component.ts:38</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="74" class="link-to-prism">src/app/components/rent-car/rent-car.component.ts:74</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serwis uwierzytelniania.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -475,10 +537,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="37" class="link-to-prism">src/app/components/rent-car/rent-car.component.ts:37</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="69" class="link-to-prism">src/app/components/rent-car/rent-car.component.ts:69</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serwis do zarządzania danymi samochodów.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -486,24 +554,63 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="isRenter"></a>
+                    <a name="destroy$"></a>
                     <span class="name">
-                        <span ><b>isRenter</b></span>
-                        <a href="#isRenter"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Private</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Domyślna wartość : </i><code>false</code>
+                        <i>Domyślna wartość : </i><code>new Subject&lt;void&gt;()</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="39" class="link-to-prism">src/app/components/rent-car/rent-car.component.ts:39</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="64" class="link-to-prism">src/app/components/rent-car/rent-car.component.ts:64</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Subject używany do zarządzania subskrypcjami i zapobiegania wyciekom pamięci.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isRenter$"></a>
+                    <span class="name">
+                        <span ><b>isRenter$</b></span>
+                        <a href="#isRenter$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Typ : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="58" class="link-to-prism">src/app/components/rent-car/rent-car.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flaga określająca, czy aktualnie zalogowany użytkownik jest wypożyczającym ten samochód.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -534,10 +641,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="32" class="link-to-prism">src/app/components/rent-car/rent-car.component.ts:32</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="49" class="link-to-prism">src/app/components/rent-car/rent-car.component.ts:49</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Obiekt reprezentujący wypożyczającego samochód.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -547,25 +660,35 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {ChangeDetectionStrategy, Component, inject,Input }from &#x27;@angular/core&#x27;;
-import {Car,CarRenter,CarService } from &#x27;../../services/car.service&#x27;;
-import {MatButtonModule} from &#x27;@angular/material/button&#x27;;
-import {FormsModule} from &#x27;@angular/forms&#x27;;
-import {MatFormFieldModule} from &#x27;@angular/material/form-field&#x27;;
-import {MatInputModule} from &#x27;@angular/material/input&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ChangeDetectionStrategy, Component, OnDestroy, Input, inject } from &#x27;@angular/core&#x27;;
+import { Car, CarRenter, CarService } from &#x27;../../services/car.service&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
 import { AuthenticationService } from &#x27;../../services/authentication.service&#x27;;
-import { Observable, of } from &#x27;rxjs&#x27;; // Observable i of (tworzenie strumieni)
-import { map, switchMap } from &#x27;rxjs/operators&#x27;; // Operatory map i switchMap
+import { Observable, Subject, combineLatest } from &#x27;rxjs&#x27;;
+import { takeUntil, map } from &#x27;rxjs/operators&#x27;;
 
+/**
+ * RentCarComponent umożliwia użytkownikom wypożyczanie oraz zwracanie samochodów.
+ *
+ * @component
+ */
 @Component({
   selector: &#x27;app-rent-car&#x27;,
-  standalone: true,  
+  standalone: true,
   imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,  
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: &#x27;./rent-car.component.html&#x27;,
   styleUrls: [&#x27;./rent-car.component.css&#x27;]
 })
-export class RentCarComponent {
+export class RentCarComponent implements OnDestroy {
+  
+  /**
+   * Obiekt reprezentujący samochód do wypożyczenia.
+   * @type {Car}
+   */
   @Input() car: Car &#x3D; {
     id: 0,
     ownerId: 0,
@@ -578,58 +701,96 @@ export class RentCarComponent {
     horsePower: 0,
     isAvailableForRent: true
   };
+
+  /**
+   * Obiekt reprezentujący wypożyczającego samochód.
+   * @type {CarRenter}
+   */
   renter: CarRenter &#x3D; {
     carId: 0,
     renterId: 0
+  };
+
+  /**
+   * Flaga określająca, czy aktualnie zalogowany użytkownik jest wypożyczającym ten samochód.
+   * @type {Observable&lt;boolean&gt;}
+   */
+  isRenter$: Observable&lt;boolean&gt;;
+
+  /**
+   * Subject używany do zarządzania subskrypcjami i zapobiegania wyciekom pamięci.
+   * @type {Subject&lt;void&gt;}
+   */
+  private destroy$ &#x3D; new Subject&lt;void&gt;();
+
+  /**
+   * Serwis do zarządzania danymi samochodów.
+   */
+  private carService &#x3D; inject(CarService);
+
+  /**
+   * Serwis uwierzytelniania.
+   */
+  private authService &#x3D; inject(AuthenticationService);
+
+  /**
+   * Konstruktor komponentu.
+   * Inicjalizuje obserwację, czy aktualny użytkownik jest wypożyczającym samochód.
+   */
+  constructor() {
+    this.isRenter$ &#x3D; combineLatest([
+      this.authService.currentUser$,
+      this.carService.getRenterId(this.car.id)
+    ]).pipe(
+      map(([user, renter]) &#x3D;&gt; user?.id &#x3D;&#x3D;&#x3D; renter.renterId)
+    );
   }
 
-  private carService &#x3D; inject(CarService);
-  private authService &#x3D; inject(AuthenticationService);
-  isRenter &#x3D; false;
-  rentCar() {
-    this.carService.rentCar(this.car.id).subscribe(
-      (carId) &#x3D;&gt; {
+  /**
+   * Metoda wypożyczająca samochód.
+   * Wysyła żądanie wypożyczenia samochodu do serwisu CarService i obsługuje odpowiedzi oraz błędy.
+   */
+  rentCar(): void {
+    this.carService.rentCar(this.car.id).pipe(takeUntil(this.destroy$)).subscribe(
+      (carId: number) &#x3D;&gt; {
         console.log(&#x27;Wypożyczono samochód o id:&#x27;, carId);
         alert(&#x27;Samochód został wypożyczony&#x27;);
+        // Aktualizacja lokalnych danych samochodu
+        this.car.isAvailableForRent &#x3D; false;
       },
-      (error) &#x3D;&gt; {
+      (error: any) &#x3D;&gt; {
         console.error(&#x27;Błąd przy wypożyczaniu samochodu:&#x27;, error);
         alert(&#x27;Wystąpił błąd przy wypożyczaniu samochodu.&#x27;);
       }
     );
   }
-  returnCar() 
-  {
-    this.carService.returnCar(this.car.id).subscribe(
-      (carId) &#x3D;&gt; {
+
+  /**
+   * Metoda zwracająca samochód.
+   * Wysyła żądanie zwrotu samochodu do serwisu CarService i obsługuje odpowiedzi oraz błędy.
+   */
+  returnCar(): void {
+    this.carService.returnCar(this.car.id).pipe(takeUntil(this.destroy$)).subscribe(
+      (carId: number) &#x3D;&gt; {
         console.log(&#x27;Zwrócono samochód o id:&#x27;, carId);
         alert(&#x27;Samochód został zwrócony&#x27;);
+        // Aktualizacja lokalnych danych samochodu
+        this.car.isAvailableForRent &#x3D; true;
       },
-      (error) &#x3D;&gt; {
+      (error: any) &#x3D;&gt; {
         console.error(&#x27;Błąd przy zwracaniu samochodu:&#x27;, error);
         alert(&#x27;Wystąpił błąd przy zwracaniu samochodu.&#x27;);
       }
     );
   }
-  isYouRented():boolean
-  {
 
-  this.carService.getRenterId(this.car.id).subscribe( data &#x3D;&gt;
-  {
-    this.renter &#x3D; data;
-  });
-
-
-  if(this.renter.renterId &#x3D;&#x3D; null) this.isRenter &#x3D; false;
-
-
-  this.authService.currentUser$.subscribe((user) &#x3D;&gt; {
-      if(user?.id &#x3D;&#x3D; this.renter.renterId) this.isRenter &#x3D; true;
-      else this.isRenter;
-    });
-    return this.isRenter;
+  /**
+   * Metoda czyszcząca subskrypcje przy niszczeniu komponentu, aby zapobiec wyciekom pamięci.
+   */
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
-  
 }
 </code></pre>
     </div>
@@ -745,7 +906,7 @@ export class RentCarComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="d-flex gap-2 flex-wrap">  @if(car.isAvailableForRent) {     <button class="btn btn-primary btn-sm d-flex align-items-center" (click)="rentCar()">       <i class="bi bi-car-front me-1"></i>Wypożycz     </button>   }  @if(!car.isAvailableForRent) {     <button class="btn btn-info btn-sm d-flex align-items-center" (click)="returnCar()">       <i class="bi bi-arrow-return-left me-1"></i>Zwróć     </button>   }</div></div>'
-    var COMPONENTS = [{'name': 'AddCarComponent', 'selector': 'app-add-car'},{'name': 'AddCustomerComponent', 'selector': 'app-add-customer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuyCarComponent', 'selector': 'app-buy-car'},{'name': 'CalculateLeasingComponent', 'selector': 'calculate-leasing'},{'name': 'CarDetailComponent', 'selector': 'app-car-detail'},{'name': 'CarListComponent', 'selector': 'app-car-list'},{'name': 'CustomerListComponent', 'selector': 'app-customer-list'},{'name': 'EditCarComponent', 'selector': 'edit-car'},{'name': 'LoginRegisterComponent', 'selector': 'app-login-register'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'RentCarComponent', 'selector': 'app-rent-car'},{'name': 'ShowCarForm', 'selector': 'show-car-form'}];
+    var COMPONENTS = [{'name': 'AddCarComponent', 'selector': 'app-add-car'},{'name': 'AddCustomerComponent', 'selector': 'app-add-customer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuyCarComponent', 'selector': 'app-buy-car'},{'name': 'CalculateLeasingComponent', 'selector': 'calculate-leasing'},{'name': 'CarDetailComponent', 'selector': 'app-car-detail'},{'name': 'CarListComponent', 'selector': 'app-car-list'},{'name': 'CustomerListComponent', 'selector': 'app-customer-list'},{'name': 'EditCarComponent', 'selector': 'edit-car'},{'name': 'LoginRegisterComponent', 'selector': 'app-login-register'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'RentCarComponent', 'selector': 'app-rent-car'},{'name': 'ShowCarFormComponent', 'selector': 'show-car-form'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'RentCarComponent'};
 </script>

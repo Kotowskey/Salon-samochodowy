@@ -126,6 +126,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Opis</h3>
+            </p>
+            <p class="comment">
+                <p>Interface reprezentująca dane nowego klienta.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -312,12 +319,15 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { Observable, BehaviorSubject, of } from &#x27;rxjs&#x27;;
-import { tap, switchMap, catchError } from &#x27;rxjs/operators&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, OnDestroy } from &#x27;@angular/core&#x27;;
+import { Observable, BehaviorSubject, of, Subject, throwError } from &#x27;rxjs&#x27;;
+import { tap, switchMap, catchError, takeUntil } from &#x27;rxjs/operators&#x27;;
 import { HttpClient, HttpHeaders } from &#x27;@angular/common/http&#x27;;
-import { AuthenticationService } from &#x27;./authentication.service&#x27;;
+import { AuthenticationService, User } from &#x27;./authentication.service&#x27;;
 
+/**
+ * Interface reprezentująca klienta.
+ */
 export interface Customer {
   id: number;
   username: string;
@@ -326,6 +336,9 @@ export interface Customer {
   isDealer: boolean;
 }
 
+/**
+ * Interface reprezentująca dane nowego klienta.
+ */
 export interface NewCustomer {
   username: string;
   password: string;
@@ -333,49 +346,100 @@ export interface NewCustomer {
   lastName: string;
 }
 
+/**
+ * CustomerService zarządza operacjami związanymi z klientami, takimi jak pobieranie, dodawanie klientów.
+ *
+ * @injectable
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
-export class CustomerService {
-  private apiUrl &#x3D; &#x27;http://localhost:3000&#x27;;
+export class CustomerService implements OnDestroy {
+  /**
+   * URL do backendu API.
+   * Można rozważyć przeniesienie tego do pliku konfiguracyjnego.
+   * @type {string}
+   */
+  private apiUrl: string &#x3D; &#x27;http://localhost:3000&#x27;;
 
+  /**
+   * BehaviorSubject przechowujący listę klientów.
+   * Inicjalizowany jako pusty array.
+   * @type {BehaviorSubject&lt;Customer[]&gt;}
+   */
   private customersSubject: BehaviorSubject&lt;Customer[]&gt; &#x3D; new BehaviorSubject&lt;Customer[]&gt;([]);
-  public customers$ &#x3D; this.customersSubject.asObservable();
 
+  /**
+   * Observable emitujący zmiany w liście klientów.
+   * @type {Observable&lt;Customer[]&gt;}
+   */
+  public customers$: Observable&lt;Customer[]&gt; &#x3D; this.customersSubject.asObservable();
+
+  /**
+   * Subject używany do zarządzania subskrypcjami i zapobiegania wyciekom pamięci.
+   * @type {Subject&lt;void&gt;}
+   */
+  private destroy$: Subject&lt;void&gt; &#x3D; new Subject&lt;void&gt;();
+
+  /**
+   * Konstruktor serwisu.
+   *
+   * @param {HttpClient} http - Serwis HttpClient do wykonywania żądań HTTP.
+   * @param {AuthenticationService} authService - Serwis uwierzytelniania użytkowników.
+   */
   constructor(
     private http: HttpClient,
-    private authService: AuthenticationService // Inject AuthenticationService
-  ) { 
-    // Subscribe to currentUser$ to react to authentication changes
-    this.authService.currentUser$.subscribe(user &#x3D;&gt; {
-      if (user &amp;&amp; user.isDealer) {
-        // Only load customers if the user is logged in and is a dealer/admin
-        this.loadInitialData();
-      } else {
-        // Clear customers if not authorized
-        this.customersSubject.next([]);
-      }
-    });
+    private authService: AuthenticationService
+  ) {
+    // Subskrybujemy strumień currentUser$, aby reagować na zmiany uwierzytelnienia
+    this.authService.currentUser$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(user &#x3D;&gt; {
+        if (user &amp;&amp; user.isDealer) {
+          // Tylko dealerzy/admini mogą pobierać listę klientów
+          this.loadInitialData();
+        } else {
+          // Czyścimy listę klientów, jeśli użytkownik nie jest autoryzowany
+          this.customersSubject.next([]);
+        }
+      });
   }
 
+  /**
+   * Metoda pobierająca początkowe dane klientów z backendu.
+   * Aktualizuje BehaviorSubject &#x60;customersSubject&#x60; z pobranymi danymi.
+   *
+   * @private
+   */
   private loadInitialData(): void {
     this.http.get&lt;Customer[]&gt;(&#x60;${this.apiUrl}/users&#x60;, { withCredentials: true })
       .pipe(
         catchError(error &#x3D;&gt; {
           console.error(&#x27;Error loading customers:&#x27;, error);
-          return of([]); // Return an empty array on error
+          return of([]); // Zwraca pusty array w przypadku błędu
         })
       )
       .subscribe(
-        (customers) &#x3D;&gt; this.customersSubject.next(customers),
-        (error) &#x3D;&gt; console.error(&#x27;Error loading customers:&#x27;, error)
+        (customers: Customer[]) &#x3D;&gt; this.customersSubject.next(customers)
       );
   }
 
+  /**
+   * Metoda zwracająca Observable emitujące listę klientów.
+   *
+   * @returns {Observable&lt;Customer[]&gt;} Observable emitujące listę klientów.
+   */
   getCustomers(): Observable&lt;Customer[]&gt; {
     return this.customers$;
   }
 
+  /**
+   * Metoda dodająca nowego klienta poprzez wysłanie żądania POST do backendu.
+   * Po pomyślnym dodaniu klienta, aktualizuje BehaviorSubject &#x60;customersSubject&#x60;.
+   *
+   * @param {NewCustomer} newCustomer - Obiekt zawierający dane nowego klienta.
+   * @returns {Observable&lt;{ message: string, user: Customer }&gt;} Observable zawierający odpowiedź z serwera.
+   */
   addCustomer(newCustomer: NewCustomer): Observable&lt;{ message: string, user: Customer }&gt; {
     const headers &#x3D; new HttpHeaders({ &#x27;Content-Type&#x27;: &#x27;application/json&#x27; });
     return this.http.post&lt;{ message: string, user: Customer }&gt;(
@@ -391,9 +455,17 @@ export class CustomerService {
       }),
       catchError(error &#x3D;&gt; {
         console.error(&#x27;Error adding customer:&#x27;, error);
-        throw error; // Re-throw the error after logging
+        return throwError(error); // Przekazuje błąd dalej po zalogowaniu
       })
     );
+  }
+
+  /**
+   * Metoda czyszcząca subskrypcje przy zniszczeniu serwisu, aby zapobiec wyciekom pamięci.
+   */
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
 </code></pre>

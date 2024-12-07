@@ -106,6 +106,10 @@
                 role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -120,6 +124,13 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Opis</h3>
+    </p>
+    <p class="comment">
+        <p>CalculateLeasingComponent umożliwia obliczenie warunków leasingu dla wybranego samochodu.</p>
+
+    </p>
 
 
 
@@ -145,6 +156,10 @@
                 <td class="col-md-9"><code>calculate-leasing</code></td>
             </tr>
 
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
 
             <tr>
                 <td class="col-md-3">imports</td>
@@ -153,6 +168,10 @@
                 </td>
             </tr>
 
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./calculate-leasing.component.css</code></td>
+            </tr>
 
 
 
@@ -163,10 +182,6 @@
 
 
 
-            <tr>
-                <td class="col-md-3">styleUrl</td>
-                <td class="col-md-9"><code>./calculate-leasing.component.css</code></td>
-            </tr>
 
 
 
@@ -217,6 +232,10 @@
                             <li>
                                 <a href="#lResponse" >lResponse</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#userSubscription" >userSubscription</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -234,6 +253,9 @@
                             </li>
                             <li>
                                 <a href="#closeDialog" >closeDialog</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
                             </li>
                             <li>
                                 <a href="#openLeasingDialog" >openLeasingDialog</a>
@@ -275,10 +297,16 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="45" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:45</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="100" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:100</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Konstruktor komponentu. Inicjalizuje subskrypcję na aktualnego użytkownika.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -317,9 +345,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Zdefiniowane w <a href="" data-line="14" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:14</a></div>
+                                    <div class="io-line">Zdefiniowane w <a href="" data-line="26" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:26</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Obiekt reprezentujący samochód, dla którego obliczany jest leasing.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -351,14 +385,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="54"
-                                    class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:54</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="115"
+                                    class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:115</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Metoda obliczająca warunki leasingu na podstawie danych wejściowych.
+Otwiera dialog z podsumowaniem leasingu po pomyślnym obliczeniu.</p>
+</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -388,14 +425,55 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="84"
-                                    class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:84</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="152"
+                                    class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:152</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Metoda zamykająca wszystkie otwarte dialogi.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="159"
+                                    class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:159</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Metoda czyszcząca subskrypcje przy niszczeniu komponentu.</p>
+</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -425,14 +503,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="72"
-                                    class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:72</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="136"
+                                    class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:136</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Metoda otwierająca dialog do wprowadzania danych leasingowych.
+Po zamknięciu dialogu, aktualizuje informacje o samochodzie, jeśli użytkownik zatwierdził zmiany.</p>
+</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -467,10 +548,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="45" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:45</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="94" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:94</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serwis uwierzytelniania.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -493,10 +580,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="42" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:42</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="78" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:78</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serwis do zarządzania samochodami.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -519,10 +612,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="43" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:43</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="83" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:83</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serwis do zarządzania dialogami.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -544,10 +643,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="44" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:44</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="89" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:89</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flaga określająca, czy aktualnie zalogowany użytkownik jest dealerem.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -580,10 +685,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="40" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:40</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="67" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:67</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Referencja do szablonu dialogu leasingowego.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -616,10 +727,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="41" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:41</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="73" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:73</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Referencja do szablonu podsumowania leasingu.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -650,10 +767,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="26" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:26</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="43" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:43</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Obiekt przechowujący dane żądania leasingowego.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -690,10 +813,49 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="30" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:30</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="52" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:52</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Obiekt przechowujący odpowiedź z serwisu leasingowego.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userSubscription"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>userSubscription</b></span>
+                        <a href="#userSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Typ : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="100" class="link-to-prism">src/app/components/calculate-leasing/calculate-leasing.component.ts:100</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Subskrypcja na strumień aktualnego użytkownika.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -704,18 +866,30 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, TemplateRef, ViewChild, inject } from &#x27;@angular/core&#x27;;
-import { Car,LeasingRequest,LeasingResponse,CarService } from &#x27;../../services/car.service&#x27;;
-import {MatDialog} from &#x27;@angular/material/dialog&#x27;;
-import { AuthenticationService } from &#x27;../../services/authentication.service&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
+import { Car, LeasingRequest, LeasingResponse, CarService } from &#x27;../../services/car.service&#x27;;
+import { AuthenticationService } from &#x27;../../services/authentication.service&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
 
+/**
+ * CalculateLeasingComponent umożliwia obliczenie warunków leasingu dla wybranego samochodu.
+ * 
+ * @component
+ */
 @Component({
   selector: &#x27;calculate-leasing&#x27;,
+  standalone: true,
   imports: [FormsModule],
   templateUrl: &#x27;./calculate-leasing.component.html&#x27;,
-  styleUrl: &#x27;./calculate-leasing.component.css&#x27;
+  styleUrls: [&#x27;./calculate-leasing.component.css&#x27;]
 })
 export class CalculateLeasingComponent {
+  
+  /**
+   * Obiekt reprezentujący samochód, dla którego obliczany jest leasing.
+   * @type {Car}
+   */
   @Input() car: Car &#x3D; {
     id: 0,
     ownerId: 0,
@@ -728,11 +902,21 @@ export class CalculateLeasingComponent {
     horsePower: 0,
     isAvailableForRent: true,
   };
+
+  /**
+   * Obiekt przechowujący dane żądania leasingowego.
+   * @type {LeasingRequest}
+   */
   lRequest: LeasingRequest &#x3D; {
     downPayment: 0,
     months: 0
-  }
-  lResponse : LeasingResponse &#x3D; {
+  };
+
+  /**
+   * Obiekt przechowujący odpowiedź z serwisu leasingowego.
+   * @type {LeasingResponse}
+   */
+  lResponse: LeasingResponse &#x3D; {
     carId: 0,
     carBrand: &#x27;&#x27;,
     carModel: &#x27;&#x27;,
@@ -741,39 +925,81 @@ export class CalculateLeasingComponent {
     remainingAmount: &#x27;&#x27;,
     months: 0,
     monthlyRate: &#x27;&#x27;
-  }
+  };
+
+  /**
+   * Referencja do szablonu dialogu leasingowego.
+   * @type {TemplateRef&lt;any&gt;}
+   */
   @ViewChild(&quot;Leasingdialog&quot;) Leasingdialog!: TemplateRef&lt;any&gt;;
+
+  /**
+   * Referencja do szablonu podsumowania leasingu.
+   * @type {TemplateRef&lt;any&gt;}
+   */
   @ViewChild(&quot;LeasingSummary&quot;) LeasingSummary!: TemplateRef&lt;any&gt;;
+
+  /** 
+   * Serwis do zarządzania samochodami.
+   */
   private carService &#x3D; inject(CarService);
+
+  /**
+   * Serwis do zarządzania dialogami.
+   */
   private dialog &#x3D; inject(MatDialog);
+
+  /**
+   * Flaga określająca, czy aktualnie zalogowany użytkownik jest dealerem.
+   * @type {boolean}
+   */
   isDealer &#x3D; false;
+
+  /**
+   * Serwis uwierzytelniania.
+   */
   private authService &#x3D; inject(AuthenticationService);
 
+  /**
+   * Subskrypcja na strumień aktualnego użytkownika.
+   * @type {Subscription}
+   */
+  private userSubscription: Subscription;
+
+  /**
+   * Konstruktor komponentu. Inicjalizuje subskrypcję na aktualnego użytkownika.
+   */
   constructor() {
-    // Subskrybuj strumień currentUser$
-    this.authService.currentUser$.subscribe((user) &#x3D;&gt; {
+    this.userSubscription &#x3D; this.authService.currentUser$.subscribe((user) &#x3D;&gt; {
       this.isDealer &#x3D; user?.isDealer ?? false; // Ustaw flagę na podstawie danych użytkownika
     });
   }
 
-  calculate(){  
-    this.carService.leaseCar(this.car.id,this.lRequest).subscribe(
-      (leasingData) &#x3D;&gt;{
+  /**
+   * Metoda obliczająca warunki leasingu na podstawie danych wejściowych.
+   * Otwiera dialog z podsumowaniem leasingu po pomyślnym obliczeniu.
+   */
+  calculate(): void {  
+    this.carService.leaseCar(this.car.id, this.lRequest).subscribe(
+      (leasingData: LeasingResponse) &#x3D;&gt; {
         this.lResponse &#x3D; leasingData;
         console.log(&#x27;Leasing wyliczony:&#x27;, leasingData);
-        //this.closeDialog();
-        const dialogRef &#x3D; this.dialog.open(this.LeasingSummary, {
+        this.dialog.open(this.LeasingSummary, {
           width: &#x27;600px&#x27;,
           data: this.lResponse,
         });
       },
       (error) &#x3D;&gt; {
-        console.error(&#x27;Błąd przy wyliczniu leasingu:&#x27;, error);
+        console.error(&#x27;Błąd przy wyliczeniu leasingu:&#x27;, error);
         alert(&#x27;Wystąpił błąd przy wyliczaniu leasingu.&#x27;);
       }
     );
   }
 
+  /**
+   * Metoda otwierająca dialog do wprowadzania danych leasingowych.
+   * Po zamknięciu dialogu, aktualizuje informacje o samochodzie, jeśli użytkownik zatwierdził zmiany.
+   */
   openLeasingDialog(): void {
     const dialogRef &#x3D; this.dialog.open(this.Leasingdialog, {
       width: &#x27;600px&#x27;,
@@ -786,10 +1012,20 @@ export class CalculateLeasingComponent {
       }
     });
   }
+
+  /**
+   * Metoda zamykająca wszystkie otwarte dialogi.
+   */
   closeDialog(): void {
     this.dialog.closeAll();
   }
 
+  /**
+   * Metoda czyszcząca subskrypcje przy niszczeniu komponentu.
+   */
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
+  }
 }
 </code></pre>
     </div>
@@ -847,6 +1083,75 @@ export class CalculateLeasingComponent {
 &lt;/ng-template&gt;</code></pre>
     </div>
 
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./calculate-leasing.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.calculate-form {
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+  }
+  
+  .calculate-form h2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .calculate-form label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #555;
+  }
+  
+  .calculate-form input[type&#x3D;&quot;text&quot;],
+  .calculate-form input[type&#x3D;&quot;number&quot;],
+  .calculate-form input[type&#x3D;&quot;checkbox&quot;] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  .calculate-form input[type&#x3D;&quot;checkbox&quot;] {
+    width: auto;
+    margin-right: 10px;
+  }
+  
+  .calculate-form button {
+    width: 45%;
+    margin: auto;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .calculate-form button:hover {
+    background-color: #0056b3;
+  }
+  .calculate-form-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}</code></pre>
+    </div>
 
     <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
@@ -874,7 +1179,7 @@ export class CalculateLeasingComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="d-flex gap-2 flex-wrap">  @if (!isDealer) {    <button class="btn btn-secondary btn-sm d-flex align-items-center" (click)="openLeasingDialog()">        <i class="bi bi-calculator me-1"></i>Leasing    </button>  }</div><ng-template #Leasingdialog>  <div class="calculate-form">      <h2>Leasing</h2>      <div class="card-body d-flex flex-column">          <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>          <p class="card-text">            <strong>Rok:</strong> {{ car.year }}<br>            <strong>VIN:</strong> {{ car.vin }}<br>            <strong>Cena:</strong> {{ car.price }} PLN<br>          </p>      </div>      <form (ngSubmit)="calculate()">          <label for="brand">Wpłata własna</label>          <input type="text" id="downPayment" [(ngModel)]="lRequest.downPayment" name="downPayment" required />              <label for="model">Okres leasingu</label>          <input type="text" id="months" [(ngModel)]="lRequest.months" name="months" required />          <div class="calculate-form-buttons">              <button type="submit">Oblicz</button>              <button type="button" mat-button (click)="closeDialog()">Zamknij</button>          </div>      </form>  </div></ng-template><ng-template #LeasingSummary>  <div class="calculate-form">      <h2>Leasing - podsumowanie</h2>      <div class="card-body d-flex flex-column">          <h5 class="card-title">{{ lResponse.carBrand }} {{ lResponse.carModel }}</h5>          <p class="card-text">            <strong>Cena:</strong> {{ lResponse.totalPrice }} PLN<br>            <strong>Wpłata własna:</strong> {{ lResponse.downPayment }} PLN<br>            <strong>Do spłaty:</strong> {{ lResponse.remainingAmount }} PLN<br>            <strong>Okres spłaty:</strong> {{ lResponse.months }} Miesięcy<br>            <strong>Miesięczna rata:</strong> {{ lResponse.monthlyRate }} PLN<br>          </p>      </div>      <div class="calculate-form-buttons">          <button type="button" mat-button (click)="closeDialog()">Zamknij</button>      </div>  </div></ng-template></div>'
-    var COMPONENTS = [{'name': 'AddCarComponent', 'selector': 'app-add-car'},{'name': 'AddCustomerComponent', 'selector': 'app-add-customer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuyCarComponent', 'selector': 'app-buy-car'},{'name': 'CalculateLeasingComponent', 'selector': 'calculate-leasing'},{'name': 'CarDetailComponent', 'selector': 'app-car-detail'},{'name': 'CarListComponent', 'selector': 'app-car-list'},{'name': 'CustomerListComponent', 'selector': 'app-customer-list'},{'name': 'EditCarComponent', 'selector': 'edit-car'},{'name': 'LoginRegisterComponent', 'selector': 'app-login-register'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'RentCarComponent', 'selector': 'app-rent-car'},{'name': 'ShowCarForm', 'selector': 'show-car-form'}];
+    var COMPONENTS = [{'name': 'AddCarComponent', 'selector': 'app-add-car'},{'name': 'AddCustomerComponent', 'selector': 'app-add-customer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuyCarComponent', 'selector': 'app-buy-car'},{'name': 'CalculateLeasingComponent', 'selector': 'calculate-leasing'},{'name': 'CarDetailComponent', 'selector': 'app-car-detail'},{'name': 'CarListComponent', 'selector': 'app-car-list'},{'name': 'CustomerListComponent', 'selector': 'app-customer-list'},{'name': 'EditCarComponent', 'selector': 'edit-car'},{'name': 'LoginRegisterComponent', 'selector': 'app-login-register'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'RentCarComponent', 'selector': 'app-rent-car'},{'name': 'ShowCarFormComponent', 'selector': 'show-car-form'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'CalculateLeasingComponent'};
 </script>

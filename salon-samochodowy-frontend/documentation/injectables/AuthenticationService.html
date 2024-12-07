@@ -119,6 +119,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Opis</h3>
+            </p>
+            <p class="comment">
+                <p>AuthenticationService zarządza uwierzytelnianiem użytkowników, w tym rejestracją, logowaniem i wylogowywaniem.</p>
+
+            </p>
 
 
 
@@ -163,6 +170,12 @@
                                 <a href="#checkCurrentUser" >checkCurrentUser</a>
                             </li>
                             <li>
+                                <a href="#getCurrentUser" >getCurrentUser</a>
+                            </li>
+                            <li>
+                                <a href="#isLoggedIn" >isLoggedIn</a>
+                            </li>
+                            <li>
                                 <a href="#login" >login</a>
                             </li>
                             <li>
@@ -194,12 +207,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="21" class="link-to-prism">src/app/services/authentication.service.ts:21</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="47" class="link-to-prism">src/app/services/authentication.service.ts:47</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Konstruktor serwisu.</p>
+</div>
                             <div>
                                     <b>Parametry :</b>
                                     <table class="params">
@@ -208,6 +223,7 @@
                                                 <td>Nazwa</td>
                                                     <td>Typ</td>
                                                 <td>Opcjonalne</td>
+                                                    <td>Opis</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -222,6 +238,12 @@
                                                             Nie
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Serwis HttpClient do wykonywania żądań HTTP.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>router</td>
@@ -234,6 +256,12 @@
                                                             Nie
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Serwis Router do nawigacji między trasami.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -271,19 +299,109 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="27"
-                                    class="link-to-prism">src/app/services/authentication.service.ts:27</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="64"
+                                    class="link-to-prism">src/app/services/authentication.service.ts:64</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Sprawdza, czy użytkownik jest aktualnie zalogowany, wykonując żądanie do backendu.
+Aktualizuje <code>currentUserSubject</code> na podstawie odpowiedzi.
+Jeśli żądanie zakończy się błędem, ustawia <code>currentUserSubject</code> na <code>null</code>.</p>
+</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCurrentUser"></a>
+                    <span class="name">
+                        <span ><b>getCurrentUser</b></span>
+                        <a href="#getCurrentUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getCurrentUser()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="167"
+                                    class="link-to-prism">src/app/services/authentication.service.ts:167</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Pobiera bieżącego użytkownika jako <code>User</code> lub <code>null</code>.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Zwraca : </b>        <code><a href="../interfaces/User.html" target="_self" >User | null</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Aktualny użytkownik lub <code>null</code> jeśli nie jest zalogowany.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoggedIn"></a>
+                    <span class="name">
+                        <span ><b>isLoggedIn</b></span>
+                        <a href="#isLoggedIn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isLoggedIn()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="158"
+                                    class="link-to-prism">src/app/services/authentication.service.ts:158</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Metoda pomocnicza do sprawdzania, czy użytkownik jest zalogowany.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Zwraca : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p><code>true</code> jeśli użytkownik jest zalogowany, w przeciwnym razie <code>false</code>.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -308,14 +426,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="55"
-                                    class="link-to-prism">src/app/services/authentication.service.ts:55</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="113"
+                                    class="link-to-prism">src/app/services/authentication.service.ts:113</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Loguje użytkownika.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parametry :</b>
@@ -326,6 +446,7 @@
                                             <td>Nazwa</td>
                                                 <td>Typ</td>
                                             <td>Opcjonalne</td>
+                                                <td>Opis</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -340,6 +461,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Nazwa użytkownika.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>password</td>
@@ -352,6 +479,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Hasło użytkownika.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -361,7 +494,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable emitujący odpowiedź z backendu.</p>
+
                             </div>
                 </td>
             </tr>
@@ -387,19 +521,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="69"
-                                    class="link-to-prism">src/app/services/authentication.service.ts:69</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="136"
+                                    class="link-to-prism">src/app/services/authentication.service.ts:136</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Wylogowuje aktualnie zalogowanego użytkownika.</p>
+</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>    <code>Observable&lt;any&gt;</code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Observable emitujący odpowiedź z backendu.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -424,14 +564,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="41"
-                                    class="link-to-prism">src/app/services/authentication.service.ts:41</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="88"
+                                    class="link-to-prism">src/app/services/authentication.service.ts:88</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Rejestruje nowego użytkownika.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parametry :</b>
@@ -442,6 +584,7 @@
                                             <td>Nazwa</td>
                                                 <td>Typ</td>
                                             <td>Opcjonalne</td>
+                                                <td>Opis</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -456,6 +599,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Nazwa użytkownika.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>password</td>
@@ -468,6 +617,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Hasło użytkownika.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>firstName</td>
@@ -480,6 +635,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Imię użytkownika.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>lastName</td>
@@ -492,6 +653,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Nazwisko użytkownika.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -501,7 +668,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable emitujący odpowiedź z backendu.</p>
+
                             </div>
                 </td>
             </tr>
@@ -538,10 +706,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="19" class="link-to-prism">src/app/services/authentication.service.ts:19</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="34" class="link-to-prism">src/app/services/authentication.service.ts:34</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>URL do backendu API.
+Można rozważyć przeniesienie tego do pliku konfiguracyjnego.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -559,15 +734,27 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Typ : </i>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;User | null&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Domyślna wartość : </i><code>this.currentUserSubject.asObservable()</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="21" class="link-to-prism">src/app/services/authentication.service.ts:21</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="47" class="link-to-prism">src/app/services/authentication.service.ts:47</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Observable emitujący zmiany bieżącego użytkownika.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -585,15 +772,28 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Typ : </i>        <code><a href="../interfaces/User.html" target="_self" >BehaviorSubject&lt;User | null&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Domyślna wartość : </i><code>new BehaviorSubject&lt;User | null&gt;(null)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="20" class="link-to-prism">src/app/services/authentication.service.ts:20</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="41" class="link-to-prism">src/app/services/authentication.service.ts:41</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>BehaviorSubject przechowujący bieżącego użytkownika.
+Inicjalizowany jest jako <code>null</code>, gdy użytkownik nie jest zalogowany.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -609,7 +809,10 @@ import { Observable, BehaviorSubject, of } from &#x27;rxjs&#x27;;
 import { tap, catchError } from &#x27;rxjs/operators&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 
-interface User {
+/**
+ * Interface reprezentująca użytkownika.
+ */
+export interface User {
   id: number;
   username: string;
   firstName: string;
@@ -617,25 +820,58 @@ interface User {
   isDealer: boolean;
 }
 
+/**
+ * AuthenticationService zarządza uwierzytelnianiem użytkowników, w tym rejestracją, logowaniem i wylogowywaniem.
+ *
+ * @injectable
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;,
 })
 export class AuthenticationService {
-  private apiUrl &#x3D; &#x27;http://localhost:3000&#x27;; // Zaktualizuj URL backendu
-  private currentUserSubject &#x3D; new BehaviorSubject&lt;User | null&gt;(null);
-  public currentUser$ &#x3D; this.currentUserSubject.asObservable();
+  /**
+   * URL do backendu API.
+   * Można rozważyć przeniesienie tego do pliku konfiguracyjnego.
+   * @type {string}
+   */
+  private apiUrl: string &#x3D; &#x27;http://localhost:3000&#x27;; // Zaktualizuj URL backendu
 
+  /**
+   * BehaviorSubject przechowujący bieżącego użytkownika.
+   * Inicjalizowany jest jako &#x60;null&#x60;, gdy użytkownik nie jest zalogowany.
+   * @type {BehaviorSubject&lt;User | null&gt;}
+   */
+  private currentUserSubject: BehaviorSubject&lt;User | null&gt; &#x3D; new BehaviorSubject&lt;User | null&gt;(null);
+
+  /**
+   * Observable emitujący zmiany bieżącego użytkownika.
+   * @type {Observable&lt;User | null&gt;}
+   */
+  public currentUser$: Observable&lt;User | null&gt; &#x3D; this.currentUserSubject.asObservable();
+
+  /**
+   * Konstruktor serwisu.
+   *
+   * @param {HttpClient} http - Serwis HttpClient do wykonywania żądań HTTP.
+   * @param {Router} router - Serwis Router do nawigacji między trasami.
+   */
   constructor(private http: HttpClient, private router: Router) {
     this.checkCurrentUser();
   }
 
-  private checkCurrentUser() {
+  /**
+   * Sprawdza, czy użytkownik jest aktualnie zalogowany, wykonując żądanie do backendu.
+   * Aktualizuje &#x60;currentUserSubject&#x60; na podstawie odpowiedzi.
+   * Jeśli żądanie zakończy się błędem, ustawia &#x60;currentUserSubject&#x60; na &#x60;null&#x60;.
+   */
+  private checkCurrentUser(): void {
     this.http.get&lt;{ user: User }&gt;(&#x60;${this.apiUrl}/current-user&#x60;, { withCredentials: true })
       .pipe(
         tap(response &#x3D;&gt; {
           this.currentUserSubject.next(response.user);
         }),
-        catchError(() &#x3D;&gt; {
+        catchError((error) &#x3D;&gt; {
+          console.warn(&#x27;Brak zalogowanego użytkownika lub wystąpił błąd:&#x27;, error);
           this.currentUserSubject.next(null);
           return of(null);
         })
@@ -643,8 +879,17 @@ export class AuthenticationService {
       .subscribe();
   }
 
+  /**
+   * Rejestruje nowego użytkownika.
+   *
+   * @param {string} username - Nazwa użytkownika.
+   * @param {string} password - Hasło użytkownika.
+   * @param {string} firstName - Imię użytkownika.
+   * @param {string} lastName - Nazwisko użytkownika.
+   * @returns {Observable&lt;any&gt;} Observable emitujący odpowiedź z backendu.
+   */
   register(username: string, password: string, firstName: string, lastName: string): Observable&lt;any&gt; {
-    return this.http.post&lt;any&gt;(
+    return this.http.post&lt;{ user: User }&gt;(
       &#x60;${this.apiUrl}/register&#x60;,
       { username, password, firstName, lastName },
       { withCredentials: true }
@@ -653,12 +898,23 @@ export class AuthenticationService {
         if (response.user) {
           this.currentUserSubject.next(response.user);
         }
+      }),
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Błąd podczas rejestracji:&#x27;, error);
+        return of(error);
       })
     );
   }
 
+  /**
+   * Loguje użytkownika.
+   *
+   * @param {string} username - Nazwa użytkownika.
+   * @param {string} password - Hasło użytkownika.
+   * @returns {Observable&lt;any&gt;} Observable emitujący odpowiedź z backendu.
+   */
   login(username: string, password: string): Observable&lt;any&gt; {
-    return this.http.post&lt;any&gt;(
+    return this.http.post&lt;{ user: User }&gt;(
       &#x60;${this.apiUrl}/login&#x60;,
       { username, password },
       { withCredentials: true }
@@ -667,20 +923,52 @@ export class AuthenticationService {
         if (response.user) {
           this.currentUserSubject.next(response.user);
         }
+      }),
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Błąd podczas logowania:&#x27;, error);
+        return of(error);
       })
     );
   }
 
+  /**
+   * Wylogowuje aktualnie zalogowanego użytkownika.
+   *
+   * @returns {Observable&lt;any&gt;} Observable emitujący odpowiedź z backendu.
+   */
   logout(): Observable&lt;any&gt; {
-    return this.http.post&lt;any&gt;(
+    return this.http.post&lt;{ message: string }&gt;(
       &#x60;${this.apiUrl}/logout&#x60;,
       {},
       { withCredentials: true }
     ).pipe(
       tap(() &#x3D;&gt; {
         this.currentUserSubject.next(null);
+        this.router.navigate([&#x27;/&#x27;]); // Przekierowanie na stronę główną po wylogowaniu
+      }),
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Błąd podczas wylogowywania:&#x27;, error);
+        return of(error);
       })
     );
+  }
+
+  /**
+   * Metoda pomocnicza do sprawdzania, czy użytkownik jest zalogowany.
+   *
+   * @returns {boolean} &#x60;true&#x60; jeśli użytkownik jest zalogowany, w przeciwnym razie &#x60;false&#x60;.
+   */
+  isLoggedIn(): boolean {
+    return this.currentUserSubject.value !&#x3D;&#x3D; null;
+  }
+
+  /**
+   * Pobiera bieżącego użytkownika jako &#x60;User&#x60; lub &#x60;null&#x60;.
+   *
+   * @returns {User | null} Aktualny użytkownik lub &#x60;null&#x60; jeśli nie jest zalogowany.
+   */
+  getCurrentUser(): User | null {
+    return this.currentUserSubject.value;
   }
 }
 </code></pre>

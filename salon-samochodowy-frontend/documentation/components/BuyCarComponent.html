@@ -124,6 +124,14 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Opis</h3>
+    </p>
+    <p class="comment">
+        <p>Komponent umożliwiający zakup wybranego samochodu.
+Wyświetla przycisk zakupu oraz komunikaty informujące o powodzeniu lub błędzie operacji.</p>
+<b>Przykład :</b><div><pre class="line-numbers"><code class="language-html">&lt;app-buy-car [car]=&quot;wybranySamochód&quot;&gt;&lt;/app-buy-car&gt;</code></pre></div>
+    </p>
 
 
 
@@ -231,12 +239,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="12" class="link-to-prism">src/app/components/buy-car/buy-car.component.ts:12</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="23" class="link-to-prism">src/app/components/buy-car/buy-car.component.ts:23</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Inicjuje komponent z wstrzykniętym serwisem do obsługi samochodów.</p>
+</div>
                             <div>
                                     <b>Parametry :</b>
                                     <table class="params">
@@ -245,6 +255,7 @@
                                                 <td>Nazwa</td>
                                                     <td>Typ</td>
                                                 <td>Opcjonalne</td>
+                                                    <td>Opis</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -259,6 +270,10 @@
                                                             Nie
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Serwis do operacji na samochodach</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -287,9 +302,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Zdefiniowane w <a href="" data-line="12" class="link-to-prism">src/app/components/buy-car/buy-car.component.ts:12</a></div>
+                                    <div class="io-line">Zdefiniowane w <a href="" data-line="23" class="link-to-prism">src/app/components/buy-car/buy-car.component.ts:23</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Samochód, który ma zostać kupiony.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -321,19 +342,26 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="16"
-                                    class="link-to-prism">src/app/components/buy-car/buy-car.component.ts:16</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="38"
+                                    class="link-to-prism">src/app/components/buy-car/buy-car.component.ts:38</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Dokonuje próby zakupu wybranego samochodu.
+Wyświetla okno dialogowe z potwierdzeniem, a po udanym zakupie - komunikat o powodzeniu.
+W przypadku błędu wyświetlany jest odpowiedni komunikat.</p>
+</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -347,6 +375,13 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input } from &#x27;@angular/core&#x27;;
 import { CarService, Car } from &#x27;../../services/car.service&#x27;;
 
+/**
+ * Komponent umożliwiający zakup wybranego samochodu.
+ * Wyświetla przycisk zakupu oraz komunikaty informujące o powodzeniu lub błędzie operacji.
+ *
+ * @example
+ * &lt;app-buy-car [car]&#x3D;&quot;wybranySamochód&quot;&gt;&lt;/app-buy-car&gt;
+ */
 @Component({
   selector: &#x27;app-buy-car&#x27;,
   standalone: true,
@@ -354,10 +389,25 @@ import { CarService, Car } from &#x27;../../services/car.service&#x27;;
   styleUrls: [&#x27;./buy-car.component.css&#x27;]
 })
 export class BuyCarComponent {
+  /**
+   * Samochód, który ma zostać kupiony.
+   * @property {Car} car Obiekt reprezentujący wybrany samochód
+   */
   @Input() car!: Car;
 
+  /**
+   * Inicjuje komponent z wstrzykniętym serwisem do obsługi samochodów.
+   * @param {CarService} carService Serwis do operacji na samochodach
+   */
   constructor(private carService: CarService) {}
 
+  /**
+   * Dokonuje próby zakupu wybranego samochodu.
+   * Wyświetla okno dialogowe z potwierdzeniem, a po udanym zakupie - komunikat o powodzeniu.
+   * W przypadku błędu wyświetlany jest odpowiedni komunikat.
+   *
+   * @returns {void}
+   */
   buyCar(): void {
     if (!this.car) {
       alert(&#x27;Samochód nie został wybrany.&#x27;);
@@ -426,7 +476,7 @@ export class BuyCarComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="d-flex gap-2 flex-wrap">  @if(car.isAvailableForRent) {  <button class="btn btn-success btn-sm d-flex align-items-center" (click)="buyCar()">      <i class="bi bi-cart-plus me-1"></i>Kup  </button>  }</div></div>'
-    var COMPONENTS = [{'name': 'AddCarComponent', 'selector': 'app-add-car'},{'name': 'AddCustomerComponent', 'selector': 'app-add-customer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuyCarComponent', 'selector': 'app-buy-car'},{'name': 'CalculateLeasingComponent', 'selector': 'calculate-leasing'},{'name': 'CarDetailComponent', 'selector': 'app-car-detail'},{'name': 'CarListComponent', 'selector': 'app-car-list'},{'name': 'CustomerListComponent', 'selector': 'app-customer-list'},{'name': 'EditCarComponent', 'selector': 'edit-car'},{'name': 'LoginRegisterComponent', 'selector': 'app-login-register'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'RentCarComponent', 'selector': 'app-rent-car'},{'name': 'ShowCarForm', 'selector': 'show-car-form'}];
+    var COMPONENTS = [{'name': 'AddCarComponent', 'selector': 'app-add-car'},{'name': 'AddCustomerComponent', 'selector': 'app-add-customer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuyCarComponent', 'selector': 'app-buy-car'},{'name': 'CalculateLeasingComponent', 'selector': 'calculate-leasing'},{'name': 'CarDetailComponent', 'selector': 'app-car-detail'},{'name': 'CarListComponent', 'selector': 'app-car-list'},{'name': 'CustomerListComponent', 'selector': 'app-customer-list'},{'name': 'EditCarComponent', 'selector': 'edit-car'},{'name': 'LoginRegisterComponent', 'selector': 'app-login-register'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'RentCarComponent', 'selector': 'app-rent-car'},{'name': 'ShowCarFormComponent', 'selector': 'show-car-form'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'BuyCarComponent'};
 </script>

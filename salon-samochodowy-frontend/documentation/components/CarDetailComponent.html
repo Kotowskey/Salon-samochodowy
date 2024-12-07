@@ -120,6 +120,13 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Opis</h3>
+    </p>
+    <p class="comment">
+        <p>CarDetailComponent wyświetla szczegółowe informacje o wybranym samochodzie.</p>
+
+    </p>
 
 
     <p class="comment">
@@ -215,6 +222,11 @@
                                     <span class="modifier">Opcjonalne</span>
                                 <a href="#car" >car</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Opcjonalne</span>
+                                <a href="#routeSubscription" >routeSubscription</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -227,6 +239,13 @@
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#fetchCarDetails" >fetchCarDetails</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
                             <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
@@ -253,12 +272,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="28" class="link-to-prism">src/app/components/car-detail/car-detail.component.ts:28</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="45" class="link-to-prism">src/app/components/car-detail/car-detail.component.ts:45</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Konstruktor komponentu.</p>
+</div>
                             <div>
                                     <b>Parametry :</b>
                                     <table class="params">
@@ -267,6 +288,7 @@
                                                 <td>Nazwa</td>
                                                     <td>Typ</td>
                                                 <td>Opcjonalne</td>
+                                                    <td>Opis</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -281,6 +303,12 @@
                                                             Nie
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Serwis umożliwiający dostęp do informacji o aktualnie aktywnej trasie.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>carService</td>
@@ -293,6 +321,12 @@
                                                             Nie
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Serwis do zarządzania danymi samochodów.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -316,6 +350,123 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="fetchCarDetails"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>fetchCarDetails</b></span>
+                        <a href="#fetchCarDetails"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>fetchCarDetails(carId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="78"
+                                    class="link-to-prism">src/app/components/car-detail/car-detail.component.ts:78</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Metoda pobierająca szczegółowe informacje o samochodzie na podstawie jego identyfikatora.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parametry :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Nazwa</td>
+                                                <td>Typ</td>
+                                            <td>Opcjonalne</td>
+                                                <td>Opis</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>carId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Nie
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Unikalny identyfikator samochodu.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="93"
+                                    class="link-to-prism">src/app/components/car-detail/car-detail.component.ts:93</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Metoda czyszcząca subskrypcje przy niszczeniu komponentu, aby zapobiec wyciekom pamięci.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="ngOnInit"></a>
                     <span class="name">
                         <span ><b>ngOnInit</b></span>
@@ -332,14 +483,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="32"
-                                    class="link-to-prism">src/app/components/car-detail/car-detail.component.ts:32</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="62"
+                                    class="link-to-prism">src/app/components/car-detail/car-detail.component.ts:62</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Metoda inicjalizacyjna wywoływana po utworzeniu komponentu.
+Pobiera identyfikator samochodu z parametrów trasy i ładuje jego szczegóły.</p>
+</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -375,10 +529,50 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="28" class="link-to-prism">src/app/components/car-detail/car-detail.component.ts:28</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="39" class="link-to-prism">src/app/components/car-detail/car-detail.component.ts:39</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Obiekt reprezentujący szczegółowe informacje o samochodzie.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="routeSubscription"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Opcjonalne</span>
+                        <span ><b>routeSubscription</b></span>
+                        <a href="#routeSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Typ : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="45" class="link-to-prism">src/app/components/car-detail/car-detail.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Subskrypcja na parametry trasy, umożliwiająca odsubskrybowanie w przypadku konieczności.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -392,7 +586,13 @@
 import { ActivatedRoute } from &#x27;@angular/router&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { CarService, Car } from &#x27;../../services/car.service&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
 
+/**
+ * CarDetailComponent wyświetla szczegółowe informacje o wybranym samochodzie.
+ *
+ * @component
+ */
 @Component({
   selector: &#x27;app-car-detail&#x27;,
   standalone: true,
@@ -415,15 +615,67 @@ import { CarService, Car } from &#x27;../../services/car.service&#x27;;
   styleUrls: [&#x27;./car-detail.component.css&#x27;],
 })
 export class CarDetailComponent implements OnInit {
+  
+  /**
+   * Obiekt reprezentujący szczegółowe informacje o samochodzie.
+   * @type {Car | undefined}
+   */
   car?: Car;
 
-  constructor(private route: ActivatedRoute, private carService: CarService) {}
+  /**
+   * Subskrypcja na parametry trasy, umożliwiająca odsubskrybowanie w przypadku konieczności.
+   * @type {Subscription}
+   */
+  private routeSubscription?: Subscription;
 
+  /**
+   * Konstruktor komponentu.
+   *
+   * @param {ActivatedRoute} route - Serwis umożliwiający dostęp do informacji o aktualnie aktywnej trasie.
+   * @param {CarService} carService - Serwis do zarządzania danymi samochodów.
+   */
+  constructor(
+    private route: ActivatedRoute,
+    private carService: CarService
+  ) {}
+
+  /**
+   * Metoda inicjalizacyjna wywoływana po utworzeniu komponentu.
+   * Pobiera identyfikator samochodu z parametrów trasy i ładuje jego szczegóły.
+   */
   ngOnInit(): void {
-    const carId &#x3D; this.route.snapshot.params[&#x27;id&#x27;];
-    this.carService.getCar(+carId).subscribe((car) &#x3D;&gt; {
-      this.car &#x3D; car;
+    this.routeSubscription &#x3D; this.route.params.subscribe(params &#x3D;&gt; {
+      const carId &#x3D; Number(params[&#x27;id&#x27;]);
+      if (!isNaN(carId)) {
+        this.fetchCarDetails(carId);
+      } else {
+        console.error(&#x27;Nieprawidłowy identyfikator samochodu:&#x27;, params[&#x27;id&#x27;]);
+      }
     });
+  }
+
+  /**
+   * Metoda pobierająca szczegółowe informacje o samochodzie na podstawie jego identyfikatora.
+   *
+   * @param {number} carId - Unikalny identyfikator samochodu.
+   */
+  private fetchCarDetails(carId: number): void {
+    this.carService.getCar(carId).subscribe(
+      (car: Car) &#x3D;&gt; {
+        this.car &#x3D; car;
+      },
+      (error) &#x3D;&gt; {
+        console.error(&#x27;Błąd podczas pobierania szczegółów samochodu:&#x27;, error);
+        // Można tutaj dodać obsługę błędów, np. wyświetlenie komunikatu użytkownikowi
+      }
+    );
+  }
+
+  /**
+   * Metoda czyszcząca subskrypcje przy niszczeniu komponentu, aby zapobiec wyciekom pamięci.
+   */
+  ngOnDestroy(): void {
+    this.routeSubscription?.unsubscribe();
   }
 }
 </code></pre>
@@ -535,7 +787,7 @@ div {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div *ngIf="car">  <h2>{{ car.brand }} {{ car.model }}</h2>  <p><strong>Rok:</strong> {{ car.year }}</p>  <p><strong>Moc:</strong> {{ car.horsePower }} KM</p>  <p><strong>VIN:</strong> {{ car.vin }}</p>  <p><strong>Cena:</strong> {{ car.price | currency: \'PLN\' }}</p>  <p>    <strong>Dostępny do wynajmu:</strong>    <span [ngClass]="car.isAvailableForRent ? \'text-success\' : \'text-danger\'">      {{ car.isAvailableForRent ? \'Tak\' : \'Nie\' }}    </span>  </p></div></div>'
-    var COMPONENTS = [{'name': 'AddCarComponent', 'selector': 'app-add-car'},{'name': 'AddCustomerComponent', 'selector': 'app-add-customer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuyCarComponent', 'selector': 'app-buy-car'},{'name': 'CalculateLeasingComponent', 'selector': 'calculate-leasing'},{'name': 'CarDetailComponent', 'selector': 'app-car-detail'},{'name': 'CarListComponent', 'selector': 'app-car-list'},{'name': 'CustomerListComponent', 'selector': 'app-customer-list'},{'name': 'EditCarComponent', 'selector': 'edit-car'},{'name': 'LoginRegisterComponent', 'selector': 'app-login-register'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'RentCarComponent', 'selector': 'app-rent-car'},{'name': 'ShowCarForm', 'selector': 'show-car-form'}];
+    var COMPONENTS = [{'name': 'AddCarComponent', 'selector': 'app-add-car'},{'name': 'AddCustomerComponent', 'selector': 'app-add-customer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuyCarComponent', 'selector': 'app-buy-car'},{'name': 'CalculateLeasingComponent', 'selector': 'calculate-leasing'},{'name': 'CarDetailComponent', 'selector': 'app-car-detail'},{'name': 'CarListComponent', 'selector': 'app-car-list'},{'name': 'CustomerListComponent', 'selector': 'app-customer-list'},{'name': 'EditCarComponent', 'selector': 'edit-car'},{'name': 'LoginRegisterComponent', 'selector': 'app-login-register'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'RentCarComponent', 'selector': 'app-rent-car'},{'name': 'ShowCarFormComponent', 'selector': 'show-car-form'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'CarDetailComponent'};
 </script>

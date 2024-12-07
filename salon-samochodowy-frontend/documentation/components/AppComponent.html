@@ -124,6 +124,13 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Opis</h3>
+    </p>
+    <p class="comment">
+        <p>AppComponent jest głównym komponentem aplikacji, zarządzającym podstawową strukturą i nawigacją.</p>
+
+    </p>
 
 
 
@@ -255,10 +262,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="27" class="link-to-prism">src/app/app.component.ts:27</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="46" class="link-to-prism">src/app/app.component.ts:46</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Tytuł aplikacji.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -276,25 +289,42 @@ import { AddCustomerComponent } from &#x27;./components/add-customer/add-custome
 import { NavbarComponent } from &#x27;./components/navbar/navbar.component&#x27;;
 import { RouterModule } from &#x27;@angular/router&#x27;; 
 import { AuthInterceptor } from &#x27;./auth.interceptor&#x27;; // Ścieżka do interceptora
-import { HTTP_INTERCEPTORS} from &#x27;@angular/common/http&#x27;;
+import { HTTP_INTERCEPTORS } from &#x27;@angular/common/http&#x27;;
 
+/**
+ * AppComponent jest głównym komponentem aplikacji, zarządzającym podstawową strukturą i nawigacją.
+ *
+ * @component
+ */
 @Component({
   selector: &#x27;app-root&#x27;,
   standalone: true,
-  imports: [AddCarComponent, NavbarComponent, RouterModule],
+  imports: [
+    AddCarComponent,
+    NavbarComponent,
+    RouterModule
+  ],
   templateUrl: &#x27;./app.component.html&#x27;,
   styleUrls: [&#x27;./app.component.css&#x27;],
   providers: [
+    /**
+     * Rejestracja AuthInterceptor jako HTTP_INTERCEPTORS.
+     * Umożliwia to dodawanie &#x60;withCredentials: true&#x60; do wszystkich żądań HTTP.
+     */
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
     }
-    // Inne providery
+    // Inne providery można dodać tutaj
   ]
 })
 export class AppComponent {
-  title &#x3D; &#x27;salon-samochodowy-frontend&#x27;;
+  /**
+   * Tytuł aplikacji.
+   * @type {string}
+   */
+  title: string &#x3D; &#x27;salon-samochodowy-frontend&#x27;;
 }
 </code></pre>
     </div>
@@ -396,7 +426,7 @@ h2 {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><!-- src/app/app.component.html --><div class="background">  <div class="overlay">    <header class="header">      <app-navbar></app-navbar>    </header>    <div class="content">      <router-outlet></router-outlet>      <app-add-car></app-add-car>          </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AddCarComponent', 'selector': 'app-add-car'},{'name': 'AddCustomerComponent', 'selector': 'app-add-customer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuyCarComponent', 'selector': 'app-buy-car'},{'name': 'CalculateLeasingComponent', 'selector': 'calculate-leasing'},{'name': 'CarDetailComponent', 'selector': 'app-car-detail'},{'name': 'CarListComponent', 'selector': 'app-car-list'},{'name': 'CustomerListComponent', 'selector': 'app-customer-list'},{'name': 'EditCarComponent', 'selector': 'edit-car'},{'name': 'LoginRegisterComponent', 'selector': 'app-login-register'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'RentCarComponent', 'selector': 'app-rent-car'},{'name': 'ShowCarForm', 'selector': 'show-car-form'}];
+    var COMPONENTS = [{'name': 'AddCarComponent', 'selector': 'app-add-car'},{'name': 'AddCustomerComponent', 'selector': 'app-add-customer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuyCarComponent', 'selector': 'app-buy-car'},{'name': 'CalculateLeasingComponent', 'selector': 'calculate-leasing'},{'name': 'CarDetailComponent', 'selector': 'app-car-detail'},{'name': 'CarListComponent', 'selector': 'app-car-list'},{'name': 'CustomerListComponent', 'selector': 'app-customer-list'},{'name': 'EditCarComponent', 'selector': 'edit-car'},{'name': 'LoginRegisterComponent', 'selector': 'app-login-register'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'RentCarComponent', 'selector': 'app-rent-car'},{'name': 'ShowCarFormComponent', 'selector': 'show-car-form'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
 </script>
