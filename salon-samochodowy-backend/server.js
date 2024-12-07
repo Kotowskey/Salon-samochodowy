@@ -1,8 +1,10 @@
+// server.js
 import express from 'express';
 import bodyParser from 'body-parser';
-import cors from 'cors';
-import session from 'express-session';
-import { sequelize, Car, User } from './models.js';
+import cors from 'cors'; 
+import session from 'express-session'; // Import express-session
+import { sequelize, Car, User } from './models.js'; 
+import { Op } from 'sequelize';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,32 +14,24 @@ app.use(bodyParser.json());
 
 // Konfiguracja CORS
 app.use(cors({
-    origin: 'http://localhost:4200',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true,
+  origin: 'http://localhost:4200', // Zmień na adres Twojej aplikacji frontendowej
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true, // Pozwól na przesyłanie ciasteczek
 }));
 
 // Konfiguracja sesji
 app.use(session({
-    secret: 'TwojSuperTajnyKlucz',
+    secret: 'TwojSuperTajnyKlucz', // Powinno być przechowywane w zmiennych środowiskowych
     resave: false,
     saveUninitialized: false,
-    cookie: {
-        secure: false,
-        httpOnly: true,
-        maxAge: 1000 * 60 * 60,
-    },
+    cookie: { 
+        secure: false, // Ustaw na true, jeśli używasz HTTPS
+        httpOnly: true, // Zapobiega dostępowi do ciasteczka z poziomu JavaScript
+        maxAge: 1000 * 60 * 60 // Sesja ważna przez 1 godzinę
+    }
 }));
 
-/**
- * Middleware sprawdzający, czy użytkownik jest zalogowany.
- * Jeśli nie, zwraca błąd 401 (Nieautoryzowany).
- * 
- * @function
- * @param {Object} req - Obiekt żądania Express.
- * @param {Object} res - Obiekt odpowiedzi Express.
- * @param {Function} next - Funkcja do wywołania kolejnego middleware.
- */
+// Middleware do ochrony tras
 const authenticateSession = (req, res, next) => {
     if (req.session && req.session.userId) {
         next();
@@ -55,100 +49,88 @@ sequelize.authenticate()
         console.error('Nie udało się połączyć z bazą danych:', err);
     });
 
-/**
- * @route GET /
- * @description Strona główna API - punkt wejścia.
- * @returns {string} Wiadomość powitalna.
- */
+// ROUTE: Strona główna API
 app.get('/', (req, res) => {
     res.send('Witamy w API Zarządzanie Samochodami!');
 });
 
 // ====== AUTHENTICATION ======
 
-/**
- * @route POST /register
- * @description Rejestracja nowego użytkownika.
- * @param {string} req.body.username - Nazwa użytkownika.
- * @param {string} req.body.password - Hasło użytkownika.
- * @param {string} req.body.firstName - Imię użytkownika.
- * @param {string} req.body.lastName - Nazwisko użytkownika.
- * @returns {Object} Obiekt nowo utworzonego użytkownika z komunikatem.
- */
+// REGISTER User
 app.post('/register', async (req, res) => {
     try {
         const { username, password, firstName, lastName } = req.body;
 
+        // Sprawdzenie, czy użytkownik już istnieje
         const existingUser = await User.findOne({ where: { username } });
         if (existingUser) {
             return res.status(400).json({ error: 'Nazwa użytkownika jest już zajęta' });
         }
 
-        const newUser = await User.create({
-            username,
-            password,
-            firstName,
+        // Tworzenie nowego użytkownika (bez haszowania hasła)
+        const newUser = await User.create({ 
+            username, 
+            password, 
+            firstName, 
             lastName,
-            isDealer: false,
+            isDealer: false // Upewniamy się, że tworzymy klienta, a nie dealera
         });
 
+        // Inicjalizacja sesji
         req.session.userId = newUser.id;
         req.session.username = newUser.username;
 
-        res.status(201).json({
-            message: 'Rejestracja udana',
-            user: {
-                id: newUser.id,
-                username: newUser.username,
-                firstName: newUser.firstName,
-                lastName: newUser.lastName,
-            },
+        res.status(201).json({ 
+            message: 'Rejestracja udana', 
+            user: { 
+                id: newUser.id, 
+                username: newUser.username, 
+                firstName: newUser.firstName, 
+                lastName: newUser.lastName 
+            } 
         });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-/**
- * @route POST /login
- * @description Logowanie użytkownika.
- * @param {string} req.body.username - Nazwa użytkownika.
- * @param {string} req.body.password - Hasło użytkownika.
- * @returns {Object} Dane zalogowanego użytkownika.
- */
+// LOGIN User
 app.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
 
+        // Znajdź użytkownika po nazwie użytkownika
         const user = await User.findOne({ where: { username } });
 
-        if (!user || user.password !== password) {
+        if (!user) {
             return res.status(400).json({ error: 'Nieprawidłowa nazwa użytkownika lub hasło' });
         }
 
+        // Sprawdź hasło (bez haszowania)
+        if (user.password !== password) {
+            return res.status(400).json({ error: 'Nieprawidłowa nazwa użytkownika lub hasło' });
+        }
+
+        // Inicjalizacja sesji
         req.session.userId = user.id;
         req.session.username = user.username;
 
-        res.status(200).json({
-            message: 'Logowanie udane',
-            user: {
-                id: user.id,
-                username: user.username,
-                firstName: user.firstName,
+        res.status(200).json({ 
+            message: 'Logowanie udane', 
+            user: { 
+                id: user.id, 
+                username: user.username, 
+                firstName: user.firstName, 
                 lastName: user.lastName,
-                isDealer: user.isDealer,
-            },
+                isDealer: user.isDealer
+            } 
         });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-/**
- * @route POST /logout
- * @description Wylogowanie użytkownika.
- * @returns {Object} Komunikat o pomyślnym wylogowaniu.
- */
+// LOGOUT User
 app.post('/logout', (req, res) => {
     if (req.session) {
         req.session.destroy(err => {
@@ -165,11 +147,7 @@ app.post('/logout', (req, res) => {
 
 // ====== CARS ======
 
-/**
- * @route GET /cars
- * @description Pobiera listę wszystkich samochodów.
- * @returns {Car[]} Tablica obiektów samochodów.
- */
+// GET all Cars
 app.get('/cars', async (req, res) => {
     try {
         const cars = await Car.findAll();
@@ -179,12 +157,7 @@ app.get('/cars', async (req, res) => {
     }
 });
 
-/**
- * @route GET /cars/:id
- * @description Pobiera dane samochodu o podanym ID.
- * @param {number} req.params.id - ID samochodu.
- * @returns {Car|Object} Obiekt samochodu lub błąd 404, jeśli nie znaleziono.
- */
+// GET Car by ID
 app.get('/cars/:id', async (req, res) => {
     try {
         const car = await Car.findByPk(req.params.id);
@@ -198,29 +171,18 @@ app.get('/cars/:id', async (req, res) => {
     }
 });
 
-/**
- * @route POST /cars
- * @description Tworzy nowy samochód (dostęp chroniony, wymagana sesja).
- * @param {string} req.body.brand - Marka samochodu.
- * @param {string} req.body.model - Model samochodu.
- * @param {number} req.body.year - Rok produkcji.
- * @param {string} req.body.vin - Numer VIN.
- * @param {number} req.body.price - Cena samochodu.
- * @param {number} req.body.horsePower - Moc samochodu (KM).
- * @param {boolean} req.body.isAvailableForRent - Dostępność do wynajmu.
- * @returns {Car} Obiekt utworzonego samochodu.
- */
+// CREATE Car (chronione)
 app.post('/cars', authenticateSession, async (req, res) => {
     try {
         const { brand, model, year, vin, price, horsePower, isAvailableForRent } = req.body;
-        const newCar = await Car.create({
-            brand,
-            model,
-            year,
-            vin,
+        const newCar = await Car.create({ 
+            brand, 
+            model, 
+            year, 
+            vin, 
             price,
-            horsePower,
-            isAvailableForRent,
+            horsePower, 
+            isAvailableForRent
         });
         res.status(201).json(newCar);
     } catch (error) {
@@ -228,19 +190,7 @@ app.post('/cars', authenticateSession, async (req, res) => {
     }
 });
 
-/**
- * @route PUT /cars/:id
- * @description Aktualizuje dane samochodu o podanym ID (chronione).
- * @param {number} req.params.id - ID samochodu.
- * @param {string} req.body.brand - Marka.
- * @param {string} req.body.model - Model.
- * @param {number} req.body.year - Rok.
- * @param {string} req.body.vin - VIN.
- * @param {number} req.body.price - Cena.
- * @param {number} req.body.horsePower - Moc.
- * @param {boolean} req.body.isAvailableForRent - Dostępność do wynajmu.
- * @returns {Car|Object} Zaktualizowany obiekt samochodu lub błąd.
- */
+// UPDATE Car (chronione)
 app.put('/cars/:id', authenticateSession, async (req, res) => {
     try {
         const { brand, model, year, vin, price, horsePower, isAvailableForRent } = req.body;
@@ -256,36 +206,29 @@ app.put('/cars/:id', authenticateSession, async (req, res) => {
     }
 });
 
-/**
- * @route DELETE /cars/:id
- * @description Usuwa samochód o podanym ID (dostęp chroniony, wymagane uprawnienia dealera).
- * @param {number} req.params.id - ID samochodu.
- * @returns {Object} Komunikat o powodzeniu.
- */
+// DELETE Car (chronione)
 app.delete('/cars/:id', authenticateSession, async (req, res) => {
     const userId = req.session.userId;
     const carId = req.params.id;
-
+  
+    // Sprawdź, czy użytkownik jest dealerem
     const user = await User.findByPk(userId);
     if (!user || !user.isDealer) {
-        return res.status(403).json({ error: 'Brak uprawnień do usuwania samochodów' });
+      return res.status(403).json({ error: 'Brak uprawnień do usuwania samochodów' });
     }
-
+  
+    // Usuń samochód
     await Car.destroy({ where: { id: carId } });
     res.status(200).json({ message: 'Samochód usunięty.' });
-});
+  });
 
 // ====== USERS ======
 
-/**
- * @route GET /users
- * @description Pobiera listę użytkowników-klientów (chronione).
- * @returns {User[]} Tablica obiektów użytkowników-klientów.
- */
+// GET all Users (klientów) (chronione)
 app.get('/users', authenticateSession, async (req, res) => {
     try {
         const users = await User.findAll({
-            where: { isDealer: false },
+            where: { isDealer: false } // Klienci mają isDealer: false
         });
         res.json(users);
     } catch (error) {
@@ -293,12 +236,7 @@ app.get('/users', authenticateSession, async (req, res) => {
     }
 });
 
-/**
- * @route GET /users/:id
- * @description Pobiera dane konkretnego klienta (chronione).
- * @param {number} req.params.id - ID użytkownika.
- * @returns {User|Object} Obiekt klienta lub błąd.
- */
+// GET User by ID (chronione)
 app.get('/users/:id', authenticateSession, async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
@@ -312,21 +250,13 @@ app.get('/users/:id', authenticateSession, async (req, res) => {
     }
 });
 
-/**
- * @route PUT /users/:id
- * @description Aktualizuje dane konkretnego użytkownika-klienta (chronione).
- * @param {number} req.params.id - ID użytkownika.
- * @param {string} req.body.username - Nazwa użytkownika.
- * @param {string} req.body.password - Hasło.
- * @param {string} req.body.firstName - Imię.
- * @param {string} req.body.lastName - Nazwisko.
- * @returns {User|Object} Zaktualizowany obiekt użytkownika lub błąd.
- */
+// UPDATE User (klient) (chronione)
 app.put('/users/:id', authenticateSession, async (req, res) => {
     try {
         const { username, password, firstName, lastName } = req.body;
         const user = await User.findByPk(req.params.id);
         if (user && !user.isDealer) {
+            // Opcjonalnie: Możesz dodać logikę, aby użytkownik mógł edytować tylko swoje własne dane
             if (user.id !== req.session.userId) {
                 return res.status(403).json({ error: 'Nie masz uprawnień do edycji tego użytkownika' });
             }
@@ -341,16 +271,12 @@ app.put('/users/:id', authenticateSession, async (req, res) => {
     }
 });
 
-/**
- * @route DELETE /users/:id
- * @description Usuwa konkretnego użytkownika-klienta (chronione).
- * @param {number} req.params.id - ID użytkownika.
- * @returns {Object} Komunikat o powodzeniu lub błąd.
- */
+// DELETE User (klient) (chronione)
 app.delete('/users/:id', authenticateSession, async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
         if (user && !user.isDealer) {
+            // Opcjonalnie: Użytkownik może usunąć tylko swoje konto
             if (user.id !== req.session.userId) {
                 return res.status(403).json({ error: 'Nie masz uprawnień do usunięcia tego użytkownika' });
             }
@@ -365,15 +291,12 @@ app.delete('/users/:id', authenticateSession, async (req, res) => {
     }
 });
 
-/**
- * @route POST /cars/:id/rent
- * @description Wynajmuje samochód o podanym ID (chronione).
- * @param {number} req.params.id - ID samochodu.
- * @returns {Object} Komunikat i obiekt wynajętego samochodu.
- */
+// RENT Car (chronione)
 app.post('/cars/:id/rent', authenticateSession, async (req, res) => {
     try {
         const carId = req.params.id;
+
+        // Znajdź samochód po ID
         const car = await Car.findByPk(carId);
 
         if (!car) {
@@ -384,8 +307,9 @@ app.post('/cars/:id/rent', authenticateSession, async (req, res) => {
             return res.status(400).json({ error: 'Samochód jest już wynajęty' });
         }
 
+        // Wynajem samochodu
         car.isAvailableForRent = false;
-        car.renterId = req.session.userId;
+        car.renterId = req.session.userId; // Przypisujemy ID użytkownika jako wynajmującego
 
         await car.save();
 
@@ -395,15 +319,12 @@ app.post('/cars/:id/rent', authenticateSession, async (req, res) => {
     }
 });
 
-/**
- * @route POST /cars/:id/return
- * @description Zwraca wynajęty samochód (chronione).
- * @param {number} req.params.id - ID samochodu.
- * @returns {Object} Komunikat i obiekt zwróconego samochodu.
- */
+// RETURN Car (chronione)
 app.post('/cars/:id/return', authenticateSession, async (req, res) => {
     try {
         const carId = req.params.id;
+
+        // Znajdź samochód po ID
         const car = await Car.findByPk(carId);
 
         if (!car) {
@@ -418,8 +339,9 @@ app.post('/cars/:id/return', authenticateSession, async (req, res) => {
             return res.status(403).json({ error: 'Nie możesz zwrócić tego samochodu, ponieważ nie jesteś jego wynajmującym' });
         }
 
+        // Zwrócenie samochodu
         car.isAvailableForRent = true;
-        car.renterId = null;
+        car.renterId = null; // Usuwamy powiązanie z wynajmującym
 
         await car.save();
 
@@ -428,16 +350,11 @@ app.post('/cars/:id/return', authenticateSession, async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
-/**
- * @route GET /cars/:id/renter
- * @description Pobiera dane o aktualnym wynajmującym samochodu.
- * @param {number} req.params.id - ID samochodu.
- * @returns {Object} ID samochodu i ID wynajmującego.
- */
+//szukanie samochodu po użytkowniku
 app.get('/cars/:id/renter', async (req, res) => {
-    const carId = req.params.id;
+    const carId = req.params.id; // ID samochodu z parametru URL
     try {
+        // Znajdź samochód na podstawie ID
         const car = await Car.findByPk(carId);
 
         if (car) {
@@ -449,16 +366,12 @@ app.get('/cars/:id/renter', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
-/**
- * @route POST /cars/:id/buy
- * @description Kupuje samochód o podanym ID (chronione).
- * @param {number} req.params.id - ID samochodu.
- * @returns {Object} Komunikat i obiekt kupionego samochodu.
- */
+// BUY Car (chronione)
 app.post('/cars/:id/buy', authenticateSession, async (req, res) => {
     try {
         const carId = req.params.id;
+
+        // Znajdź samochód po ID
         const car = await Car.findByPk(carId);
 
         if (!car) {
@@ -469,8 +382,9 @@ app.post('/cars/:id/buy', authenticateSession, async (req, res) => {
             return res.status(400).json({ error: 'Samochód jest już sprzedany lub wynajęty' });
         }
 
-        car.isAvailableForRent = false;
-        car.ownerId = req.session.userId;
+        // Kupno samochodu
+        car.isAvailableForRent = false; // Samochód jest teraz niedostępny do wynajmu
+        car.ownerId = req.session.userId; // Przypisujemy właściciela
 
         await car.save();
 
@@ -480,15 +394,11 @@ app.post('/cars/:id/buy', authenticateSession, async (req, res) => {
     }
 });
 
-/**
- * @route GET /current-user
- * @description Pobiera dane aktualnie zalogowanego użytkownika (chronione).
- * @returns {Object} Dane użytkownika.
- */
+// ====== CURRENT USER ======
 app.get('/current-user', authenticateSession, async (req, res) => {
     try {
         const user = await User.findByPk(req.session.userId, {
-            attributes: ['id', 'username', 'firstName', 'lastName', 'isDealer'],
+            attributes: ['id', 'username', 'firstName', 'lastName', 'isDealer']
         });
         if (user) {
             res.json({ user });
@@ -500,14 +410,7 @@ app.get('/current-user', authenticateSession, async (req, res) => {
     }
 });
 
-/**
- * @route POST /cars/:id/leasing
- * @description Oblicza raty leasingowe dla podanego samochodu.
- * @param {number} req.params.id - ID samochodu.
- * @param {number} req.body.downPayment - Wpłata początkowa.
- * @param {number} req.body.months - Liczba miesięcy leasingu.
- * @returns {Object} Szczegóły rat leasingowych.
- */
+// LEASING Car
 app.post('/cars/:id/leasing', async (req, res) => {
     try {
         const carId = req.params.id;
@@ -546,58 +449,50 @@ app.post('/cars/:id/leasing', async (req, res) => {
     }
 });
 
-/**
- * @route POST /admin/create-customer
- * @description Tworzy nowego użytkownika-klienta (tylko dla dealerów, chronione).
- * @param {string} req.body.username - Nazwa użytkownika.
- * @param {string} req.body.password - Hasło.
- * @param {string} req.body.firstName - Imię.
- * @param {string} req.body.lastName - Nazwisko.
- * @returns {Object} Obiekt nowo utworzonego klienta.
- */
+// ===== DEALER =====
+// Endpoint do tworzenia nowych klientów przez dealerów
 app.post('/admin/create-customer', authenticateSession, async (req, res) => {
     try {
         const { username, password, firstName, lastName } = req.body;
 
+        // Sprawdzenie, czy aktualny użytkownik jest dealerem
         const dealer = await User.findByPk(req.session.userId);
         if (!dealer || !dealer.isDealer) {
             return res.status(403).json({ error: 'Brak uprawnień do tworzenia klientów' });
         }
 
+        // Sprawdzenie, czy użytkownik już istnieje
         const existingUser = await User.findOne({ where: { username } });
         if (existingUser) {
             return res.status(400).json({ error: 'Nazwa użytkownika jest już zajęta' });
         }
 
-        const newUser = await User.create({
-            username,
-            password,
-            firstName,
+        // Tworzenie nowego klienta bez haszowania hasła
+        const newUser = await User.create({ 
+            username, 
+            password, 
+            firstName, 
             lastName,
-            isDealer: false,
+            isDealer: false // Upewniamy się, że tworzymy klienta, a nie dealera
         });
 
-        res.status(201).json({
-            message: 'Klient został pomyślnie dodany',
-            user: {
-                id: newUser.id,
-                username: newUser.username,
-                firstName: newUser.firstName,
+        res.status(201).json({ 
+            message: 'Klient został pomyślnie dodany', 
+            user: { 
+                id: newUser.id, 
+                username: newUser.username, 
+                firstName: newUser.firstName, 
                 lastName: newUser.lastName,
-                isDealer: newUser.isDealer,
-            },
+                isDealer: newUser.isDealer
+            } 
         });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-// ====== START SERWERA ======
 
-/**
- * Uruchamia serwer na wskazanym porcie.
- * @returns {void}
- */
+// ====== START SERWERA ======
 app.listen(PORT, () => {
     console.log(`Serwer działa na porcie ${PORT}`);
 });
