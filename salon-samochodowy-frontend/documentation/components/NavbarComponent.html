@@ -124,13 +124,6 @@
 </p>
 
 
-    <p class="comment">
-        <h3>Opis</h3>
-    </p>
-    <p class="comment">
-        <p>NavbarComponent zarządza paskiem nawigacyjnym aplikacji, umożliwiając logowanie, rejestrację, wylogowanie oraz dodawanie samochodów.</p>
-
-    </p>
 
 
     <p class="comment">
@@ -171,7 +164,6 @@
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
                             <code>CommonModule</code>
-                            <code>FormsModule</code>
                                 <code><a href="../components/LoginRegisterComponent.html" target="_self" >LoginRegisterComponent</a></code>
                                 <code><a href="../components/CustomerListComponent.html" target="_self" >CustomerListComponent</a></code>
                                 <code><a href="../components/AddCustomerComponent.html" target="_self" >AddCustomerComponent</a></code>
@@ -214,16 +206,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#addCarErrorMessage" >addCarErrorMessage</a>
-                            </li>
-                            <li>
                                 <a href="#car" >car</a>
                             </li>
                             <li>
                                 <a href="#currentUser" >currentUser</a>
-                            </li>
-                            <li>
-                                <a href="#isAddingCar" >isAddingCar</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -245,19 +231,16 @@
                                 <a href="#addCar" >addCar</a>
                             </li>
                             <li>
-                                <a href="#cancelAddCar" >cancelAddCar</a>
-                            </li>
-                            <li>
                                 <a href="#logout" >logout</a>
                             </li>
                             <li>
                                 <a href="#ngOnDestroy" >ngOnDestroy</a>
                             </li>
                             <li>
-                                <a href="#openAuthModal" >openAuthModal</a>
+                                <a href="#openAddCarDialog" >openAddCarDialog</a>
                             </li>
                             <li>
-                                <a href="#startAddCar" >startAddCar</a>
+                                <a href="#openAuthModal" >openAuthModal</a>
                             </li>
                         </ul>
                     </td>
@@ -277,19 +260,17 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authService: <a href="../injectables/AuthenticationService.html" target="_self">AuthenticationService</a>, carService: <a href="../injectables/CarService.html" target="_self">CarService</a>)</code>
+<code>constructor(authService: <a href="../injectables/AuthenticationService.html" target="_self">AuthenticationService</a>, dialog: MatDialog, carService: <a href="../injectables/CarService.html" target="_self">CarService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="72" class="link-to-prism">src/app/components/navbar/navbar.component.ts:72</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="42" class="link-to-prism">src/app/components/navbar/navbar.component.ts:42</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Konstruktor komponentu.</p>
-</div>
                             <div>
                                     <b>Parametry :</b>
                                     <table class="params">
@@ -298,7 +279,6 @@
                                                 <td>Nazwa</td>
                                                     <td>Typ</td>
                                                 <td>Opcjonalne</td>
-                                                    <td>Opis</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -313,12 +293,18 @@
                                                             Nie
                                                     </td>
                                                     
+                                                </tr>
+                                                <tr>
+                                                        <td>dialog</td>
+                                                  
                                                         <td>
-                                                                <ul>
-<li>Serwis uwierzytelniania.</li>
-</ul>
-
+                                                                    <code>MatDialog</code>
                                                         </td>
+                                                  
+                                                    <td>
+                                                            Nie
+                                                    </td>
+                                                    
                                                 </tr>
                                                 <tr>
                                                         <td>carService</td>
@@ -331,12 +317,6 @@
                                                             Nie
                                                     </td>
                                                     
-                                                        <td>
-                                                                <ul>
-<li>Serwis zarządzania samochodami.</li>
-</ul>
-
-                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -376,57 +356,14 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="181"
-                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:181</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="83"
+                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:83</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Metoda dodająca nowy samochód za pomocą serwisu CarService.
-Wysyła dane samochodu do serwisu i obsługuje odpowiedzi oraz błędy.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="cancelAddCar"></a>
-                    <span class="name">
-                        <span ><b>cancelAddCar</b></span>
-                        <a href="#cancelAddCar"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>cancelAddCar()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="159"
-                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:159</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Metoda anulująca tryb dodawania samochodu.
-Resetuje flagę isAddingCar na false i czyści formularz.</p>
-</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -456,16 +393,14 @@ Resetuje flagę isAddingCar na false i czyści formularz.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="104"
-                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:104</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="65"
+                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:65</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Metoda wylogowania użytkownika z odświeżeniem strony.</p>
-</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -495,16 +430,51 @@ Resetuje flagę isAddingCar na false i czyści formularz.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="125"
-                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:125</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="78"
+                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:78</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Metoda czyszcząca subskrypcje przy zniszczeniu komponentu, aby zapobiec wyciekom pamięci.</p>
-</div>
+
+                        <div class="io-description">
+                            <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openAddCarDialog"></a>
+                    <span class="name">
+                        <span ><b>openAddCarDialog</b></span>
+                        <a href="#openAddCarDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openAddCarDialog()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="96"
+                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:96</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -534,56 +504,14 @@ Resetuje flagę isAddingCar na false i czyści formularz.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="93"
-                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:93</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="56"
+                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:56</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Metoda otwierająca modal logowania/rejestracji.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="startAddCar"></a>
-                    <span class="name">
-                        <span ><b>startAddCar</b></span>
-                        <a href="#startAddCar"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>startAddCar()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="133"
-                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:133</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Metoda inicjująca tryb dodawania samochodu.
-Ustawia flagę isAddingCar na true, aby wyświetlić formularz dodawania samochodu.</p>
-</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -599,43 +527,6 @@ Ustawia flagę isAddingCar na true, aby wyświetlić formularz dodawania samocho
     <h3 id="inputs">
         Włąściwości
     </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="addCarErrorMessage"></a>
-                    <span class="name">
-                        <span ><b>addCarErrorMessage</b></span>
-                        <a href="#addCarErrorMessage"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Typ : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Domyślna wartość : </i><code>&#x27;&#x27;</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="72" class="link-to-prism">src/app/components/navbar/navbar.component.ts:72</a></div>
-                        </td>
-                    </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Komunikat o błędzie występującym podczas dodawania samochodu.</p>
-</div>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -671,16 +562,10 @@ Ustawia flagę isAddingCar na true, aby wyświetlić formularz dodawania samocho
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="49" class="link-to-prism">src/app/components/navbar/navbar.component.ts:49</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="31" class="link-to-prism">src/app/components/navbar/navbar.component.ts:31</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Obiekt samochodu do dodania.</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -708,53 +593,10 @@ Ustawia flagę isAddingCar na true, aby wyświetlić formularz dodawania samocho
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="37" class="link-to-prism">src/app/components/navbar/navbar.component.ts:37</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="27" class="link-to-prism">src/app/components/navbar/navbar.component.ts:27</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Obiekt reprezentujący aktualnie zalogowanego użytkownika.</p>
-</div>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="isAddingCar"></a>
-                    <span class="name">
-                        <span ><b>isAddingCar</b></span>
-                        <a href="#isAddingCar"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Typ : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Domyślna wartość : </i><code>false</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="66" class="link-to-prism">src/app/components/navbar/navbar.component.ts:66</a></div>
-                        </td>
-                    </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Flaga określająca, czy formularz dodawania samochodu jest widoczny.</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -778,16 +620,10 @@ Ustawia flagę isAddingCar na true, aby wyświetlić formularz dodawania samocho
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="43" class="link-to-prism">src/app/components/navbar/navbar.component.ts:43</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="28" class="link-to-prism">src/app/components/navbar/navbar.component.ts:28</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Subskrypcja na strumień aktualnego użytkownika, umożliwiająca odsubskrybowanie w metodzie ngOnDestroy.</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -797,27 +633,24 @@ Ustawia flagę isAddingCar na true, aby wyświetlić formularz dodawania samocho
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, inject } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
-import { FormsModule } from &#x27;@angular/forms&#x27;; // Dodano FormsModule dla obsługi formularzy
 import { LoginRegisterComponent } from &#x27;../login-register/login-register.component&#x27;;
-import { CustomerListComponent } from &#x27;../customer-list/customer-list.component&#x27;;
-import { AddCustomerComponent } from &#x27;../add-customer/add-customer.component&#x27;;
 import { AuthenticationService } from &#x27;../../services/authentication.service&#x27;;
-import { Car, CarService } from &#x27;../../services/car.service&#x27;;
 import { Subscription } from &#x27;rxjs&#x27;;
 
-/**
- * NavbarComponent zarządza paskiem nawigacyjnym aplikacji, umożliwiając logowanie, rejestrację, wylogowanie oraz dodawanie samochodów.
- *
- * @component
- */
+// Importujemy potrzebne moduły i komponenty
+import { CustomerListComponent } from &#x27;../customer-list/customer-list.component&#x27;;
+import { AddCustomerComponent } from &#x27;../add-customer/add-customer.component&#x27;;
+import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
+import { Car, CarService } from &#x27;../../services/car.service&#x27;;
+import { ShowCarForm } from &#x27;../show-car-form/show-car-form.component&#x27;;
+
 @Component({
   selector: &#x27;app-navbar&#x27;,
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule, // Dodano FormsModule dla obsługi formularzy
     LoginRegisterComponent,
     CustomerListComponent,
     AddCustomerComponent,
@@ -826,23 +659,10 @@ import { Subscription } from &#x27;rxjs&#x27;;
   styleUrls: [&#x27;./navbar.component.css&#x27;],
 })
 export class NavbarComponent implements OnDestroy {
-  
-  /**
-   * Obiekt reprezentujący aktualnie zalogowanego użytkownika.
-   * @type {any}
-   */
   currentUser: any &#x3D; null;
-  
-  /**
-   * Subskrypcja na strumień aktualnego użytkownika, umożliwiająca odsubskrybowanie w metodzie ngOnDestroy.
-   * @type {Subscription}
-   */
   private userSubscription: Subscription;
 
-  /**
-   * Obiekt samochodu do dodania.
-   * @type {Car}
-   */
+  // Definiujemy obiekt samochodu
   car: Car &#x3D; {
     id: 0,
     ownerId: 0,
@@ -856,26 +676,9 @@ export class NavbarComponent implements OnDestroy {
     isAvailableForRent: true,
   };
 
-  /**
-   * Flaga określająca, czy formularz dodawania samochodu jest widoczny.
-   * @type {boolean}
-   */
-  isAddingCar: boolean &#x3D; false;
-
-  /**
-   * Komunikat o błędzie występującym podczas dodawania samochodu.
-   * @type {string}
-   */
-  addCarErrorMessage: string &#x3D; &#x27;&#x27;;
-
-  /**
-   * Konstruktor komponentu.
-   *
-   * @param {AuthenticationService} authService - Serwis uwierzytelniania.
-   * @param {CarService} carService - Serwis zarządzania samochodami.
-   */
   constructor(
     private authService: AuthenticationService,
+    private dialog: MatDialog,
     private carService: CarService
   ) {
     // Subskrybujemy bieżącego użytkownika
@@ -884,10 +687,8 @@ export class NavbarComponent implements OnDestroy {
     });
   }
 
-  /**
-   * Metoda otwierająca modal logowania/rejestracji.
-   */
-  openAuthModal(): void {
+  // Metoda otwierająca modal logowania/rejestracji
+  openAuthModal() {
     const modalElement &#x3D; document.getElementById(&#x27;authModal&#x27;);
     if (modalElement) {
       const modal &#x3D; new (window as any).bootstrap.Modal(modalElement);
@@ -895,10 +696,8 @@ export class NavbarComponent implements OnDestroy {
     }
   }
 
-  /**
-   * Metoda wylogowania użytkownika z odświeżeniem strony.
-   */
-  logout(): void {
+  // Metoda wylogowania użytkownika z odświeżeniem strony
+  logout() {
     this.authService.logout().subscribe({
       next: () &#x3D;&gt; {
         window.location.reload(); // Odświeżenie strony po wylogowaniu
@@ -910,92 +709,39 @@ export class NavbarComponent implements OnDestroy {
     });
   }
 
-  /**
-   * Metoda inicjalizująca komponent.
-   * Zajmuje się subskrypcją na strumień użytkownika.
-   */
-  // Inicjalizacja odbywa się w konstruktorze, więc metoda ngOnInit nie jest wymagana.
-
-  /**
-   * Metoda czyszcząca subskrypcje przy zniszczeniu komponentu, aby zapobiec wyciekom pamięci.
-   */
-  ngOnDestroy(): void {
+  // Zwalniamy zasoby przy zniszczeniu komponentu
+  ngOnDestroy() {
     this.userSubscription.unsubscribe();
   }
 
-  /**
-   * Metoda inicjująca tryb dodawania samochodu.
-   * Ustawia flagę isAddingCar na true, aby wyświetlić formularz dodawania samochodu.
-   */
-  startAddCar(): void {
-    if (!this.currentUser?.isDealer) {
-      alert(&#x27;Nie masz uprawnień do dodawania samochodów.&#x27;);
-      return;
-    }
-    this.isAddingCar &#x3D; true;
-    this.addCarErrorMessage &#x3D; &#x27;&#x27;;
-    // Resetowanie obiektu samochodu przed dodaniem
-    this.car &#x3D; {
-      id: 0,
-      ownerId: this.currentUser?.id ?? 0,
-      renterId: 0,
-      brand: &#x27;&#x27;,
-      model: &#x27;&#x27;,
-      year: 0,
-      vin: &#x27;&#x27;,
-      price: 0,
-      horsePower: 0,
-      isAvailableForRent: true,
-    };
-  }
-
-  /**
-   * Metoda anulująca tryb dodawania samochodu.
-   * Resetuje flagę isAddingCar na false i czyści formularz.
-   */
-  cancelAddCar(): void {
-    this.isAddingCar &#x3D; false;
-    this.addCarErrorMessage &#x3D; &#x27;&#x27;;
-    // Resetowanie obiektu samochodu
-    this.car &#x3D; {
-      id: 0,
-      ownerId: this.currentUser?.id ?? 0,
-      renterId: 0,
-      brand: &#x27;&#x27;,
-      model: &#x27;&#x27;,
-      year: 0,
-      vin: &#x27;&#x27;,
-      price: 0,
-      horsePower: 0,
-      isAvailableForRent: true,
-    };
-  }
-
-  /**
-   * Metoda dodająca nowy samochód za pomocą serwisu CarService.
-   * Wysyła dane samochodu do serwisu i obsługuje odpowiedzi oraz błędy.
-   */
-  addCar(): void {
-    if (!this.currentUser?.isDealer) {
-      alert(&#x27;Nie masz uprawnień do dodawania samochodów.&#x27;);
-      return;
-    }
-
+  // Metody związane z dodawaniem samochodu
+  addCar() {
     this.carService.addCar(this.car).subscribe(
-      (newCar: Car) &#x3D;&gt; {
+      (newCar) &#x3D;&gt; {
         console.log(&#x27;Nowy samochód dodany:&#x27;, newCar);
         alert(&#x27;Samochód został dodany!&#x27;);
-        this.isAddingCar &#x3D; false; // Wyjście z trybu dodawania po sukcesie
-        // Opcjonalnie można odświeżyć listę samochodów lub wykonać inne akcje
       },
-      (error: any) &#x3D;&gt; {
+      (error) &#x3D;&gt; {
         console.error(&#x27;Błąd przy dodawaniu samochodu:&#x27;, error);
-        this.addCarErrorMessage &#x3D; error.error.error || &#x27;Wystąpił błąd przy dodawaniu samochodu.&#x27;;
+        alert(&#x27;Wystąpił błąd przy dodawaniu samochodu.&#x27;);
       }
     );
   }
-}
-</code></pre>
+
+  openAddCarDialog(): void {
+    const dialogRef &#x3D; this.dialog.open(ShowCarForm, {
+      width: &#x27;600px&#x27;,
+      data: { ...this.car },
+    });
+
+    dialogRef.afterClosed().subscribe((result) &#x3D;&gt; {
+      if (result) {
+        this.car &#x3D; result;
+        this.addCar();
+      }
+    });
+  }
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
@@ -1214,7 +960,7 @@ export class NavbarComponent implements OnDestroy {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><nav class="navbar navbar-expand-lg navbar-light bg-secondary shadow-sm">  <div class="container-fluid">    <!-- Lewa strona: Logo lub nazwa firmy -->    <a      class="navbar-brand d-flex align-items-center"      href="#"    >      <!-- Ikona -->      <i        class="bi bi-car-front-fill me-2"        style="font-size: 1.5rem; color: #ffffff;"      ></i>      <span class="fw-bold" style="color: white;"        >Salon Samochodowy Angular Białystok</span      >    </a>    <!-- Przycisk hamburger na małych ekranach -->    <button      class="navbar-toggler"      type="button"      data-bs-toggle="collapse"      data-bs-target="#navbarContent"      aria-controls="navbarContent"      aria-expanded="false"      aria-label="Przełącz nawigację"    >      <span class="navbar-toggler-icon"></span>    </button>    <!-- Prawa strona: Przycisk logowania lub informacje o użytkowniku -->    <div class="d-flex align-items-center">      <!-- Przycisk "Customer List", "Add Customer" i "Add Car" widoczne tylko dla dealerów -->      <ng-container *ngIf="currentUser?.isDealer">        <button          class="btn btn-light me-2"          type="button"          data-bs-toggle="modal"          data-bs-target="#customerListModal"        >          Lista Klientów        </button>        <button          class="btn btn-light me-2"          type="button"          data-bs-toggle="modal"          data-bs-target="#addCustomerModal"        >          Dodaj Klienta        </button>        <!-- Przycisk do dodawania samochodu -->        <button          class="btn btn-light me-2"          type="button"          (click)="openAddCarDialog()"        >          Dodaj Samochód        </button>      </ng-container>      <ng-container *ngIf="!currentUser">        <button          class="btn btn-light me-2"          type="button"          (click)="openAuthModal()"        >          Zaloguj się        </button>      </ng-container>      <ng-container *ngIf="currentUser">        <span class="me-3" style="color: white;"          >Witaj, {{ currentUser.firstName }}!</span        >        <button          class="btn btn-light"          type="button"          (click)="logout()"        >          Wyloguj się        </button>      </ng-container>    </div>  </div></nav><!-- Modal dla Listy Klientów --><div  class="modal fade"  id="customerListModal"  tabindex="-1"  aria-labelledby="customerListModalLabel"  aria-hidden="true">  <div class="modal-dialog modal-lg">    <div class="modal-content">      <div class="modal-header">        <h5 class="modal-title" id="customerListModalLabel">          Lista Klientów        </h5>        <button          type="button"          class="btn-close"          data-bs-dismiss="modal"          aria-label="Zamknij"        ></button>      </div>      <div class="modal-body">        <app-customer-list></app-customer-list>      </div>    </div>  </div></div><!-- Modal dla Dodawania Klienta --><div  class="modal fade"  id="addCustomerModal"  tabindex="-1"  aria-labelledby="addCustomerModalLabel"  aria-hidden="true">  <div class="modal-dialog">    <div class="modal-content">      <div class="modal-header">        <h5 class="modal-title" id="addCustomerModalLabel">          Dodaj Nowego Klienta        </h5>        <button          type="button"          class="btn-close"          data-bs-dismiss="modal"          aria-label="Zamknij"        ></button>      </div>      <div class="modal-body">        <app-add-customer></app-add-customer>      </div>    </div>  </div></div><!-- Komponent LoginRegisterComponent --><app-login-register></app-login-register></div>'
-    var COMPONENTS = [{'name': 'AddCarComponent', 'selector': 'app-add-car'},{'name': 'AddCustomerComponent', 'selector': 'app-add-customer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuyCarComponent', 'selector': 'app-buy-car'},{'name': 'CalculateLeasingComponent', 'selector': 'calculate-leasing'},{'name': 'CarDetailComponent', 'selector': 'app-car-detail'},{'name': 'CarListComponent', 'selector': 'app-car-list'},{'name': 'CustomerListComponent', 'selector': 'app-customer-list'},{'name': 'EditCarComponent', 'selector': 'edit-car'},{'name': 'LoginRegisterComponent', 'selector': 'app-login-register'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'RentCarComponent', 'selector': 'app-rent-car'},{'name': 'ShowCarFormComponent', 'selector': 'show-car-form'}];
+    var COMPONENTS = [{'name': 'AddCarComponent', 'selector': 'app-add-car'},{'name': 'AddCustomerComponent', 'selector': 'app-add-customer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuyCarComponent', 'selector': 'app-buy-car'},{'name': 'CalculateLeasingComponent', 'selector': 'calculate-leasing'},{'name': 'CarDetailComponent', 'selector': 'app-car-detail'},{'name': 'CarListComponent', 'selector': 'app-car-list'},{'name': 'CustomerListComponent', 'selector': 'app-customer-list'},{'name': 'EditCarComponent', 'selector': 'edit-car'},{'name': 'LoginRegisterComponent', 'selector': 'app-login-register'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'RentCarComponent', 'selector': 'app-rent-car'},{'name': 'ShowCarForm', 'selector': 'show-car-form'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'NavbarComponent'};
 </script>

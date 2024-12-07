@@ -93,7 +93,7 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/RentCarComponent.html" data-type="entity-link" >RentCarComponent</a>
                             </li>
                             <li class="link">
-                                <a href="components/ShowCarFormComponent.html" data-type="entity-link" >ShowCarFormComponent</a>
+                                <a href="components/ShowCarForm.html" data-type="entity-link" >ShowCarForm</a>
                             </li>
                         </ul>
                     </li>

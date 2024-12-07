@@ -106,10 +106,6 @@
                 role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
-            <a href="#styleData" class="nav-link"
-                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
-        </li>
-        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -124,21 +120,8 @@
 </p>
 
 
-    <p class="comment">
-        <h3>Opis</h3>
-    </p>
-    <p class="comment">
-        <p>EditCarComponent umożliwia edycję informacji o wybranym samochodzie bez użycia dialogów.</p>
-
-    </p>
 
 
-    <p class="comment">
-        <h3>Implementuje</h3>
-    </p>
-    <p class="comment">
-                <code>OnDestroy</code>
-    </p>
 
 
 <section data-compodoc="block-metadata">
@@ -162,16 +145,8 @@
                 <td class="col-md-9"><code>edit-car</code></td>
             </tr>
 
-            <tr>
-                <td class="col-md-3">standalone</td>
-                <td class="col-md-9"><code>true</code></td>
-            </tr>
 
 
-            <tr>
-                <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./edit-car.component.css</code></td>
-            </tr>
 
 
 
@@ -182,6 +157,10 @@
 
 
 
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./edit-car.component.css</code></td>
+            </tr>
 
 
 
@@ -212,14 +191,11 @@
                                 <a href="#carService" >carService</a>
                             </li>
                             <li>
-                                <a href="#isDealer" >isDealer</a>
-                            </li>
-                            <li>
-                                <a href="#isEditing" >isEditing</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Private</span>
-                                <a href="#userSubscription" >userSubscription</a>
+                                <a href="#dialog" >dialog</a>
+                            </li>
+                            <li>
+                                <a href="#isDealer" >isDealer</a>
                             </li>
                         </ul>
                     </td>
@@ -234,16 +210,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#cancelEdit" >cancelEdit</a>
-                            </li>
-                            <li>
                                 <a href="#editCar" >editCar</a>
                             </li>
                             <li>
-                                <a href="#ngOnDestroy" >ngOnDestroy</a>
-                            </li>
-                            <li>
-                                <a href="#startEdit" >startEdit</a>
+                                <a href="#openEditCarDialog" >openEditCarDialog</a>
                             </li>
                         </ul>
                     </td>
@@ -282,17 +252,10 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="64" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:64</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="30" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:30</a></div>
                             </td>
                         </tr>
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Konstruktor komponentu.
-Inicjalizuje subskrypcję na strumień aktualnego użytkownika.</p>
-</div>
-                    </td>
-                </tr>
             </tbody>
         </table>
 </section>
@@ -331,15 +294,9 @@ Inicjalizuje subskrypcję na strumień aktualnego użytkownika.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Zdefiniowane w <a href="" data-line="25" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:25</a></div>
+                                    <div class="io-line">Zdefiniowane w <a href="" data-line="14" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:14</a></div>
                             </td>
                         </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Obiekt reprezentujący samochód do edycji.</p>
-</div>
-                    </td>
-                </tr>
             </tbody>
         </table>
 </section>
@@ -351,46 +308,6 @@ Inicjalizuje subskrypcję na strumień aktualnego użytkownika.</p>
     <h3 id="methods">
         Metody
     </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="cancelEdit"></a>
-                    <span class="name">
-                        <span ><b>cancelEdit</b></span>
-                        <a href="#cancelEdit"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>cancelEdit()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="93"
-                                    class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:93</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Metoda anulująca edycję samochodu.
-Resetuje flagę isEditing na false i przywraca oryginalne dane samochodu.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -411,17 +328,14 @@ Resetuje flagę isEditing na false i przywraca oryginalne dane samochodu.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="102"
-                                    class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:102</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="38"
+                                    class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:38</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Metoda edytująca informacje o samochodzie.
-Wysyła zaktualizowane dane do serwisu CarService.</p>
-</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -435,72 +349,30 @@ Wysyła zaktualizowane dane do serwisu CarService.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="ngOnDestroy"></a>
+                    <a name="openEditCarDialog"></a>
                     <span class="name">
-                        <span ><b>ngOnDestroy</b></span>
-                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>openEditCarDialog</b></span>
+                        <a href="#openEditCarDialog"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>ngOnDestroy()</code>
+<code>openEditCarDialog()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="124"
-                                    class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:124</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="50"
+                                    class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:50</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Metoda czyszcząca subskrypcje przy niszczeniu komponentu, aby zapobiec wyciekom pamięci.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="startEdit"></a>
-                    <span class="name">
-                        <span ><b>startEdit</b></span>
-                        <a href="#startEdit"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>startEdit()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="81"
-                                    class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:81</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Metoda inicjalizująca edycję samochodu.
-Ustawia flagę isEditing na true, aby wyświetlić formularz edycji.</p>
-</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -535,16 +407,10 @@ Ustawia flagę isEditing na true, aby wyświetlić formularz edycji.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="64" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:64</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="30" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:30</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Serwis uwierzytelniania.</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -567,16 +433,36 @@ Ustawia flagę isEditing na true, aby wyświetlić formularz edycji.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="59" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:59</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="28" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:28</a></div>
                         </td>
                     </tr>
 
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Serwis do zarządzania danymi samochodów.</p>
-</div>
+                    <a name="dialog"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>dialog</b></span>
+                        <a href="#dialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
                 </td>
             </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Domyślna wartość : </i><code>inject(MatDialog)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="29" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
 
         </tbody>
     </table>
@@ -598,80 +484,10 @@ Ustawia flagę isEditing na true, aby wyświetlić formularz edycji.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="42" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:42</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="27" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:27</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Flaga określająca, czy aktualnie zalogowany użytkownik jest dealerem.</p>
-</div>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="isEditing"></a>
-                    <span class="name">
-                        <span ><b>isEditing</b></span>
-                        <a href="#isEditing"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Domyślna wartość : </i><code>false</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="48" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:48</a></div>
-                        </td>
-                    </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Flaga określająca, czy komponent znajduje się w trybie edycji.</p>
-</div>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="userSubscription"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>userSubscription</b></span>
-                        <a href="#userSubscription"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Typ : </i>    <code>Subscription</code>
-
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="54" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:54</a></div>
-                        </td>
-                    </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Subskrypcja na strumień użytkownika, umożliwiająca odsubskrybowanie w metodzie ngOnDestroy.</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -681,28 +497,19 @@ Ustawia flagę isEditing na true, aby wyświetlić formularz edycji.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, Input, inject } from &#x27;@angular/core&#x27;;
-import { Car, CarService } from &#x27;../../services/car.service&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, inject, Input} from &#x27;@angular/core&#x27;;
+import {Car,CarService } from &#x27;../../services/car.service&#x27;;
+import {MatDialog} from &#x27;@angular/material/dialog&#x27;;
+import { ShowCarForm } from &#x27;../show-car-form/show-car-form.component&#x27;;
 import { AuthenticationService } from &#x27;../../services/authentication.service&#x27;;
-import { Subscription } from &#x27;rxjs&#x27;;
 
-/**
- * EditCarComponent umożliwia edycję informacji o wybranym samochodzie bez użycia dialogów.
- *
- * @component
- */
 @Component({
   selector: &#x27;edit-car&#x27;,
-  standalone: true,
+  imports: [],
   templateUrl: &#x27;./edit-car.component.html&#x27;,
-  styleUrls: [&#x27;./edit-car.component.css&#x27;]
+  styleUrl: &#x27;./edit-car.component.css&#x27;
 })
-export class EditCarComponent implements OnDestroy {
-  
-  /**
-   * Obiekt reprezentujący samochód do edycji.
-   * @type {Car}
-   */
+export class EditCarComponent {
   @Input() car: Car &#x3D; {
     id: 0,
     ownerId: 0,
@@ -716,97 +523,43 @@ export class EditCarComponent implements OnDestroy {
     isAvailableForRent: true,
   };
 
-  /**
-   * Flaga określająca, czy aktualnie zalogowany użytkownik jest dealerem.
-   * @type {boolean}
-   */
   isDealer &#x3D; false;
-
-  /**
-   * Flaga określająca, czy komponent znajduje się w trybie edycji.
-   * @type {boolean}
-   */
-  isEditing &#x3D; false;
-
-  /**
-   * Subskrypcja na strumień użytkownika, umożliwiająca odsubskrybowanie w metodzie ngOnDestroy.
-   * @type {Subscription}
-   */
-  private userSubscription: Subscription;
-
-  /**
-   * Serwis do zarządzania danymi samochodów.
-   */
   private carService &#x3D; inject(CarService);
-
-  /**
-   * Serwis uwierzytelniania.
-   */
+  private dialog &#x3D; inject(MatDialog);
   private authService &#x3D; inject(AuthenticationService);
 
-  /**
-   * Konstruktor komponentu.
-   * Inicjalizuje subskrypcję na strumień aktualnego użytkownika.
-   */
   constructor() {
     // Subskrybuj strumień currentUser$
-    this.userSubscription &#x3D; this.authService.currentUser$.subscribe((user) &#x3D;&gt; {
+    this.authService.currentUser$.subscribe((user) &#x3D;&gt; {
       this.isDealer &#x3D; user?.isDealer ?? false; // Ustaw flagę na podstawie danych użytkownika
     });
   }
-
-  /**
-   * Metoda inicjalizująca edycję samochodu.
-   * Ustawia flagę isEditing na true, aby wyświetlić formularz edycji.
-   */
-  startEdit(): void {
-    if (!this.isDealer) {
-      alert(&#x27;Nie masz uprawnień do edytowania samochodów.&#x27;);
-      return;
-    }
-    this.isEditing &#x3D; true;
-  }
-
-  /**
-   * Metoda anulująca edycję samochodu.
-   * Resetuje flagę isEditing na false i przywraca oryginalne dane samochodu.
-   */
-  cancelEdit(): void {
-    this.isEditing &#x3D; false;
-    // Można tutaj przywrócić oryginalne dane, jeśli były przechowywane
-  }
-
-  /**
-   * Metoda edytująca informacje o samochodzie.
-   * Wysyła zaktualizowane dane do serwisu CarService.
-   */
-  editCar(): void {
-    if (!this.isDealer) {
-      alert(&#x27;Nie masz uprawnień do edytowania samochodów.&#x27;);
-      return;
-    }
-
-    this.carService.updateCar(this.car.id, this.car).subscribe(
-      (updatedCar: Car) &#x3D;&gt; {
+  editCar(){
+    this.carService.updateCar(this.car.id,this.car).subscribe(
+      (updatedCar) &#x3D;&gt;{
         console.log(&#x27;Samochód zmodyfikowany:&#x27;, updatedCar);
         alert(&#x27;Samochód zmodyfikowany!&#x27;);
-        this.isEditing &#x3D; false; // Wyjście z trybu edycji po sukcesie
       },
-      (error: any) &#x3D;&gt; {
+      (error) &#x3D;&gt; {
         console.error(&#x27;Błąd przy edytowaniu samochodu:&#x27;, error);
         alert(&#x27;Wystąpił błąd przy edytowaniu samochodu.&#x27;);
       }
     );
   }
+  openEditCarDialog(): void {
+    const dialogRef &#x3D; this.dialog.open(ShowCarForm, {
+      width: &#x27;600px&#x27;,
+      data: this.car,
+    });
 
-  /**
-   * Metoda czyszcząca subskrypcje przy niszczeniu komponentu, aby zapobiec wyciekom pamięci.
-   */
-  ngOnDestroy(): void {
-    this.userSubscription.unsubscribe();
+    dialogRef.afterClosed().subscribe((result) &#x3D;&gt; {
+      if (result) {
+        this.car &#x3D; result;
+        this.editCar();
+      }
+    });
   }
-}
-</code></pre>
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
@@ -820,16 +573,6 @@ export class EditCarComponent implements OnDestroy {
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="styleData">
-                <p class="comment">
-                    <code>./edit-car.component.css</code>
-                </p>
-                <pre class="line-numbers"><code class="language-scss">.edit-button {
-    background-color: #7535dc;
-    color: white;
-    border-color: #a735dcc5;
-}</code></pre>
-    </div>
 
     <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
@@ -857,7 +600,7 @@ export class EditCarComponent implements OnDestroy {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="d-flex gap-2 flex-wrap">  @if (isDealer) {    <button class="btn btn-warning btn-sm d-flex align-items-center" (click)="openEditCarDialog()">        <i class="bi bi-pencil me-1"></i>Edytuj    </button>  }</div></div>'
-    var COMPONENTS = [{'name': 'AddCarComponent', 'selector': 'app-add-car'},{'name': 'AddCustomerComponent', 'selector': 'app-add-customer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuyCarComponent', 'selector': 'app-buy-car'},{'name': 'CalculateLeasingComponent', 'selector': 'calculate-leasing'},{'name': 'CarDetailComponent', 'selector': 'app-car-detail'},{'name': 'CarListComponent', 'selector': 'app-car-list'},{'name': 'CustomerListComponent', 'selector': 'app-customer-list'},{'name': 'EditCarComponent', 'selector': 'edit-car'},{'name': 'LoginRegisterComponent', 'selector': 'app-login-register'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'RentCarComponent', 'selector': 'app-rent-car'},{'name': 'ShowCarFormComponent', 'selector': 'show-car-form'}];
+    var COMPONENTS = [{'name': 'AddCarComponent', 'selector': 'app-add-car'},{'name': 'AddCustomerComponent', 'selector': 'app-add-customer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuyCarComponent', 'selector': 'app-buy-car'},{'name': 'CalculateLeasingComponent', 'selector': 'calculate-leasing'},{'name': 'CarDetailComponent', 'selector': 'app-car-detail'},{'name': 'CarListComponent', 'selector': 'app-car-list'},{'name': 'CustomerListComponent', 'selector': 'app-customer-list'},{'name': 'EditCarComponent', 'selector': 'edit-car'},{'name': 'LoginRegisterComponent', 'selector': 'app-login-register'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'RentCarComponent', 'selector': 'app-rent-car'},{'name': 'ShowCarForm', 'selector': 'show-car-form'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'EditCarComponent'};
 </script>

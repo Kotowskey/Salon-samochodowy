@@ -124,13 +124,6 @@
 </p>
 
 
-    <p class="comment">
-        <h3>Opis</h3>
-    </p>
-    <p class="comment">
-        <p>CarListComponent zarządza listą samochodów, umożliwiając ich przeglądanie, sortowanie, filtrowanie oraz operacje takie jak edycja, wynajem, leasing czy zakup.</p>
-
-    </p>
 
 
     <p class="comment">
@@ -138,7 +131,6 @@
     </p>
     <p class="comment">
                 <code>OnInit</code>
-                <code>OnDestroy</code>
     </p>
 
 
@@ -217,15 +209,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#brandSearch" >brandSearch</a>
+                                <a href="#brandserch" >brandserch</a>
                             </li>
                             <li>
                                 <a href="#cars" >cars</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                    <span class="modifier">Opcjonalne</span>
-                                <a href="#combinedSubscription" >combinedSubscription</a>
                             </li>
                             <li>
                                 <a href="#filteredCars" >filteredCars</a>
@@ -270,9 +257,6 @@
                                 <a href="#filterCars" >filterCars</a>
                             </li>
                             <li>
-                                <a href="#ngOnDestroy" >ngOnDestroy</a>
-                            </li>
-                            <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
@@ -307,14 +291,12 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="101" class="link-to-prism">src/app/components/car-list/car-list.component.ts:101</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="40" class="link-to-prism">src/app/components/car-list/car-list.component.ts:40</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Konstruktor komponentu.</p>
-</div>
                             <div>
                                     <b>Parametry :</b>
                                     <table class="params">
@@ -323,7 +305,6 @@
                                                 <td>Nazwa</td>
                                                     <td>Typ</td>
                                                 <td>Opcjonalne</td>
-                                                    <td>Opis</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -338,12 +319,6 @@
                                                             Nie
                                                     </td>
                                                     
-                                                        <td>
-                                                                <ul>
-<li>Serwis do zarządzania danymi samochodów.</li>
-</ul>
-
-                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>authService</td>
@@ -356,12 +331,6 @@
                                                             Nie
                                                     </td>
                                                     
-                                                        <td>
-                                                                <ul>
-<li>Serwis uwierzytelniania.</li>
-</ul>
-
-                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -401,17 +370,14 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="182"
-                                    class="link-to-prism">src/app/components/car-list/car-list.component.ts:182</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="97"
+                                    class="link-to-prism">src/app/components/car-list/car-list.component.ts:97</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Metoda usuwająca samochód o podanym identyfikatorze.
-Sprawdza uprawnienia użytkownika przed wykonaniem operacji.</p>
-</div>
 
                             <div class="io-description">
                                 <b>Parametry :</b>
@@ -422,7 +388,6 @@ Sprawdza uprawnienia użytkownika przed wykonaniem operacji.</p>
                                             <td>Nazwa</td>
                                                 <td>Typ</td>
                                             <td>Opcjonalne</td>
-                                                <td>Opis</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -437,12 +402,6 @@ Sprawdza uprawnienia użytkownika przed wykonaniem operacji.</p>
                                             </td>
 
 
-                                            <td>
-                                                    <ul>
-<li>Unikalny identyfikator samochodu do usunięcia.</li>
-</ul>
-
-                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -478,56 +437,14 @@ Sprawdza uprawnienia użytkownika przed wykonaniem operacji.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="217"
-                                    class="link-to-prism">src/app/components/car-list/car-list.component.ts:217</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="124"
+                                    class="link-to-prism">src/app/components/car-list/car-list.component.ts:124</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Metoda filtrująca samochody na podstawie wpisanej marki.
-Aktualizuje listę <code>filteredCars</code> zgodnie z kryteriami filtrowania.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ngOnDestroy"></a>
-                    <span class="name">
-                        <span ><b>ngOnDestroy</b></span>
-                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>ngOnDestroy()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="226"
-                                    class="link-to-prism">src/app/components/car-list/car-list.component.ts:226</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Metoda czyszcząca subskrypcje przy niszczeniu komponentu, aby zapobiec wyciekom pamięci.</p>
-</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -557,17 +474,14 @@ Aktualizuje listę <code>filteredCars</code> zgodnie z kryteriami filtrowania.</
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="118"
-                                    class="link-to-prism">src/app/components/car-list/car-list.component.ts:118</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="47"
+                                    class="link-to-prism">src/app/components/car-list/car-list.component.ts:47</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Metoda inicjalizacyjna wywoływana po utworzeniu komponentu.
-Subskrybuje strumienie użytkownika i listy samochodów, aktualizując odpowiednie właściwości komponentu.</p>
-</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -597,17 +511,14 @@ Subskrybuje strumienie użytkownika i listy samochodów, aktualizując odpowiedn
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="209"
-                                    class="link-to-prism">src/app/components/car-list/car-list.component.ts:209</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="120"
+                                    class="link-to-prism">src/app/components/car-list/car-list.component.ts:120</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Metoda wywoływana przy każdej zmianie w polu wyszukiwania marki samochodu.
-Inicjuje filtrowanie listy samochodów.</p>
-</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -637,17 +548,14 @@ Inicjuje filtrowanie listy samochodów.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="163"
-                                    class="link-to-prism">src/app/components/car-list/car-list.component.ts:163</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="84"
+                                    class="link-to-prism">src/app/components/car-list/car-list.component.ts:84</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Metoda sortująca samochody według mocy silnika.
-Zmienia kierunek sortowania przy każdym wywołaniu.</p>
-</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -677,17 +585,14 @@ Zmienia kierunek sortowania przy każdym wywołaniu.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="146"
-                                    class="link-to-prism">src/app/components/car-list/car-list.component.ts:146</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="71"
+                                    class="link-to-prism">src/app/components/car-list/car-list.component.ts:71</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Metoda sortująca samochody według ceny.
-Zmienia kierunek sortowania przy każdym wywołaniu.</p>
-</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -707,10 +612,10 @@ Zmienia kierunek sortowania przy każdym wywołaniu.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="brandSearch"></a>
+                    <a name="brandserch"></a>
                     <span class="name">
-                        <span ><b>brandSearch</b></span>
-                        <a href="#brandSearch"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>brandserch</b></span>
+                        <a href="#brandserch"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -727,16 +632,10 @@ Zmienia kierunek sortowania przy każdym wywołaniu.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="59" class="link-to-prism">src/app/components/car-list/car-list.component.ts:59</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="34" class="link-to-prism">src/app/components/car-list/car-list.component.ts:34</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Wartość wpisana w polu wyszukiwania marki samochodu.</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -764,50 +663,10 @@ Zmienia kierunek sortowania przy każdym wywołaniu.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="65" class="link-to-prism">src/app/components/car-list/car-list.component.ts:65</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="35" class="link-to-prism">src/app/components/car-list/car-list.component.ts:35</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Lista wszystkich dostępnych samochodów.</p>
-</div>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="combinedSubscription"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                            <span class="modifier">Opcjonalne</span>
-                        <span ><b>combinedSubscription</b></span>
-                        <a href="#combinedSubscription"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Typ : </i>    <code>Subscription</code>
-
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="101" class="link-to-prism">src/app/components/car-list/car-list.component.ts:101</a></div>
-                        </td>
-                    </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Subskrypcja na połączone strumienie użytkownika i samochodów.</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -835,16 +694,10 @@ Zmienia kierunek sortowania przy każdym wywołaniu.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="83" class="link-to-prism">src/app/components/car-list/car-list.component.ts:83</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="38" class="link-to-prism">src/app/components/car-list/car-list.component.ts:38</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Lista samochodów po zastosowaniu filtrowania.</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -872,16 +725,10 @@ Zmienia kierunek sortowania przy każdym wywołaniu.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="95" class="link-to-prism">src/app/components/car-list/car-list.component.ts:95</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="40" class="link-to-prism">src/app/components/car-list/car-list.component.ts:40</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Kierunek sortowania według mocy silnika.</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -903,16 +750,10 @@ Zmienia kierunek sortowania przy każdym wywołaniu.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="41" class="link-to-prism">src/app/components/car-list/car-list.component.ts:41</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="31" class="link-to-prism">src/app/components/car-list/car-list.component.ts:31</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Flaga określająca, czy aktualnie zalogowany użytkownik jest dealerem.</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -934,16 +775,10 @@ Zmienia kierunek sortowania przy każdym wywołaniu.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="47" class="link-to-prism">src/app/components/car-list/car-list.component.ts:47</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="32" class="link-to-prism">src/app/components/car-list/car-list.component.ts:32</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Flaga określająca, czy użytkownik jest zalogowany.</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -971,16 +806,10 @@ Zmienia kierunek sortowania przy każdym wywołaniu.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="71" class="link-to-prism">src/app/components/car-list/car-list.component.ts:71</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="36" class="link-to-prism">src/app/components/car-list/car-list.component.ts:36</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Lista samochodów należących do aktualnie zalogowanego użytkownika.</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -1008,16 +837,10 @@ Zmienia kierunek sortowania przy każdym wywołaniu.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="89" class="link-to-prism">src/app/components/car-list/car-list.component.ts:89</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="39" class="link-to-prism">src/app/components/car-list/car-list.component.ts:39</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Kierunek sortowania według ceny.</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -1045,16 +868,10 @@ Zmienia kierunek sortowania przy każdym wywołaniu.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="77" class="link-to-prism">src/app/components/car-list/car-list.component.ts:77</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="37" class="link-to-prism">src/app/components/car-list/car-list.component.ts:37</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Lista samochodów po zastosowaniu sortowania.</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -1076,16 +893,10 @@ Zmienia kierunek sortowania przy każdym wywołaniu.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="53" class="link-to-prism">src/app/components/car-list/car-list.component.ts:53</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="33" class="link-to-prism">src/app/components/car-list/car-list.component.ts:33</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Identyfikator aktualnie zalogowanego użytkownika.</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -1095,7 +906,7 @@ Zmienia kierunek sortowania przy każdym wywołaniu.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, OnDestroy } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
 import { CarService, Car } from &#x27;../../services/car.service&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { RouterModule } from &#x27;@angular/router&#x27;;
@@ -1105,224 +916,123 @@ import { AuthenticationService } from &#x27;../../services/authentication.servic
 import { RentCarComponent } from &#x27;../rent-car/rent-car.component&#x27;;
 import { CalculateLeasingComponent } from &#x27;../calculate-leasing/calculate-leasing.component&#x27;;
 import { BuyCarComponent } from &#x27;../buy-car/buy-car.component&#x27;;
-import { combineLatest, Subscription } from &#x27;rxjs&#x27;;
+import { combineLatest } from &#x27;rxjs&#x27;;
 
-/**
- * CarListComponent zarządza listą samochodów, umożliwiając ich przeglądanie, sortowanie, filtrowanie oraz operacje takie jak edycja, wynajem, leasing czy zakup.
- *
- * @component
- */
 @Component({
-  selector: &#x27;app-car-list&#x27;,
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    EditCarComponent,
-    RentCarComponent,
-    CalculateLeasingComponent,
-    BuyCarComponent,
-    RouterModule
-  ],
-  templateUrl: &#x27;./car-list.component.html&#x27;,
-  styleUrls: [&#x27;./car-list.component.css&#x27;]
+    selector: &#x27;app-car-list&#x27;,
+    standalone: true,
+    imports: [
+      CommonModule,
+      FormsModule,
+      EditCarComponent,
+      RentCarComponent,
+      CalculateLeasingComponent,
+      BuyCarComponent,
+      RouterModule
+    ],
+    templateUrl: &#x27;./car-list.component.html&#x27;,
+    styleUrls: [&#x27;./car-list.component.css&#x27;]
 })
-export class CarListComponent implements OnInit, OnDestroy {
-  
-  /**
-   * Flaga określająca, czy aktualnie zalogowany użytkownik jest dealerem.
-   * @type {boolean}
-   */
-  isDealer &#x3D; false;
+export class CarListComponent implements OnInit {
+    isDealer &#x3D; false;
+    logged &#x3D; false;
+    userId &#x3D; -1;
+    brandserch &#x3D; &quot;&quot;;
+    cars: Car[] &#x3D; [];
+    ownedCars: Car[] &#x3D; [];
+    sortedCars: Car[] &#x3D; [];
+    filteredCars: Car[] &#x3D; [];
+    priceSortDirection: &#x27;asc&#x27; | &#x27;desc&#x27; &#x3D; &#x27;asc&#x27;;
+    horsePowerSortDirection: &#x27;asc&#x27; | &#x27;desc&#x27; &#x3D; &#x27;asc&#x27;;
 
-  /**
-   * Flaga określająca, czy użytkownik jest zalogowany.
-   * @type {boolean}
-   */
-  logged &#x3D; false;
+    constructor(
+      private carService: CarService,
+      private authService: AuthenticationService
+    ) { }
 
-  /**
-   * Identyfikator aktualnie zalogowanego użytkownika.
-   * @type {number}
-   */
-  userId &#x3D; -1;
+    ngOnInit(): void {
+        // Połączenie strumieni użytkownika i samochodów
+        combineLatest([
+            this.authService.currentUser$,
+            this.carService.getCars()
+        ]).subscribe(([user, cars]) &#x3D;&gt; {
+            this.isDealer &#x3D; user?.isDealer ?? false;
+            this.logged &#x3D; !!user;
+            this.userId &#x3D; user?.id ?? -1;
+            this.cars &#x3D; cars;
 
-  /**
-   * Wartość wpisana w polu wyszukiwania marki samochodu.
-   * @type {string}
-   */
-  brandSearch &#x3D; &quot;&quot;;
+            // Aktualizacja ownedCars
+            if (this.logged) {
+                this.ownedCars &#x3D; this.cars.filter(car &#x3D;&gt; car.ownerId &#x3D;&#x3D;&#x3D; this.userId);
+            } else {
+                this.ownedCars &#x3D; [];
+            }
 
-  /**
-   * Lista wszystkich dostępnych samochodów.
-   * @type {Car[]}
-   */
-  cars: Car[] &#x3D; [];
-
-  /**
-   * Lista samochodów należących do aktualnie zalogowanego użytkownika.
-   * @type {Car[]}
-   */
-  ownedCars: Car[] &#x3D; [];
-
-  /**
-   * Lista samochodów po zastosowaniu sortowania.
-   * @type {Car[]}
-   */
-  sortedCars: Car[] &#x3D; [];
-
-  /**
-   * Lista samochodów po zastosowaniu filtrowania.
-   * @type {Car[]}
-   */
-  filteredCars: Car[] &#x3D; [];
-
-  /**
-   * Kierunek sortowania według ceny.
-   * @type {&#x27;asc&#x27; | &#x27;desc&#x27;}
-   */
-  priceSortDirection: &#x27;asc&#x27; | &#x27;desc&#x27; &#x3D; &#x27;asc&#x27;;
-
-  /**
-   * Kierunek sortowania według mocy silnika.
-   * @type {&#x27;asc&#x27; | &#x27;desc&#x27;}
-   */
-  horsePowerSortDirection: &#x27;asc&#x27; | &#x27;desc&#x27; &#x3D; &#x27;asc&#x27;;
-
-  /**
-   * Subskrypcja na połączone strumienie użytkownika i samochodów.
-   * @type {Subscription}
-   */
-  private combinedSubscription?: Subscription;
-
-  /**
-   * Konstruktor komponentu.
-   *
-   * @param {CarService} carService - Serwis do zarządzania danymi samochodów.
-   * @param {AuthenticationService} authService - Serwis uwierzytelniania.
-   */
-  constructor(
-    private carService: CarService,
-    private authService: AuthenticationService
-  ) { }
-
-  /**
-   * Metoda inicjalizacyjna wywoływana po utworzeniu komponentu.
-   * Subskrybuje strumienie użytkownika i listy samochodów, aktualizując odpowiednie właściwości komponentu.
-   */
-  ngOnInit(): void {
-    // Połączenie strumieni użytkownika i samochodów
-    this.combinedSubscription &#x3D; combineLatest([
-      this.authService.currentUser$,
-      this.carService.getCars()
-    ]).subscribe(([user, cars]) &#x3D;&gt; {
-      this.isDealer &#x3D; user?.isDealer ?? false;
-      this.logged &#x3D; !!user;
-      this.userId &#x3D; user?.id ?? -1;
-      this.cars &#x3D; cars;
-
-      // Aktualizacja ownedCars
-      if (this.logged) {
-        this.ownedCars &#x3D; this.cars.filter(car &#x3D;&gt; car.ownerId &#x3D;&#x3D;&#x3D; this.userId);
-      } else {
-        this.ownedCars &#x3D; [];
-      }
-
-      // Filtracja samochodów dostępnych do wynajmu (zakładając, że ownerId &#x3D; null oznacza dostępność)
-      this.sortedCars &#x3D; this.cars.filter(car &#x3D;&gt; car.ownerId &#x3D;&#x3D; null);
-      this.filterCars();
-    });
-  }
-
-  /**
-   * Metoda sortująca samochody według ceny.
-   * Zmienia kierunek sortowania przy każdym wywołaniu.
-   */
-  sortByPrice(): void {
-    if (this.priceSortDirection &#x3D;&#x3D;&#x3D; &#x27;asc&#x27;) {
-      this.sortedCars.sort((a, b) &#x3D;&gt; a.price - b.price);
-      this.priceSortDirection &#x3D; &#x27;desc&#x27;;
-    } else {
-      this.sortedCars.sort((a, b) &#x3D;&gt; b.price - a.price);
-      this.priceSortDirection &#x3D; &#x27;asc&#x27;;
-    }
-    // Resetowanie sortowania mocy, jeśli jest aktywne
-    this.horsePowerSortDirection &#x3D; &#x27;asc&#x27;;
-    this.filterCars(); // Aktualizacja listy po sortowaniu
-  }
-
-  /**
-   * Metoda sortująca samochody według mocy silnika.
-   * Zmienia kierunek sortowania przy każdym wywołaniu.
-   */
-  sortByHorsePower(): void {
-    if (this.horsePowerSortDirection &#x3D;&#x3D;&#x3D; &#x27;asc&#x27;) {
-      this.sortedCars.sort((a, b) &#x3D;&gt; a.horsePower - b.horsePower);
-      this.horsePowerSortDirection &#x3D; &#x27;desc&#x27;;
-    } else {
-      this.sortedCars.sort((a, b) &#x3D;&gt; b.horsePower - a.horsePower);
-      this.horsePowerSortDirection &#x3D; &#x27;asc&#x27;;
-    }
-    // Resetowanie sortowania ceny, jeśli jest aktywne
-    this.priceSortDirection &#x3D; &#x27;asc&#x27;;
-    this.filterCars(); // Aktualizacja listy po sortowaniu
-  }
-
-  /**
-   * Metoda usuwająca samochód o podanym identyfikatorze.
-   * Sprawdza uprawnienia użytkownika przed wykonaniem operacji.
-   *
-   * @param {number} id - Unikalny identyfikator samochodu do usunięcia.
-   */
-  deleteCar(id: number): void {
-    if (!this.isDealer) {
-      alert(&#x27;Nie masz uprawnień do usuwania samochodów.&#x27;);
-      return;
+            // Filtracja i sortowanie samochodów dostępnych do wynajmu
+            this.sortedCars &#x3D; this.cars.filter(car &#x3D;&gt; car.ownerId &#x3D;&#x3D; null);
+            this.filterCars();
+        });
     }
 
-    if (confirm(&#x27;Czy na pewno chcesz usunąć ten samochód?&#x27;)) {
-      this.carService.deleteCar(id).subscribe(
-        () &#x3D;&gt; {
-          this.cars &#x3D; this.cars.filter((car) &#x3D;&gt; car.id !&#x3D;&#x3D; id);
-          this.sortedCars &#x3D; this.sortedCars.filter((car) &#x3D;&gt; car.id !&#x3D;&#x3D; id);
-          this.ownedCars &#x3D; this.ownedCars.filter((car) &#x3D;&gt; car.id !&#x3D;&#x3D; id);
-          this.filterCars(); // Aktualizacja po usunięciu samochodu
-          alert(&#x27;Samochód został usunięty.&#x27;);
-        },
-        (error) &#x3D;&gt; {
-          console.error(&#x27;Błąd podczas usuwania samochodu:&#x27;, error);
-          alert(&#x27;Wystąpił błąd podczas usuwania samochodu.&#x27;);
+    sortByPrice(): void {
+        if (this.priceSortDirection &#x3D;&#x3D;&#x3D; &#x27;asc&#x27;) {
+            this.sortedCars.sort((a, b) &#x3D;&gt; a.price - b.price);
+            this.priceSortDirection &#x3D; &#x27;desc&#x27;;
+        } else {
+            this.sortedCars.sort((a, b) &#x3D;&gt; b.price - a.price);
+            this.priceSortDirection &#x3D; &#x27;asc&#x27;;
         }
-      );
+        // Resetowanie sortowania mocy, jeśli jest aktywne
+        this.horsePowerSortDirection &#x3D; &#x27;asc&#x27;;
+        this.filterCars(); // Aktualizacja listy po sortowaniu
     }
-  }
 
-  /**
-   * Metoda wywoływana przy każdej zmianie w polu wyszukiwania marki samochodu.
-   * Inicjuje filtrowanie listy samochodów.
-   */
-  onBrandSearchChange(): void {
-    this.filterCars(); // Filtracja samochodów przy każdej zmianie w polu wyszukiwania
-  }
+    sortByHorsePower(): void {
+        if (this.horsePowerSortDirection &#x3D;&#x3D;&#x3D; &#x27;asc&#x27;) {
+            this.sortedCars.sort((a, b) &#x3D;&gt; a.horsePower - b.horsePower);
+            this.horsePowerSortDirection &#x3D; &#x27;desc&#x27;;
+        } else {
+            this.sortedCars.sort((a, b) &#x3D;&gt; b.horsePower - a.horsePower);
+            this.horsePowerSortDirection &#x3D; &#x27;asc&#x27;;
+        }
+        // Resetowanie sortowania ceny, jeśli jest aktywne
+        this.priceSortDirection &#x3D; &#x27;asc&#x27;;
+        this.filterCars(); // Aktualizacja listy po sortowaniu
+    }
 
-  /**
-   * Metoda filtrująca samochody na podstawie wpisanej marki.
-   * Aktualizuje listę &#x60;filteredCars&#x60; zgodnie z kryteriami filtrowania.
-   */
-  filterCars(): void {
-    this.filteredCars &#x3D; this.sortedCars.filter(car &#x3D;&gt;
-      car.brand.toLowerCase().includes(this.brandSearch.toLowerCase())
-    );
-  }
+    deleteCar(id: number): void {
+        if (!this.isDealer) {
+            alert(&#x27;Nie masz uprawnień do usuwania samochodów.&#x27;);
+            return;
+        }
 
-  /**
-   * Metoda czyszcząca subskrypcje przy niszczeniu komponentu, aby zapobiec wyciekom pamięci.
-   */
-  ngOnDestroy(): void {
-    this.combinedSubscription?.unsubscribe();
-  }
-}
-</code></pre>
+        if (confirm(&#x27;Czy na pewno chcesz usunąć ten samochód?&#x27;)) {
+            this.carService.deleteCar(id).subscribe(
+                () &#x3D;&gt; {
+                    this.cars &#x3D; this.cars.filter((car) &#x3D;&gt; car.id !&#x3D;&#x3D; id);
+                    this.sortedCars &#x3D; this.sortedCars.filter((car) &#x3D;&gt; car.id !&#x3D;&#x3D; id);
+                    this.ownedCars &#x3D; this.ownedCars.filter((car) &#x3D;&gt; car.id !&#x3D;&#x3D; id);
+                    this.filterCars(); // Aktualizacja po usunięciu samochodu
+                    alert(&#x27;Samochód został usunięty.&#x27;);
+                },
+                (error) &#x3D;&gt; {
+                    console.error(&#x27;Błąd podczas usuwania samochodu:&#x27;, error);
+                    alert(&#x27;Wystąpił błąd podczas usuwania samochodu.&#x27;);
+                }
+            );
+        }
+    }
+
+    onBrandSearchChange(): void {
+        this.filterCars(); // Filtracja samochodów przy każdej zmianie w polu wyszukiwania
+    }
+
+    filterCars(): void {
+        this.filteredCars &#x3D; this.sortedCars.filter(car &#x3D;&gt;
+            car.brand.toLowerCase().includes(this.brandserch.toLowerCase())
+        );
+    }
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
@@ -1502,7 +1212,7 @@ footer a:hover {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="container my-4">  <h2 class="mb-4 text-center">Lista dostępnych samochodów</h2>    <div class="d-flex justify-content-between align-items-center mb-3">    <div>      <button class="btn btn-primary me-2" (click)="sortByPrice()">        Sortuj według ceny         <i [ngClass]="priceSortDirection === \'asc\' ? \'bi bi-sort-up\' : \'bi bi-sort-down\'"></i>      </button>      <button class="btn btn-primary" (click)="sortByHorsePower()">        Sortuj według mocy         <i [ngClass]="horsePowerSortDirection === \'asc\' ? \'bi bi-sort-up\' : \'bi bi-sort-down\'"></i>      </button>    </div>    <input type="text" [(ngModel)]="brandserch" (ngModelChange)="onBrandSearchChange()" placeholder="Wyszukaj markę">  </div>  <div class="row">    <div class="col-md-4 mb-4" *ngFor="let car of filteredCars">      <div class="card h-100 position-relative">        <!-- Dodanie ikony info-circle do przycisku Szczegóły -->        <a [routerLink]="[\'/cars\', car.id]" class="btn btn-info btn-sm position-absolute top-0 end-0 m-2">          <i class="bi bi-info-circle me-1"></i> Szczegóły        </a>                <div class="card-body d-flex flex-column">          <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>          <p class="card-text">            <strong>Rok:</strong> {{ car.year }}<br>            <strong>Moc:</strong> {{ car.horsePower }} KM<br>            <strong>VIN:</strong> {{ car.vin }}<br>            <strong>Dostępny do wynajmu:</strong>             <span class="badge" [ngClass]="car.isAvailableForRent ? \'bg-success\' : \'bg-danger\'">              {{ car.isAvailableForRent ? \'Tak\' : \'Nie\' }}            </span>          </p>          <div class="mt-auto">            <h6 class="card-subtitle mb-2 text-muted">{{ car.price | currency:\'PLN\' }}</h6>                        @if(logged)            {              <div class="button-box">                @if(!isDealer && (car.renterId == userId || car.renterId == null)){                  <app-buy-car [car]="car"></app-buy-car>                  <app-rent-car [car]="car"></app-rent-car>                  <calculate-leasing [car]="car"></calculate-leasing>                }                @if(isDealer) {                  <button mat-raised-button color="primary" class="btn btn-danger btn-sm me-2" (click)="deleteCar(car.id)">                    Usuń                  </button>                  <edit-car [car]="car"></edit-car>                }              </div>            }          </div>        </div>      </div>    </div>  </div></div>@if(ownedCars.length > 0 && logged){  <div class="container my-4">    <h2 class="mb-4 text-center">Lista twoich samochodów</h2>    <div class="row">      <div class="col-md-4 mb-4" *ngFor="let car of ownedCars">        <div class="card h-100">          <div class="card-body d-flex flex-column">            <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>            <p class="card-text">              <strong>Rok:</strong> {{ car.year }}<br>              <strong>Moc:</strong> {{ car.horsePower }} KM<br>              <strong>VIN:</strong> {{ car.vin }}<br>            </p>            <div class="mt-auto">              <h6 class="card-subtitle mb-2 text-muted">{{ car.price | currency:\'PLN\' }}</h6>            </div>          </div>        </div>      </div>    </div>  </div>  }<footer>  <a routerLink="/privacy-policy">Polityka Prywatności</a></footer></div>'
-    var COMPONENTS = [{'name': 'AddCarComponent', 'selector': 'app-add-car'},{'name': 'AddCustomerComponent', 'selector': 'app-add-customer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuyCarComponent', 'selector': 'app-buy-car'},{'name': 'CalculateLeasingComponent', 'selector': 'calculate-leasing'},{'name': 'CarDetailComponent', 'selector': 'app-car-detail'},{'name': 'CarListComponent', 'selector': 'app-car-list'},{'name': 'CustomerListComponent', 'selector': 'app-customer-list'},{'name': 'EditCarComponent', 'selector': 'edit-car'},{'name': 'LoginRegisterComponent', 'selector': 'app-login-register'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'RentCarComponent', 'selector': 'app-rent-car'},{'name': 'ShowCarFormComponent', 'selector': 'show-car-form'}];
+    var COMPONENTS = [{'name': 'AddCarComponent', 'selector': 'app-add-car'},{'name': 'AddCustomerComponent', 'selector': 'app-add-customer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuyCarComponent', 'selector': 'app-buy-car'},{'name': 'CalculateLeasingComponent', 'selector': 'calculate-leasing'},{'name': 'CarDetailComponent', 'selector': 'app-car-detail'},{'name': 'CarListComponent', 'selector': 'app-car-list'},{'name': 'CustomerListComponent', 'selector': 'app-customer-list'},{'name': 'EditCarComponent', 'selector': 'edit-car'},{'name': 'LoginRegisterComponent', 'selector': 'app-login-register'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'RentCarComponent', 'selector': 'app-rent-car'},{'name': 'ShowCarForm', 'selector': 'show-car-form'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'CarListComponent'};
 </script>
