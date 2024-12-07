@@ -124,6 +124,32 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Opis</h3>
+    </p>
+    <p class="comment">
+        <p>Komponent odpowiedzialny za wyświetlanie formularza samochodu w oknie dialogowym. Umożliwia dodawanie nowych samochodów poprzez wypełnienie formularza.</p>
+<h2>Przykład użycia</h2>
+<b>Przykład :</b><div><pre class="line-numbers"><code class="language-typescript">import { MatDialog } from &#39;&#64;angular/material/dialog&#39;;
+import { ShowCarForm } from &#39;./show-car-form/show-car-form.component&#39;;
+
+// ...
+
+constructor(private dialog: MatDialog) {}
+
+openShowCarForm() {
+  const dialogRef = this.dialog.open(ShowCarForm, {
+    width: &#39;600px&#39;,
+    data: { ...carData },
+  });
+
+  dialogRef.afterClosed().subscribe(result =&gt; {
+    if (result) {
+      // Obsłuż dodanie samochodu
+    }
+  });
+}</code></pre></div>
+    </p>
 
 
 
@@ -240,12 +266,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="26" class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:26</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="61" class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:61</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Inicjalizuje komponent, przypisując przekazane dane do właściwości <code>car</code>.</p>
+</div>
                             <div>
                                     <b>Parametry :</b>
                                     <table class="params">
@@ -254,6 +282,7 @@
                                                 <td>Nazwa</td>
                                                     <td>Typ</td>
                                                 <td>Opcjonalne</td>
+                                                    <td>Opis</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -268,6 +297,12 @@
                                                             Nie
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Referencja do okna dialogowego, umożliwiająca kontrolę nad jego stanem.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>data</td>
@@ -280,6 +315,12 @@
                                                             Nie
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Dane samochodu przekazane do komponentu przez okno dialogowe.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -324,7 +365,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Zdefiniowane w <a href="" data-line="15" class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:15</a></div>
+                                    <div class="io-line">Zdefiniowane w <a href="" data-line="50" class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:50</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -358,19 +399,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="35"
-                                    class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:35</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="88"
+                                    class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:88</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Zamyka okno dialogowe i przekazuje zaktualizowany obiekt <code>car</code> do komponentu otwierającego dialog. Umożliwia to dodanie nowego samochodu lub aktualizację istniejącego.</p>
+<b>Przykład :</b><div><pre class="line-numbers"><code class="language-html">```typescript
+this.addCar();</code></pre></div><b>Przykład :</b><div><pre class="line-numbers"><code class="language-none"></code></pre></div></div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -395,19 +442,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="39"
-                                    class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:39</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="103"
+                                    class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:103</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Zamyka okno dialogowe bez przekazywania żadnych danych. Używane, gdy użytkownik zdecyduje się anulować operację.</p>
+<b>Przykład :</b><div><pre class="line-numbers"><code class="language-html">```typescript
+this.closeDialog();</code></pre></div><b>Przykład :</b><div><pre class="line-numbers"><code class="language-none"></code></pre></div></div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -423,6 +476,34 @@ import { Car } from &#x27;../../services/car.service&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
 import { MatDialogRef, MAT_DIALOG_DATA } from &#x27;@angular/material/dialog&#x27;;
 
+/**
+ * @module ShowCarForm
+ * @description
+ * Komponent odpowiedzialny za wyświetlanie formularza samochodu w oknie dialogowym. Umożliwia dodawanie nowych samochodów poprzez wypełnienie formularza.
+ *
+ * ## Przykład użycia
+ * &#x60;&#x60;&#x60;typescript
+ * import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
+ * import { ShowCarForm } from &#x27;./show-car-form/show-car-form.component&#x27;;
+ *
+ * // ...
+ *
+ * constructor(private dialog: MatDialog) {}
+ *
+ * openShowCarForm() {
+ *   const dialogRef &#x3D; this.dialog.open(ShowCarForm, {
+ *     width: &#x27;600px&#x27;,
+ *     data: { ...carData },
+ *   });
+ *
+ *   dialogRef.afterClosed().subscribe(result &#x3D;&gt; {
+ *     if (result) {
+ *       // Obsłuż dodanie samochodu
+ *     }
+ *   });
+ * }
+ * &#x60;&#x60;&#x60;
+ */
 @Component({
   selector: &#x27;show-car-form&#x27;,
   standalone: true,
@@ -431,6 +512,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from &#x27;@angular/material/dialog&#x2
   styleUrls: [&#x27;./show-car-form.component.css&#x27;],
 })
 export class ShowCarForm {
+  
+  /**
+   * @input
+   * @type {Car}
+   * @description
+   * Obiekt reprezentujący samochód do wyświetlenia lub edycji w formularzu. Zawiera wszystkie niezbędne informacje o samochodzie.
+   */
   @Input() car: Car &#x3D; {
     id: 0,
     ownerId: 0,
@@ -444,6 +532,13 @@ export class ShowCarForm {
     isAvailableForRent: true,
   };
 
+  /**
+   * @constructor
+   * @param {MatDialogRef&lt;ShowCarForm&gt;} dialogRef - Referencja do okna dialogowego, umożliwiająca kontrolę nad jego stanem.
+   * @param {Car} data - Dane samochodu przekazane do komponentu przez okno dialogowe.
+   * @description
+   * Inicjalizuje komponent, przypisując przekazane dane do właściwości &#x60;car&#x60;.
+   */
   constructor(
     private dialogRef: MatDialogRef&lt;ShowCarForm&gt;,
     @Inject(MAT_DIALOG_DATA) data: Car
@@ -451,14 +546,37 @@ export class ShowCarForm {
     Object.assign(this.car, data);
   }
 
+  /**
+   * @method
+   * @name addCar
+   * @description
+   * Zamyka okno dialogowe i przekazuje zaktualizowany obiekt &#x60;car&#x60; do komponentu otwierającego dialog. Umożliwia to dodanie nowego samochodu lub aktualizację istniejącego.
+   *
+   * @example
+   * &#x60;&#x60;&#x60;typescript
+   * this.addCar();
+   * &#x60;&#x60;&#x60;
+   */
   addCar() {
     this.dialogRef.close(this.car);
   }
 
+  /**
+   * @method
+   * @name closeDialog
+   * @description
+   * Zamyka okno dialogowe bez przekazywania żadnych danych. Używane, gdy użytkownik zdecyduje się anulować operację.
+   *
+   * @example
+   * &#x60;&#x60;&#x60;typescript
+   * this.closeDialog();
+   * &#x60;&#x60;&#x60;
+   */
   closeDialog(): void {
     this.dialogRef.close();
   }
-}</code></pre>
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">

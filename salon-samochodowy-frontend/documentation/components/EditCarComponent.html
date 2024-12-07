@@ -120,6 +120,14 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Opis</h3>
+    </p>
+    <p class="comment">
+        <p>Komponent odpowiedzialny za edycję informacji o samochodzie. Umożliwia użytkownikom dealerom modyfikowanie danych samochodu oraz otwieranie formularza edycji w oknie dialogowym.</p>
+<h2>Przykład użycia</h2>
+<b>Przykład :</b><div><pre class="line-numbers"><code class="language-html">&lt;edit-car [car]=&quot;selectedCar&quot;&gt;&lt;/edit-car&gt;</code></pre></div>
+    </p>
 
 
 
@@ -252,10 +260,16 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="30" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:30</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="77" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:77</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Inicjalizuje komponent i subskrybuje strumień aktualnego użytkownika, aby ustawić flagę <code>isDealer</code> na podstawie danych użytkownika.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -294,7 +308,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Zdefiniowane w <a href="" data-line="14" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:14</a></div>
+                                    <div class="io-line">Zdefiniowane w <a href="" data-line="31" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:31</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -328,19 +342,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="38"
-                                    class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:38</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="102"
+                                    class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:102</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Aktualizuje dane samochodu za pomocą usługi <code>CarService</code>. Po pomyślnej aktualizacji wyświetla komunikat o sukcesie, w przeciwnym razie informuje o błędzie.</p>
+<b>Przykład :</b><div><pre class="line-numbers"><code class="language-html">```typescript
+this.editCar();</code></pre></div><b>Przykład :</b><div><pre class="line-numbers"><code class="language-none"></code></pre></div></div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -365,19 +385,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="50"
-                                    class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:50</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="126"
+                                    class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:126</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Otwiera okno dialogowe z formularzem edycji samochodu. Po zamknięciu dialogu, jeśli wynik jest dostępny, aktualizuje dane samochodu i wywołuje metodę <code>editCar</code>.</p>
+<b>Przykład :</b><div><pre class="line-numbers"><code class="language-html">```typescript
+this.openEditCarDialog();</code></pre></div><b>Przykład :</b><div><pre class="line-numbers"><code class="language-none"></code></pre></div></div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -407,10 +433,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="30" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:30</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="77" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:77</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Usługa do zarządzania uwierzytelnianiem użytkowników.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -433,10 +465,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="28" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:28</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="59" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:59</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Usługa do zarządzania danymi samochodów.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -459,10 +497,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="29" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:29</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="68" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:68</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Serwis do otwierania okien dialogowych.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -484,10 +528,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="27" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:27</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="50" class="link-to-prism">src/app/components/edit-car/edit-car.component.ts:50</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flaga określająca, czy aktualnie zalogowany użytkownik jest dealerem.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -497,12 +547,22 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, inject, Input} from &#x27;@angular/core&#x27;;
-import {Car,CarService } from &#x27;../../services/car.service&#x27;;
-import {MatDialog} from &#x27;@angular/material/dialog&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, Input } from &#x27;@angular/core&#x27;;
+import { Car, CarService } from &#x27;../../services/car.service&#x27;;
+import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
 import { ShowCarForm } from &#x27;../show-car-form/show-car-form.component&#x27;;
 import { AuthenticationService } from &#x27;../../services/authentication.service&#x27;;
 
+/**
+ * @module EditCarComponent
+ * @description
+ * Komponent odpowiedzialny za edycję informacji o samochodzie. Umożliwia użytkownikom dealerom modyfikowanie danych samochodu oraz otwieranie formularza edycji w oknie dialogowym.
+ *
+ * ## Przykład użycia
+ * &#x60;&#x60;&#x60;html
+ * &lt;edit-car [car]&#x3D;&quot;selectedCar&quot;&gt;&lt;/edit-car&gt;
+ * &#x60;&#x60;&#x60;
+ */
 @Component({
   selector: &#x27;edit-car&#x27;,
   imports: [],
@@ -510,6 +570,13 @@ import { AuthenticationService } from &#x27;../../services/authentication.servic
   styleUrl: &#x27;./edit-car.component.css&#x27;
 })
 export class EditCarComponent {
+  
+  /**
+   * @input
+   * @type {Car}
+   * @description
+   * Obiekt reprezentujący samochód do edycji. Zawiera wszystkie niezbędne informacje o samochodzie.
+   */
   @Input() car: Car &#x3D; {
     id: 0,
     ownerId: 0,
@@ -523,20 +590,67 @@ export class EditCarComponent {
     isAvailableForRent: true,
   };
 
+  /**
+   * @property
+   * @type {boolean}
+   * @description
+   * Flaga określająca, czy aktualnie zalogowany użytkownik jest dealerem.
+   */
   isDealer &#x3D; false;
+
+  /**
+   * @private
+   * @property
+   * @type {CarService}
+   * @description
+   * Usługa do zarządzania danymi samochodów.
+   */
   private carService &#x3D; inject(CarService);
+
+  /**
+   * @private
+   * @property
+   * @type {MatDialog}
+   * @description
+   * Serwis do otwierania okien dialogowych.
+   */
   private dialog &#x3D; inject(MatDialog);
+
+  /**
+   * @private
+   * @property
+   * @type {AuthenticationService}
+   * @description
+   * Usługa do zarządzania uwierzytelnianiem użytkowników.
+   */
   private authService &#x3D; inject(AuthenticationService);
 
+  /**
+   * @constructor
+   * @description
+   * Inicjalizuje komponent i subskrybuje strumień aktualnego użytkownika, aby ustawić flagę &#x60;isDealer&#x60; na podstawie danych użytkownika.
+   */
   constructor() {
     // Subskrybuj strumień currentUser$
     this.authService.currentUser$.subscribe((user) &#x3D;&gt; {
       this.isDealer &#x3D; user?.isDealer ?? false; // Ustaw flagę na podstawie danych użytkownika
     });
   }
-  editCar(){
-    this.carService.updateCar(this.car.id,this.car).subscribe(
-      (updatedCar) &#x3D;&gt;{
+
+  /**
+   * @method
+   * @name editCar
+   * @description
+   * Aktualizuje dane samochodu za pomocą usługi &#x60;CarService&#x60;. Po pomyślnej aktualizacji wyświetla komunikat o sukcesie, w przeciwnym razie informuje o błędzie.
+   *
+   * @example
+   * &#x60;&#x60;&#x60;typescript
+   * this.editCar();
+   * &#x60;&#x60;&#x60;
+   */
+  editCar() {
+    this.carService.updateCar(this.car.id, this.car).subscribe(
+      (updatedCar) &#x3D;&gt; {
         console.log(&#x27;Samochód zmodyfikowany:&#x27;, updatedCar);
         alert(&#x27;Samochód zmodyfikowany!&#x27;);
       },
@@ -546,6 +660,18 @@ export class EditCarComponent {
       }
     );
   }
+
+  /**
+   * @method
+   * @name openEditCarDialog
+   * @description
+   * Otwiera okno dialogowe z formularzem edycji samochodu. Po zamknięciu dialogu, jeśli wynik jest dostępny, aktualizuje dane samochodu i wywołuje metodę &#x60;editCar&#x60;.
+   *
+   * @example
+   * &#x60;&#x60;&#x60;typescript
+   * this.openEditCarDialog();
+   * &#x60;&#x60;&#x60;
+   */
   openEditCarDialog(): void {
     const dialogRef &#x3D; this.dialog.open(ShowCarForm, {
       width: &#x27;600px&#x27;,
@@ -559,7 +685,8 @@ export class EditCarComponent {
       }
     });
   }
-}</code></pre>
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">

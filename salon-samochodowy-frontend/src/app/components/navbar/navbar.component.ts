@@ -11,6 +11,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { Car, CarService } from '../../services/car.service';
 import { ShowCarForm } from '../show-car-form/show-car-form.component';
 
+/**
+ * @module NavbarComponent
+ * @description
+ * Komponent nawigacyjny aplikacji, odpowiedzialny za wyświetlanie paska nawigacji, zarządzanie autoryzacją użytkowników oraz operacje związane z samochodami.
+ *
+ * ## Przykład użycia
+ * ```html
+ * <app-navbar></app-navbar>
+ * ```
+ */
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -24,10 +34,30 @@ import { ShowCarForm } from '../show-car-form/show-car-form.component';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnDestroy {
+  
+  /**
+   * @property
+   * @type {any}
+   * @description
+   * Obiekt reprezentujący aktualnie zalogowanego użytkownika. Może zawierać różne informacje o użytkowniku.
+   */
   currentUser: any = null;
+
+  /**
+   * @private
+   * @property
+   * @type {Subscription}
+   * @description
+   * Subskrypcja strumienia aktualnego użytkownika, używana do odsubskrybowania w metodzie `ngOnDestroy`.
+   */
   private userSubscription: Subscription;
 
-  // Definiujemy obiekt samochodu
+  /**
+   * @property
+   * @type {Car}
+   * @description
+   * Obiekt reprezentujący samochód do dodania. Zawiera wszystkie niezbędne informacje o samochodzie.
+   */
   car: Car = {
     id: 0,
     ownerId: 0,
@@ -41,6 +71,14 @@ export class NavbarComponent implements OnDestroy {
     isAvailableForRent: true,
   };
 
+  /**
+   * @constructor
+   * @param {AuthenticationService} authService - Usługa do zarządzania uwierzytelnianiem użytkowników.
+   * @param {MatDialog} dialog - Serwis do otwierania okien dialogowych.
+   * @param {CarService} carService - Usługa do zarządzania danymi samochodów.
+   * @description
+   * Inicjalizuje komponent, subskrybuje strumień aktualnego użytkownika i ustawia właściwość `currentUser`.
+   */
   constructor(
     private authService: AuthenticationService,
     private dialog: MatDialog,
@@ -52,7 +90,17 @@ export class NavbarComponent implements OnDestroy {
     });
   }
 
-  // Metoda otwierająca modal logowania/rejestracji
+  /**
+   * @method
+   * @name openAuthModal
+   * @description
+   * Otwiera modalne okno logowania/rejestracji użytkownika przy użyciu Bootstrap Modal.
+   *
+   * @example
+   * ```typescript
+   * this.openAuthModal();
+   * ```
+   */
   openAuthModal() {
     const modalElement = document.getElementById('authModal');
     if (modalElement) {
@@ -61,7 +109,17 @@ export class NavbarComponent implements OnDestroy {
     }
   }
 
-  // Metoda wylogowania użytkownika z odświeżeniem strony
+  /**
+   * @method
+   * @name logout
+   * @description
+   * Wylogowuje aktualnie zalogowanego użytkownika za pomocą usługi `AuthenticationService`. Po pomyślnym wylogowaniu odświeża stronę. W przypadku błędu wyświetla odpowiedni komunikat.
+   *
+   * @example
+   * ```typescript
+   * this.logout();
+   * ```
+   */
   logout() {
     this.authService.logout().subscribe({
       next: () => {
@@ -74,12 +132,27 @@ export class NavbarComponent implements OnDestroy {
     });
   }
 
-  // Zwalniamy zasoby przy zniszczeniu komponentu
+  /**
+   * @method
+   * @name ngOnDestroy
+   * @description
+   * Metoda cyklu życia Angular, wywoływana tuż przed zniszczeniem komponentu. Używana do zwolnienia zasobów, takich jak subskrypcje.
+   */
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
   }
 
-  // Metody związane z dodawaniem samochodu
+  /**
+   * @method
+   * @name addCar
+   * @description
+   * Dodaje nowy samochód za pomocą usługi `CarService`. Po pomyślnym dodaniu wyświetla komunikat o sukcesie, w przeciwnym razie informuje o błędzie.
+   *
+   * @example
+   * ```typescript
+   * this.addCar();
+   * ```
+   */
   addCar() {
     this.carService.addCar(this.car).subscribe(
       (newCar) => {
@@ -93,6 +166,17 @@ export class NavbarComponent implements OnDestroy {
     );
   }
 
+  /**
+   * @method
+   * @name openAddCarDialog
+   * @description
+   * Otwiera okno dialogowe z formularzem dodawania samochodu. Po zamknięciu dialogu, jeśli wynik jest dostępny, aktualizuje obiekt `car` i wywołuje metodę `addCar`.
+   *
+   * @example
+   * ```typescript
+   * this.openAddCarDialog();
+   * ```
+   */
   openAddCarDialog(): void {
     const dialogRef = this.dialog.open(ShowCarForm, {
       width: '600px',

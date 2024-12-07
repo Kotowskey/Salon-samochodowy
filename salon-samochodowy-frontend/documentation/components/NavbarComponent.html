@@ -124,6 +124,14 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Opis</h3>
+    </p>
+    <p class="comment">
+        <p>Komponent nawigacyjny aplikacji, odpowiedzialny za wyświetlanie paska nawigacji, zarządzanie autoryzacją użytkowników oraz operacje związane z samochodami.</p>
+<h2>Przykład użycia</h2>
+<b>Przykład :</b><div><pre class="line-numbers"><code class="language-html">&lt;app-navbar&gt;&lt;/app-navbar&gt;</code></pre></div>
+    </p>
 
 
     <p class="comment">
@@ -265,12 +273,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="42" class="link-to-prism">src/app/components/navbar/navbar.component.ts:42</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="72" class="link-to-prism">src/app/components/navbar/navbar.component.ts:72</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Inicjalizuje komponent, subskrybuje strumień aktualnego użytkownika i ustawia właściwość <code>currentUser</code>.</p>
+</div>
                             <div>
                                     <b>Parametry :</b>
                                     <table class="params">
@@ -279,6 +289,7 @@
                                                 <td>Nazwa</td>
                                                     <td>Typ</td>
                                                 <td>Opcjonalne</td>
+                                                    <td>Opis</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -293,6 +304,12 @@
                                                             Nie
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Usługa do zarządzania uwierzytelnianiem użytkowników.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>dialog</td>
@@ -305,6 +322,12 @@
                                                             Nie
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Serwis do otwierania okien dialogowych.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>carService</td>
@@ -317,6 +340,12 @@
                                                             Nie
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Usługa do zarządzania danymi samochodów.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -356,19 +385,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="83"
-                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:83</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="156"
+                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:156</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Dodaje nowy samochód za pomocą usługi <code>CarService</code>. Po pomyślnym dodaniu wyświetla komunikat o sukcesie, w przeciwnym razie informuje o błędzie.</p>
+<b>Przykład :</b><div><pre class="line-numbers"><code class="language-html">```typescript
+this.addCar();</code></pre></div><b>Przykład :</b><div><pre class="line-numbers"><code class="language-none"></code></pre></div></div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -393,19 +428,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="65"
-                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:65</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="123"
+                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:123</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Wylogowuje aktualnie zalogowanego użytkownika za pomocą usługi <code>AuthenticationService</code>. Po pomyślnym wylogowaniu odświeża stronę. W przypadku błędu wyświetla odpowiedni komunikat.</p>
+<b>Przykład :</b><div><pre class="line-numbers"><code class="language-html">```typescript
+this.logout();</code></pre></div><b>Przykład :</b><div><pre class="line-numbers"><code class="language-none"></code></pre></div></div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -430,14 +471,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="78"
-                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:78</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="141"
+                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:141</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Metoda cyklu życia Angular, wywoływana tuż przed zniszczeniem komponentu. Używana do zwolnienia zasobów, takich jak subskrypcje.</p>
+</div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -467,19 +510,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="96"
-                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:96</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="180"
+                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:180</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Otwiera okno dialogowe z formularzem dodawania samochodu. Po zamknięciu dialogu, jeśli wynik jest dostępny, aktualizuje obiekt <code>car</code> i wywołuje metodę <code>addCar</code>.</p>
+<b>Przykład :</b><div><pre class="line-numbers"><code class="language-html">```typescript
+this.openAddCarDialog();</code></pre></div><b>Przykład :</b><div><pre class="line-numbers"><code class="language-none"></code></pre></div></div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -504,19 +553,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="56"
-                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:56</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="104"
+                                    class="link-to-prism">src/app/components/navbar/navbar.component.ts:104</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Otwiera modalne okno logowania/rejestracji użytkownika przy użyciu Bootstrap Modal.</p>
+<b>Przykład :</b><div><pre class="line-numbers"><code class="language-html">```typescript
+this.openAuthModal();</code></pre></div><b>Przykład :</b><div><pre class="line-numbers"><code class="language-none"></code></pre></div></div>
 
                         <div class="io-description">
                             <b>Zwraca : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -562,10 +617,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="31" class="link-to-prism">src/app/components/navbar/navbar.component.ts:31</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="61" class="link-to-prism">src/app/components/navbar/navbar.component.ts:61</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Obiekt reprezentujący samochód do dodania. Zawiera wszystkie niezbędne informacje o samochodzie.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -593,10 +654,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="27" class="link-to-prism">src/app/components/navbar/navbar.component.ts:27</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="44" class="link-to-prism">src/app/components/navbar/navbar.component.ts:44</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Obiekt reprezentujący aktualnie zalogowanego użytkownika. Może zawierać różne informacje o użytkowniku.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -620,10 +687,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="28" class="link-to-prism">src/app/components/navbar/navbar.component.ts:28</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="53" class="link-to-prism">src/app/components/navbar/navbar.component.ts:53</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Subskrypcja strumienia aktualnego użytkownika, używana do odsubskrybowania w metodzie <code>ngOnDestroy</code>.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -646,6 +719,16 @@ import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
 import { Car, CarService } from &#x27;../../services/car.service&#x27;;
 import { ShowCarForm } from &#x27;../show-car-form/show-car-form.component&#x27;;
 
+/**
+ * @module NavbarComponent
+ * @description
+ * Komponent nawigacyjny aplikacji, odpowiedzialny za wyświetlanie paska nawigacji, zarządzanie autoryzacją użytkowników oraz operacje związane z samochodami.
+ *
+ * ## Przykład użycia
+ * &#x60;&#x60;&#x60;html
+ * &lt;app-navbar&gt;&lt;/app-navbar&gt;
+ * &#x60;&#x60;&#x60;
+ */
 @Component({
   selector: &#x27;app-navbar&#x27;,
   standalone: true,
@@ -659,10 +742,30 @@ import { ShowCarForm } from &#x27;../show-car-form/show-car-form.component&#x27;
   styleUrls: [&#x27;./navbar.component.css&#x27;],
 })
 export class NavbarComponent implements OnDestroy {
+  
+  /**
+   * @property
+   * @type {any}
+   * @description
+   * Obiekt reprezentujący aktualnie zalogowanego użytkownika. Może zawierać różne informacje o użytkowniku.
+   */
   currentUser: any &#x3D; null;
+
+  /**
+   * @private
+   * @property
+   * @type {Subscription}
+   * @description
+   * Subskrypcja strumienia aktualnego użytkownika, używana do odsubskrybowania w metodzie &#x60;ngOnDestroy&#x60;.
+   */
   private userSubscription: Subscription;
 
-  // Definiujemy obiekt samochodu
+  /**
+   * @property
+   * @type {Car}
+   * @description
+   * Obiekt reprezentujący samochód do dodania. Zawiera wszystkie niezbędne informacje o samochodzie.
+   */
   car: Car &#x3D; {
     id: 0,
     ownerId: 0,
@@ -676,6 +779,14 @@ export class NavbarComponent implements OnDestroy {
     isAvailableForRent: true,
   };
 
+  /**
+   * @constructor
+   * @param {AuthenticationService} authService - Usługa do zarządzania uwierzytelnianiem użytkowników.
+   * @param {MatDialog} dialog - Serwis do otwierania okien dialogowych.
+   * @param {CarService} carService - Usługa do zarządzania danymi samochodów.
+   * @description
+   * Inicjalizuje komponent, subskrybuje strumień aktualnego użytkownika i ustawia właściwość &#x60;currentUser&#x60;.
+   */
   constructor(
     private authService: AuthenticationService,
     private dialog: MatDialog,
@@ -687,7 +798,17 @@ export class NavbarComponent implements OnDestroy {
     });
   }
 
-  // Metoda otwierająca modal logowania/rejestracji
+  /**
+   * @method
+   * @name openAuthModal
+   * @description
+   * Otwiera modalne okno logowania/rejestracji użytkownika przy użyciu Bootstrap Modal.
+   *
+   * @example
+   * &#x60;&#x60;&#x60;typescript
+   * this.openAuthModal();
+   * &#x60;&#x60;&#x60;
+   */
   openAuthModal() {
     const modalElement &#x3D; document.getElementById(&#x27;authModal&#x27;);
     if (modalElement) {
@@ -696,7 +817,17 @@ export class NavbarComponent implements OnDestroy {
     }
   }
 
-  // Metoda wylogowania użytkownika z odświeżeniem strony
+  /**
+   * @method
+   * @name logout
+   * @description
+   * Wylogowuje aktualnie zalogowanego użytkownika za pomocą usługi &#x60;AuthenticationService&#x60;. Po pomyślnym wylogowaniu odświeża stronę. W przypadku błędu wyświetla odpowiedni komunikat.
+   *
+   * @example
+   * &#x60;&#x60;&#x60;typescript
+   * this.logout();
+   * &#x60;&#x60;&#x60;
+   */
   logout() {
     this.authService.logout().subscribe({
       next: () &#x3D;&gt; {
@@ -709,12 +840,27 @@ export class NavbarComponent implements OnDestroy {
     });
   }
 
-  // Zwalniamy zasoby przy zniszczeniu komponentu
+  /**
+   * @method
+   * @name ngOnDestroy
+   * @description
+   * Metoda cyklu życia Angular, wywoływana tuż przed zniszczeniem komponentu. Używana do zwolnienia zasobów, takich jak subskrypcje.
+   */
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
   }
 
-  // Metody związane z dodawaniem samochodu
+  /**
+   * @method
+   * @name addCar
+   * @description
+   * Dodaje nowy samochód za pomocą usługi &#x60;CarService&#x60;. Po pomyślnym dodaniu wyświetla komunikat o sukcesie, w przeciwnym razie informuje o błędzie.
+   *
+   * @example
+   * &#x60;&#x60;&#x60;typescript
+   * this.addCar();
+   * &#x60;&#x60;&#x60;
+   */
   addCar() {
     this.carService.addCar(this.car).subscribe(
       (newCar) &#x3D;&gt; {
@@ -728,6 +874,17 @@ export class NavbarComponent implements OnDestroy {
     );
   }
 
+  /**
+   * @method
+   * @name openAddCarDialog
+   * @description
+   * Otwiera okno dialogowe z formularzem dodawania samochodu. Po zamknięciu dialogu, jeśli wynik jest dostępny, aktualizuje obiekt &#x60;car&#x60; i wywołuje metodę &#x60;addCar&#x60;.
+   *
+   * @example
+   * &#x60;&#x60;&#x60;typescript
+   * this.openAddCarDialog();
+   * &#x60;&#x60;&#x60;
+   */
   openAddCarDialog(): void {
     const dialogRef &#x3D; this.dialog.open(ShowCarForm, {
       width: &#x27;600px&#x27;,
@@ -741,7 +898,8 @@ export class NavbarComponent implements OnDestroy {
       }
     });
   }
-}</code></pre>
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
