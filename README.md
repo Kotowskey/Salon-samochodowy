@@ -21,7 +21,7 @@
    ```
 
 ## Dokumentacja
-2. Uruchom serwer dokumentacyjny:
+1. Uruchom serwer dokumentacyjny:
    ```bash
    compodoc -s -p tsconfig.json --language pl-PL
    ```
