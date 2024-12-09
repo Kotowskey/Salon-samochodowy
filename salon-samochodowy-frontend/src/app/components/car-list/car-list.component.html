@@ -28,7 +28,6 @@
           <p class="card-text">
             <strong>Rok:</strong> {{ car.year }}<br>
             <strong>Moc:</strong> {{ car.horsePower }} KM<br>
-            <strong>VIN:</strong> {{ car.vin }}<br>
             <strong>Dostępny do wynajmu:</strong> 
             <span class="badge" [ngClass]="car.isAvailableForRent ? 'bg-success' : 'bg-danger'">
               {{ car.isAvailableForRent ? 'Tak' : 'Nie' }}
@@ -72,7 +71,30 @@
             <p class="card-text">
               <strong>Rok:</strong> {{ car.year }}<br>
               <strong>Moc:</strong> {{ car.horsePower }} KM<br>
-              <strong>VIN:</strong> {{ car.vin }}<br>
+            </p>
+            <div class="mt-auto">
+              <h6 class="card-subtitle mb-2 text-muted">{{ car.price | currency:'PLN' }}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+}
+
+@if(rentedCars.length > 0 && logged)
+{
+  <div class="container my-4">
+    <h2 class="mb-4 text-center">Lista wynajętych samochodów</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let car of rentedCars">
+        <div class="card h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+            <p class="card-text">
+              <strong>Rok:</strong> {{ car.year }}<br>
+              <strong>Moc:</strong> {{ car.horsePower }} KM<br>
             </p>
             <div class="mt-auto">
               <h6 class="card-subtitle mb-2 text-muted">{{ car.price | currency:'PLN' }}</h6>

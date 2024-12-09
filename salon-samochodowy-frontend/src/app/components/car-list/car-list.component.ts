@@ -34,6 +34,7 @@ export class CarListComponent implements OnInit {
     brandserch = "";
     cars: Car[] = [];
     ownedCars: Car[] = [];
+    rentedCars: Car[] = [];
     sortedCars: Car[] = [];
     filteredCars: Car[] = [];
     priceSortDirection: 'asc' | 'desc' = 'asc';
@@ -58,8 +59,16 @@ export class CarListComponent implements OnInit {
             // Aktualizacja ownedCars
             if (this.logged) {
                 this.ownedCars = this.cars.filter(car => car.ownerId === this.userId);
+                this.rentedCars = this.cars.filter(car => car.renterId === this.userId);
             } else {
                 this.ownedCars = [];
+                this.rentedCars = [];
+            }
+
+            if (this.logged) {
+                
+            } else {
+                
             }
 
             // Filtracja i sortowanie samochodów dostępnych do wynajmu
@@ -67,6 +76,7 @@ export class CarListComponent implements OnInit {
             this.filterCars();
         });
     }
+    
 
     sortByPrice(): void {
         if (this.priceSortDirection === 'asc') {
