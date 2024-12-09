@@ -14,5 +14,9 @@
   "type": "module",
   "devDependencies": {
     "sequelize-cli": "^6.6.2"
+  },
+  "scripts": {
+    "apidoc": "apidoc -i ./ -o ./doc"
   }
+  
 }

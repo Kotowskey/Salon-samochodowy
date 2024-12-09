@@ -1,0 +1,12 @@
+{
+    "name": "Car Management API",
+    "version": "1.0.0",
+    "description": "Dokumentacja API do zarządzania samochodami i użytkownikami",
+    "title": "Car Management API Documentation",
+    "url": "http://localhost:3000",
+    "template": {
+      "withCompare": true,
+      "withGenerator": true
+    }
+  }
+  

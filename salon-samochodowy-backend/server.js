@@ -49,14 +49,37 @@ sequelize.authenticate()
         console.error('Nie udało się połączyć z bazą danych:', err);
     });
 
-// ROUTE: Strona główna API
+/**
+ * @api {get} / Strona główna API
+ * @apiName GetHome
+ * @apiGroup General
+ *
+ * @apiSuccess {String} message Witamy w API Zarządzanie Samochodami!
+ */
 app.get('/', (req, res) => {
     res.send('Witamy w API Zarządzanie Samochodami!');
 });
 
-// ====== AUTHENTICATION ======
-
-// REGISTER User
+/**
+ * @api {post} /register Rejestracja nowego użytkownika
+ * @apiName RegisterUser
+ * @apiGroup Authentication
+ *
+ * @apiParam {String} username Nazwa użytkownika
+ * @apiParam {String} password Hasło użytkownika
+ * @apiParam {String} firstName Imię użytkownika
+ * @apiParam {String} lastName Nazwisko użytkownika
+ *
+ * @apiSuccess (201) {String} message Informacja o sukcesie rejestracji
+ * @apiSuccess {Object} user Informacje o zarejestrowanym użytkowniku
+ * @apiSuccess {Number} user.id ID użytkownika
+ * @apiSuccess {String} user.username Nazwa użytkownika
+ * @apiSuccess {String} user.firstName Imię
+ * @apiSuccess {String} user.lastName Nazwisko
+ *
+ * @apiError (400) {String} error Nazwa użytkownika jest już zajęta
+ * @apiError (500) {String} error Opis błędu serwera
+ */
 app.post('/register', async (req, res) => {
     try {
         const { username, password, firstName, lastName } = req.body;
@@ -94,7 +117,25 @@ app.post('/register', async (req, res) => {
     }
 });
 
-// LOGIN User
+/**
+ * @api {post} /login Logowanie użytkownika
+ * @apiName LoginUser
+ * @apiGroup Authentication
+ *
+ * @apiParam {String} username Nazwa użytkownika
+ * @apiParam {String} password Hasło użytkownika
+ *
+ * @apiSuccess {String} message Informacja o sukcesie logowania
+ * @apiSuccess {Object} user Informacje o zalogowanym użytkowniku
+ * @apiSuccess {Number} user.id ID użytkownika
+ * @apiSuccess {String} user.username Nazwa użytkownika
+ * @apiSuccess {String} user.firstName Imię
+ * @apiSuccess {String} user.lastName Nazwisko
+ * @apiSuccess {Boolean} user.isDealer Status dealera
+ *
+ * @apiError (400) {String} error Nieprawidłowa nazwa użytkownika lub hasło
+ * @apiError (500) {String} error Opis błędu serwera
+ */
 app.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -130,7 +171,16 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// LOGOUT User
+/**
+ * @api {post} /logout Wylogowanie użytkownika
+ * @apiName LogoutUser
+ * @apiGroup Authentication
+ *
+ * @apiSuccess {String} message Informacja o sukcesie wylogowania
+ *
+ * @apiError (400) {String} error Brak aktywnej sesji
+ * @apiError (500) {String} error Nie udało się wylogować
+ */
 app.post('/logout', (req, res) => {
     if (req.session) {
         req.session.destroy(err => {
@@ -145,9 +195,15 @@ app.post('/logout', (req, res) => {
     }
 });
 
-// ====== CARS ======
-
-// GET all Cars
+/**
+ * @api {get} /cars Pobierz wszystkie samochody
+ * @apiName GetAllCars
+ * @apiGroup Cars
+ *
+ * @apiSuccess {Object[]} cars Lista samochodów
+ *
+ * @apiError (500) {String} error Opis błędu serwera
+ */
 app.get('/cars', async (req, res) => {
     try {
         const cars = await Car.findAll();
@@ -157,7 +213,18 @@ app.get('/cars', async (req, res) => {
     }
 });
 
-// GET Car by ID
+/**
+ * @api {get} /cars/:id Pobierz samochód po ID
+ * @apiName GetCarById
+ * @apiGroup Cars
+ *
+ * @apiParam {Number} id ID samochodu
+ *
+ * @apiSuccess {Object} car Informacje o samochodzie
+ *
+ * @apiError (404) {String} error Samochód nie znaleziony
+ * @apiError (500) {String} error Opis błędu serwera
+ */
 app.get('/cars/:id', async (req, res) => {
     try {
         const car = await Car.findByPk(req.params.id);
@@ -171,7 +238,27 @@ app.get('/cars/:id', async (req, res) => {
     }
 });
 
-// CREATE Car (chronione)
+/**
+ * @api {post} /cars Dodaj nowy samochód
+ * @apiName CreateCar
+ * @apiGroup Cars
+ * @apiPermission authenticated
+ *
+ * @apiHeader {String} Cookie Sesja użytkownika
+ *
+ * @apiParam {String} brand Marka samochodu
+ * @apiParam {String} model Model samochodu
+ * @apiParam {Number} year Rok produkcji
+ * @apiParam {String} vin Numer VIN
+ * @apiParam {Number} price Cena samochodu
+ * @apiParam {Number} horsePower Moc silnika
+ * @apiParam {Boolean} isAvailableForRent Status dostępności do wynajmu
+ *
+ * @apiSuccess (201) {Object} newCar Informacje o nowym samochodzie
+ *
+ * @apiError (401) {String} error Nieautoryzowany
+ * @apiError (500) {String} error Opis błędu serwera
+ */
 app.post('/cars', authenticateSession, async (req, res) => {
     try {
         const { brand, model, year, vin, price, horsePower, isAvailableForRent } = req.body;
@@ -190,7 +277,29 @@ app.post('/cars', authenticateSession, async (req, res) => {
     }
 });
 
-// UPDATE Car (chronione)
+/**
+ * @api {put} /cars/:id Aktualizuj informacje o samochodzie
+ * @apiName UpdateCar
+ * @apiGroup Cars
+ * @apiPermission authenticated
+ *
+ * @apiHeader {String} Cookie Sesja użytkownika
+ *
+ * @apiParam {Number} id ID samochodu
+ * @apiParam {String} brand Marka samochodu
+ * @apiParam {String} model Model samochodu
+ * @apiParam {Number} year Rok produkcji
+ * @apiParam {String} vin Numer VIN
+ * @apiParam {Number} price Cena samochodu
+ * @apiParam {Number} horsePower Moc silnika
+ * @apiParam {Boolean} isAvailableForRent Status dostępności do wynajmu
+ *
+ * @apiSuccess {Object} car Zaktualizowane informacje o samochodzie
+ *
+ * @apiError (401) {String} error Nieautoryzowany
+ * @apiError (404) {String} error Samochód nie znaleziony
+ * @apiError (500) {String} error Opis błędu serwera
+ */
 app.put('/cars/:id', authenticateSession, async (req, res) => {
     try {
         const { brand, model, year, vin, price, horsePower, isAvailableForRent } = req.body;
@@ -206,25 +315,58 @@ app.put('/cars/:id', authenticateSession, async (req, res) => {
     }
 });
 
-// DELETE Car (chronione)
+/**
+ * @api {delete} /cars/:id Usuń samochód
+ * @apiName DeleteCar
+ * @apiGroup Cars
+ * @apiPermission authenticated, dealer
+ *
+ * @apiHeader {String} Cookie Sesja użytkownika
+ *
+ * @apiParam {Number} id ID samochodu
+ *
+ * @apiSuccess {String} message Informacja o sukcesie usunięcia
+ *
+ * @apiError (401) {String} error Nieautoryzowany
+ * @apiError (403) {String} error Brak uprawnień do usuwania samochodów
+ * @apiError (500) {String} error Opis błędu serwera
+ */
 app.delete('/cars/:id', authenticateSession, async (req, res) => {
     const userId = req.session.userId;
     const carId = req.params.id;
   
-    // Sprawdź, czy użytkownik jest dealerem
-    const user = await User.findByPk(userId);
-    if (!user || !user.isDealer) {
-      return res.status(403).json({ error: 'Brak uprawnień do usuwania samochodów' });
-    }
+    try {
+        // Sprawdź, czy użytkownik jest dealerem
+        const user = await User.findByPk(userId);
+        if (!user || !user.isDealer) {
+            return res.status(403).json({ error: 'Brak uprawnień do usuwania samochodów' });
+        }
   
-    // Usuń samochód
-    await Car.destroy({ where: { id: carId } });
-    res.status(200).json({ message: 'Samochód usunięty.' });
-  });
+        // Usuń samochód
+        const deleted = await Car.destroy({ where: { id: carId } });
+        if (deleted) {
+            res.status(200).json({ message: 'Samochód usunięty.' });
+        } else {
+            res.status(404).json({ error: 'Samochód nie znaleziony' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
-// ====== USERS ======
-
-// GET all Users (klientów) (chronione)
+/**
+ * @api {get} /users Pobierz wszystkich klientów
+ * @apiName GetAllUsers
+ * @apiGroup Users
+ * @apiPermission authenticated
+ *
+ * @apiHeader {String} Cookie Sesja użytkownika
+ *
+ * @apiSuccess {Object[]} users Lista klientów
+ *
+ * @apiError (401) {String} error Nieautoryzowany
+ * @apiError (500) {String} error Opis błędu serwera
+ */
 app.get('/users', authenticateSession, async (req, res) => {
     try {
         const users = await User.findAll({
@@ -236,7 +378,22 @@ app.get('/users', authenticateSession, async (req, res) => {
     }
 });
 
-// GET User by ID (chronione)
+/**
+ * @api {get} /users/:id Pobierz klienta po ID
+ * @apiName GetUserById
+ * @apiGroup Users
+ * @apiPermission authenticated
+ *
+ * @apiHeader {String} Cookie Sesja użytkownika
+ *
+ * @apiParam {Number} id ID użytkownika
+ *
+ * @apiSuccess {Object} user Informacje o kliencie
+ *
+ * @apiError (401) {String} error Nieautoryzowany
+ * @apiError (404) {String} error Klient nie znaleziony
+ * @apiError (500) {String} error Opis błędu serwera
+ */
 app.get('/users/:id', authenticateSession, async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
@@ -250,7 +407,27 @@ app.get('/users/:id', authenticateSession, async (req, res) => {
     }
 });
 
-// UPDATE User (klient) (chronione)
+/**
+ * @api {put} /users/:id Aktualizuj informacje o kliencie
+ * @apiName UpdateUser
+ * @apiGroup Users
+ * @apiPermission authenticated, self
+ *
+ * @apiHeader {String} Cookie Sesja użytkownika
+ *
+ * @apiParam {Number} id ID użytkownika
+ * @apiParam {String} username Nazwa użytkownika
+ * @apiParam {String} password Hasło użytkownika
+ * @apiParam {String} firstName Imię użytkownika
+ * @apiParam {String} lastName Nazwisko użytkownika
+ *
+ * @apiSuccess {Object} user Zaktualizowane informacje o kliencie
+ *
+ * @apiError (401) {String} error Nieautoryzowany
+ * @apiError (403) {String} error Nie masz uprawnień do edycji tego użytkownika
+ * @apiError (404) {String} error Klient nie znaleziony
+ * @apiError (500) {String} error Opis błędu serwera
+ */
 app.put('/users/:id', authenticateSession, async (req, res) => {
     try {
         const { username, password, firstName, lastName } = req.body;
@@ -271,7 +448,23 @@ app.put('/users/:id', authenticateSession, async (req, res) => {
     }
 });
 
-// DELETE User (klient) (chronione)
+/**
+ * @api {delete} /users/:id Usuń klienta
+ * @apiName DeleteUser
+ * @apiGroup Users
+ * @apiPermission authenticated, self
+ *
+ * @apiHeader {String} Cookie Sesja użytkownika
+ *
+ * @apiParam {Number} id ID użytkownika
+ *
+ * @apiSuccess {String} message Informacja o sukcesie usunięcia
+ *
+ * @apiError (401) {String} error Nieautoryzowany
+ * @apiError (403) {String} error Nie masz uprawnień do usunięcia tego użytkownika
+ * @apiError (404) {String} error Klient nie znaleziony
+ * @apiError (500) {String} error Opis błędu serwera
+ */
 app.delete('/users/:id', authenticateSession, async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
@@ -291,7 +484,24 @@ app.delete('/users/:id', authenticateSession, async (req, res) => {
     }
 });
 
-// RENT Car (chronione)
+/**
+ * @api {post} /cars/:id/rent Wypożycz samochód
+ * @apiName RentCar
+ * @apiGroup Cars
+ * @apiPermission authenticated
+ *
+ * @apiHeader {String} Cookie Sesja użytkownika
+ *
+ * @apiParam {Number} id ID samochodu
+ *
+ * @apiSuccess {String} message Informacja o sukcesie wypożyczenia
+ * @apiSuccess {Object} car Zaktualizowane informacje o samochodzie
+ *
+ * @apiError (400) {String} error Samochód jest już wynajęty
+ * @apiError (403) {String} error Nieautoryzowany dostęp do zwrotu samochodu
+ * @apiError (404) {String} error Samochód nie znaleziony
+ * @apiError (500) {String} error Opis błędu serwera
+ */
 app.post('/cars/:id/rent', authenticateSession, async (req, res) => {
     try {
         const carId = req.params.id;
@@ -319,7 +529,24 @@ app.post('/cars/:id/rent', authenticateSession, async (req, res) => {
     }
 });
 
-// RETURN Car (chronione)
+/**
+ * @api {post} /cars/:id/return Zwrot samochodu
+ * @apiName ReturnCar
+ * @apiGroup Cars
+ * @apiPermission authenticated, renter
+ *
+ * @apiHeader {String} Cookie Sesja użytkownika
+ *
+ * @apiParam {Number} id ID samochodu
+ *
+ * @apiSuccess {String} message Informacja o sukcesie zwrotu
+ * @apiSuccess {Object} car Zaktualizowane informacje o samochodzie
+ *
+ * @apiError (400) {String} error Samochód już jest dostępny
+ * @apiError (403) {String} error Nie możesz zwrócić tego samochodu, ponieważ nie jesteś jego wynajmującym
+ * @apiError (404) {String} error Samochód nie znaleziony
+ * @apiError (500) {String} error Opis błędu serwera
+ */
 app.post('/cars/:id/return', authenticateSession, async (req, res) => {
     try {
         const carId = req.params.id;
@@ -350,7 +577,21 @@ app.post('/cars/:id/return', authenticateSession, async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-//szukanie samochodu po użytkowniku
+
+/**
+ * @api {get} /cars/:id/renter Pobierz wynajmującego samochód
+ * @apiName GetCarRenter
+ * @apiGroup Cars
+ * @apiPermission none
+ *
+ * @apiParam {Number} id ID samochodu
+ *
+ * @apiSuccess {Number} carId ID samochodu
+ * @apiSuccess {Number} renterId ID wynajmującego
+ *
+ * @apiError (404) {String} error Samochód nie znaleziony
+ * @apiError (500) {String} error Opis błędu serwera
+ */
 app.get('/cars/:id/renter', async (req, res) => {
     const carId = req.params.id; // ID samochodu z parametru URL
     try {
@@ -366,7 +607,24 @@ app.get('/cars/:id/renter', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-// BUY Car (chronione)
+
+/**
+ * @api {post} /cars/:id/buy Kupno samochodu
+ * @apiName BuyCar
+ * @apiGroup Cars
+ * @apiPermission authenticated
+ *
+ * @apiHeader {String} Cookie Sesja użytkownika
+ *
+ * @apiParam {Number} id ID samochodu
+ *
+ * @apiSuccess {String} message Informacja o sukcesie kupna
+ * @apiSuccess {Object} car Zaktualizowane informacje o samochodzie
+ *
+ * @apiError (400) {String} error Wpłata wstępna nie może być większa niż cena samochodu
+ * @apiError (404) {String} error Samochód nie znaleziony
+ * @apiError (500) {String} error Opis błędu serwera
+ */
 app.post('/cars/:id/buy', authenticateSession, async (req, res) => {
     try {
         const carId = req.params.id;
@@ -394,7 +652,20 @@ app.post('/cars/:id/buy', authenticateSession, async (req, res) => {
     }
 });
 
-// ====== CURRENT USER ======
+/**
+ * @api {get} /current-user Pobierz aktualnie zalogowanego użytkownika
+ * @apiName GetCurrentUser
+ * @apiGroup Users
+ * @apiPermission authenticated
+ *
+ * @apiHeader {String} Cookie Sesja użytkownika
+ *
+ * @apiSuccess {Object} user Informacje o aktualnie zalogowanym użytkowniku
+ *
+ * @apiError (401) {String} error Nieautoryzowany
+ * @apiError (404) {String} error Użytkownik nie znaleziony
+ * @apiError (500) {String} error Opis błędu serwera
+ */
 app.get('/current-user', authenticateSession, async (req, res) => {
     try {
         const user = await User.findByPk(req.session.userId, {
@@ -410,7 +681,29 @@ app.get('/current-user', authenticateSession, async (req, res) => {
     }
 });
 
-// LEASING Car
+/**
+ * @api {post} /cars/:id/leasing Leasing samochodu
+ * @apiName LeaseCar
+ * @apiGroup Cars
+ * @apiPermission none
+ *
+ * @apiParam {Number} id ID samochodu
+ * @apiParam {Number} downPayment Wpłata wstępna
+ * @apiParam {Number} months Liczba miesięcy
+ *
+ * @apiSuccess {Number} carId ID samochodu
+ * @apiSuccess {String} carBrand Marka samochodu
+ * @apiSuccess {String} carModel Model samochodu
+ * @apiSuccess {Number} totalPrice Cena samochodu
+ * @apiSuccess {Number} downPayment Wpłata wstępna
+ * @apiSuccess {Number} remainingAmount Pozostała kwota do spłaty
+ * @apiSuccess {Number} months Liczba miesięcy
+ * @apiSuccess {Number} monthlyRate Miesięczna rata
+ *
+ * @apiError (400) {String} error Nieprawidłowe dane wejściowe
+ * @apiError (404) {String} error Samochód nie znaleziony
+ * @apiError (500) {String} error Opis błędu serwera
+ */
 app.post('/cars/:id/leasing', async (req, res) => {
     try {
         const carId = req.params.id;
@@ -449,8 +742,31 @@ app.post('/cars/:id/leasing', async (req, res) => {
     }
 });
 
-// ===== DEALER =====
-// Endpoint do tworzenia nowych klientów przez dealerów
+/**
+ * @api {post} /admin/create-customer Tworzenie nowego klienta przez dealera
+ * @apiName CreateCustomer
+ * @apiGroup Admin
+ * @apiPermission authenticated, dealer
+ *
+ * @apiHeader {String} Cookie Sesja użytkownika
+ *
+ * @apiParam {String} username Nazwa użytkownika
+ * @apiParam {String} password Hasło użytkownika
+ * @apiParam {String} firstName Imię użytkownika
+ * @apiParam {String} lastName Nazwisko użytkownika
+ *
+ * @apiSuccess (201) {String} message Informacja o sukcesie dodania klienta
+ * @apiSuccess {Object} user Informacje o nowym kliencie
+ * @apiSuccess {Number} user.id ID użytkownika
+ * @apiSuccess {String} user.username Nazwa użytkownika
+ * @apiSuccess {String} user.firstName Imię
+ * @apiSuccess {String} user.lastName Nazwisko
+ * @apiSuccess {Boolean} user.isDealer Status dealera
+ *
+ * @apiError (400) {String} error Nazwa użytkownika jest już zajęta
+ * @apiError (403) {String} error Brak uprawnień do tworzenia klientów
+ * @apiError (500) {String} error Opis błędu serwera
+ */
 app.post('/admin/create-customer', authenticateSession, async (req, res) => {
     try {
         const { username, password, firstName, lastName } = req.body;
@@ -490,7 +806,6 @@ app.post('/admin/create-customer', authenticateSession, async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
 
 // ====== START SERWERA ======
 app.listen(PORT, () => {
