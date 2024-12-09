@@ -11,6 +11,7 @@ import { RentCarComponent } from '../rent-car/rent-car.component';
 import { CalculateLeasingComponent } from '../calculate-leasing/calculate-leasing.component';
 import { BuyCarComponent } from '../buy-car/buy-car.component';
 import { combineLatest } from 'rxjs';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @Component({
     selector: 'app-car-list',
@@ -39,6 +40,8 @@ export class CarListComponent implements OnInit {
     filteredCars: Car[] = [];
     priceSortDirection: 'asc' | 'desc' = 'asc';
     horsePowerSortDirection: 'asc' | 'desc' = 'asc';
+    isCollapsedOwned = true;
+    isCollapsedRented = true;
 
     constructor(
       private carService: CarService,
@@ -135,5 +138,11 @@ export class CarListComponent implements OnInit {
         this.filteredCars = this.sortedCars.filter(car =>
             car.brand.toLowerCase().includes(this.brandserch.toLowerCase())
         );
+    }
+    CollapseOwnedCar() {
+        this.isCollapsedOwned = !this.isCollapsedOwned;
+    }
+    CollapseRentedCar() {
+        this.isCollapsedRented = !this.isCollapsedRented;
     }
 }
