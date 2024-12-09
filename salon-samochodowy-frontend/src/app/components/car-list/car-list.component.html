@@ -85,8 +85,8 @@
 
 @if(rentedCars.length > 0 && logged)
 {
-  <div class="container my-4" (click)="CollapseRentedCar()">
-    <h2 class="mb-4 text-center">Lista wynajętych samochodów</h2>
+  <div class="container my-4">
+    <h2 class="mb-4 text-center" (click)="CollapseRentedCar()">Lista wynajętych samochodów</h2>
     <div class="row" [ngClass]="isCollapsedRented ? 'collapse show' : 'collapse'">
       <div class="col-md-4 mb-4" *ngFor="let car of rentedCars">
         <div class="card h-100">
