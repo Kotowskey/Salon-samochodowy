@@ -8,29 +8,6 @@ import {ReactiveFormsModule, FormControl, FormGroup} from '@angular/forms';
  * @module ShowCarForm
  * @description
  * Komponent odpowiedzialny za wyświetlanie formularza samochodu w oknie dialogowym. Umożliwia dodawanie nowych samochodów poprzez wypełnienie formularza.
- *
- * ## Przykład użycia
- * ```typescript
- * import { MatDialog } from '@angular/material/dialog';
- * import { ShowCarForm } from './show-car-form/show-car-form.component';
- *
- * // ...
- *
- * constructor(private dialog: MatDialog) {}
- *
- * openShowCarForm() {
- *   const dialogRef = this.dialog.open(ShowCarForm, {
- *     width: '600px',
- *     data: { ...carData },
- *   });
- *
- *   dialogRef.afterClosed().subscribe(result => {
- *     if (result) {
- *       // Obsłuż dodanie samochodu
- *     }
- *   });
- * }
- * ```
  */
 @Component({
   selector: 'show-car-form',
