@@ -40,6 +40,7 @@ export class CarListComponent implements OnInit {
     horsePowerSortDirection: 'asc' | 'desc' = 'asc';
     isCollapsedOwned = true;
     isCollapsedRented = true;
+    isCollapsedList = true;
 
     constructor(
       private carService: CarService,
@@ -142,5 +143,8 @@ export class CarListComponent implements OnInit {
     }
     CollapseRentedCar() {
         this.isCollapsedRented = !this.isCollapsedRented;
+    }
+    CollapseListCar() {
+        this.isCollapsedList = !this.isCollapsedList;
     }
 }

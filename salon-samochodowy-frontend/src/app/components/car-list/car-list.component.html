@@ -1,5 +1,5 @@
 <div class="container my-4">
-  <h2 class="mb-4 text-center">Lista dostępnych samochodów</h2>
+  <h2 class="mb-4 text-center" (click)="CollapseListCar()">Lista dostępnych samochodów</h2>
   
   <div class="d-flex justify-content-between align-items-center mb-3">
     <div>
@@ -15,7 +15,7 @@
     <input type="text" [(ngModel)]="brandserch" (ngModelChange)="onBrandSearchChange()" placeholder="Wyszukaj markę">
   </div>
 
-  <div class="row">
+  <div class="row" [ngClass]="isCollapsedList ? 'collapse show' : 'collapse'">
     <div class="col-md-4 mb-4" *ngFor="let car of filteredCars">
       <div class="card h-100 position-relative">
         <!-- Dodanie ikony info-circle do przycisku Szczegóły -->
