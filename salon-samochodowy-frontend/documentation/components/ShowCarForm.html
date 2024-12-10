@@ -129,26 +129,7 @@
     </p>
     <p class="comment">
         <p>Komponent odpowiedzialny za wyświetlanie formularza samochodu w oknie dialogowym. Umożliwia dodawanie nowych samochodów poprzez wypełnienie formularza.</p>
-<h2>Przykład użycia</h2>
-<b>Przykład :</b><div><pre class="line-numbers"><code class="language-typescript">import { MatDialog } from &#39;&#64;angular/material/dialog&#39;;
-import { ShowCarForm } from &#39;./show-car-form/show-car-form.component&#39;;
 
-// ...
-
-constructor(private dialog: MatDialog) {}
-
-openShowCarForm() {
-  const dialogRef = this.dialog.open(ShowCarForm, {
-    width: &#39;600px&#39;,
-    data: { ...carData },
-  });
-
-  dialogRef.afterClosed().subscribe(result =&gt; {
-    if (result) {
-      // Obsłuż dodanie samochodu
-    }
-  });
-}</code></pre></div>
     </p>
 
 
@@ -184,6 +165,7 @@ openShowCarForm() {
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
                             <code>FormsModule</code>
+                            <code>ReactiveFormsModule</code>
                 </td>
             </tr>
 
@@ -214,6 +196,20 @@ openShowCarForm() {
     <h3 id="index">Indeks</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Włąściwości</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#showcarform" >showcarform</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -261,12 +257,12 @@ openShowCarForm() {
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(dialogRef: <a href="../interfaces/Car.html" target="_self">MatDialogRef&lt;ShowCarForm&gt;</a>, data: <a href="../interfaces/Car.html" target="_self">Car</a>)</code>
+<code>constructor(fb: FormBuilder, dialogRef: <a href="../interfaces/Car.html" target="_self">MatDialogRef&lt;ShowCarForm&gt;</a>, data: <a href="../interfaces/Car.html" target="_self">Car</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Zdefiniowane w <a href="" data-line="61" class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:61</a></div>
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="38" class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:38</a></div>
                             </td>
                         </tr>
 
@@ -286,6 +282,20 @@ openShowCarForm() {
                                             </tr>
                                         </thead>
                                         <tbody>
+                                                <tr>
+                                                        <td>fb</td>
+                                                  
+                                                        <td>
+                                                                    <code>FormBuilder</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            Nie
+                                                    </td>
+                                                    
+                                                        <td>
+                                                        </td>
+                                                </tr>
                                                 <tr>
                                                         <td>dialogRef</td>
                                                   
@@ -365,7 +375,7 @@ openShowCarForm() {
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Zdefiniowane w <a href="" data-line="50" class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:50</a></div>
+                                    <div class="io-line">Zdefiniowane w <a href="" data-line="27" class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:27</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -399,8 +409,8 @@ openShowCarForm() {
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="88"
-                                    class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:88</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="75"
+                                    class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:75</a></div>
                         </td>
                     </tr>
 
@@ -442,8 +452,8 @@ this.addCar();</code></pre></div><b>Przykład :</b><div><pre class="line-numbers
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Zdefiniowane w <a href="" data-line="103"
-                                    class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:103</a></div>
+                            <div class="io-line">Zdefiniowane w <a href="" data-line="97"
+                                    class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:97</a></div>
                         </td>
                     </tr>
 
@@ -466,6 +476,38 @@ this.closeDialog();</code></pre></div><b>Przykład :</b><div><pre class="line-nu
         </tbody>
     </table>
 </section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Włąściwości
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showcarform"></a>
+                    <span class="name">
+                        <span ><b>showcarform</b></span>
+                        <a href="#showcarform"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Typ : </i>    <code>FormGroup</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Zdefiniowane w <a href="" data-line="20" class="link-to-prism">src/app/components/show-car-form/show-car-form.component.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
 
 </div>
 
@@ -473,46 +515,24 @@ this.closeDialog();</code></pre></div><b>Przykład :</b><div><pre class="line-nu
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, Input } from &#x27;@angular/core&#x27;;
 import { Car } from &#x27;../../services/car.service&#x27;;
-import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { FormBuilder, FormsModule, Validators } from &#x27;@angular/forms&#x27;;
 import { MatDialogRef, MAT_DIALOG_DATA } from &#x27;@angular/material/dialog&#x27;;
+import {ReactiveFormsModule, FormControl, FormGroup} from &#x27;@angular/forms&#x27;;
 
 /**
  * @module ShowCarForm
  * @description
  * Komponent odpowiedzialny za wyświetlanie formularza samochodu w oknie dialogowym. Umożliwia dodawanie nowych samochodów poprzez wypełnienie formularza.
- *
- * ## Przykład użycia
- * &#x60;&#x60;&#x60;typescript
- * import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
- * import { ShowCarForm } from &#x27;./show-car-form/show-car-form.component&#x27;;
- *
- * // ...
- *
- * constructor(private dialog: MatDialog) {}
- *
- * openShowCarForm() {
- *   const dialogRef &#x3D; this.dialog.open(ShowCarForm, {
- *     width: &#x27;600px&#x27;,
- *     data: { ...carData },
- *   });
- *
- *   dialogRef.afterClosed().subscribe(result &#x3D;&gt; {
- *     if (result) {
- *       // Obsłuż dodanie samochodu
- *     }
- *   });
- * }
- * &#x60;&#x60;&#x60;
  */
 @Component({
   selector: &#x27;show-car-form&#x27;,
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,ReactiveFormsModule],
   templateUrl: &#x27;./show-car-form.component.html&#x27;,
   styleUrls: [&#x27;./show-car-form.component.css&#x27;],
 })
 export class ShowCarForm {
-  
+  showcarform: FormGroup;
   /**
    * @input
    * @type {Car}
@@ -540,10 +560,20 @@ export class ShowCarForm {
    * Inicjalizuje komponent, przypisując przekazane dane do właściwości &#x60;car&#x60;.
    */
   constructor(
+    private fb: FormBuilder,
     private dialogRef: MatDialogRef&lt;ShowCarForm&gt;,
     @Inject(MAT_DIALOG_DATA) data: Car
   ) {
     Object.assign(this.car, data);
+    this.showcarform &#x3D; this.fb.group({
+      brand: [this.car.brand, Validators.required],
+      model: [this.car.model, Validators.required],
+      year: [this.car.year, [Validators.required, Validators.min(1886), Validators.max(new Date().getFullYear())]],
+      vin: [this.car.vin,[Validators.required, Validators.pattern(/^[A-HJ-NPR-Z0-9]{17}$/)]],//Dozwolone znaki w walidacji: Duże litery od A do Z z wyłączeniem I oraz O oraz liczby
+      price:[this.car.price, [Validators.required, Validators.min(0)]],
+      horsePower: [this.car.horsePower, [Validators.required, Validators.min(1)]],
+      isAvailableForRent: [this.car.isAvailableForRent]
+    })
   }
 
   /**
@@ -558,6 +588,13 @@ export class ShowCarForm {
    * &#x60;&#x60;&#x60;
    */
   addCar() {
+    this.car.brand &#x3D; this.showcarform.get(&#x27;brand&#x27;)!.value;
+    this.car.model &#x3D; this.showcarform.get(&#x27;model&#x27;)!.value;
+    this.car.year &#x3D; this.showcarform.get(&#x27;year&#x27;)!.value;
+    this.car.vin &#x3D; this.showcarform.get(&#x27;vin&#x27;)!.value;
+    this.car.price &#x3D; this.showcarform.get(&#x27;price&#x27;)!.value;
+    this.car.horsePower &#x3D; this.showcarform.get(&#x27;horsePower&#x27;)!.value;
+    this.car.isAvailableForRent &#x3D; this.showcarform.get(&#x27;isAvailableForRent&#x27;)!.value;
     this.dialogRef.close(this.car);
   }
 
@@ -582,73 +619,85 @@ export class ShowCarForm {
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;add-car-form&quot;&gt;
   &lt;h2&gt;Dodaj Samochód&lt;/h2&gt;
-  &lt;form (ngSubmit)&#x3D;&quot;addCar()&quot;&gt;
+  &lt;form [formGroup]&#x3D;&quot;showcarform&quot; (ngSubmit)&#x3D;&quot;addCar()&quot;&gt;
     &lt;label for&#x3D;&quot;brand&quot;&gt;Marka&lt;/label&gt;
     &lt;input
       type&#x3D;&quot;text&quot;
       id&#x3D;&quot;brand&quot;
-      [(ngModel)]&#x3D;&quot;car.brand&quot;
+      formControlName&#x3D;&quot;brand&quot;
       name&#x3D;&quot;brand&quot;
-      required
     /&gt;
-
+    @if(showcarform.get(&#x27;brand&#x27;)?.invalid &amp;&amp; (showcarform.get(&#x27;brand&#x27;)?.dirty || showcarform.get(&#x27;brand&#x27;)?.touched))
+    {
+      &lt;p class&#x3D;&quot;text-danger text-center&quot;&gt;Marka jest wymagana&lt;/p&gt;
+    }
     &lt;label for&#x3D;&quot;model&quot;&gt;Model&lt;/label&gt;
     &lt;input
       type&#x3D;&quot;text&quot;
       id&#x3D;&quot;model&quot;
-      [(ngModel)]&#x3D;&quot;car.model&quot;
+      formControlName&#x3D;&quot;model&quot;
       name&#x3D;&quot;model&quot;
-      required
     /&gt;
-
+    @if(showcarform.get(&#x27;model&#x27;)?.invalid &amp;&amp; (showcarform.get(&#x27;model&#x27;)?.dirty || showcarform.get(&#x27;model&#x27;)?.touched))
+    {
+      &lt;p class&#x3D;&quot;text-danger text-center&quot;&gt;Model jest wymagana&lt;/p&gt;
+    }
     &lt;label for&#x3D;&quot;year&quot;&gt;Rok&lt;/label&gt;
     &lt;input
       type&#x3D;&quot;number&quot;
       id&#x3D;&quot;year&quot;
-      [(ngModel)]&#x3D;&quot;car.year&quot;
+      formControlName&#x3D;&quot;year&quot;
       name&#x3D;&quot;year&quot;
-      required
     /&gt;
-
+    @if(showcarform.get(&#x27;year&#x27;)?.invalid &amp;&amp; (showcarform.get(&#x27;year&#x27;)?.dirty || showcarform.get(&#x27;year&#x27;)?.touched))
+    {
+      &lt;p class&#x3D;&quot;text-danger text-center&quot;&gt;Błędny rok, min 1886&lt;/p&gt;
+    }
     &lt;label for&#x3D;&quot;vin&quot;&gt;VIN&lt;/label&gt;
     &lt;input
       type&#x3D;&quot;text&quot;
       id&#x3D;&quot;vin&quot;
-      [(ngModel)]&#x3D;&quot;car.vin&quot;
+      formControlName&#x3D;&quot;vin&quot;
       name&#x3D;&quot;vin&quot;
-      required
     /&gt;
-
+    @if(showcarform.get(&#x27;vin&#x27;)?.invalid &amp;&amp; (showcarform.get(&#x27;vin&#x27;)?.dirty || showcarform.get(&#x27;vin&#x27;)?.touched))
+    {
+      &lt;p class&#x3D;&quot;text-danger text-center&quot;&gt;Błędny VIN, użyj tylko cyfr i dużych liter bez O oraz I&lt;/p&gt;
+    }
     &lt;label for&#x3D;&quot;price&quot;&gt;Cena&lt;/label&gt;
     &lt;input
       type&#x3D;&quot;number&quot;
       id&#x3D;&quot;price&quot;
-      [(ngModel)]&#x3D;&quot;car.price&quot;
+      formControlName&#x3D;&quot;price&quot;
       name&#x3D;&quot;price&quot;
-      required
     /&gt;
-
+    @if(showcarform.get(&#x27;price&#x27;)?.invalid &amp;&amp; (showcarform.get(&#x27;price&#x27;)?.dirty || showcarform.get(&#x27;price&#x27;)?.touched))
+    {
+      &lt;p class&#x3D;&quot;text-danger text-center&quot;&gt;Cena musi być liczbą dodatnią&lt;/p&gt;
+    }
     &lt;label for&#x3D;&quot;horsePower&quot;&gt;Moc&lt;/label&gt;
     &lt;input
       type&#x3D;&quot;number&quot;
       id&#x3D;&quot;horsePower&quot;
-      [(ngModel)]&#x3D;&quot;car.horsePower&quot;
+      formControlName&#x3D;&quot;horsePower&quot;
       name&#x3D;&quot;horsePower&quot;
-      required
     /&gt;
-
+    @if(showcarform.get(&#x27;horsePower&#x27;)?.invalid &amp;&amp; (showcarform.get(&#x27;horsePower&#x27;)?.dirty || showcarform.get(&#x27;horsePower&#x27;)?.touched))
+    {
+      &lt;p class&#x3D;&quot;text-danger text-center&quot;&gt;Moc nie może być mniejsza od 1&lt;/p&gt;
+    }
     &lt;label for&#x3D;&quot;isAvailableForRent&quot;&gt;
       Dostępny do wynajmu
       &lt;input
         type&#x3D;&quot;checkbox&quot;
         id&#x3D;&quot;isAvailableForRent&quot;
-        [(ngModel)]&#x3D;&quot;car.isAvailableForRent&quot;
+        formControlName&#x3D;&quot;isAvailableForRent&quot;
         name&#x3D;&quot;isAvailableForRent&quot;
       /&gt;
     &lt;/label&gt;
 
     &lt;div class&#x3D;&quot;add-car-form-buttons&quot;&gt;
-      &lt;button type&#x3D;&quot;submit&quot;&gt;Zapisz&lt;/button&gt;
+      &lt;button type&#x3D;&quot;submit&quot; [disabled]&#x3D;&quot;showcarform.invalid&quot;&gt;Zapisz&lt;/button&gt;
       &lt;button type&#x3D;&quot;button&quot; mat-button (click)&#x3D;&quot;closeDialog()&quot;&gt;Zamknij&lt;/button&gt;
     &lt;/div&gt;
   &lt;/form&gt;
@@ -722,7 +771,12 @@ export class ShowCarForm {
     justify-content: center;
     gap: 20px;
     margin-top: 20px;
-}</code></pre>
+}
+.add-car-form button:disabled{
+  background-color: #555;
+}
+
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="tree">
@@ -750,7 +804,7 @@ export class ShowCarForm {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="add-car-form">  <h2>Dodaj Samochód</h2>  <form (ngSubmit)="addCar()">    <label for="brand">Marka</label>    <input      type="text"      id="brand"      [(ngModel)]="car.brand"      name="brand"      required    />    <label for="model">Model</label>    <input      type="text"      id="model"      [(ngModel)]="car.model"      name="model"      required    />    <label for="year">Rok</label>    <input      type="number"      id="year"      [(ngModel)]="car.year"      name="year"      required    />    <label for="vin">VIN</label>    <input      type="text"      id="vin"      [(ngModel)]="car.vin"      name="vin"      required    />    <label for="price">Cena</label>    <input      type="number"      id="price"      [(ngModel)]="car.price"      name="price"      required    />    <label for="horsePower">Moc</label>    <input      type="number"      id="horsePower"      [(ngModel)]="car.horsePower"      name="horsePower"      required    />    <label for="isAvailableForRent">      Dostępny do wynajmu      <input        type="checkbox"        id="isAvailableForRent"        [(ngModel)]="car.isAvailableForRent"        name="isAvailableForRent"      />    </label>    <div class="add-car-form-buttons">      <button type="submit">Zapisz</button>      <button type="button" mat-button (click)="closeDialog()">Zamknij</button>    </div>  </form></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="add-car-form">  <h2>Dodaj Samochód</h2>  <form [formGroup]="showcarform" (ngSubmit)="addCar()">    <label for="brand">Marka</label>    <input      type="text"      id="brand"      formControlName="brand"      name="brand"    />    @if(showcarform.get(\'brand\')?.invalid && (showcarform.get(\'brand\')?.dirty || showcarform.get(\'brand\')?.touched))    {      <p class="text-danger text-center">Marka jest wymagana</p>    }    <label for="model">Model</label>    <input      type="text"      id="model"      formControlName="model"      name="model"    />    @if(showcarform.get(\'model\')?.invalid && (showcarform.get(\'model\')?.dirty || showcarform.get(\'model\')?.touched))    {      <p class="text-danger text-center">Model jest wymagana</p>    }    <label for="year">Rok</label>    <input      type="number"      id="year"      formControlName="year"      name="year"    />    @if(showcarform.get(\'year\')?.invalid && (showcarform.get(\'year\')?.dirty || showcarform.get(\'year\')?.touched))    {      <p class="text-danger text-center">Błędny rok, min 1886</p>    }    <label for="vin">VIN</label>    <input      type="text"      id="vin"      formControlName="vin"      name="vin"    />    @if(showcarform.get(\'vin\')?.invalid && (showcarform.get(\'vin\')?.dirty || showcarform.get(\'vin\')?.touched))    {      <p class="text-danger text-center">Błędny VIN, użyj tylko cyfr i dużych liter bez O oraz I</p>    }    <label for="price">Cena</label>    <input      type="number"      id="price"      formControlName="price"      name="price"    />    @if(showcarform.get(\'price\')?.invalid && (showcarform.get(\'price\')?.dirty || showcarform.get(\'price\')?.touched))    {      <p class="text-danger text-center">Cena musi być liczbą dodatnią</p>    }    <label for="horsePower">Moc</label>    <input      type="number"      id="horsePower"      formControlName="horsePower"      name="horsePower"    />    @if(showcarform.get(\'horsePower\')?.invalid && (showcarform.get(\'horsePower\')?.dirty || showcarform.get(\'horsePower\')?.touched))    {      <p class="text-danger text-center">Moc nie może być mniejsza od 1</p>    }    <label for="isAvailableForRent">      Dostępny do wynajmu      <input        type="checkbox"        id="isAvailableForRent"        formControlName="isAvailableForRent"        name="isAvailableForRent"      />    </label>    <div class="add-car-form-buttons">      <button type="submit" [disabled]="showcarform.invalid">Zapisz</button>      <button type="button" mat-button (click)="closeDialog()">Zamknij</button>    </div>  </form></div></div>'
     var COMPONENTS = [{'name': 'AddCarComponent', 'selector': 'app-add-car'},{'name': 'AddCustomerComponent', 'selector': 'app-add-customer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuyCarComponent', 'selector': 'app-buy-car'},{'name': 'CalculateLeasingComponent', 'selector': 'calculate-leasing'},{'name': 'CarDetailComponent', 'selector': 'app-car-detail'},{'name': 'CarListComponent', 'selector': 'app-car-list'},{'name': 'CustomerListComponent', 'selector': 'app-customer-list'},{'name': 'EditCarComponent', 'selector': 'edit-car'},{'name': 'LoginRegisterComponent', 'selector': 'app-login-register'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'RentCarComponent', 'selector': 'app-rent-car'},{'name': 'ShowCarForm', 'selector': 'show-car-form'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ShowCarForm'};
