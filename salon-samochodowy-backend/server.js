@@ -53,7 +53,6 @@ sequelize.authenticate()
  * @apiName GetHome
  * @apiGroup General
  *
- * @apiSuccess {String} message Witamy w API Zarządzanie Samochodami!
  */
 app.get('/', (req, res) => {
     res.send('Witamy w API Zarządzanie Samochodami!');
@@ -69,15 +68,6 @@ app.get('/', (req, res) => {
  * @apiParam {String} firstName Imię użytkownika
  * @apiParam {String} lastName Nazwisko użytkownika
  *
- * @apiSuccess (201) {String} message Informacja o sukcesie rejestracji
- * @apiSuccess {Object} user Informacje o zarejestrowanym użytkowniku
- * @apiSuccess {Number} user.id ID użytkownika
- * @apiSuccess {String} user.username Nazwa użytkownika
- * @apiSuccess {String} user.firstName Imię
- * @apiSuccess {String} user.lastName Nazwisko
- *
- * @apiError (400) {String} error Nazwa użytkownika jest już zajęta
- * @apiError (500) {String} error Opis błędu serwera
  */
 app.post('/register', async (req, res) => {
     try {
@@ -124,16 +114,6 @@ app.post('/register', async (req, res) => {
  * @apiParam {String} username Nazwa użytkownika
  * @apiParam {String} password Hasło użytkownika
  *
- * @apiSuccess {String} message Informacja o sukcesie logowania
- * @apiSuccess {Object} user Informacje o zalogowanym użytkowniku
- * @apiSuccess {Number} user.id ID użytkownika
- * @apiSuccess {String} user.username Nazwa użytkownika
- * @apiSuccess {String} user.firstName Imię
- * @apiSuccess {String} user.lastName Nazwisko
- * @apiSuccess {Boolean} user.isDealer Status dealera
- *
- * @apiError (400) {String} error Nieprawidłowa nazwa użytkownika lub hasło
- * @apiError (500) {String} error Opis błędu serwera
  */
 app.post('/login', async (req, res) => {
     try {
@@ -175,10 +155,6 @@ app.post('/login', async (req, res) => {
  * @apiName LogoutUser
  * @apiGroup Authentication
  *
- * @apiSuccess {String} message Informacja o sukcesie wylogowania
- *
- * @apiError (400) {String} error Brak aktywnej sesji
- * @apiError (500) {String} error Nie udało się wylogować
  */
 app.post('/logout', (req, res) => {
     if (req.session) {
@@ -199,9 +175,6 @@ app.post('/logout', (req, res) => {
  * @apiName GetAllCars
  * @apiGroup Cars
  *
- * @apiSuccess {Object[]} cars Lista samochodów
- *
- * @apiError (500) {String} error Opis błędu serwera
  */
 app.get('/cars', async (req, res) => {
     try {
@@ -219,10 +192,6 @@ app.get('/cars', async (req, res) => {
  *
  * @apiParam {Number} id ID samochodu
  *
- * @apiSuccess {Object} car Informacje o samochodzie
- *
- * @apiError (404) {String} error Samochód nie znaleziony
- * @apiError (500) {String} error Opis błędu serwera
  */
 app.get('/cars/:id', async (req, res) => {
     try {
@@ -253,10 +222,6 @@ app.get('/cars/:id', async (req, res) => {
  * @apiParam {Number} horsePower Moc silnika
  * @apiParam {Boolean} isAvailableForRent Status dostępności do wynajmu
  *
- * @apiSuccess (201) {Object} newCar Informacje o nowym samochodzie
- *
- * @apiError (401) {String} error Nieautoryzowany
- * @apiError (500) {String} error Opis błędu serwera
  */
 app.post('/cars', authenticateSession, async (req, res) => {
     try {
@@ -293,11 +258,6 @@ app.post('/cars', authenticateSession, async (req, res) => {
  * @apiParam {Number} horsePower Moc silnika
  * @apiParam {Boolean} isAvailableForRent Status dostępności do wynajmu
  *
- * @apiSuccess {Object} car Zaktualizowane informacje o samochodzie
- *
- * @apiError (401) {String} error Nieautoryzowany
- * @apiError (404) {String} error Samochód nie znaleziony
- * @apiError (500) {String} error Opis błędu serwera
  */
 app.put('/cars/:id', authenticateSession, async (req, res) => {
     try {
@@ -324,11 +284,6 @@ app.put('/cars/:id', authenticateSession, async (req, res) => {
  *
  * @apiParam {Number} id ID samochodu
  *
- * @apiSuccess {String} message Informacja o sukcesie usunięcia
- *
- * @apiError (401) {String} error Nieautoryzowany
- * @apiError (403) {String} error Brak uprawnień do usuwania samochodów
- * @apiError (500) {String} error Opis błędu serwera
  */
 app.delete('/cars/:id', authenticateSession, async (req, res) => {
     const userId = req.session.userId;
@@ -361,10 +316,6 @@ app.delete('/cars/:id', authenticateSession, async (req, res) => {
  *
  * @apiHeader {String} Cookie Sesja użytkownika
  *
- * @apiSuccess {Object[]} users Lista klientów
- *
- * @apiError (401) {String} error Nieautoryzowany
- * @apiError (500) {String} error Opis błędu serwera
  */
 app.get('/users', authenticateSession, async (req, res) => {
     try {
@@ -387,11 +338,6 @@ app.get('/users', authenticateSession, async (req, res) => {
  *
  * @apiParam {Number} id ID użytkownika
  *
- * @apiSuccess {Object} user Informacje o kliencie
- *
- * @apiError (401) {String} error Nieautoryzowany
- * @apiError (404) {String} error Klient nie znaleziony
- * @apiError (500) {String} error Opis błędu serwera
  */
 app.get('/users/:id', authenticateSession, async (req, res) => {
     try {
@@ -420,12 +366,6 @@ app.get('/users/:id', authenticateSession, async (req, res) => {
  * @apiParam {String} firstName Imię użytkownika
  * @apiParam {String} lastName Nazwisko użytkownika
  *
- * @apiSuccess {Object} user Zaktualizowane informacje o kliencie
- *
- * @apiError (401) {String} error Nieautoryzowany
- * @apiError (403) {String} error Nie masz uprawnień do edycji tego użytkownika
- * @apiError (404) {String} error Klient nie znaleziony
- * @apiError (500) {String} error Opis błędu serwera
  */
 app.put('/users/:id', authenticateSession, async (req, res) => {
     try {
@@ -457,12 +397,6 @@ app.put('/users/:id', authenticateSession, async (req, res) => {
  *
  * @apiParam {Number} id ID użytkownika
  *
- * @apiSuccess {String} message Informacja o sukcesie usunięcia
- *
- * @apiError (401) {String} error Nieautoryzowany
- * @apiError (403) {String} error Nie masz uprawnień do usunięcia tego użytkownika
- * @apiError (404) {String} error Klient nie znaleziony
- * @apiError (500) {String} error Opis błędu serwera
  */
 app.delete('/users/:id', authenticateSession, async (req, res) => {
     try {
@@ -493,13 +427,6 @@ app.delete('/users/:id', authenticateSession, async (req, res) => {
  *
  * @apiParam {Number} id ID samochodu
  *
- * @apiSuccess {String} message Informacja o sukcesie wypożyczenia
- * @apiSuccess {Object} car Zaktualizowane informacje o samochodzie
- *
- * @apiError (400) {String} error Samochód jest już wynajęty
- * @apiError (403) {String} error Nieautoryzowany dostęp do zwrotu samochodu
- * @apiError (404) {String} error Samochód nie znaleziony
- * @apiError (500) {String} error Opis błędu serwera
  */
 app.post('/cars/:id/rent', authenticateSession, async (req, res) => {
     try {
@@ -538,13 +465,6 @@ app.post('/cars/:id/rent', authenticateSession, async (req, res) => {
  *
  * @apiParam {Number} id ID samochodu
  *
- * @apiSuccess {String} message Informacja o sukcesie zwrotu
- * @apiSuccess {Object} car Zaktualizowane informacje o samochodzie
- *
- * @apiError (400) {String} error Samochód już jest dostępny
- * @apiError (403) {String} error Nie możesz zwrócić tego samochodu, ponieważ nie jesteś jego wynajmującym
- * @apiError (404) {String} error Samochód nie znaleziony
- * @apiError (500) {String} error Opis błędu serwera
  */
 app.post('/cars/:id/return', authenticateSession, async (req, res) => {
     try {
@@ -585,11 +505,6 @@ app.post('/cars/:id/return', authenticateSession, async (req, res) => {
  *
  * @apiParam {Number} id ID samochodu
  *
- * @apiSuccess {Number} carId ID samochodu
- * @apiSuccess {Number} renterId ID wynajmującego
- *
- * @apiError (404) {String} error Samochód nie znaleziony
- * @apiError (500) {String} error Opis błędu serwera
  */
 app.get('/cars/:id/renter', async (req, res) => {
     const carId = req.params.id; // ID samochodu z parametru URL
@@ -617,12 +532,6 @@ app.get('/cars/:id/renter', async (req, res) => {
  *
  * @apiParam {Number} id ID samochodu
  *
- * @apiSuccess {String} message Informacja o sukcesie kupna
- * @apiSuccess {Object} car Zaktualizowane informacje o samochodzie
- *
- * @apiError (400) {String} error Wpłata wstępna nie może być większa niż cena samochodu
- * @apiError (404) {String} error Samochód nie znaleziony
- * @apiError (500) {String} error Opis błędu serwera
  */
 app.post('/cars/:id/buy', authenticateSession, async (req, res) => {
     try {
@@ -659,11 +568,6 @@ app.post('/cars/:id/buy', authenticateSession, async (req, res) => {
  *
  * @apiHeader {String} Cookie Sesja użytkownika
  *
- * @apiSuccess {Object} user Informacje o aktualnie zalogowanym użytkowniku
- *
- * @apiError (401) {String} error Nieautoryzowany
- * @apiError (404) {String} error Użytkownik nie znaleziony
- * @apiError (500) {String} error Opis błędu serwera
  */
 app.get('/current-user', authenticateSession, async (req, res) => {
     try {
@@ -690,18 +594,6 @@ app.get('/current-user', authenticateSession, async (req, res) => {
  * @apiParam {Number} downPayment Wpłata wstępna
  * @apiParam {Number} months Liczba miesięcy
  *
- * @apiSuccess {Number} carId ID samochodu
- * @apiSuccess {String} carBrand Marka samochodu
- * @apiSuccess {String} carModel Model samochodu
- * @apiSuccess {Number} totalPrice Cena samochodu
- * @apiSuccess {Number} downPayment Wpłata wstępna
- * @apiSuccess {Number} remainingAmount Pozostała kwota do spłaty
- * @apiSuccess {Number} months Liczba miesięcy
- * @apiSuccess {Number} monthlyRate Miesięczna rata
- *
- * @apiError (400) {String} error Nieprawidłowe dane wejściowe
- * @apiError (404) {String} error Samochód nie znaleziony
- * @apiError (500) {String} error Opis błędu serwera
  */
 app.post('/cars/:id/leasing', async (req, res) => {
     try {
@@ -754,17 +646,6 @@ app.post('/cars/:id/leasing', async (req, res) => {
  * @apiParam {String} firstName Imię użytkownika
  * @apiParam {String} lastName Nazwisko użytkownika
  *
- * @apiSuccess (201) {String} message Informacja o sukcesie dodania klienta
- * @apiSuccess {Object} user Informacje o nowym kliencie
- * @apiSuccess {Number} user.id ID użytkownika
- * @apiSuccess {String} user.username Nazwa użytkownika
- * @apiSuccess {String} user.firstName Imię
- * @apiSuccess {String} user.lastName Nazwisko
- * @apiSuccess {Boolean} user.isDealer Status dealera
- *
- * @apiError (400) {String} error Nazwa użytkownika jest już zajęta
- * @apiError (403) {String} error Brak uprawnień do tworzenia klientów
- * @apiError (500) {String} error Opis błędu serwera
  */
 app.post('/admin/create-customer', authenticateSession, async (req, res) => {
     try {
