@@ -1,5 +1,3 @@
-// src/app/services/customer.service.ts
-
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, of, Subject, throwError } from 'rxjs';
 import { tap, switchMap, catchError, takeUntil } from 'rxjs/operators';

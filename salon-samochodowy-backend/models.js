@@ -1,4 +1,3 @@
-// models.js
 import { Sequelize } from 'sequelize';
 
 /**

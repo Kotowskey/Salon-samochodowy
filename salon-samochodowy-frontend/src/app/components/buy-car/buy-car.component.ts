@@ -1,4 +1,3 @@
-// src/app/components/buy-car/buy-car.component.ts
 import { Component, Input } from '@angular/core';
 import { CarService, Car } from '../../services/car.service';
 

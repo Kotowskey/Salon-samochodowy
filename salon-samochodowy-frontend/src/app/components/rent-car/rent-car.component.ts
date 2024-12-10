@@ -1,5 +1,3 @@
-// src/app/components/rent-car/rent-car.component.ts
-
 import { ChangeDetectionStrategy, Component, OnDestroy, Input, inject } from '@angular/core';
 import { Car, CarRenter, CarService } from '../../services/car.service';
 import { MatButtonModule } from '@angular/material/button';

@@ -1,5 +1,3 @@
-// src/app/services/car.service.ts
-
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';

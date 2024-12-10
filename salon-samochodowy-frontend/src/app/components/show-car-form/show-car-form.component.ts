@@ -1,4 +1,3 @@
-// src/app/show-car-form/show-car-form.component.ts
 import { Component, Inject, Input } from '@angular/core';
 import { Car } from '../../services/car.service';
 import { FormsModule } from '@angular/forms';

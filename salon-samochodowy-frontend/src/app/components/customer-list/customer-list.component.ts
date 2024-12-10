@@ -1,5 +1,3 @@
-// src/app/components/customer-list/customer-list.component.ts
-
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CustomerService, Customer } from '../../services/customer.service';
 import { CommonModule } from '@angular/common';

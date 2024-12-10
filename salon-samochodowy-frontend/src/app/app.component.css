@@ -1,5 +1,3 @@
-/* app.component.css */
-
 /* Upewnienie się, że zawartość nie jest zakrywana przez fixed navbar */
 .content {
   padding-top: 70px; /* Wysokość navbaru */
