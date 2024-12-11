@@ -33,7 +33,7 @@ export class AuthenticationService {
 
   /**
    * BehaviorSubject przechowujący bieżącego użytkownika.
-   * Inicjalizowany jest jako `null`, gdy użytkownik nie jest zalogowany.
+   * Inicjalizowany jest jako null, gdy użytkownik nie jest zalogowany.
    * @type {BehaviorSubject<User | null>}
    */
   private currentUserSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
@@ -56,8 +56,8 @@ export class AuthenticationService {
 
   /**
    * Sprawdza, czy użytkownik jest aktualnie zalogowany, wykonując żądanie do backendu.
-   * Aktualizuje `currentUserSubject` na podstawie odpowiedzi.
-   * Jeśli żądanie zakończy się błędem, ustawia `currentUserSubject` na `null`.
+   * Aktualizuje currentUserSubject na podstawie odpowiedzi.
+   * Jeśli żądanie zakończy się błędem, ustawia currentUserSubject na null.
    */
   private checkCurrentUser(): void {
     this.http.get<{ user: User }>(`${this.apiUrl}/current-user`, { withCredentials: true })
@@ -145,16 +145,16 @@ export class AuthenticationService {
   /**
    * Metoda pomocnicza do sprawdzania, czy użytkownik jest zalogowany.
    *
-   * @returns {boolean} `true` jeśli użytkownik jest zalogowany, w przeciwnym razie `false`.
+   * @returns {boolean} true jeśli użytkownik jest zalogowany, w przeciwnym razie false.
    */
   isLoggedIn(): boolean {
     return this.currentUserSubject.value !== null;
   }
 
   /**
-   * Pobiera bieżącego użytkownika jako `User` lub `null`.
+   * Pobiera bieżącego użytkownika jako User lub null.
    *
-   * @returns {User | null} Aktualny użytkownik lub `null` jeśli nie jest zalogowany.
+   * @returns {User | null} Aktualny użytkownik lub null jeśli nie jest zalogowany.
    */
   getCurrentUser(): User | null {
     return this.currentUserSubject.value;
