@@ -22,14 +22,22 @@ export class CalendarComponent implements OnInit, OnDestroy {
   rentals: any[] = [];
   currentUserId: number | null = null; 
   private rentalDatesSubscription: Subscription | null = null;
-
+  private rentalsSubscription: Subscription | null = null;
   private rentalService = inject(RentalService);
   private authService = inject(AuthenticationService);
   ngOnInit() {
     this.authService.currentUser$.subscribe(user => {
       this.currentUserId = user ? user.id : null; // Przechowaj ID zalogowanego użytkownika
     });
-    this.loadRentals();
+ 
+   this.rentalsSubscription = this.rentalService.rentals$.subscribe(
+   (rentals) => {
+     this.rentals = rentals;
+     console.log('Zaktualizowane wynajmy:', this.rentals);
+    }
+  );
+
+    this.rentalService.loadRentals();
     this.generateCalendar();
   }
 
@@ -37,26 +45,21 @@ export class CalendarComponent implements OnInit, OnDestroy {
     if (this.rentalDatesSubscription) {
       this.rentalDatesSubscription.unsubscribe();
     }
+    if (this.rentalsSubscription) {
+      this.rentalsSubscription.unsubscribe();
+    }
   }
 
   open() {
     this.isOpen = true;
+    this.rentalService.loadRentals();
   }
 
   close() {
     this.isOpen = false;
   }
 
-  loadRentals(): void {
-  this.rentalService.getRentals().subscribe(
-    (data) => {
-      this.rentals = data;
-    },
-    (error) => {
-      console.error('Błąd przy pobieraniu wynajmów:', error);
-    }
-  );
-}
+  
 
   isUserRentExist(date: Date): boolean {
     if (!this.currentUserId) {
