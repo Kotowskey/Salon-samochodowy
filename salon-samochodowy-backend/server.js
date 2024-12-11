@@ -2,30 +2,30 @@ import express from 'express';
 import cors from 'cors';
 import session from 'express-session';
 import { sequelize, Car, User } from './models.js';
-import { body, validationResult, param, query } from 'express-validator'; // Import express-validator
+import { body, validationResult, param, query } from 'express-validator'; 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(express.json()); // Zamiast bodyParser.json()
+app.use(express.json()); 
 
 // Konfiguracja CORS
 app.use(cors({
-  origin: 'http://localhost:4200', // Zmień na adres Twojej aplikacji frontendowej
+  origin: 'http://localhost:4200', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true, // Pozwól na przesyłanie ciasteczek
+  credentials: true, 
 }));
 
 // Konfiguracja sesji
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'TwojSuperTajnyKlucz', // Powinno być przechowywane w zmiennych środowiskowych
+    secret: process.env.SESSION_SECRET || 'TwojSuperTajnyKlucz', 
     resave: false,
     saveUninitialized: false,
     cookie: { 
-        secure: process.env.NODE_ENV === 'production', // Ustaw na true w produkcji
-        httpOnly: true, // Zapobiega dostępowi do ciasteczka z poziomu JavaScript
-        maxAge: 1000 * 60 * 60 // Sesja ważna przez 1 godzinę
+        secure: process.env.NODE_ENV === 'production', // w produkcji trzeba ustawić na true (to do HTTPS)
+        httpOnly: true, 
+        maxAge: 1000 * 60 * 60 
     }
 }));
 
