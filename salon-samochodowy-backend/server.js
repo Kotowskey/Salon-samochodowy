@@ -147,11 +147,12 @@ app.post('/register', validate([
  */
 app.post('/login', validate([
     body('username')
-        .notEmpty().withMessage('Nazwa użytkownika jest wymagana')
+        .isLength({ min: 3 }).withMessage('Nazwa użytkownika musi mieć przynajmniej 3 znaki')
         .trim()
         .escape(),
     body('password')
-        .notEmpty().withMessage('Hasło jest wymagane')
+        .isLength({ min: 6 }).withMessage('Hasło musi mieć przynajmniej 6 znaków')
+        .trim()
 ]), async (req, res) => {
     try {
         const { username, password } = req.body;

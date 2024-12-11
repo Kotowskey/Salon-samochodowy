@@ -39,6 +39,11 @@ export class LoginRegisterComponent implements OnDestroy {
     this.isLoginMode = !this.isLoginMode;
     this.errorMessage = '';
     this.successMessage = '';
+    // Resetowanie pól formularza przy przełączaniu trybu
+    this.username = '';
+    this.password = '';
+    this.firstName = '';
+    this.lastName = '';
   }
 
   onSubmit(form: NgForm): void {
