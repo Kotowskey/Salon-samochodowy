@@ -1,4 +1,3 @@
-// authentication.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
@@ -30,7 +29,7 @@ export class AuthenticationService {
    * Można rozważyć przeniesienie tego do pliku konfiguracyjnego.
    * @type {string}
    */
-  private apiUrl: string = 'http://localhost:3000'; // Zaktualizuj URL backendu
+  private apiUrl: string = 'http://localhost:3000'; 
 
   /**
    * BehaviorSubject przechowujący bieżącego użytkownika.
@@ -74,7 +73,7 @@ export class AuthenticationService {
       )
       .subscribe({
         next: () => {},
-        error: () => {} // Błąd jest już obsłużony w catchError
+        error: () => {} 
       });
   }
 
@@ -98,7 +97,7 @@ export class AuthenticationService {
           this.currentUserSubject.next(response.user);
         }
       }),
-      catchError(this.handleError) // Przekazanie błędu do handlera
+      catchError(this.handleError) 
     );
   }
 
@@ -120,7 +119,7 @@ export class AuthenticationService {
           this.currentUserSubject.next(response.user);
         }
       }),
-      catchError(this.handleError) // Przekazanie błędu do handlera
+      catchError(this.handleError) 
     );
   }
 

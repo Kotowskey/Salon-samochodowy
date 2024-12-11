@@ -7,9 +7,9 @@ import { Component } from '@angular/core';
  */
 @Component({
   selector: 'app-privacy-policy',
-  standalone: true, // Umożliwia używanie komponentu jako standalone
+  standalone: true, 
   templateUrl: './privacy-policy.component.html',
-  styleUrls: ['./privacy-policy.component.css'] // Poprawiono literówkę z styleUrl na styleUrls
+  styleUrls: ['./privacy-policy.component.css'] 
 })
 export class PrivacyPolicyComponent {
 }

@@ -96,7 +96,7 @@ export class CarService {
       .pipe(
         catchError(error => {
           console.error('Error loading cars:', error);
-          return of([]); // Zwraca pustą tablicę w przypadku błędu
+          return of([]); 
         })
       )
       .subscribe(
@@ -124,7 +124,7 @@ export class CarService {
       .pipe(
         catchError(error => {
           console.error(`Error fetching car with ID ${carId}:`, error);
-          return of(null as any); // Można dostosować obsługę błędów
+          return of(null as any); 
         })
       );
   }
@@ -145,7 +145,7 @@ export class CarService {
         }),
         catchError(error => {
           console.error('Error adding car:', error);
-          return of(null as any); // Można dostosować obsługę błędów
+          return of(null as any); 
         })
       );
   }
@@ -171,7 +171,7 @@ export class CarService {
         }),
         catchError(error => {
           console.error(`Error updating car with ID ${id}:`, error);
-          return of(null as any); // Można dostosować obsługę błędów
+          return of(null as any); 
         })
       );
   }
@@ -192,7 +192,7 @@ export class CarService {
         }),
         catchError(error => {
           console.error(`Error deleting car with ID ${id}:`, error);
-          return of(null as any); // Można dostosować obsługę błędów
+          return of(null as any); 
         })
       );
   }
@@ -213,7 +213,7 @@ export class CarService {
         }),
         catchError(error => {
           console.error(`Error renting car with ID ${carId}:`, error);
-          return of(null as any); // Można dostosować obsługę błędów
+          return of(null as any); 
         })
       );
   }
@@ -234,7 +234,7 @@ export class CarService {
         }),
         catchError(error => {
           console.error(`Error returning car with ID ${carId}:`, error);
-          return of(null as any); // Można dostosować obsługę błędów
+          return of(null as any); 
         })
       );
   }
@@ -251,7 +251,7 @@ export class CarService {
       .pipe(
         catchError(error => {
           console.error(`Error fetching renter for car ID ${carId}:`, error);
-          return of({ carId, renterId: 0 } as CarRenter); // Można dostosować obsługę błędów
+          return of({ carId, renterId: 0 } as CarRenter); 
         })
       );
   }  
@@ -272,7 +272,7 @@ export class CarService {
         }),
         catchError(error => {
           console.error(`Error leasing car with ID ${carId}:`, error);
-          return of(null as any); // Można dostosować obsługę błędów
+          return of(null as any); 
         })
       );
   }
@@ -284,7 +284,7 @@ export class CarService {
    * @returns {Observable<any>} Observable emitujący odpowiedź serwera.
    */
   buyCar(carId: number): Observable<any> {
-    const url = `${this.apiUrl}/${carId}/buy`; // Endpoint for buying
+    const url = `${this.apiUrl}/${carId}/buy`; 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(url, {}, { headers, withCredentials: true })
       .pipe(
@@ -293,7 +293,7 @@ export class CarService {
         }),
         catchError(error => {
           console.error(`Error buying car with ID ${carId}:`, error);
-          return of(null as any); // Można dostosować obsługę błędów
+          return of(null as any); 
         })
       );
   }
@@ -308,7 +308,7 @@ export class CarService {
       .pipe(
         catchError(error => {
           console.error(`Error refreshing car with ID ${carId}:`, error);
-          return of(null as any); // Można dostosować obsługę błędów
+          return of(null as any); 
         })
       )
       .subscribe(

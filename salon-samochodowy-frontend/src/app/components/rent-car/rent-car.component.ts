@@ -93,7 +93,6 @@ export class RentCarComponent implements OnDestroy {
       (carId: number) => {
         console.log('Wypożyczono samochód o id:', carId);
         alert('Samochód został wypożyczony');
-        // Aktualizacja lokalnych danych samochodu
         this.car.isAvailableForRent = false;
       },
       (error: any) => {
@@ -112,7 +111,6 @@ export class RentCarComponent implements OnDestroy {
       (carId: number) => {
         console.log('Zwrócono samochód o id:', carId);
         alert('Samochód został zwrócony');
-        // Aktualizacja lokalnych danych samochodu
         this.car.isAvailableForRent = true;
       },
       (error: any) => {

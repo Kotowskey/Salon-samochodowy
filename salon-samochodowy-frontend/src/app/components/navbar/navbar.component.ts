@@ -4,7 +4,7 @@ import { LoginRegisterComponent } from '../login-register/login-register.compone
 import { AuthenticationService } from '../../services/authentication.service';
 import { Subscription } from 'rxjs';
 
-// Importujemy potrzebne moduły i komponenty
+
 import { CustomerListComponent } from '../customer-list/customer-list.component';
 import { AddCustomerComponent } from '../add-customer/add-customer.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -84,7 +84,6 @@ export class NavbarComponent implements OnDestroy {
     private dialog: MatDialog,
     private carService: CarService
   ) {
-    // Subskrybujemy bieżącego użytkownika
     this.userSubscription = this.authService.currentUser$.subscribe((user) => {
       this.currentUser = user;
     });
@@ -123,7 +122,7 @@ export class NavbarComponent implements OnDestroy {
   logout() {
     this.authService.logout().subscribe({
       next: () => {
-        window.location.reload(); // Odświeżenie strony po wylogowaniu
+        window.location.reload(); 
       },
       error: (error) => {
         console.error('Błąd podczas wylogowywania:', error);
