@@ -1,15 +1,15 @@
 import express from 'express';
-import bodyParser from 'body-parser';
-import cors from 'cors'; 
-import session from 'express-session'; // Import express-session
-import { sequelize, Car, User } from './models.js'; 
-import { Op } from 'sequelize';
+// import bodyParser from 'body-parser'; // Nie jest już potrzebny
+import cors from 'cors';
+import session from 'express-session';
+import { sequelize, Car, User } from './models.js';
+import { body, validationResult, param, query } from 'express-validator'; // Import express-validator
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(bodyParser.json());
+app.use(express.json()); // Zamiast bodyParser.json()
 
 // Konfiguracja CORS
 app.use(cors({
@@ -20,11 +20,11 @@ app.use(cors({
 
 // Konfiguracja sesji
 app.use(session({
-    secret: 'TwojSuperTajnyKlucz', // Powinno być przechowywane w zmiennych środowiskowych
+    secret: process.env.SESSION_SECRET || 'TwojSuperTajnyKlucz', // Powinno być przechowywane w zmiennych środowiskowych
     resave: false,
     saveUninitialized: false,
     cookie: { 
-        secure: false, // Ustaw na true, jeśli używasz HTTPS
+        secure: process.env.NODE_ENV === 'production', // Ustaw na true w produkcji
         httpOnly: true, // Zapobiega dostępowi do ciasteczka z poziomu JavaScript
         maxAge: 1000 * 60 * 60 // Sesja ważna przez 1 godzinę
     }
@@ -37,6 +37,20 @@ const authenticateSession = (req, res, next) => {
     } else {
         res.status(401).json({ error: 'Nieautoryzowany' });
     }
+};
+
+// Middleware do obsługi walidacji
+const validate = (validations) => {
+    return async (req, res, next) => {
+        await Promise.all(validations.map(validation => validation.run(req)));
+        
+        const errors = validationResult(req);
+        if (errors.isEmpty()) {
+            return next();
+        }
+        
+        res.status(400).json({ errors: errors.array() });
+    };
 };
 
 // Test połączenia z bazą danych
@@ -69,7 +83,23 @@ app.get('/', (req, res) => {
  * @apiParam {String} lastName Nazwisko użytkownika
  *
  */
-app.post('/register', async (req, res) => {
+app.post('/register', validate([
+    body('username')
+        .isLength({ min: 3 }).withMessage('Nazwa użytkownika musi mieć przynajmniej 3 znaki')
+        .trim()
+        .escape(),
+    body('password')
+        .isLength({ min: 6 }).withMessage('Hasło musi mieć przynajmniej 6 znaków')
+        .trim(),
+    body('firstName')
+        .notEmpty().withMessage('Imię jest wymagane')
+        .trim()
+        .escape(),
+    body('lastName')
+        .notEmpty().withMessage('Nazwisko jest wymagane')
+        .trim()
+        .escape()
+]), async (req, res) => {
     try {
         const { username, password, firstName, lastName } = req.body;
 
@@ -115,7 +145,14 @@ app.post('/register', async (req, res) => {
  * @apiParam {String} password Hasło użytkownika
  *
  */
-app.post('/login', async (req, res) => {
+app.post('/login', validate([
+    body('username')
+        .notEmpty().withMessage('Nazwa użytkownika jest wymagana')
+        .trim()
+        .escape(),
+    body('password')
+        .notEmpty().withMessage('Hasło jest wymagane')
+]), async (req, res) => {
     try {
         const { username, password } = req.body;
 
@@ -176,10 +213,23 @@ app.post('/logout', (req, res) => {
  * @apiGroup Cars
  *
  */
-app.get('/cars', async (req, res) => {
+app.get('/cars', validate([
+    query('page').optional().isInt({ min: 1 }).withMessage('Strona musi być liczbą całkowitą większą lub równą 1'),
+    query('limit').optional().isInt({ min: 1 }).withMessage('Limit musi być liczbą całkowitą większą lub równą 1')
+]), async (req, res) => {
     try {
-        const cars = await Car.findAll();
-        res.json(cars);
+        const { page = 1, limit = 10 } = req.query;
+        const offset = (page - 1) * limit;
+        const cars = await Car.findAndCountAll({
+            limit: parseInt(limit),
+            offset: parseInt(offset)
+        });
+        res.json({
+            totalItems: cars.count,
+            totalPages: Math.ceil(cars.count / limit),
+            currentPage: parseInt(page),
+            data: cars.rows
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -193,7 +243,10 @@ app.get('/cars', async (req, res) => {
  * @apiParam {Number} id ID samochodu
  *
  */
-app.get('/cars/:id', async (req, res) => {
+app.get('/cars/:id', validate([
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID samochodu musi być liczbą całkowitą większą lub równą 1')
+]), async (req, res) => {
     try {
         const car = await Car.findByPk(req.params.id);
         if (car) {
@@ -223,7 +276,32 @@ app.get('/cars/:id', async (req, res) => {
  * @apiParam {Boolean} isAvailableForRent Status dostępności do wynajmu
  *
  */
-app.post('/cars', authenticateSession, async (req, res) => {
+app.post('/cars', authenticateSession, validate([
+    body('brand')
+        .notEmpty().withMessage('Marka samochodu jest wymagana')
+        .trim()
+        .escape(),
+    body('model')
+        .notEmpty().withMessage('Model samochodu jest wymagany')
+        .trim()
+        .escape(),
+    body('year')
+        .isInt({ min: 1886 }).withMessage('Rok produkcji musi być poprawną liczbą całkowitą')
+        .toInt(),
+    body('vin')
+        .isLength({ min: 17, max: 17 }).withMessage('Numer VIN musi mieć dokładnie 17 znaków')
+        .trim()
+        .escape(),
+    body('price')
+        .isFloat({ min: 0 }).withMessage('Cena samochodu musi być liczbą dodatnią')
+        .toFloat(),
+    body('horsePower')
+        .isInt({ min: 1 }).withMessage('Moc silnika musi być liczbą całkowitą większą lub równą 1')
+        .toInt(),
+    body('isAvailableForRent')
+        .isBoolean().withMessage('Status dostępności do wynajmu musi być wartością logiczną')
+        .toBoolean()
+]), async (req, res) => {
     try {
         const { brand, model, year, vin, price, horsePower, isAvailableForRent } = req.body;
         const newCar = await Car.create({ 
@@ -259,7 +337,41 @@ app.post('/cars', authenticateSession, async (req, res) => {
  * @apiParam {Boolean} isAvailableForRent Status dostępności do wynajmu
  *
  */
-app.put('/cars/:id', authenticateSession, async (req, res) => {
+app.put('/cars/:id', authenticateSession, validate([
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID samochodu musi być liczbą całkowitą większą lub równą 1'),
+    body('brand')
+        .optional()
+        .notEmpty().withMessage('Marka samochodu nie może być pusta')
+        .trim()
+        .escape(),
+    body('model')
+        .optional()
+        .notEmpty().withMessage('Model samochodu nie może być pusty')
+        .trim()
+        .escape(),
+    body('year')
+        .optional()
+        .isInt({ min: 1886 }).withMessage('Rok produkcji musi być poprawną liczbą całkowitą')
+        .toInt(),
+    body('vin')
+        .optional()
+        .isLength({ min: 17, max: 17 }).withMessage('Numer VIN musi mieć dokładnie 17 znaków')
+        .trim()
+        .escape(),
+    body('price')
+        .optional()
+        .isFloat({ min: 0 }).withMessage('Cena samochodu musi być liczbą dodatnią')
+        .toFloat(),
+    body('horsePower')
+        .optional()
+        .isInt({ min: 1 }).withMessage('Moc silnika musi być liczbą całkowitą większą lub równą 1')
+        .toInt(),
+    body('isAvailableForRent')
+        .optional()
+        .isBoolean().withMessage('Status dostępności do wynajmu musi być wartością logiczną')
+        .toBoolean()
+]), async (req, res) => {
     try {
         const { brand, model, year, vin, price, horsePower, isAvailableForRent } = req.body;
         const car = await Car.findByPk(req.params.id);
@@ -285,7 +397,10 @@ app.put('/cars/:id', authenticateSession, async (req, res) => {
  * @apiParam {Number} id ID samochodu
  *
  */
-app.delete('/cars/:id', authenticateSession, async (req, res) => {
+app.delete('/cars/:id', authenticateSession, validate([
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID samochodu musi być liczbą całkowitą większą lub równą 1')
+]), async (req, res) => {
     const userId = req.session.userId;
     const carId = req.params.id;
   
@@ -317,12 +432,25 @@ app.delete('/cars/:id', authenticateSession, async (req, res) => {
  * @apiHeader {String} Cookie Sesja użytkownika
  *
  */
-app.get('/users', authenticateSession, async (req, res) => {
+app.get('/users', authenticateSession, validate([
+    query('page').optional().isInt({ min: 1 }).withMessage('Strona musi być liczbą całkowitą większą lub równą 1'),
+    query('limit').optional().isInt({ min: 1 }).withMessage('Limit musi być liczbą całkowitą większą lub równą 1')
+]), async (req, res) => {
     try {
-        const users = await User.findAll({
-            where: { isDealer: false } // Klienci mają isDealer: false
+        const { page = 1, limit = 10 } = req.query;
+        const offset = (page - 1) * limit;
+        const users = await User.findAndCountAll({
+            where: { isDealer: false }, // Klienci mają isDealer: false
+            limit: parseInt(limit),
+            offset: parseInt(offset),
+            attributes: ['id', 'username', 'firstName', 'lastName']
         });
-        res.json(users);
+        res.json({
+            totalItems: users.count,
+            totalPages: Math.ceil(users.count / limit),
+            currentPage: parseInt(page),
+            data: users.rows
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -339,9 +467,14 @@ app.get('/users', authenticateSession, async (req, res) => {
  * @apiParam {Number} id ID użytkownika
  *
  */
-app.get('/users/:id', authenticateSession, async (req, res) => {
+app.get('/users/:id', authenticateSession, validate([
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID użytkownika musi być liczbą całkowitą większą lub równą 1')
+]), async (req, res) => {
     try {
-        const user = await User.findByPk(req.params.id);
+        const user = await User.findByPk(req.params.id, {
+            attributes: ['id', 'username', 'firstName', 'lastName', 'isDealer']
+        });
         if (user && !user.isDealer) {
             res.json(user);
         } else {
@@ -367,7 +500,29 @@ app.get('/users/:id', authenticateSession, async (req, res) => {
  * @apiParam {String} lastName Nazwisko użytkownika
  *
  */
-app.put('/users/:id', authenticateSession, async (req, res) => {
+app.put('/users/:id', authenticateSession, validate([
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID użytkownika musi być liczbą całkowitą większą lub równą 1'),
+    body('username')
+        .optional()
+        .isLength({ min: 3 }).withMessage('Nazwa użytkownika musi mieć przynajmniej 3 znaki')
+        .trim()
+        .escape(),
+    body('password')
+        .optional()
+        .isLength({ min: 6 }).withMessage('Hasło musi mieć przynajmniej 6 znaków')
+        .trim(),
+    body('firstName')
+        .optional()
+        .notEmpty().withMessage('Imię nie może być puste')
+        .trim()
+        .escape(),
+    body('lastName')
+        .optional()
+        .notEmpty().withMessage('Nazwisko nie może być puste')
+        .trim()
+        .escape()
+]), async (req, res) => {
     try {
         const { username, password, firstName, lastName } = req.body;
         const user = await User.findByPk(req.params.id);
@@ -398,7 +553,10 @@ app.put('/users/:id', authenticateSession, async (req, res) => {
  * @apiParam {Number} id ID użytkownika
  *
  */
-app.delete('/users/:id', authenticateSession, async (req, res) => {
+app.delete('/users/:id', authenticateSession, validate([
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID użytkownika musi być liczbą całkowitą większą lub równą 1')
+]), async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
         if (user && !user.isDealer) {
@@ -428,7 +586,10 @@ app.delete('/users/:id', authenticateSession, async (req, res) => {
  * @apiParam {Number} id ID samochodu
  *
  */
-app.post('/cars/:id/rent', authenticateSession, async (req, res) => {
+app.post('/cars/:id/rent', authenticateSession, validate([
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID samochodu musi być liczbą całkowitą większą lub równą 1')
+]), async (req, res) => {
     try {
         const carId = req.params.id;
 
@@ -466,7 +627,10 @@ app.post('/cars/:id/rent', authenticateSession, async (req, res) => {
  * @apiParam {Number} id ID samochodu
  *
  */
-app.post('/cars/:id/return', authenticateSession, async (req, res) => {
+app.post('/cars/:id/return', authenticateSession, validate([
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID samochodu musi być liczbą całkowitą większą lub równą 1')
+]), async (req, res) => {
     try {
         const carId = req.params.id;
 
@@ -506,7 +670,10 @@ app.post('/cars/:id/return', authenticateSession, async (req, res) => {
  * @apiParam {Number} id ID samochodu
  *
  */
-app.get('/cars/:id/renter', async (req, res) => {
+app.get('/cars/:id/renter', validate([
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID samochodu musi być liczbą całkowitą większą lub równą 1')
+]), async (req, res) => {
     const carId = req.params.id; // ID samochodu z parametru URL
     try {
         // Znajdź samochód na podstawie ID
@@ -533,7 +700,10 @@ app.get('/cars/:id/renter', async (req, res) => {
  * @apiParam {Number} id ID samochodu
  *
  */
-app.post('/cars/:id/buy', authenticateSession, async (req, res) => {
+app.post('/cars/:id/buy', authenticateSession, validate([
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID samochodu musi być liczbą całkowitą większą lub równą 1')
+]), async (req, res) => {
     try {
         const carId = req.params.id;
 
@@ -544,7 +714,7 @@ app.post('/cars/:id/buy', authenticateSession, async (req, res) => {
             return res.status(404).json({ error: 'Samochód nie znaleziony' });
         }
 
-        if (!car.isAvailableForRent) {
+        if (!car.isAvailableForRent) { // Można rozważyć zmianę logiki na isAvailableForSale
             return res.status(400).json({ error: 'Samochód jest już sprzedany lub wynajęty' });
         }
 
@@ -595,14 +765,19 @@ app.get('/current-user', authenticateSession, async (req, res) => {
  * @apiParam {Number} months Liczba miesięcy
  *
  */
-app.post('/cars/:id/leasing', async (req, res) => {
+app.post('/cars/:id/leasing', validate([
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID samochodu musi być liczbą całkowitą większą lub równą 1'),
+    body('downPayment')
+        .isFloat({ min: 0 }).withMessage('Wpłata wstępna musi być liczbą dodatnią')
+        .toFloat(),
+    body('months')
+        .isInt({ min: 1 }).withMessage('Liczba miesięcy musi być liczbą całkowitą większą lub równą 1')
+        .toInt()
+]), async (req, res) => {
     try {
         const carId = req.params.id;
         const { downPayment, months } = req.body;
-
-        if (!downPayment || !months || months <= 0 || downPayment < 0) {
-            return res.status(400).json({ error: 'Nieprawidłowe dane wejściowe' });
-        }
 
         const car = await Car.findByPk(carId);
 
@@ -647,7 +822,23 @@ app.post('/cars/:id/leasing', async (req, res) => {
  * @apiParam {String} lastName Nazwisko użytkownika
  *
  */
-app.post('/admin/create-customer', authenticateSession, async (req, res) => {
+app.post('/admin/create-customer', authenticateSession, validate([
+    body('username')
+        .isLength({ min: 3 }).withMessage('Nazwa użytkownika musi mieć przynajmniej 3 znaki')
+        .trim()
+        .escape(),
+    body('password')
+        .isLength({ min: 6 }).withMessage('Hasło musi mieć przynajmniej 6 znaków')
+        .trim(),
+    body('firstName')
+        .notEmpty().withMessage('Imię jest wymagane')
+        .trim()
+        .escape(),
+    body('lastName')
+        .notEmpty().withMessage('Nazwisko jest wymagane')
+        .trim()
+        .escape()
+]), async (req, res) => {
     try {
         const { username, password, firstName, lastName } = req.body;
 
