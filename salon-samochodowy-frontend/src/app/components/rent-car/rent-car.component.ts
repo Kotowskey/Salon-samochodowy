@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Observable, Subject, combineLatest } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
-
+import { RentalService } from '../../services/rental.service.service';
 /**
  * RentCarComponent umożliwia użytkownikom wypożyczanie oraz zwracanie samochodów.
  *
@@ -72,6 +72,12 @@ export class RentCarComponent implements OnDestroy {
   private authService = inject(AuthenticationService);
 
   /**
+   * Serwis wynajmów.
+   */
+  private rentalService = inject(RentalService);
+  private todayDate = new Date();
+  private futureDate = new Date();
+  /**
    * Konstruktor komponentu.
    * Inicjalizuje obserwację, czy aktualny użytkownik jest wypożyczającym samochód.
    */
@@ -89,11 +95,14 @@ export class RentCarComponent implements OnDestroy {
    * Wysyła żądanie wypożyczenia samochodu do serwisu CarService i obsługuje odpowiedzi oraz błędy.
    */
   rentCar(): void {
+    this.futureDate.setDate(this.todayDate.getDate() + 14);
+
     this.carService.rentCar(this.car.id).pipe(takeUntil(this.destroy$)).subscribe(
       (carId: number) => {
         console.log('Wypożyczono samochód o id:', carId);
         alert('Samochód został wypożyczony');
         this.car.isAvailableForRent = false;
+        this.addrental();
       },
       (error: any) => {
         console.error('Błąd przy wypożyczaniu samochodu:', error);
@@ -112,10 +121,38 @@ export class RentCarComponent implements OnDestroy {
         console.log('Zwrócono samochód o id:', carId);
         alert('Samochód został zwrócony');
         this.car.isAvailableForRent = true;
+        this.removerental();
       },
       (error: any) => {
         console.error('Błąd przy zwracaniu samochodu:', error);
         alert('Wystąpił błąd przy zwracaniu samochodu.');
+      }
+    );
+  }
+  addrental()
+  {
+    this.rentalService.addRental(this.car.id, this.todayDate,this.futureDate).subscribe(
+      () => {
+        alert('Samochód został wypożyczony i dodany bo bazy wypożyczeń');
+        
+      },
+      (error) => {
+        console.error('Błąd przy wypożyczaniu samochodu i dodawaniu do bazy:', error);
+        alert('Wystąpił błąd przy wypożyczaniu samochodu i dodawaniu do bazy.');
+      }
+      
+    );
+  }
+  removerental()
+  {
+    this.rentalService.removeRental(this.car.id).subscribe(
+      () => {
+        alert('Samochód został zwrócony i usunięty z bazy');
+       
+      },
+      (error) => {
+        console.error('Błąd przy zwracaniu samochodu i usuwaniu z bazy:', error);
+        alert('Wystąpił błąd przy zwracaniu samochodu i usuwaniu z bazy.');
       }
     );
   }

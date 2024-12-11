@@ -113,6 +113,28 @@ const User = sequelize.define('User', {
     timestamps: false, 
 });
 
+
+const Rental = sequelize.define('Rental', {
+    carId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    },
+    userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    },
+    startDate: {
+        type: Sequelize.DATE,
+        allowNull: false,
+    },
+    endDate: {
+        type: Sequelize.DATE,
+        allowNull: false,
+    },
+}, {
+    timestamps: false, 
+});
+
 /**
  * @api {relation} UserCarRelations Relacje między użytkownikami a samochodami
  * @apiName UserCarRelations
@@ -128,6 +150,9 @@ Car.belongsTo(User, { as: 'owner', foreignKey: 'ownerId' });
 
 User.hasMany(Car, { as: 'carsRented', foreignKey: 'renterId' });
 Car.belongsTo(User, { as: 'renter', foreignKey: 'renterId' });
+
+Rental.belongsTo(Car, { foreignKey: 'carId' });
+Car.hasMany(Rental, { foreignKey: 'carId' });
 
 /**
  * @api {function} syncDatabase Synchronizacja bazy danych
@@ -146,4 +171,4 @@ Car.belongsTo(User, { as: 'renter', foreignKey: 'renterId' });
         .catch(err => console.error('Database synchronization error:', err));
 })();
 
-export { sequelize, Car, User };
+export { sequelize, Car, User,Rental };

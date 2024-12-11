@@ -7,7 +7,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule } from '@angular/router'; 
 import { AuthInterceptor } from './auth.interceptor'; 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { CalendarComponent } from "./components/calendar/calendar.component";
 /**
  * AppComponent jest głównym komponentem aplikacji, zarządzającym podstawową strukturą i nawigacją.
  *
@@ -19,7 +19,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
   imports: [
     AddCarComponent,
     NavbarComponent,
-    RouterModule
+    RouterModule,
+    CalendarComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],

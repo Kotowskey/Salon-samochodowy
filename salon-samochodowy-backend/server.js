@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors'; 
 import session from 'express-session'; // Import express-session
-import { sequelize, Car, User } from './models.js'; 
+import { sequelize, Car, User,Rental } from './models.js'; 
 import { Op } from 'sequelize';
 import { body, param, validationResult } from 'express-validator'; // Import express-validator
 
@@ -830,6 +830,85 @@ app.post('/admin/create-customer', authenticateSession, [
             } 
         });
     } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
+//RENTALS
+app.post('/rentals', authenticateSession, async (req, res) => {
+    console.log('Żądanie do zapisania wynajmu:', req.body, 'Użytkownik:', req.session.userId);
+
+    try {
+        const { carId, startDate, endDate } = req.body;
+
+        // Walidacja dat
+        if (!startDate || !endDate || new Date(startDate) >= new Date(endDate)) {
+            return res.status(400).json({ error: 'Nieprawidłowe daty wynajmu' });
+        }
+
+        // Dodanie wynajmu do bazy danych
+        const rental = await Rental.create({
+            carId,
+            userId: req.session.userId,
+            startDate: new Date(startDate),
+            endDate: new Date(endDate),
+        });
+
+        console.log('Wynajem zapisany:', rental);
+
+        // Aktualizacja statusu samochodu
+        const car = await Car.findByPk(carId);
+        if (car) {
+            car.isAvailableForRent = false;
+            await car.save();
+        }
+
+        res.status(201).json({ message: 'Wynajem zapisany', rental });
+    } catch (error) {
+        console.error('Błąd przy zapisie wynajmu:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.delete('/rentals/:id', authenticateSession, async (req, res) => {
+    try {
+        const rentalId = req.params.id;
+
+        // Znajdź wynajem
+        const rental = await Rental.findOne({ where: { carId: rentalId } });
+        if (!rental) {
+            return res.status(404).json({ error: 'Wynajem nie znaleziony' });
+        }
+
+        // Sprawdź, czy użytkownik jest właścicielem wynajmu
+        if (rental.userId !== req.session.userId) {
+            return res.status(403).json({ error: 'Nie masz uprawnień do usunięcia tego wynajmu' });
+        }
+
+        // Usunięcie wynajmu i aktualizacja statusu samochodu
+        await rental.destroy();
+
+        const car = await Car.findByPk(rental.carId);
+        if (car) {
+            car.isAvailableForRent = true;
+            await car.save();
+        }
+
+        res.status(200).json({ message: 'Wynajem usunięty' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+// Pobieranie wszystkich wynajmów
+app.get('/rentals', authenticateSession, async (req, res) => {
+    console.log('Żądanie otrzymane do /rentals od użytkownika:', req.session?.userId);
+    try {
+        const rentals = await Rental.findAll();
+        console.log('Znalezione wynajmy:', rentals);
+        res.status(200).json(rentals);
+    } catch (error) {
+        console.error('Błąd w trasie /rentals:', error);
         res.status(500).json({ error: error.message });
     }
 });

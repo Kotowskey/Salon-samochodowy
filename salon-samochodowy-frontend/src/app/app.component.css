@@ -36,3 +36,9 @@ h2 {
 .card:hover {
   transform: translateY(-5px);
 }
+
+.floating-button {
+  position: fixed; /* Ustawienie przycisku na stałej pozycji */
+  bottom: 50px;    /* Odległość od dołu ekranu */
+  right: 50px;     /* Odległość od prawej strony ekranu */
+}

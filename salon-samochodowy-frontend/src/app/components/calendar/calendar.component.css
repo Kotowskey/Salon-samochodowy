@@ -1,0 +1,89 @@
+.calendar-dialog {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    color: black;
+  }
+  
+  .calendar-dialog .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .calendar-dialog .calendar-header h3 {
+    margin: 0;
+  }
+  
+  .calendar-dialog .calendar-header button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .calendar-dialog .close-button {
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .calendar-table {
+    width: 100%;
+    table-layout: fixed; /* Ustaw równy układ kolumn */
+    border-collapse: collapse;
+  }
+  
+  .calendar-table th,
+  .calendar-table td {
+    width: 14.28%; /* 100% / 7 dni */
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+  }
+  
+  .calendar-table td.today {
+    background-color: lightblue;
+    border-radius: 50%;
+  }
+  
+  .calendar-table td.rented {
+    background-color: lightgreen;
+    border-radius: 50%;
+  }
+  
+  .rented {
+    background-color: rgba(255, 165, 0, 0.3); /* Pomarańczowe tło */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .rented-circle {
+    width: 10px;
+    height: 10px;
+    background-color: orange;
+    border-radius: 50%;
+  }
+  
+  
+  .user-rental {
+    background-color: rgba(255, 165, 0, 0.3); /* Pomarańczowe tło */
+    border-radius: 50%; /* Zaokrąglone rogi */
+    font-weight: bold;
+    text-align: center;
+  }
+  

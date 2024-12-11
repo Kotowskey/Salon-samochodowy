@@ -1,0 +1,46 @@
+<button class="floating-button btn btn-primary btn-sm me-2"
+(click)="open()">
+Kalendarz
+</button>
+
+
+@if(isOpen){
+    <div class="calendar-dialog">
+      <div class="calendar-header">
+        <button (click)="changeMonth(-1)">&#8592;</button>
+        <h3>{{ months[currentMonth] }} {{ currentYear }}</h3>
+        <button (click)="changeMonth(1)">&#8594;</button>
+      </div>
+      <table class="calendar-table">
+        <thead>
+          <tr>
+            @for (day of days; track day) {
+              <th>{{ day }}</th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (week of calendar; track week) 
+          {
+            <tr>
+              @for (date of week; track date) 
+              {
+                @if(isUserRentExist(datetoDate(date)))
+                {
+                  <td style="color: red; "> {{date}}</td>
+                }
+                @else 
+                {
+                  <td> {{date}}</td>
+                }
+              }
+              
+            </tr>
+          }
+        </tbody>
+      </table>
+      <button class="close-button" (click)="close()">Close</button>
+    </div>
+  }
+  
+  
