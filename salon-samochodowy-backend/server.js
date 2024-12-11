@@ -1,5 +1,4 @@
 import express from 'express';
-// import bodyParser from 'body-parser'; // Nie jest już potrzebny
 import cors from 'cors';
 import session from 'express-session';
 import { sequelize, Car, User } from './models.js';
