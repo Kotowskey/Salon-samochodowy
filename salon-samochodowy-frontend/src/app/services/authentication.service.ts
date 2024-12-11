@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, of } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
@@ -68,10 +68,13 @@ export class AuthenticationService {
         catchError((error) => {
           console.warn('Brak zalogowanego użytkownika lub wystąpił błąd:', error);
           this.currentUserSubject.next(null);
-          return of(null);
+          return throwError(error);
         })
       )
-      .subscribe();
+      .subscribe({
+        next: () => {},
+        error: () => {} // Błąd jest już obsłużony w catchError
+      });
   }
 
   /**
@@ -94,10 +97,7 @@ export class AuthenticationService {
           this.currentUserSubject.next(response.user);
         }
       }),
-      catchError((error) => {
-        console.error('Błąd podczas rejestracji:', error);
-        return of(error);
-      })
+      catchError(this.handleError) // Przekazanie błędu do handlera
     );
   }
 
@@ -119,10 +119,7 @@ export class AuthenticationService {
           this.currentUserSubject.next(response.user);
         }
       }),
-      catchError((error) => {
-        console.error('Błąd podczas logowania:', error);
-        return of(error);
-      })
+      catchError(this.handleError) // Przekazanie błędu do handlera
     );
   }
 
@@ -141,10 +138,7 @@ export class AuthenticationService {
         this.currentUserSubject.next(null);
         this.router.navigate(['/']); // Przekierowanie na stronę główną po wylogowaniu
       }),
-      catchError((error) => {
-        console.error('Błąd podczas wylogowywania:', error);
-        return of(error);
-      })
+      catchError(this.handleError) // Przekazanie błędu do handlera
     );
   }
 
@@ -164,5 +158,17 @@ export class AuthenticationService {
    */
   getCurrentUser(): User | null {
     return this.currentUserSubject.value;
+  }
+
+  /**
+   * Handler do obsługi błędów HTTP.
+   *
+   * @param {HttpErrorResponse} error - Błąd HTTP.
+   * @returns {Observable<never>} Observable z wyrzuconym błędem.
+   */
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    // Możesz dostosować logikę obsługi błędów tutaj
+    console.error('Błąd w AuthenticationService:', error);
+    return throwError(error);
   }
 }
