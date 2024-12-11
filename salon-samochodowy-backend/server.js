@@ -76,10 +76,10 @@ app.get('/', (req, res) => {
  * @apiName RegisterUser
  * @apiGroup Authentication
  *
- * @apiParam {String} username Nazwa użytkownika
- * @apiParam {String} password Hasło użytkownika
- * @apiParam {String} firstName Imię użytkownika
- * @apiParam {String} lastName Nazwisko użytkownika
+ * @apiParam {String{3..}} username Nazwa użytkownika (min 3 znaki)
+ * @apiParam {String{6..}} password Hasło użytkownika (min 6 znaków)
+ * @apiParam {String} firstName Imię użytkownika (wymagane)
+ * @apiParam {String} lastName Nazwisko użytkownika (wymagane)
  *
  */
 app.post('/register', validate([
@@ -140,8 +140,8 @@ app.post('/register', validate([
  * @apiName LoginUser
  * @apiGroup Authentication
  *
- * @apiParam {String} username Nazwa użytkownika
- * @apiParam {String} password Hasło użytkownika
+ * @apiParam {String{3..}} username Nazwa użytkownika (min 3 znaki)
+ * @apiParam {String{6..}} password Hasło użytkownika (min 6 znaków)
  *
  */
 app.post('/login', validate([
@@ -212,6 +212,9 @@ app.post('/logout', (req, res) => {
  * @apiName GetAllCars
  * @apiGroup Cars
  *
+ * @apiParam {Number{1..}} [page=1] Numer strony
+ * @apiParam {Number{1..}} [limit=10] Liczba rekordów na stronę
+ *
  */
 app.get('/cars', validate([
     query('page').optional().isInt({ min: 1 }).withMessage('Strona musi być liczbą całkowitą większą lub równą 1'),
@@ -240,7 +243,7 @@ app.get('/cars', validate([
  * @apiName GetCarById
  * @apiGroup Cars
  *
- * @apiParam {Number} id ID samochodu
+ * @apiParam {Number{1..}} id ID samochodu
  *
  */
 app.get('/cars/:id', validate([
@@ -267,13 +270,13 @@ app.get('/cars/:id', validate([
  *
  * @apiHeader {String} Cookie Sesja użytkownika
  *
- * @apiParam {String} brand Marka samochodu
- * @apiParam {String} model Model samochodu
- * @apiParam {Number} year Rok produkcji
- * @apiParam {String} vin Numer VIN
- * @apiParam {Number} price Cena samochodu
- * @apiParam {Number} horsePower Moc silnika
- * @apiParam {Boolean} isAvailableForRent Status dostępności do wynajmu
+ * @apiParam {String} brand Marka samochodu (wymagane)
+ * @apiParam {String} model Model samochodu (wymagane)
+ * @apiParam {Number{1886..}} year Rok produkcji (min 1886)
+ * @apiParam {String{17}} vin Numer VIN (dokładnie 17 znaków)
+ * @apiParam {Number{0..}} price Cena samochodu (liczba dodatnia)
+ * @apiParam {Number{1..}} horsePower Moc silnika (liczba całkowita >= 1)
+ * @apiParam {Boolean} isAvailableForRent Status dostępności do wynajmu (wymagane)
  *
  */
 app.post('/cars', authenticateSession, validate([
@@ -327,14 +330,14 @@ app.post('/cars', authenticateSession, validate([
  *
  * @apiHeader {String} Cookie Sesja użytkownika
  *
- * @apiParam {Number} id ID samochodu
- * @apiParam {String} brand Marka samochodu
- * @apiParam {String} model Model samochodu
- * @apiParam {Number} year Rok produkcji
- * @apiParam {String} vin Numer VIN
- * @apiParam {Number} price Cena samochodu
- * @apiParam {Number} horsePower Moc silnika
- * @apiParam {Boolean} isAvailableForRent Status dostępności do wynajmu
+ * @apiParam {Number{1..}} id ID samochodu
+ * @apiParam {String} [brand] Marka samochodu (nie może być pusta)
+ * @apiParam {String} [model] Model samochodu (nie może być pusty)
+ * @apiParam {Number{1886..}} [year] Rok produkcji (min 1886)
+ * @apiParam {String{17}} [vin] Numer VIN (dokładnie 17 znaków)
+ * @apiParam {Number{0..}} [price] Cena samochodu (liczba dodatnia)
+ * @apiParam {Number{1..}} [horsePower] Moc silnika (liczba całkowita >= 1)
+ * @apiParam {Boolean} [isAvailableForRent] Status dostępności do wynajmu
  *
  */
 app.put('/cars/:id', authenticateSession, validate([
@@ -394,7 +397,7 @@ app.put('/cars/:id', authenticateSession, validate([
  *
  * @apiHeader {String} Cookie Sesja użytkownika
  *
- * @apiParam {Number} id ID samochodu
+ * @apiParam {Number{1..}} id ID samochodu
  *
  */
 app.delete('/cars/:id', authenticateSession, validate([
@@ -431,6 +434,9 @@ app.delete('/cars/:id', authenticateSession, validate([
  *
  * @apiHeader {String} Cookie Sesja użytkownika
  *
+ * @apiParam {Number{1..}} [page=1] Numer strony
+ * @apiParam {Number{1..}} [limit=10] Liczba rekordów na stronę
+ *
  */
 app.get('/users', authenticateSession, validate([
     query('page').optional().isInt({ min: 1 }).withMessage('Strona musi być liczbą całkowitą większą lub równą 1'),
@@ -464,7 +470,7 @@ app.get('/users', authenticateSession, validate([
  *
  * @apiHeader {String} Cookie Sesja użytkownika
  *
- * @apiParam {Number} id ID użytkownika
+ * @apiParam {Number{1..}} id ID użytkownika
  *
  */
 app.get('/users/:id', authenticateSession, validate([
@@ -493,11 +499,11 @@ app.get('/users/:id', authenticateSession, validate([
  *
  * @apiHeader {String} Cookie Sesja użytkownika
  *
- * @apiParam {Number} id ID użytkownika
- * @apiParam {String} username Nazwa użytkownika
- * @apiParam {String} password Hasło użytkownika
- * @apiParam {String} firstName Imię użytkownika
- * @apiParam {String} lastName Nazwisko użytkownika
+ * @apiParam {Number{1..}} id ID użytkownika
+ * @apiParam {String{3..}} [username] Nazwa użytkownika (min 3 znaki)
+ * @apiParam {String{6..}} [password] Hasło użytkownika (min 6 znaków)
+ * @apiParam {String} [firstName] Imię użytkownika (nie może być puste)
+ * @apiParam {String} [lastName] Nazwisko użytkownika (nie może być puste)
  *
  */
 app.put('/users/:id', authenticateSession, validate([
@@ -550,7 +556,7 @@ app.put('/users/:id', authenticateSession, validate([
  *
  * @apiHeader {String} Cookie Sesja użytkownika
  *
- * @apiParam {Number} id ID użytkownika
+ * @apiParam {Number{1..}} id ID użytkownika
  *
  */
 app.delete('/users/:id', authenticateSession, validate([
@@ -583,7 +589,7 @@ app.delete('/users/:id', authenticateSession, validate([
  *
  * @apiHeader {String} Cookie Sesja użytkownika
  *
- * @apiParam {Number} id ID samochodu
+ * @apiParam {Number{1..}} id ID samochodu
  *
  */
 app.post('/cars/:id/rent', authenticateSession, validate([
@@ -624,7 +630,7 @@ app.post('/cars/:id/rent', authenticateSession, validate([
  *
  * @apiHeader {String} Cookie Sesja użytkownika
  *
- * @apiParam {Number} id ID samochodu
+ * @apiParam {Number{1..}} id ID samochodu
  *
  */
 app.post('/cars/:id/return', authenticateSession, validate([
@@ -665,9 +671,8 @@ app.post('/cars/:id/return', authenticateSession, validate([
  * @api {get} /cars/:id/renter Pobierz wynajmującego samochód
  * @apiName GetCarRenter
  * @apiGroup Cars
- * @apiPermission none
  *
- * @apiParam {Number} id ID samochodu
+ * @apiParam {Number{1..}} id ID samochodu
  *
  */
 app.get('/cars/:id/renter', validate([
@@ -697,7 +702,7 @@ app.get('/cars/:id/renter', validate([
  *
  * @apiHeader {String} Cookie Sesja użytkownika
  *
- * @apiParam {Number} id ID samochodu
+ * @apiParam {Number{1..}} id ID samochodu
  *
  */
 app.post('/cars/:id/buy', authenticateSession, validate([
@@ -758,11 +763,10 @@ app.get('/current-user', authenticateSession, async (req, res) => {
  * @api {post} /cars/:id/leasing Leasing samochodu
  * @apiName LeaseCar
  * @apiGroup Cars
- * @apiPermission none
  *
- * @apiParam {Number} id ID samochodu
- * @apiParam {Number} downPayment Wpłata wstępna
- * @apiParam {Number} months Liczba miesięcy
+ * @apiParam {Number{1..}} id ID samochodu
+ * @apiParam {Number{0..}} downPayment Wpłata wstępna (liczba dodatnia)
+ * @apiParam {Number{1..}} months Liczba miesięcy (liczba całkowita >= 1)
  *
  */
 app.post('/cars/:id/leasing', validate([
@@ -816,10 +820,10 @@ app.post('/cars/:id/leasing', validate([
  *
  * @apiHeader {String} Cookie Sesja użytkownika
  *
- * @apiParam {String} username Nazwa użytkownika
- * @apiParam {String} password Hasło użytkownika
- * @apiParam {String} firstName Imię użytkownika
- * @apiParam {String} lastName Nazwisko użytkownika
+ * @apiParam {String{3..}} username Nazwa użytkownika (min 3 znaki)
+ * @apiParam {String{6..}} password Hasło użytkownika (min 6 znaków)
+ * @apiParam {String} firstName Imię użytkownika (wymagane)
+ * @apiParam {String} lastName Nazwisko użytkownika (wymagane)
  *
  */
 app.post('/admin/create-customer', authenticateSession, validate([
