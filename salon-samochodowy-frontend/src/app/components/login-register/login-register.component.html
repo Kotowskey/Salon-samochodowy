@@ -8,27 +8,88 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zamknij"></button>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="onSubmit()">
+        <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+          
+          <!-- Nazwa użytkownika -->
           <div class="mb-3">
             <label for="username" class="form-label">Nazwa użytkownika</label>
-            <input type="text" class="form-control" id="username" [(ngModel)]="username" name="username" required>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              [(ngModel)]="username"
+              name="username"
+              required
+              minlength="3"
+              #usernameModel="ngModel"
+            >
+            <div *ngIf="usernameModel.invalid && (usernameModel.dirty || usernameModel.touched)" class="text-danger">
+              <small *ngIf="usernameModel.errors?.['required']">Nazwa użytkownika jest wymagana.</small>
+              <small *ngIf="usernameModel.errors?.['minlength']">Nazwa użytkownika musi mieć co najmniej 3 znaki.</small>
+            </div>
           </div>
+          
+          <!-- Hasło -->
           <div class="mb-3">
             <label for="password" class="form-label">Hasło</label>
-            <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password" required>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              [(ngModel)]="password"
+              name="password"
+              required
+              minlength="6"
+              #passwordModel="ngModel"
+            >
+            <div *ngIf="passwordModel.invalid && (passwordModel.dirty || passwordModel.touched)" class="text-danger">
+              <small *ngIf="passwordModel.errors?.['required']">Hasło jest wymagane.</small>
+              <small *ngIf="passwordModel.errors?.['minlength']">Hasło musi mieć co najmniej 6 znaków.</small>
+            </div>
           </div>
 
+          <!-- Pola rejestracyjne -->
           <div *ngIf="!isLoginMode">
+            <!-- Imię -->
             <div class="mb-3">
               <label for="firstName" class="form-label">Imię</label>
-              <input type="text" class="form-control" id="firstName" [(ngModel)]="firstName" name="firstName" required>
+              <input
+                type="text"
+                class="form-control"
+                id="firstName"
+                [(ngModel)]="firstName"
+                name="firstName"
+                required
+                pattern="^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$"
+                #firstNameModel="ngModel"
+              >
+              <div *ngIf="firstNameModel.invalid && (firstNameModel.dirty || firstNameModel.touched)" class="text-danger">
+                <small *ngIf="firstNameModel.errors?.['required']">Imię jest wymagane.</small>
+                <small *ngIf="firstNameModel.errors?.['pattern']">Imię może zawierać tylko litery.</small>
+              </div>
             </div>
+            
+            <!-- Nazwisko -->
             <div class="mb-3">
               <label for="lastName" class="form-label">Nazwisko</label>
-              <input type="text" class="form-control" id="lastName" [(ngModel)]="lastName" name="lastName" required>
+              <input
+                type="text"
+                class="form-control"
+                id="lastName"
+                [(ngModel)]="lastName"
+                name="lastName"
+                required
+                pattern="^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$"
+                #lastNameModel="ngModel"
+              >
+              <div *ngIf="lastNameModel.invalid && (lastNameModel.dirty || lastNameModel.touched)" class="text-danger">
+                <small *ngIf="lastNameModel.errors?.['required']">Nazwisko jest wymagane.</small>
+                <small *ngIf="lastNameModel.errors?.['pattern']">Nazwisko może zawierać tylko litery.</small>
+              </div>
             </div>
           </div>
 
+          <!-- Komunikaty o błędach i sukcesie -->
           <div *ngIf="errorMessage" class="alert alert-danger">
             {{ errorMessage }}
           </div>
@@ -36,7 +97,12 @@
             {{ successMessage }}
           </div>
 
-          <button type="submit" class="btn btn-primary w-100">
+          <!-- Przycisk Submit -->
+          <button
+            type="submit"
+            class="btn btn-primary w-100"
+            [disabled]="authForm.invalid"
+          >
             {{ isLoginMode ? 'Zaloguj się' : 'Zarejestruj się' }}
           </button>
         </form>

@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Subject } from 'rxjs';
@@ -41,7 +41,12 @@ export class LoginRegisterComponent implements OnDestroy {
     this.successMessage = '';
   }
 
-  onSubmit(): void {
+  onSubmit(form: NgForm): void {
+    if (form.invalid) {
+      // Formularz jest nieprawidłowy, nie wykonuj żadnych akcji
+      return;
+    }
+
     if (this.isLoginMode) {
       this.authService.login(this.username, this.password)
         .pipe(takeUntil(this.destroy$))
@@ -53,7 +58,7 @@ export class LoginRegisterComponent implements OnDestroy {
           },
           error: (error) => {
             console.error('Nie udało się zalogować. Sprawdź login i hasło i spróbuj jeszcze raz:', error);
-            // Dostosuj do struktury błędu zwracanego przez API
+            // Dostosuj do struktury błędu zwracającego API
             this.errorMessage = error.error?.message || 'Nie udało się zalogować. Sprawdź login i hasło i spróbuj jeszcze raz';
           }
         });
