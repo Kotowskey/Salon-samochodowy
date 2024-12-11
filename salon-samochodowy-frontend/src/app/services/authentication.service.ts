@@ -1,3 +1,4 @@
+// authentication.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
@@ -167,7 +168,6 @@ export class AuthenticationService {
    * @returns {Observable<never>} Observable z wyrzuconym błędem.
    */
   private handleError(error: HttpErrorResponse): Observable<never> {
-    // Możesz dostosować logikę obsługi błędów tutaj
     console.error('Błąd w AuthenticationService:', error);
     return throwError(error);
   }

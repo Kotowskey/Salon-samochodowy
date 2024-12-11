@@ -1,3 +1,4 @@
+<!-- login-register.component.html -->
 <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -20,7 +21,13 @@
               [(ngModel)]="username"
               name="username"
               #usernameModel="ngModel"
+              required
+              minlength="3"
             >
+            <div *ngIf="usernameModel.invalid && (usernameModel.dirty || usernameModel.touched)" class="text-danger">
+              <div *ngIf="usernameModel.errors?.['required']">Nazwa użytkownika jest wymagana.</div>
+              <div *ngIf="usernameModel.errors?.['minlength']">Nazwa użytkownika musi mieć co najmniej 3 znaki.</div>
+            </div>
           </div>
           
           <!-- Hasło -->
@@ -33,7 +40,13 @@
               [(ngModel)]="password"
               name="password"
               #passwordModel="ngModel"
+              required
+              minlength="6"
             >
+            <div *ngIf="passwordModel.invalid && (passwordModel.dirty || passwordModel.touched)" class="text-danger">
+              <div *ngIf="passwordModel.errors?.['required']">Hasło jest wymagane.</div>
+              <div *ngIf="passwordModel.errors?.['minlength']">Hasło musi mieć co najmniej 6 znaków.</div>
+            </div>
           </div>
 
           <!-- Pola rejestracyjne -->
@@ -48,7 +61,11 @@
                 [(ngModel)]="firstName"
                 name="firstName"
                 #firstNameModel="ngModel"
+                required
               >
+              <div *ngIf="firstNameModel.invalid && (firstNameModel.dirty || firstNameModel.touched)" class="text-danger">
+                <div *ngIf="firstNameModel.errors?.['required']">Imię jest wymagane.</div>
+              </div>
             </div>
             
             <!-- Nazwisko -->
@@ -61,7 +78,11 @@
                 [(ngModel)]="lastName"
                 name="lastName"
                 #lastNameModel="ngModel"
+                required
               >
+              <div *ngIf="lastNameModel.invalid && (lastNameModel.dirty || lastNameModel.touched)" class="text-danger">
+                <div *ngIf="lastNameModel.errors?.['required']">Nazwisko jest wymagane.</div>
+              </div>
             </div>
           </div>
 
@@ -77,6 +98,7 @@
           <button
             type="submit"
             class="btn btn-primary w-100"
+            [disabled]="authForm.invalid"
           >
             {{ isLoginMode ? 'Zaloguj się' : 'Zarejestruj się' }}
           </button>
