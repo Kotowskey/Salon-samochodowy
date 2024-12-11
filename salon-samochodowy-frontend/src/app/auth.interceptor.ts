@@ -26,12 +26,10 @@ export class AuthInterceptor implements HttpInterceptor {
    * @returns {Observable<HttpEvent<any>>} - Observable emitujący zdarzenia HTTP.
    */
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // Klonowanie żądania i dodanie `withCredentials: true`
     const clonedRequest = req.clone({
       withCredentials: true
     });
 
-    // Kontynuowanie przetwarzania żądania
     return next.handle(clonedRequest);
   }
 }

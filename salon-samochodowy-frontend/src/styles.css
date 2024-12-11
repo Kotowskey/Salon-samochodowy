@@ -1,17 +1,17 @@
 .d-flex {
     display: flex;
-    gap: 8px; /* odstępy między elementami */
-    flex-wrap: wrap; /* pozwala na przełamywanie wierszy */
+    gap: 8px; 
+    flex-wrap: wrap; 
   }
   
   button {
-    min-width: 120px; /* minimalna szerokość dla spójnego wyglądu */
-    justify-content: center; /* centrowanie zawartości */
+    min-width: 120px; 
+    justify-content: center;
   }
   
   @media (max-width: 576px) {
     button {
-      flex: 1 1 100%; /* Przyciski rozciągają się na pełną szerokość w małych widokach */
+      flex: 1 1 100%; 
     }
   }
   

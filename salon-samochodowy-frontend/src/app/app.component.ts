@@ -5,7 +5,7 @@ import { CustomerListComponent } from './components/customer-list/customer-list.
 import { AddCustomerComponent } from './components/add-customer/add-customer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule } from '@angular/router'; 
-import { AuthInterceptor } from './auth.interceptor'; // Ścieżka do interceptora
+import { AuthInterceptor } from './auth.interceptor'; 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 /**
@@ -33,7 +33,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
       useClass: AuthInterceptor,
       multi: true
     }
-    // Inne providery można dodać tutaj
   ]
 })
 export class AppComponent {

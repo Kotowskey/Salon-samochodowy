@@ -70,15 +70,12 @@ export class CustomerService implements OnDestroy {
     private http: HttpClient,
     private authService: AuthenticationService
   ) {
-    // Subskrybujemy strumień currentUser$, aby reagować na zmiany uwierzytelnienia
     this.authService.currentUser$
       .pipe(takeUntil(this.destroy$))
       .subscribe(user => {
         if (user && user.isDealer) {
-          // Tylko dealerzy/admini mogą pobierać listę klientów
           this.loadInitialData();
         } else {
-          // Czyścimy listę klientów, jeśli użytkownik nie jest autoryzowany
           this.customersSubject.next([]);
         }
       });
@@ -95,7 +92,7 @@ export class CustomerService implements OnDestroy {
       .pipe(
         catchError(error => {
           console.error('Error loading customers:', error);
-          return of([]); // Zwraca pusty array w przypadku błędu
+          return of([]); 
         })
       )
       .subscribe(
@@ -134,7 +131,7 @@ export class CustomerService implements OnDestroy {
       }),
       catchError(error => {
         console.error('Error adding customer:', error);
-        return throwError(error); // Przekazuje błąd dalej po zalogowaniu
+        return throwError(error); 
       })
     );
   }
