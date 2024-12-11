@@ -23,10 +23,20 @@
               required
               minlength="3"
             >
-            <div *ngIf="usernameModel.invalid && (usernameModel.dirty || usernameModel.touched)" class="text-danger">
-              <div *ngIf="usernameModel.errors?.['required']">Nazwa użytkownika jest wymagana.</div>
-              <div *ngIf="usernameModel.errors?.['minlength']">Nazwa użytkownika musi mieć co najmniej 3 znaki.</div>
-            </div>
+            @if(usernameModel.invalid && (usernameModel.dirty || usernameModel.touched))
+            {
+              <div class="text-danger">
+                @if(usernameModel.errors?.['required'])
+                {
+                  <div>Nazwa użytkownika jest wymagana.</div>
+                }
+                @if(usernameModel.errors?.['minlength'])
+                {
+                  <div>Nazwa użytkownika musi mieć co najmniej 3 znaki.</div>
+                }  
+              </div>
+            }
+
           </div>
           
           <!-- Hasło -->
@@ -42,57 +52,90 @@
               required
               minlength="6"
             >
-            <div *ngIf="passwordModel.invalid && (passwordModel.dirty || passwordModel.touched)" class="text-danger">
-              <div *ngIf="passwordModel.errors?.['required']">Hasło jest wymagane.</div>
-              <div *ngIf="passwordModel.errors?.['minlength']">Hasło musi mieć co najmniej 6 znaków.</div>
-            </div>
+            @if(passwordModel.invalid && (passwordModel.dirty || passwordModel.touched))
+            {
+              <div class="text-danger">
+                @if(passwordModel.errors?.['required'])
+                {
+                  <div>Hasło jest wymagane.</div>
+                }
+                @if(passwordModel.errors?.['minlength'])
+                {
+                  <div>Hasło musi mieć co najmniej 6 znaków.</div>
+                }
+              </div>
+            }
+
           </div>
 
           <!-- Pola rejestracyjne -->
-          <div *ngIf="!isLoginMode">
-            <!-- Imię -->
-            <div class="mb-3">
-              <label for="firstName" class="form-label">Imię</label>
-              <input
-                type="text"
-                class="form-control"
-                id="firstName"
-                [(ngModel)]="firstName"
-                name="firstName"
-                #firstNameModel="ngModel"
-                required
-              >
-              <div *ngIf="firstNameModel.invalid && (firstNameModel.dirty || firstNameModel.touched)" class="text-danger">
-                <div *ngIf="firstNameModel.errors?.['required']">Imię jest wymagane.</div>
+           @if(!isLoginMode)
+           {
+            <div>
+              <!-- Imię -->
+              <div class="mb-3">
+                <label for="firstName" class="form-label">Imię</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstName"
+                  [(ngModel)]="firstName"
+                  name="firstName"
+                  #firstNameModel="ngModel"
+                  required
+                >
+                @if(firstNameModel.invalid && (firstNameModel.dirty || firstNameModel.touched))
+                {
+                  <div class="text-danger">
+                    @if(firstNameModel.errors?.['required'])
+                    {
+                      <div>Imię jest wymagane.</div>
+                    }
+                  </div>
+                }
+                
+              </div>
+              
+              <!-- Nazwisko -->
+              <div class="mb-3">
+                <label for="lastName" class="form-label">Nazwisko</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastName"
+                  [(ngModel)]="lastName"
+                  name="lastName"
+                  #lastNameModel="ngModel"
+                  required
+                >
+                @if(lastNameModel.invalid && (lastNameModel.dirty || lastNameModel.touched))
+                {
+                  <div class="text-danger">
+                    @if(lastNameModel.errors?.['required'])
+                    {
+                      <div>Nazwisko jest wymagane.</div>
+                    }
+                  </div>
+                }
               </div>
             </div>
-            
-            <!-- Nazwisko -->
-            <div class="mb-3">
-              <label for="lastName" class="form-label">Nazwisko</label>
-              <input
-                type="text"
-                class="form-control"
-                id="lastName"
-                [(ngModel)]="lastName"
-                name="lastName"
-                #lastNameModel="ngModel"
-                required
-              >
-              <div *ngIf="lastNameModel.invalid && (lastNameModel.dirty || lastNameModel.touched)" class="text-danger">
-                <div *ngIf="lastNameModel.errors?.['required']">Nazwisko jest wymagane.</div>
-              </div>
-            </div>
-          </div>
+           }
+
 
           <!-- Komunikaty o błędach i sukcesie -->
-          <div *ngIf="errorMessage" class="alert alert-danger">
-            {{ errorMessage }}
-          </div>
-          <div *ngIf="successMessage" class="alert alert-success">
-            {{ successMessage }}
-          </div>
-
+           @if(errorMessage)
+           {
+            <div class="alert alert-danger">
+              {{ errorMessage }}
+            </div>
+           }
+           @if(successMessage)
+           {
+            <div class="alert alert-success">
+              {{ successMessage }}
+            </div>
+           }
+          
           <!-- Przycisk Submit -->
           <button
             type="submit"

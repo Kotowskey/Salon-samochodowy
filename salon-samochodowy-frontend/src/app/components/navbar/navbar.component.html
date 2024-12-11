@@ -31,54 +31,58 @@
     <!-- Prawa strona: Przycisk logowania lub informacje o użytkowniku -->
     <div class="d-flex align-items-center">
       <!-- Przycisk "Customer List", "Add Customer" i "Add Car" widoczne tylko dla dealerów -->
-      <ng-container *ngIf="currentUser?.isDealer">
-        <button
-          class="btn btn-light me-2"
-          type="button"
-          data-bs-toggle="modal"
-          data-bs-target="#customerListModal"
-        >
-          Lista Klientów
-        </button>
-        <button
-          class="btn btn-light me-2"
-          type="button"
-          data-bs-toggle="modal"
-          data-bs-target="#addCustomerModal"
-        >
-          Dodaj Klienta
-        </button>
-        <!-- Przycisk do dodawania samochodu -->
-        <button
-          class="btn btn-light me-2"
-          type="button"
-          (click)="openAddCarDialog()"
-        >
-          Dodaj Samochód
-        </button>
-      </ng-container>
+      @if(currentUser?.isDealer)
+      {
+          <button
+            class="btn btn-light me-2"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#customerListModal"
+          >
+            Lista Klientów
+          </button>
+          <button
+            class="btn btn-light me-2"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#addCustomerModal"
+          >
+            Dodaj Klienta
+          </button>
+          <!-- Przycisk do dodawania samochodu -->
+          <button
+            class="btn btn-light me-2"
+            type="button"
+            (click)="openAddCarDialog()"
+          >
+            Dodaj Samochód
+          </button>
+      }
 
-      <ng-container *ngIf="!currentUser">
-        <button
-          class="btn btn-light me-2"
-          type="button"
-          (click)="openAuthModal()"
-        >
-          Zaloguj się
-        </button>
-      </ng-container>
-      <ng-container *ngIf="currentUser">
-        <span class="me-3" style="color: white;"
-          >Witaj, {{ currentUser.firstName }}!</span
-        >
-        <button
-          class="btn btn-light"
-          type="button"
-          (click)="logout()"
-        >
-          Wyloguj się
-        </button>
-      </ng-container>
+      @if(!currentUser)
+      {
+          <button
+            class="btn btn-light me-2"
+            type="button"
+            (click)="openAuthModal()"
+          >
+            Zaloguj się
+          </button>
+      }
+      @if(currentUser)
+      {
+          <span class="me-3" style="color: white;"
+            >Witaj, {{ currentUser.firstName }}!</span
+          >
+          <button
+            class="btn btn-light"
+            type="button"
+            (click)="logout()"
+          >
+            Wyloguj się
+          </button>
+      }
+      
     </div>
   </div>
 </nav>

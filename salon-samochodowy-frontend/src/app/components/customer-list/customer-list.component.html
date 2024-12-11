@@ -1,11 +1,11 @@
 <div class="customer-list">
   <h2>Lista Klientów</h2>
-
-  <ng-template [ngIf]="error">
-    <div class="error">
-      {{ error }}
-    </div>
-  </ng-template>
+    @if(error)
+    {
+      <div class="error">
+        {{ error }}
+      </div>
+    }
   @if(customers.length > 0)
   {
     <table>
