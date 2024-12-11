@@ -4,6 +4,7 @@ import cors from 'cors';
 import session from 'express-session'; // Import express-session
 import { sequelize, Car, User } from './models.js'; 
 import { Op } from 'sequelize';
+import { body, param, validationResult } from 'express-validator'; // Import express-validator
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -39,6 +40,15 @@ const authenticateSession = (req, res, next) => {
     }
 };
 
+// Middleware do obsługi wyników walidacji
+const handleValidationErrors = (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+};
+
 // Test połączenia z bazą danych
 sequelize.authenticate()
     .then(() => {
@@ -69,7 +79,19 @@ app.get('/', (req, res) => {
  * @apiParam {String} lastName Nazwisko użytkownika (wymagane)
  *
  */
-app.post('/register', async (req, res) => {
+app.post('/register', [
+    body('username')
+        .isString().withMessage('Nazwa użytkownika musi być tekstem')
+        .isLength({ min: 3 }).withMessage('Nazwa użytkownika musi mieć co najmniej 3 znaki'),
+    body('password')
+        .isString().withMessage('Hasło musi być tekstem')
+        .isLength({ min: 6 }).withMessage('Hasło musi mieć co najmniej 6 znaków'),
+    body('firstName')
+        .notEmpty().withMessage('Imię jest wymagane'),
+    body('lastName')
+        .notEmpty().withMessage('Nazwisko jest wymagane'),
+    handleValidationErrors
+], async (req, res) => {
     try {
         const { username, password, firstName, lastName } = req.body;
 
@@ -115,7 +137,15 @@ app.post('/register', async (req, res) => {
  * @apiParam {String{6..}} password Hasło użytkownika (min 6 znaków)
  *
  */
-app.post('/login', async (req, res) => {
+app.post('/login', [
+    body('username')
+        .isString().withMessage('Nazwa użytkownika musi być tekstem')
+        .isLength({ min: 3 }).withMessage('Nazwa użytkownika musi mieć co najmniej 3 znaki'),
+    body('password')
+        .isString().withMessage('Hasło musi być tekstem')
+        .isLength({ min: 6 }).withMessage('Hasło musi mieć co najmniej 6 znaków'),
+    handleValidationErrors
+], async (req, res) => {
     try {
         const { username, password } = req.body;
 
@@ -196,7 +226,11 @@ app.get('/cars', async (req, res) => {
  * @apiParam {Number{1..}} id ID samochodu
  *
  */
-app.get('/cars/:id', async (req, res) => {
+app.get('/cars/:id', [
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID samochodu musi być liczbą całkowitą większą lub równą 1'),
+    handleValidationErrors
+], async (req, res) => {
     try {
         const car = await Car.findByPk(req.params.id);
         if (car) {
@@ -226,7 +260,26 @@ app.get('/cars/:id', async (req, res) => {
  * @apiParam {Boolean} isAvailableForRent Status dostępności do wynajmu (wymagane)
  *
  */
-app.post('/cars', authenticateSession, async (req, res) => {
+app.post('/cars', authenticateSession, [
+    body('brand')
+        .isString().withMessage('Marka musi być tekstem')
+        .notEmpty().withMessage('Marka jest wymagana'),
+    body('model')
+        .isString().withMessage('Model musi być tekstem')
+        .notEmpty().withMessage('Model jest wymagany'),
+    body('year')
+        .isInt({ min: 1886 }).withMessage('Rok produkcji musi być liczbą całkowitą nie mniejszą niż 1886'),
+    body('vin')
+        .isString().withMessage('Numer VIN musi być tekstem')
+        .isLength({ min: 17, max: 17 }).withMessage('Numer VIN musi mieć dokładnie 17 znaków'),
+    body('price')
+        .isFloat({ min: 0 }).withMessage('Cena musi być liczbą dodatnią'),
+    body('horsePower')
+        .isInt({ min: 1 }).withMessage('Moc silnika musi być liczbą całkowitą nie mniejszą niż 1'),
+    body('isAvailableForRent')
+        .isBoolean().withMessage('Status dostępności do wynajmu musi być wartością boolean'),
+    handleValidationErrors
+], async (req, res) => {
     try {
         const { brand, model, year, vin, price, horsePower, isAvailableForRent } = req.body;
         const newCar = await Car.create({ 
@@ -262,7 +315,35 @@ app.post('/cars', authenticateSession, async (req, res) => {
  * @apiParam {Boolean} [isAvailableForRent] Status dostępności do wynajmu
  *
  */
-app.put('/cars/:id', authenticateSession, async (req, res) => {
+app.put('/cars/:id', authenticateSession, [
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID samochodu musi być liczbą całkowitą większą lub równą 1'),
+    body('brand')
+        .optional()
+        .isString().withMessage('Marka musi być tekstem')
+        .notEmpty().withMessage('Marka nie może być pusta'),
+    body('model')
+        .optional()
+        .isString().withMessage('Model musi być tekstem')
+        .notEmpty().withMessage('Model nie może być pusty'),
+    body('year')
+        .optional()
+        .isInt({ min: 1886 }).withMessage('Rok produkcji musi być liczbą całkowitą nie mniejszą niż 1886'),
+    body('vin')
+        .optional()
+        .isString().withMessage('Numer VIN musi być tekstem')
+        .isLength({ min: 17, max: 17 }).withMessage('Numer VIN musi mieć dokładnie 17 znaków'),
+    body('price')
+        .optional()
+        .isFloat({ min: 0 }).withMessage('Cena musi być liczbą dodatnią'),
+    body('horsePower')
+        .optional()
+        .isInt({ min: 1 }).withMessage('Moc silnika musi być liczbą całkowitą nie mniejszą niż 1'),
+    body('isAvailableForRent')
+        .optional()
+        .isBoolean().withMessage('Status dostępności do wynajmu musi być wartością boolean'),
+    handleValidationErrors
+], async (req, res) => {
     try {
         const { brand, model, year, vin, price, horsePower, isAvailableForRent } = req.body;
         const car = await Car.findByPk(req.params.id);
@@ -288,7 +369,11 @@ app.put('/cars/:id', authenticateSession, async (req, res) => {
  * @apiParam {Number{1..}} id ID samochodu
  *
  */
-app.delete('/cars/:id', authenticateSession, async (req, res) => {
+app.delete('/cars/:id', authenticateSession, [
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID samochodu musi być liczbą całkowitą większą lub równą 1'),
+    handleValidationErrors
+], async (req, res) => {
     const userId = req.session.userId;
     const carId = req.params.id;
   
@@ -345,7 +430,11 @@ app.get('/users', authenticateSession, async (req, res) => {
  * @apiParam {Number{1..}} id ID użytkownika
  *
  */
-app.get('/users/:id', authenticateSession, async (req, res) => {
+app.get('/users/:id', authenticateSession, [
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID użytkownika musi być liczbą całkowitą większą lub równą 1'),
+    handleValidationErrors
+], async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
         if (user && !user.isDealer) {
@@ -373,7 +462,25 @@ app.get('/users/:id', authenticateSession, async (req, res) => {
  * @apiParam {String} [lastName] Nazwisko użytkownika (nie może być puste)
  *
  */
-app.put('/users/:id', authenticateSession, async (req, res) => {
+app.put('/users/:id', authenticateSession, [
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID użytkownika musi być liczbą całkowitą większą lub równą 1'),
+    body('username')
+        .optional()
+        .isString().withMessage('Nazwa użytkownika musi być tekstem')
+        .isLength({ min: 3 }).withMessage('Nazwa użytkownika musi mieć co najmniej 3 znaki'),
+    body('password')
+        .optional()
+        .isString().withMessage('Hasło musi być tekstem')
+        .isLength({ min: 6 }).withMessage('Hasło musi mieć co najmniej 6 znaków'),
+    body('firstName')
+        .optional()
+        .notEmpty().withMessage('Imię nie może być puste'),
+    body('lastName')
+        .optional()
+        .notEmpty().withMessage('Nazwisko nie może być puste'),
+    handleValidationErrors
+], async (req, res) => {
     try {
         const { username, password, firstName, lastName } = req.body;
         const user = await User.findByPk(req.params.id);
@@ -404,7 +511,11 @@ app.put('/users/:id', authenticateSession, async (req, res) => {
  * @apiParam {Number{1..}} id ID użytkownika
  *
  */
-app.delete('/users/:id', authenticateSession, async (req, res) => {
+app.delete('/users/:id', authenticateSession, [
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID użytkownika musi być liczbą całkowitą większą lub równą 1'),
+    handleValidationErrors
+], async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
         if (user && !user.isDealer) {
@@ -434,7 +545,11 @@ app.delete('/users/:id', authenticateSession, async (req, res) => {
  * @apiParam {Number{1..}} id ID samochodu
  *
  */
-app.post('/cars/:id/rent', authenticateSession, async (req, res) => {
+app.post('/cars/:id/rent', authenticateSession, [
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID samochodu musi być liczbą całkowitą większą lub równą 1'),
+    handleValidationErrors
+], async (req, res) => {
     try {
         const carId = req.params.id;
 
@@ -472,7 +587,11 @@ app.post('/cars/:id/rent', authenticateSession, async (req, res) => {
  * @apiParam {Number{1..}} id ID samochodu
  *
  */
-app.post('/cars/:id/return', authenticateSession, async (req, res) => {
+app.post('/cars/:id/return', authenticateSession, [
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID samochodu musi być liczbą całkowitą większą lub równą 1'),
+    handleValidationErrors
+], async (req, res) => {
     try {
         const carId = req.params.id;
 
@@ -511,7 +630,11 @@ app.post('/cars/:id/return', authenticateSession, async (req, res) => {
  * @apiParam {Number{1..}} id ID samochodu
  *
  */
-app.get('/cars/:id/renter', async (req, res) => {
+app.get('/cars/:id/renter', [
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID samochodu musi być liczbą całkowitą większą lub równą 1'),
+    handleValidationErrors
+], async (req, res) => {
     const carId = req.params.id; // ID samochodu z parametru URL
     try {
         // Znajdź samochód na podstawie ID
@@ -538,7 +661,11 @@ app.get('/cars/:id/renter', async (req, res) => {
  * @apiParam {Number{1..}} id ID samochodu
  *
  */
-app.post('/cars/:id/buy', authenticateSession, async (req, res) => {
+app.post('/cars/:id/buy', authenticateSession, [
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID samochodu musi być liczbą całkowitą większą lub równą 1'),
+    handleValidationErrors
+], async (req, res) => {
     try {
         const carId = req.params.id;
 
@@ -599,14 +726,18 @@ app.get('/current-user', authenticateSession, async (req, res) => {
  * @apiParam {Number{1..}} months Liczba miesięcy (liczba całkowita >= 1)
  *
  */
-app.post('/cars/:id/leasing', async (req, res) => {
+app.post('/cars/:id/leasing', [
+    param('id')
+        .isInt({ min: 1 }).withMessage('ID samochodu musi być liczbą całkowitą większą lub równą 1'),
+    body('downPayment')
+        .isFloat({ min: 0 }).withMessage('Wpłata wstępna musi być liczbą dodatnią'),
+    body('months')
+        .isInt({ min: 1 }).withMessage('Liczba miesięcy musi być liczbą całkowitą nie mniejszą niż 1'),
+    handleValidationErrors
+], async (req, res) => {
     try {
         const carId = req.params.id;
         const { downPayment, months } = req.body;
-
-        if (!downPayment || !months || months <= 0 || downPayment < 0) {
-            return res.status(400).json({ error: 'Nieprawidłowe dane wejściowe' });
-        }
 
         const car = await Car.findByPk(carId);
 
@@ -651,7 +782,19 @@ app.post('/cars/:id/leasing', async (req, res) => {
  * @apiParam {String} lastName Nazwisko użytkownika (wymagane)
  *
  */
-app.post('/admin/create-customer', authenticateSession, async (req, res) => {
+app.post('/admin/create-customer', authenticateSession, [
+    body('username')
+        .isString().withMessage('Nazwa użytkownika musi być tekstem')
+        .isLength({ min: 3 }).withMessage('Nazwa użytkownika musi mieć co najmniej 3 znaki'),
+    body('password')
+        .isString().withMessage('Hasło musi być tekstem')
+        .isLength({ min: 6 }).withMessage('Hasło musi mieć co najmniej 6 znaków'),
+    body('firstName')
+        .notEmpty().withMessage('Imię jest wymagane'),
+    body('lastName')
+        .notEmpty().withMessage('Nazwisko jest wymagane'),
+    handleValidationErrors
+], async (req, res) => {
     try {
         const { username, password, firstName, lastName } = req.body;
 

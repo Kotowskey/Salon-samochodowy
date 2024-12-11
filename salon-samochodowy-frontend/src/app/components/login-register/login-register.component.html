@@ -19,14 +19,8 @@
               id="username"
               [(ngModel)]="username"
               name="username"
-              required
-              minlength="3"
               #usernameModel="ngModel"
             >
-            <div *ngIf="usernameModel.invalid && (usernameModel.dirty || usernameModel.touched)" class="text-danger">
-              <small *ngIf="usernameModel.errors?.['required']">Nazwa użytkownika jest wymagana.</small>
-              <small *ngIf="usernameModel.errors?.['minlength']">Nazwa użytkownika musi mieć co najmniej 3 znaki.</small>
-            </div>
           </div>
           
           <!-- Hasło -->
@@ -38,14 +32,8 @@
               id="password"
               [(ngModel)]="password"
               name="password"
-              required
-              minlength="6"
               #passwordModel="ngModel"
             >
-            <div *ngIf="passwordModel.invalid && (passwordModel.dirty || passwordModel.touched)" class="text-danger">
-              <small *ngIf="passwordModel.errors?.['required']">Hasło jest wymagane.</small>
-              <small *ngIf="passwordModel.errors?.['minlength']">Hasło musi mieć co najmniej 6 znaków.</small>
-            </div>
           </div>
 
           <!-- Pola rejestracyjne -->
@@ -59,14 +47,8 @@
                 id="firstName"
                 [(ngModel)]="firstName"
                 name="firstName"
-                required
-                pattern="^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$"
                 #firstNameModel="ngModel"
               >
-              <div *ngIf="firstNameModel.invalid && (firstNameModel.dirty || firstNameModel.touched)" class="text-danger">
-                <small *ngIf="firstNameModel.errors?.['required']">Imię jest wymagane.</small>
-                <small *ngIf="firstNameModel.errors?.['pattern']">Imię może zawierać tylko litery.</small>
-              </div>
             </div>
             
             <!-- Nazwisko -->
@@ -78,14 +60,8 @@
                 id="lastName"
                 [(ngModel)]="lastName"
                 name="lastName"
-                required
-                pattern="^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$"
                 #lastNameModel="ngModel"
               >
-              <div *ngIf="lastNameModel.invalid && (lastNameModel.dirty || lastNameModel.touched)" class="text-danger">
-                <small *ngIf="lastNameModel.errors?.['required']">Nazwisko jest wymagane.</small>
-                <small *ngIf="lastNameModel.errors?.['pattern']">Nazwisko może zawierać tylko litery.</small>
-              </div>
             </div>
           </div>
 
@@ -101,7 +77,6 @@
           <button
             type="submit"
             class="btn btn-primary w-100"
-            [disabled]="authForm.invalid"
           >
             {{ isLoginMode ? 'Zaloguj się' : 'Zarejestruj się' }}
           </button>
